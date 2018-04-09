@@ -1,0 +1,268 @@
+
+\documentclass[style=sailor,size=12pt]{powerdot}
+\usepackage{epic,array,ecltree,url}
+\usepackage[nointegrals]{wasysym}
+\usepackage{mathtools}
+
+\newcommand{\id}[1]{\mbox{\it #1\/}}
+\newcommand{\rid}[1]{\mbox{\rm #1}}
+\newcommand{\sid}[1]{\mbox{\sf #1}}
+\newcommand{\bid}[1]{\mbox{\bf #1}}
+\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Ell}{\mathscr{L}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+\newcommand{\mli}[1]{\mathit{#1}}
+\newcommand{\ndiv}{\hspace{-3pt}\not|\hspace{2pt}}
+
+\pdsetup{method=normal,
+list={labelsep=1em,leftmargin=1cm,itemsep=0pt,topsep=5pt,parsep=0pt}
+}
+% import from truth and PTL.
+\title{Sets and Strings}
+\author{Foundations of Computer Science}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\section[slide=false]{Strings}
+\begin{slide}[bm=,toc=]{Strings}
+\begin{enumerate}
+\item An \emph{alphabet} is any finite set. For example $\{0,1,2,...,9\}$ and
+      $\{0,1\}$ are alphabets. An arbitrary finite alphabet is denoted by 
+      $\Sigma$. We call the elements of $\Sigma$ letters or symbols.
+\item A \emph{string} over $\Sigma$ is any finite-length sequence of elements of
+      $\Sigma$. For example, if $\Sigma = \{a,b\}$ then $aabab$ is a string of
+      length $5$ over $\Sigma$.
+\item The length of a string $x$ is denoted $|x|$. 
+\item There is a unique string of length zero over any alphabet $\Sigma$ called
+      the \emph{empty string} and it is denoted $\epsilon$.
+\end{enumerate} 
+    Note that $\emptyset$, $\{\epsilon\}$ and $\epsilon$ are three different things.
+    The first is a set with no elements, the second is a set with one element,
+    namely the empty string, and the last is a string, not a set.
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Operations on strings}
+
+\begin{itemize}
+\item If $x$ and $y$ are strings then string $xy$ is called the
+\emph{concatenation} of $x$ and $y$.
+\item Concatenation is associative: $(xy)z = x(yz)$; it is not commutative.
+\item $\epsilon$ is an identity for concatenation: ${\epsilon}x = x\epsilon = x$. 
+\item $|xy| = |x| + |y|$. We write $a^n$ for a string of $a$'s of length $n$.
+For example, $a^5 = aaaaa$ and $a^0 = \epsilon$. And $a^ma^n = a^{m+n}$ for all
+$m,n \geq 0.$
+\end{itemize} 
+
+\end{slide}
+\section[slide=false]{Sets}
+
+\begin{slide}[bm=,toc=]{Finite and infinite Sets}
+
+\emph{\textbf{Definition: A set is a collection of elements.}}
+\begin{itemize}
+   \item $a \in S$ means $a$ is an element of set $S$ 
+   \item $a \notin S$ means $a$ is not an element of set $S$
+   \item $\emptyset$ represents the set with no elements (``empty set'').
+\end{itemize} 
+
+\textbf{Two ways of defining a set:}
+\begin{itemize}
+   \item Explict (write out the elements).
+   \begin{itemize}
+      \item $S = \{red, yellow, green\}$ 
+      \item $R = \{1,2,3\}$
+      \item This does not work for infinite sets.
+   \end{itemize} 
+   \item Through \emph{set comprehension}. 
+   \begin{itemize}
+      \item $\N = \{n| n \in \Z, n \geq 0\}$ 
+      \item $E = \{n| n \in \N, n \mod{2} = 0 \}$
+   \end{itemize}
+\end{itemize} 
+
+Important infinite sets: $\N$, $\Z$, $\Q$, $\R$.
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Applications of sets}
+Sets are the basis for:
+\begin{itemize}
+   \item Relations
+   \item Functions
+   \item Equivalence classes
+   \item Partial orders
+\end{itemize}
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Basic operations on sets}
+\begin{itemize}
+   \item The \emph{cardinality} of set $A$ is denoted $|A|$; $\emptyset$ has
+   cardinality 0. 
+   \item \emph{set union}: $A \cup B = \{x|x \in A \text{ or } x \in B\}$
+   \item \emph{set intersection}: $A \cap B = \{x|x \in A \text{ and } x \in B\}$
+   \item \emph{set concatenation}: $\mli{AB} = \{xy | x \in A \text{ and } y \in
+   B\}$. For example, $\{a,ab\}\{b,ba\} = \{ab,aba,abb,abba\}$. When forming a
+   set concatenation, you form all strings that can be obtained in this way.
+   Note that $\mli{AB}$ and $\mli{BA}$ are different sets in general.
+\end{itemize}
+\end{slide}
+
+\begin{wideslide}[bm=,toc=]{Powers of sets}
+\emph{powers} of a set $A$ (i.e.\ $A^n$) are defined inductively:
+\[
+  A^0 = \{\epsilon\}
+\]
+\[
+  A^{n+1} = AA^n
+\]
+
+$A^n$ is formed by concatenating $n$ copies of $A$ together. Taking $A^0 =
+\{\epsilon\}$ by definition makes $A^{m+n} = A^mA^n$ true, even when one of $m$
+or $n$ is zero. For example, if $A = \{ab,aab\}$ then
+$A^0 = \{ab,aab\}^0 = \{\epsilon\}$
+
+$A^1 = AA^0 = \{ab,aab\}\{\epsilon\} = \{ab,aab\}$
+
+$A^2 = AA^1 = \{ab,aab\}\{ab,aab\} = \{abab,abaab,aabab,aabaab\}$
+
+$A^3 = AA^2 = \{ab,aab\}\{abab,abaab,aabab,aabaab\} =$
+$\{ababab,ababaab,abaabab,abaabaab, $
+$aababab,aababaab,aabaabab,aabaabaab \}$
+\\~\\
+As a special case, if $A$ is an alphabet then $A^n$ is the set of all strings
+over $A$ of length $n$.
+\end{wideslide}
+
+\begin{slide}[bm=,toc=]{Kleene closure}
+\emph{Kleene closure} of a set $A$, denoted $A^*$, is the infinite union of all
+finite powers of $A$:
+\[
+A^* = \bigcup_{n \geq 0} A^n = A^0 \cup A^1 \cup A^2 \cup A^3 \cup \cdots
+\]
+As a special case, if $A$ is an alphabet then $A*$ is the set of all strings
+over $A$ of any length, including zero length.
+\end{slide}
+
+\begin{slide}[bm=,toc=]{$\bar{A}$ and $A^+$}
+\begin{itemize}
+   \item The \emph{complement} of $A$ with respect to $\Sigma^*$ is defined 
+         $\bar{A} = \{x \in \Sigma^* | x \notin A\}$. The complement of $A$
+         depends on $\Sigma^*$, hence $\bar{A}$ is sometimes denoted 
+         $\Sigma^* - A$ to emphasize this dependence.
+   \item $A^+$ is the infinite union of all nonzero powers of $A$:
+         \[
+           A^+ = AA^* = \bigcup_{n>0} A^n
+           \]
+\end{itemize}
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Properties of Set Operations}
+\begin{itemize}
+   \item Set union, set intersection and set concatenation are associative: 
+   \[
+     \begin{split}
+     (A\cup B) \cup C = A \cup (B \cup C) \\
+     (A\cap B) \cap C = A \cap (B \cap C) \\
+     (\mli{AB})C = A(\mli{BC}) \\
+     \end{split}
+     \]
+   \item Set union and set intersection are commutative
+   \[
+     \begin{split}
+     A\cup B = B \cup A \\
+     A\cap B = B \cap A \\
+     \end{split}
+    \]
+    \item Set concatenation is not commutative.
+\end{itemize}
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Identity for Union and set Concatenation}
+\begin{itemize}
+   \item The empty set $\emptyset$ is the identity for $\bigcup$:
+   \[
+     A\cup \emptyset = \emptyset \cup A = A
+     \]
+   \item The set $\{\epsilon\}$ is an identity for set concatenation:
+       \[
+         \{\epsilon\}A = A\{\epsilon\} = A
+       \]
+   \item $A\emptyset = {\emptyset}A = \emptyset$
+\end{itemize}
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Distributive Properties}
+\begin{itemize}
+   \item  Set union and intersection distribute over each other:
+   $A \cup (B \cap C) = (A\cup B)\cap(A \cup C)$\\
+   $A \cap (B \cup C) = (A\cap B)\cup(A \cap C)$
+
+   \item Set concatenation distributes over union. 
+    $A(B\cup C) = \mli{AB} \cup \mli{AC}$\\
+    $(A\cup B)C = \mli{AC} \cup \mli{BC}$
+    \item Set concatenation does \emph{not} distribute over intersection. For
+    example, let $A = \{a,ab\}$, $B = \{b\}$, $C = \{\epsilon\}$. Then
+       $A(B\cap C) = A\emptyset = \emptyset$ \\
+       $\mli{AB} \cap \mli{AC} = \{ab,abb\} \cap \{a,ab\} = \{ab\}$
+\end{itemize}
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Other useful identities}
+De Morgan Laws:
+\[
+\overline{A \cup B} = \bar{A} \cap \bar{B}  
+\]
+\[
+\overline{A \cap B} = \bar{A} \cup \bar{B}  
+\]
+
+Properties of Kleene closure:
+\begin{itemize}
+\item $A^*A^* = A^*$
+\item $(A^*)^* = A^*$
+\item $A^* = \{\epsilon \cup AA^* = \{\epsilon\}\cup A^*A \}$
+\item $\emptyset^* = \{\epsilon\}$ 
+\item $\{\epsilon\}^* = \{\epsilon\}$ 
+\item $AA^* = A^*A$ 
+\end{itemize}
+\end{slide}
+
+\end{document}

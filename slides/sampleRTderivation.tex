@@ -1,0 +1,63 @@
+
+\documentclass[style=simple,size=12pt]{powerdot}
+\usepackage{epic,array,ecltree,wasysym,url}
+\usepackage{mlextra}
+
+\newcommand{\id}[1]{\mbox{\it #1\/}}
+\newcommand{\rid}[1]{\mbox{\rm #1}}
+\newcommand{\sid}[1]{\mbox{\sf #1}}
+\newcommand{\bid}[1]{\mbox{\bf #1}}
+\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
+
+\pdsetup{method=normal}
+
+\begin{document}
+
+\begin{wideslide}[bm=,toc=]{Sample RT derivation}
+
+\begin{center}
+\begin{tabular}{llllll}
+ & & $\bid{B}$ & $\id{nil}\in\id{RTL}$ & & \\ \cline{4-4}
+$\bid{B}$ & $\id{nil}\in\id{RTL}$ & $\bid{R2}$ & $\id{node}(\id{nil})\in\id{RT}$ & $\id{nil}\in\id{RTL}$ & $\bid{B}$ \\ 
+\cline{2-2} \cline{4-5}
+$\bid{R2}$ & $\id{node}(\id{nil})\in\id{RT}$ & $\bid{R1}$ & \multicolumn{2}{l}{
+$\id{cons}(\id{node}(\id{nil}),\id{nil})\in\id{RTL}$} & \\
+\cline{2-5}
+$\bid{R1}$ & \multicolumn{4}{l}{$\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil})) \in \id{RTL}$} \\
+\cline{2-5}
+$\bid{R2}$ & \multicolumn{4}{l}{$\id{node}(\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil})))\in\id{RT}$}
+\end{tabular}
+\end{center}
+\end{wideslide}
+\end{document}
+ 
+ & $e,s \vdash 1 \rightarrow 1,e,s$ & & $l_1\in\id{dom}(s)$ & \\ \cline{2-2}\cline{4-4}
+$\id{sum}$ & $e,s \vdash \ast\!\ast\! x+1 \rightarrow 4,e,s$ & & $e,s\vdash \ast x \rightarrow l_2,e,s$ & $\id{deref}$ \\ 
+ & $l_2\in\id{dom}(s)$ & & & \\ \cline{2-4}
+ & \multicolumn{3}{c}{$e,s\vdash \ast\!\ast\! x := \ast\!\ast\! x+1
+\rightarrow 4,e,s[l_2\mapsto 4]$} & $\id{assign1}$
+\end{tabular}
+\end{center}
+
+\item Proofs {\em about\/} the Post system prove properties of the relation,
+or in other words about {\em all\/} programs expressed in the simple language.
+For instance, one can show that the Post system over
+$(\id{Env}\times\id{S}\times E\times V\times \id{Env}\times S)$
+is decidable.
+\item The Post system is r.e. but undecidable.
+\item A semi-decision procedure for the Post system normally
+answers {\em queries\/} of the form $e,s\vdash C\rightarrow x,y,z$ where
+$x$, $y$ and $z$ are Post-system variables, and $e$ and $s$ are not
+variables but rather concrete instances of an environment 
+and store respectively as in the example above.
+\item The Post system is deterministic.
+For any expression or command in the simple language, exactly one 
+rule applies to it.
+This facilitates finding proofs in the system since an expression or command
+can be compiled into a deterministic representation
+and ``executed'' in order to help speed up a semi-decision procedure.
+Of course the compilation must preserve what is provable within
+the system, and this is the goal of compiler verification.
+\end{itemize}
+
+\end{document}

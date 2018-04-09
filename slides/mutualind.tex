@@ -1,0 +1,126 @@
+
+\documentclass[style=sailor,size=12pt]{powerdot}
+\usepackage{epic,array,ecltree,wasysym,url}
+\usepackage{mlextra}
+
+\newcommand{\id}[1]{\mbox{\it #1\/}}
+\newcommand{\rid}[1]{\mbox{\rm #1}}
+\newcommand{\sid}[1]{\mbox{\sf #1}}
+\newcommand{\bid}[1]{\mbox{\bf #1}}
+\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
+
+\pdsetup{method=normal}
+
+\begin{document}
+
+\begin{wideslide}[bm=,toc=]{Recursive definitions}
+\begin{itemize}
+\item A mutually-recursive definition of {\em rooted trees\/} {\em RT\/}:
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B} \>
+        \(\begin{array}[t]{l}
+        \id{nil}\in\id{RTL}
+        \end{array}\) \\[2ex]
+{\bf R1} \>
+        \(\begin{array}[t]{l}
+        x\in\id{RT}\;\;\;y\in\id{RTL} \\
+        \hline
+        \id{cons}(x,y)\in\id{RTL}
+        \end{array}\) \\[2ex]
+{\bf R2} \>
+        \(\begin{array}[t]{l}
+        x\in\id{RTL} \\
+        \hline
+        \id{node}(x)\in\id{RT}
+        \end{array}\)
+\end{tabbing}
+\item Compare with definition in Rosen 7th Ed.
+\item Rosen ignores mutual recursion and hence mutual induction.
+\item His definition is not induction friendly.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Mutual induction}
+{\bf Theorem}. If $t\in\id{RT}$ then $\id{\#edges}(t)$ = $\id{\#nodes}(t) - 1$.
+\vspace{1em}
+
+{\bf Proof}.  By {\em strong\/} mutual induction on derivation height. 
+We prove the following two statements:
+\vspace{1em}
+
+$S_1$: $l\in \id{RTL}\Rightarrow \id{\#edges}(l) = \id{\#nodes}(l) - |l|$.
+
+$S_2$: $t\in \id{RT}\Rightarrow \id{\#edges}(t) = \id{\#nodes}(t) - 1$.
+
+\vspace{2em}
+Note: $|l|$ stands for the length of list $l$, $\id{\#edges}(l)$ the number of edges in $l$
+and $\id{\#nodes}(l)$ the number of nodes in $l$.
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Mutual induction}
+{\em Basis\/}: derivation height is zero.
+
+\vspace{1em}
+$S_1$: If derivation height is zero then $l\in\id{RTL}$ implies $l=\id{nil}$.
+Then $\id{\#edges}(\id{nil})=\id{\#nodes}(\id{nil}) - |\id{nil}| = 0$.
+
+\vspace{1em}
+$S_2$: Vacuously true since there's no derivation of height zero for $t\in\id{RT}$.
+
+\vspace{2em}
+{\em Inductive hypothesis\/}:  Suppose for all $k$ where $0\leq k\leq n$ and $n\geq 0$,
+$S_1$ holds if $l\in\id{RTL}$ has derivation height $k$ and
+$S_2$ holds if $t\in\id{RT}$ has derivation height $k$.
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Mutual induction}
+{\em Inductive step}.
+We must show $S_1$ and $S_2$ for every derivation of height $n+1$ for $n\geq 0$.
+We begin with $S_2$.
+
+\vspace{1em}
+Suppose $t\in\id{RT}$ has derivation height $n+1$ where $n\geq 0$.
+Then the derivation must end with {\bf R2}. 
+Therefore $t$ has the form $\id{node}(x)$
+where $x\in\id{RTL}$.
+The derivation of $x\in\id{RTL}$ has height $n$.
+%So by induction and $S_1$, $\id{\#edges}(x)=\id{\#nodes}(x)$.
+Then
+\begin{displaymath}
+\begin{array}{lll}
+\id{\#nodes}(\id{node}(x)) & = & 1 + \id{\#nodes}(x) \\
+	& = & 1+\id{\#edges}(x) + |x|\;\;\;\rid{by induction and}\;S_1 \\
+	& = & 1+\id{\#edges}(\id{node}(x))
+\end{array}
+\end{displaymath}
+Ergo, $\id{\#edges}(\id{node}(x))=\id{\#nodes}(\id{node}(x))-1$.
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Mutual induction}
+Now we show $S_1$.
+Suppose $l\in\id{RTL}$ has derivation height $n+1$ where $n\geq 0$.
+Then the derivation must end with {\bf R1}. 
+Therefore $l$ has the form $\id{cons}(x,y)$
+where $x\in\id{RT}$ and $y\in\id{RTL}$.
+Either the derivation of $x\in\id{RT}$ or $y\in\id{RTL}$ has height $n$ while the other 
+has height {\em at most\/} $n$.
+%By induction and $S_2$, $\id{\#edges}(x)=\id{\#nodes}(x)-1$.
+%Also by induction and $S_1$, $\id{\#edges}(y)=\id{\#nodes}(y)$.
+Then
+\begin{displaymath}
+\begin{array}{lll}
+\id{\#edges}(\id{cons}(x,y)) & = & \id{\#edges}(x) + \id{\#edges}(y) \\
+	& = & \id{\#nodes}(x) - 1 + \id{\#edges}(y) \\
+ & & \>\>\>\>\>\>\rid{by induction and}\;S_2 \\
+	& = & \id{\#nodes}(x) - 1 + \id{\#nodes}(y) - |y| \\
+ & & \>\>\>\>\>\>\rid{by induction and}\;S_1 \\
+	& = & \id{\#nodes}(\id{cons}(x,y)) - 1 - |y| \\
+	& = & \id{\#nodes}(\id{cons}(x,y)) - (1 + |y|) \\
+	& = & \id{\#nodes}(\id{cons}(x,y)) - |\id{cons}(x,y)|
+\end{array}
+\end{displaymath}
+%{\em quod erat demonstrandum (Q.E.D.)\/}
+\end{wideslide}
+\end{document}
+
