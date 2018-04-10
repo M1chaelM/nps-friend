@@ -4,6 +4,7 @@
 \usepackage[nointegrals]{wasysym}
 \usepackage{mathtools}
 \usepackage{graphicx}
+\usepackage[labelformat=empty]{caption}
 
 \newcommand{\id}[1]{\mbox{\it #1\/}}
 \newcommand{\rid}[1]{\mbox{\rm #1}}
@@ -52,11 +53,23 @@
 \newcommand{\mli}[1]{\mathit{#1}}
 \newcommand{\ndiv}{\hspace{-3pt}\not|\hspace{2pt}}
 
+\newcommand{\node}{%
+  \begingroup\normalfont
+  \includegraphics[height=\fontcharht\font`\c]{art/node.eps}%
+  \endgroup
+}
+
+\newcommand{\threenode}{%
+  \begingroup\normalfont
+  \includegraphics[height=\fontcharht\font`\B]{art/3nodetree.eps}%
+  \endgroup
+}
+
 \pdsetup{method=normal,
 list={labelsep=1em,leftmargin=1cm,itemsep=0pt,topsep=5pt,parsep=0pt}
 }
 % import from truth and PTL.
-\title{A Brief Introduction to Post Systems}
+\title{An Application of Post systems}
 \author{Foundations of Computer Science}
 \date{\today}
 
@@ -136,10 +149,10 @@ where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables)
 \item Example derivation showing $9 \in S$:\\
 \vspace{2mm}
 \begin{tabular}{lllll}
-  $\bid{B}$  & $\id{3}\in \id{S}$           & $\id{3}\in \id{S}$ & $\bid{B}$\\ 
-  \cline{2-3}
-  $\bid{R}$  & $\id{3} + \id{3} \in \id{S}$ &                    & $\id{3}\in \id{S}$ & $\bid{B}$ \\ 
-  \cline{2-4} 
+  $\bid{B}$  & $\id{3}\in \id{S}$           & $\id{3}\in \id{S}$ & $\bid{B}$
+  \\ \cline{2-3}
+  $\bid{R}$  & $\id{3} + \id{3} \in \id{S}$ &                    & $\id{3}\in \id{S}$ & $\bid{B}$ 
+  \\ \cline{2-4} 
   $\bid{R}$  & $\id{3} + \id{3} + \id{3} \in \id{S}$ &           &                    &  \\ 
 \end{tabular}
 \end{itemize}
@@ -171,7 +184,6 @@ equal to 12.
 \item Well-suited to strong induction.
 \end{itemize}
 \end{wideslide}
-
 
 
 \begin{wideslide}[bm=,toc=]{Recursive definitions}
@@ -221,7 +233,8 @@ equal to 12.
 %\item Consequents have larger terms than antecedents except in last rule.
 \end{itemize}
 \end{wideslide}
-\begin{wideslide}[bm=,toc=]{Rooted Tree Review}
+
+\begin{wideslide}[bm=,toc=]{Rooted trees in Rosen 7th Ed.}
   Recall the definition of rooted trees given in Rosen (p. 351).
   
   The set of \emph{rooted trees}, where a rooted tree consists of a set of
@@ -243,44 +256,53 @@ equal to 12.
   {\bf } \>
           is also a rooted tree.\\[2ex] \\
 \end{tabbing}
-
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Rooted Tree Review}
-  \begin{itemize}
-    \item Let RT be the set of rooted trees (i.e. $t \in$ RT iff $x$ is a rooted tree).
-    \item A list of rooted trees, $l$, is a finite ordered list of elements of RT ($t_1,t_2...t_n$).
-    \item Let RTL be the set of all possible lists of a rooted trees.
-    \item $nil$ denotes an empty list. 
-    \item We define two helper functions: $node$ and $cons$.
-  \end{itemize}
-  The $node(l)$ function:
-  \begin{itemize}
-      \item Takes a list, $l$ as an argument and creates a new tree node that is 
-            connected to every element in the list $l$.
-      \item If the list is empty, the new node will be connected to nothing.
-  \end{itemize}
+\begin{wideslide}[bm=,toc=]{Rooted trees}
+\begin{itemize}
+\item We want a definition amenable to induction---use a Post system instead.
+\item Need 3 {\em constructors\/} $\id{cons}$, $\id{node}$ and $\id{nil}$.
 
+\vspace{1em}
+\begin{tabular}{|ll|} \hline
+{\em integer list\/} & {\em list shorthand} \\ \hline
+$\id{nil}$ & $[\;]$ \\
+$\id{cons}(3,\id{nil})$ & $[3]$ \\
+$\id{cons}(5,\id{cons}(3,\id{nil}))$ & $[5,3]$ \\
+$\id{cons}(2,\id{cons}(5,\id{cons}(3,\id{nil})))$ & $[2,5,3]$ \\ \hline
+\end{tabular}
 
-
+\vspace{1em}
+\begin{tabular}{|ll|} \hline
+{\em rooted tree list l\/} & {\em rooted tree} $\id{node}(l)$  \\ \hline
+$\id{nil}$ & $\id{node}([\,])$ \\
+$\id{cons}(\id{node}(\id{nil}),\id{nil})$ & 
+$\id{node}(\id{node}([\,]))$ \\
+$\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil}))$ &
+$\id{node}(\id{node}([\,]),\id{node}([\,]))$ \\ \hline
+\end{tabular}
+\vspace{1em}
+\item Let {\em RT\/} be the set of rooted trees.
+%\item A list of rooted trees is a finite list of elements of RT ($t_1,t_2...t_n$).
+\item Let {\em RTL\/} be the set of all lists of rooted trees.
+\end{itemize}
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{The cons function}
-    \begin{itemize}
-      \item It \emph{constructs} a two-cell memory object with references to its
-      arguments. For example, if we write $ pair = cons(x,y)$, $pair$ will store
-      references to the elements $x$ and $y$.
-      \item Repeated calls can be used to create a list. For example, $list =
-      cons(z,pair)$ creates a list containing elements $z,x,y$, in that order.
-
-    \item If $t$ is a tree and $l$ is a list of trees, $cons(t,l)$ will produce a 
-          new list of trees that begins with $t$.
-    \end{itemize}
-\end{wideslide}
-
+%\begin{wideslide}[bm=,toc=]{The cons function}
+    %\begin{itemize}
+      %\item It \emph{constructs} a two-cell memory object with references to its
+      %arguments. For example, if we write $ pair = cons(x,y)$, $pair$ will store
+      %references to the elements $x$ and $y$.
+      %\item Repeated calls can be used to create a list. For example, $list =
+      %cons(z,pair)$ creates a list containing elements $z,x,y$, in that order.
+    %%\item If $t$ is a tree and $l$ is a list of trees, $cons(t,l)$ will produce a 
+          %new list of trees that begins with $t$.
+    %\end{itemize}
+%\end{wideslide}
+ 
 \begin{wideslide}[bm=,toc=]{Recursive definitions}
 \begin{itemize}
-\item A mutually-recursive definition of {\em rooted trees\/} {\em RT\/}:
+\item A mutually-recursive definition of {\em rooted trees\/}:
 \vspace{-1em}
 \begin{tabbing}
 {\bf R1}XX \=  \kill
@@ -301,32 +323,44 @@ equal to 12.
         \id{node}(x)\in\id{RT}
         \end{array}\)
 \end{tabbing}
-\item Compare with sloppy definition in Rosen 7th Ed., pg.\ 351.
-\item It ignores mutual recursion and hence mutual induction.
-\item It is not induction friendly.
+\item Compare with definition in Rosen 7th Ed.
+\item Rosen ignores mutual recursion and hence mutual induction.
+\item His definition is not induction friendly.
 \end{itemize}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Sample RT derivation}
 \begin{center}
 \begin{tabular}{llllll}
-             &                                 & $\bid{B}$             & $\id{nil}\in\id{RTL}$           &                       & \\ \cline{4-4}
-  $\bid{B}$  & $\id{nil}\in\id{RTL}$           &$\bid{R2}$             & $\id{node}(\id{nil})\in\id{RT}$ & $\id{nil}\in\id{RTL}$ & $\bid{B}$ \\ 
-  \cline{2-2} \cline{4-5}
-  $\bid{R2}$ & $\id{node}(\id{nil})\in\id{RT}$ & $\bid{R1}$            & \multicolumn{2}{l}{
-  $\id{cons}(\id{node}(\id{nil}),\id{nil})\in\id{RTL}$} & \\
-  \cline{2-5}
-  $\bid{R1}$ & \multicolumn{4}{l}{$\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil})) \in \id{RTL}$} \\
-  \cline{2-5}
-  $\bid{R2}$ & \multicolumn{4}{l}{$\id{node}(\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil})))\in\id{RT}$}
+  \onslide{1-}{             &                                 & $\bid{B}$ & $\id{nil}\in\id{RTL}$           &                       &} 
+  \onslide{1-}{\\ \cline{4-4}} 
+  \onslide{1-}{$\bid{B}$  & $\id{nil}\in\id{RTL}$}
+  &\onslide{1-}{$\bid{R2}$             & $\id{node}(\id{nil})\in\id{RT}$} & \onslide{1-}{$\id{nil}\in\id{RTL}$ & $\bid{B}$} 
+  \onslide{1-}{\\ \cline{2-2} \cline{4-5}}
+  \onslide{1-}{$\bid{R2}$ & $\id{node}(\id{nil})\in\id{RT}$} & \onslide{1-}{$\bid{R1}$ & \multicolumn{2}{l}{ $\id{cons}(\id{node}(\id{nil}),\id{nil})\in\id{RTL}$} &} 
+  \onslide{1-}{\\ \cline{2-5}}
+  \onslide{1-}{$\bid{R1}$ & \multicolumn{4}{l}{$\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil}))
+      \in \id{RTL}$}} 
+  \onslide{1-}{ \\ \cline{2-5}}
+  \onslide{1-}{$\bid{R2}$ & \multicolumn{4}{l}{$\id{node}(\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil})))\in\id{RT}$}}
 \end{tabular}
 \end{center}
-\begin{figure}[h]
-\centering
-\includegraphics[width=3.5in, height=1.5in,keepaspectratio=true]{art/3_node_tree.eps}
-\caption{3 node rooted tree derived above}
-\label{2sp}
-\end{figure}
+\twocolumn[
+lfrprop={},
+lineheight=2cm,topsep=0.3cm
+]{Rooted Tree Lists \\ \vspace{1mm}\hrule \vspace{1mm} 
+    \onslide{1-}{[]}\\
+    \onslide{1-}{[\node]}\\ 
+    \onslide{1-}{[\node,\node]}
+}{Rooted Trees \\ \vspace{1mm}\hrule \vspace{1mm} 
+  \onslide{1-}{\node}\\ 
+  \onslide{1}{\threenode}}
+%\begin{figure}[h]
+%\centering
+%\includegraphics[width=2.5in, height=.75in,keepaspectratio=true]{art/3_node_tree.eps}
+%\caption{3 node rooted tree derived above}
+%\label{2sp}
+%\end{figure}
 \end{wideslide}
 
 
@@ -353,5 +387,6 @@ equal to 12.
 \item So structural induction is not possible here.
 \end{itemize}
 \end{wideslide}
+
 
 \end{document}
