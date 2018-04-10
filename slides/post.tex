@@ -146,8 +146,10 @@ where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables)
 \item Must prove $n\in S$ iff $n$ is a positive multiple of 3.
 \item ``$n\in S$ only if $n$ is a positive multiple of 3'' (system {\em soundness\/}).
 \item ``$n\in S$ if $n$ is a positive multiple of 3'' (system {\em completeness\/}).
-\item Example derivation showing $9 \in S$:\\
-\vspace{2mm}
+\end{itemize}
+\end{wideslide}
+\begin{wideslide}[bm=,toc=]{Example derivation showing $9 \in S$}
+\begin{center}
 \begin{tabular}{lllll}
   $\bid{B}$  & $\id{3}\in \id{S}$           & $\id{3}\in \id{S}$ & $\bid{B}$
   \\ \cline{2-3}
@@ -155,7 +157,8 @@ where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables)
   \\ \cline{2-4} 
   $\bid{R}$  & $\id{3} + \id{3} + \id{3} \in \id{S}$ &           &                    &  \\ 
 \end{tabular}
-\end{itemize}
+\end{center}
+
 \end{wideslide}
 \begin{wideslide}[bm=,toc=]{Recursive Definitions}
 \begin{itemize}
@@ -164,24 +167,25 @@ where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables)
 {\bf R1}XX \=  \kill
 {\bf B1} \>
         \(\begin{array}[t]{l}
-        4\in S
+        4\in P
         \end{array}\) \\[2ex]
 {\bf B2} \>
         \(\begin{array}[t]{l}
-        5\in S
+        5\in P
         \end{array}\) \\[2ex]
         
 {\bf R} \>
         \(\begin{array}[t]{l}
-        x \in S \;\;\;y \in S \\
+        x \in P \;\;\;y \in P \\
         \hline
-        x + y \in S
+        x + y \in P
         \end{array}\)
 \end{tabbing}
-\item Compare to postage stamp problem in Rosen p. 337.
-\item Claim: This system defines the set of all positive integers greater than or
+\item Claim: every amount of postage at least $12$ can be formed using only $4$
+and $5$-cent stamps (Rosen pg. 337).
+\item Must show every positive integer at least $12$ belongs to $P$. 
 equal to 12.
-\item Well-suited to strong induction.
+\item This is a completeness result of the system.
 \end{itemize}
 \end{wideslide}
 
