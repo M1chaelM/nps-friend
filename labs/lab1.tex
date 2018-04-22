@@ -1,0 +1,213 @@
+\documentclass[]{exam}
+
+%These tell TeX which packages to use.
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%Here I define some theorem styles and shortcut commands for symbols I use often
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem*{rmk}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem*{joke}{Joke}
+\newtheorem{ex}{Example}
+\newtheorem*{soln}{Solution}
+\newtheorem{prop}{Proposition}
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Ell}{\mathscr{L}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+
+
+\title{Lab 1: Sets, Functions, Relations}
+\author{Foundations of Computer Science}
+\date{\today}
+%\pagestyle{empty} 
+%\footer{}{\thepage}{}
+
+\begin{document}
+
+\maketitle
+
+\begin{questions}
+
+\section*{Warm up}
+\question
+Sam says: ``I'll call you if I'm interested.'' A few days later, he calls you.
+
+Is Sam interested? Assume he's not a liar.
+
+\question
+Rouben says: ``If I call you, I'm interested.'' A few days later, he calls you.
+
+Is Rouben interested? Assume he's not a liar.
+
+\question If it's raining, Steve brings an umbrella.\\
+    Today, Steve brought an umbrella.\\
+    Is it raining today?
+
+\question Joe breathes when he eats.\\
+    Joe is breathing.\\
+    Is Joe eating?
+
+\question Let $p$ be the statement ``Beau likes fish.''\\
+    Let $q$ be the statement ``1 = 0.''\\
+    Let $s$ be the statement $p \implies q$.\\
+    Assume $s$ is True.\\
+    Does Beau like fish?
+
+\section*{Review of Sets and Functions}
+\subsection*{Sets}
+Recall $a|b$ for $a,b \in \Z$ if and only if there exists some $k \in \Z$ such that $b = ka$.
+\question Let $c, d$ be natural numbers such that $c$ divides $d$.
+   Let $A = \{a \in \N| a \text{ divides } c \}$ and let\\ 
+   $B = \{b \in \N| b\text{ divides }d \}$. Prove $A \subseteq B$.
+
+\question
+Prove $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$.
+
+
+
+\subsection*{Functions}
+Recall a function $f: A \to B$ is injective if and only if $f(x) = f(y) \implies
+x = y$ for all $x,y \in A$.
+
+A function $f: A \to B$ is surjective if and only if for all $y \in B$ there
+exists $x \in A$ such that $f(x) = y$. 
+
+\question Consider $f: \N \to \N$, where $f(x) = x^2$.
+
+\begin{enumerate}[label=\alph*)]
+\item Is $f$ injective? Give a proof of your answer.
+
+\item Is $f$ surjective? Give a proof of your answer.
+\end{enumerate}
+
+
+\question Consider $f: \N \to \Z$, where $f(x) = \frac{x}{2}$ if $x$ is even
+and $f(x) = -\left (\frac{x+1}{2} \right) $ if $x$ is odd.
+\begin{enumerate}[label=\alph*)]
+\item Is $f$ injective? Give a proof of your answer.
+\item Is $f$ surjective? Give a proof of your answer.
+\end{enumerate}
+
+\question
+Define the function \emph{floor}: $\R^+ \to \N$ as $floor(x) = n$ if and only if
+$n \leq x < n+1$.(Note that $\R^+$ denotes the positive real numbers.)
+
+\begin{enumerate}[label=\alph*)]
+\item Is $floor$ injective? Give a proof of your answer. 
+
+\item Is $floor$ surjective? Give a proof of your answer.
+
+\end{enumerate}
+
+\section*{Relations}
+
+\question Recall that two integers have the same parity if they are both
+          even or both odd. Let $P$ be a relation on $\Z$ where $aPb$
+          if and only if $a$ and $b$ have the same parity. Prove that
+          $P$ is an equivalence relation.
+
+
+\question
+Let $\Sigma = \{a,b\}$
+Consider the relation $P$ on $\Sigma^*$ where $xPy$ for $x,y \in \Sigma^*$
+if and only if there exists a string $w$ in $\Sigma^*$ such that $y = wx$. 
+\begin{enumerate}[label=\alph*)]
+\item Assume $w = aba$. Find $3$ pairs $(x_1,y_1),(x_2,y_2),(x_3,y_3)$ that belong
+to the relation $P$.
+
+\item Now assume $w$ can be any string in $\Sigma^*$. Is the pair $(x,y) \in P$,
+where $x = bb$ and $y = abbabbabb$? If so, what is $w$? If not, why
+not?
+
+\item Consider $x = abababa$ and $y = aba$. Is the pair $(x,y) \in P$? If so,
+what is $w$? If not, why not?
+
+\item Characterize the relation in informal English. What does $xPy$ mean about $x$
+and $y$?\\
+
+\end{enumerate}
+\question Prove the division relation, $a | b$, is a partial order on the set
+of positive integers. 
+
+\question Prove the subset relation, $A \subseteq B$, is a partial order on
+sets. 
+
+\question 
+Let $\Sigma = \{0,1,2\}$.  Let $T = \{t \in \Sigma^* | |t| \geq 3\}$.
+Now define $Z$ to be a relation on $T$ such that $xZy$ for $x,y \in
+T$ if and only if there exist strings $r,s \in \Sigma^*$
+and string $m$ in $\Sigma^3$ such that $x = rm$ and $y = sm$. 
+
+\begin{enumerate}[label=\alph*)]
+\item Prove $Z$ is an equivalence relation.
+
+\item How many equivalences classes are there with respect to $Z$ on $T$?
+\end{enumerate}
+
+%\newpage
+
+\end{questions}
+\end{document}
+
+

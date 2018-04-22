@@ -1,0 +1,376 @@
+\documentclass[]{exam}
+
+%These tell TeX which packages to use.
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%Here I define some theorem styles and shortcut commands for symbols I use often
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem*{rmk}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem*{joke}{Joke}
+\newtheorem{ex}{Example}
+\newtheorem*{soln}{Solution}
+\newtheorem{prop}{Proposition}
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Ell}{\mathscr{L}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+
+
+\title{Lab 2: Recusive Definitions and Inductive Proofs}
+\author{Foundations of Computer Science}
+\date{\today}
+%\pagestyle{empty} 
+%\footer{}{\thepage}{}
+
+\begin{document}
+
+\maketitle
+
+\begin{questions}
+
+\section*{Recursive Definitions}
+\question Write a Post system that defines the odd natural numbers.
+
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B} \>
+        \(\begin{array}[t]{l}
+        1\in O
+        \end{array}\) \\[2ex]
+{\bf R} \>
+        \(\begin{array}[t]{l}
+        x \in O \\
+        \hline
+        x + 2 \in O
+        \end{array}\)
+\end{tabbing}
+
+\question Write a Post system that defines the integers.
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B} \>
+        \(\begin{array}[t]{l}
+        1\in Z
+        \end{array}\) \\[2ex]
+{\bf R1} \>
+        \(\begin{array}[t]{l}
+        x \in Z \\
+        \hline
+        -x \in Z
+        \end{array}\) \\[2ex]
+{\bf R2} \>
+        \(\begin{array}[t]{l}
+        x \in Z \;\;\;y \in Z \\
+        \hline
+        x + y \in Z
+        \end{array}\)
+\end{tabbing}
+
+
+\question Write a Post system that defines the set of binary strings of odd
+length that have a ``0'' as the middle character.
+
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B} \>
+        \(\begin{array}[t]{l}
+        0\in B
+        \end{array}\) \\[2ex]
+{\bf R1} \>
+        \(\begin{array}[t]{l}
+        x \in B \\
+        \hline
+        0x0 \in B
+        \end{array}\) \\[2ex]
+{\bf R2} \>
+        \(\begin{array}[t]{l}
+        x \in B \\
+        \hline
+        1x1 \in B
+        \end{array}\) \\[2ex]
+{\bf R3} \>
+        \(\begin{array}[t]{l}
+        x \in B \\
+        \hline
+        0x1 \in B
+        \end{array}\) \\[2ex]
+{\bf R4} \>
+        \(\begin{array}[t]{l}
+        x \in B \\
+        \hline
+        1x0 \in B
+        \end{array}\)
+\end{tabbing}
+
+\question Write a Post system that defines the set of palindromes with odd
+length.
+
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B1} \>
+        \(\begin{array}[t]{l}
+        a \in OPal
+        \end{array}\) \\[2ex]
+{\bf B2} \>
+        \(\begin{array}[t]{l}
+        b \in OPal 
+        \end{array}\) \\[2ex]
+{\bf R} \>
+        \(\begin{array}[t]{l}
+        x \in Opal \;\;\;y \in Opal \\
+        \hline
+        y(xy) \in Opal
+        \end{array}\)
+\end{tabbing}
+
+
+\section*{Inductive Proofs}
+For the following proofs, begin by setting up the correct basis, hypothesis
+and inductive step in terms of $S(n)$.
+
+%\question Prove for all $n \geq 0$, $\sum_{i=1}^{n}i^2 =
+%\frac{n(n+1)(2n+1)}{6}$. (Note that $\sum_{i=1}^0 i^2 = 0$.)
+
+\question Prove for all $n \geq 1$, $\sum_{i=1}^{n} (2i - 1) = n^2$. 
+\begin{proof}
+First, set up the basis, hypothesis and induction step in terms of $S(n)$:
+~\\
+\textbf{Basis:} Show $S(1): \sum_{i=1}^1 (2i - 1) = 1^2$. We have $ \sum_{i=1}^1
+(2i - 1) = 2(1) - 1 = 1^2 = 1$. Therefore, this is true.
+~\\
+\textbf{Inductive Hypothesis:} Suppose $S(n): \sum_{i=1}^{n}(2i - 1) = n^2$, 
+  where $n \geq 1$.
+~\\
+\textbf{Inductive Step:} Show $S(n+1): \sum_{i=1}^{n+1} (2i - 1) = (n + 1)^2$. 
+First, rewrite the sum $\sum_{i=1}^{n+1} (2i - 1)$ as $\sum_{i=1}^{n}
+(2i - 1) + 2(n+1) - 1$. Then, by the inductive hypothesis, we have $\sum_{i=1}^{n}
+(2i - 1) + 2n + 1 = n^2 + 2n + 1$. Factoring, we get $n^2 + 2n + 1 = (n + 1)^2$,
+which proves the result.
+
+\end{proof}
+
+
+%\begin{proof}
+%First, set up the basis, hypothesis and induction step in terms of $S(n)$:
+%~\\
+%\textbf{Basis:} Show $S(0): \sum_{i=1}^0 i^2 = 0$. This is true by convention
+%for empty sums. 
+%~\\
+%\textbf{Inductive Hypothesis:} Suppose $S(n): \sum_{i=1}^{n}i^2 =
+%\frac{n(n+1)(2n+1)}{6}$, where $n \geq 0$.
+%~\\
+%\textbf{Inductive Step:} Show $S(n+1): \sum_{i=1}^{n+1}i^2 =
+%\frac{(n+1)(n+2)(2(n+1)+1)}{6} = \frac{(n^2 + 3n + 3)(2n+3)}{6} = \frac{(2n^3 +
+%    9n^2 + 15n + 9)}{6}$.
+%
+%$S(n+1): \sum_{i=1}^{n+1}i^2 = \sum_{i=1}^{n}i^2 + (n + 1)^2.$ By inductive
+%hypothesis, $\sum_{i=1}^{n}i^2 + (n + 1)^2 = \frac{n(n+1)(2n+1)}{6} + (n + 1)^2$  
+%
+%\end{proof}
+
+\question Consider the following Post System:
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B} \>
+        \(\begin{array}[t]{l}
+        2\in S
+        \end{array}\) \\[2ex]
+{\bf R} \>
+        \(\begin{array}[t]{l}
+        x \in S \;\;\;y \in S \\
+        \hline
+        x + y \in S
+        \end{array}\)
+\end{tabbing}
+
+\begin{enumerate}[label=\alph*)]
+\item Prove $m \in S$ only if $m$ is a positive even integer (soundness). 
+\begin{proof}
+First, set up the basis, hypothesis and induction step in terms of $S(n)$ and
+derivation height:
+~\\
+\textbf{Basis:} Show $S(0)$: if the derivation height of $m \in S$ is $0$, $m$ is a
+positive even number. This is the case because if the derivation height is $0$,
+the derivation ends with the basis step, so $m = 2$, which is a positive even
+number.
+~\\
+\textbf{Inductive Hypothesis:} Suppose for all $k$, where $0 \leq k \leq n$ and
+$n \geq 0$, $S(k):$ $m$ is a positive even integer if $m \in S$ has a derivation
+height $k$.
+~\\
+\textbf{Inductive Step:} Show $S(n+1)$: if $m' \in S$ and $m'$ has derivation
+height $n + 1$ for $n \geq 0$, $m'$ is a positive even integer. Since $n \geq 0$,
+we have $n + 1 \geq 1$, so the derivation of $m'$ must end with an application of
+rule $R$. Therefore, $m' = x + y$, where $x,y \in S$, and the derivation heights
+of $x$ and $y$ are less than the derivation height of $m'$. Therefore, by the
+inductive hypothesis, $x$ and $y$ are positive even integers. It follows that
+their sum, $m'$, is also a positive even integer.
+
+\end{proof}
+\item Prove if $m$ is a positive even number, $m \in S$ (completeness).
+\begin{proof}
+First, set up the basis, hypothesis and induction step in terms of $S(k)$,
+where $k$ is a positive integer such that $m = 2k$, and we want to show
+$2k \in S$ for all $k \geq 1$:
+~\\
+\textbf{Basis:} Show $S(1)$: $2(1) = 2 \in S$. This is the case by axiom $B$.
+~\\
+\textbf{Inductive Hypothesis:} Suppose $S(k):$ $2k \in S$ for $k \geq 1$.
+~\\
+\textbf{Inductive Step:} Show $S(k+1)$: $2(k+1) \in S$, where $k \geq 1$.
+Observe that $2(k + 1) = 2k + 2$. By induction $2k \in S$, and by axiom
+$B$, $2 \in S$, so rule $R$ gives us $2k + 2 \in S$.
+\end{proof}
+\end{enumerate}
+
+\question Consider the following Post System:
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B} \>
+        \(\begin{array}[t]{l}
+        a \in D
+        \end{array}\) \\[2ex]
+{\bf R} \>
+        \(\begin{array}[t]{l}
+        x \in D \\
+        \hline
+        xx \in D
+        \end{array}\) 
+\end{tabbing}
+
+Prove for all $x \in D$, $|x| = 2^n$, where $n$ is the derivation height
+of $x$. 
+%
+
+\begin{proof}
+First, set up the basis, hypothesis and induction step in terms of $S(n)$ and
+derivation height:
+~\\
+\textbf{Basis:} Show $S(0):$ if $x \in D$ and $x$ has a derivation height of
+$0$, then $x$ must end with rule $B$. Therefore $x$ is $a$ and $|x| = 1 = 2^0$,
+which proves the formula for $n = 0$.
+~\\
+\textbf{Inductive Hypothesis:} Suppose $S(n)$: Assume $|x| = 2^n$ when $x$ has 
+a derivation height of $n$.
+~\\
+\textbf{Inductive Step:} Show $S(n+1)$: Show if $y \in D$ and $y$ has a
+derivation height of $n + 1$, then $|y| = 2^{n + 1}$. Since $n \geq 0$,
+we have that the derivation height of $y$ is greater than or equal to
+$1$, and therefore must have been produced using rule $R$. It follows
+that $y$ can be expressed as $xx$ where $x \in D$. By the inductive hypothesis,
+$|x| = 2^n$, and therefore $|xx| = 2(2^n) = 2^{n+1}$.
+
+
+\end{proof}
+\question Consider the following Post System:
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B1} \>
+        \(\begin{array}[t]{l}
+        aa \in E
+        \end{array}\) \\[2ex]
+{\bf B2} \>
+        \(\begin{array}[t]{l}
+        bb \in E
+        \end{array}\) \\[2ex]
+{\bf R} \>
+        \(\begin{array}[t]{l}
+        x \in E \;\;\;y \in E \\
+        \hline
+        x(yx) \in E
+        \end{array}\) 
+\end{tabbing}
+Prove for all $m \in E$, $\frac{|m|}{2}$ is a positive odd integer.  
+\begin{proof}
+First, set up the basis, hypothesis and induction step in terms of $S(n)$ and
+derivation height:
+~\\
+\textbf{Basis:} Show $S(0):$ if $m \in E$ and $m$ has a derivation height of
+$0$, then $m$ must be produced by rule $B1$ or $B2$. Therefore $m$ is $aa$ or $bb$ 
+and $|m| = 2$. Since $\frac{2}{2} = 1$ is a positive odd integer, the base
+case holds.
+~\\
+\textbf{Inductive Hypothesis:} Suppose $S(n)$: Assume $\frac{|m|}{2}$ is odd
+for $m \in E$ when $m$ has a derivation height of $n$.
+~\\
+\textbf{Inductive Step:} Show $S(n+1)$: Show if $m' \in E$ and $m'$ has a
+derivation height of $n + 1$, then $\frac{|m'|}{2}$ is odd.  Since $n \geq 0$,
+we have that the derivation height of $m'$ is greater than or equal to
+$1$, and therefore must have been produced using rule $R$. It follows
+that $m'$ can be expressed as $x(yx)$ where $x,y \in D$. Therefore $|m'| = |x| +
+|y| + |x| = 2|x| + |y|$. We must show that $\frac{|m'|}{2} = \frac{2|x| + |y|}{2} = |x| +
+\frac{|y|}{2}$ is odd.  Since $x$ and $y$ have a derivation height of $n$,
+we know by the inductive hypothesis, $\frac{|x|}{2}$ 
+and $\frac{|y|}{2}$ are odd, so $|x|$ is even. The sum of an even and
+an odd is odd, so $|m'| = |x| + \frac{|y|}{2}$ is odd.
+
+\end{proof}
+
+
+%\newpage
+
+\end{questions}
+\end{document}
+
+

@@ -1,0 +1,173 @@
+\documentclass[]{exam}
+
+%These tell TeX which packages to use.
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%Here I define some theorem styles and shortcut commands for symbols I use often
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem*{rmk}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem*{joke}{Joke}
+\newtheorem{ex}{Example}
+\newtheorem*{soln}{Solution}
+\newtheorem{prop}{Proposition}
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Ell}{\mathscr{L}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+
+
+\title{Lab 2: Recusive Definitions and Inductive Proofs}
+\author{Foundations of Computer Science}
+\date{\today}
+%\pagestyle{empty} 
+%\footer{}{\thepage}{}
+
+\begin{document}
+
+\maketitle
+
+\begin{questions}
+
+\section*{Recursive Definitions}
+\question Write a Post system that defines the odd natural numbers.
+
+
+\question Write a Post system that defines the integers.
+
+\question Write a Post system that defines the set of binary strings of odd
+length that have a ``0'' as the middle character.
+
+\question Write a Post system that defines the set of palindromes with odd
+length.
+
+
+\section*{Inductive Proofs}
+For the following proofs, begin by setting up the correct basis, hypothesis
+and inductive step in terms of $S(n)$.
+
+
+\question Prove for all $n \geq 1$, $\sum_{i=1}^{n} (2n - 1) = n^2$. 
+\question Consider the following Post System:
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B} \>
+        \(\begin{array}[t]{l}
+        2\in S
+        \end{array}\) \\[2ex]
+{\bf R} \>
+        \(\begin{array}[t]{l}
+        x \in S \;\;\;y \in S \\
+        \hline
+        x + y \in S
+        \end{array}\)
+\end{tabbing}
+
+\begin{enumerate}[label=\alph*)]
+\item Prove $x \in S$ only if $x$ is a positive even integer (soundness). 
+\item Prove if $x$ is a positive even integer, $x \in S$ (completeness).
+\end{enumerate}
+
+\question Consider the following Post System:
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B} \>
+        \(\begin{array}[t]{l}
+        a \in D
+        \end{array}\) \\[2ex]
+{\bf R} \>
+        \(\begin{array}[t]{l}
+        x \in D \\
+        \hline
+        xx \in D
+        \end{array}\) 
+\end{tabbing}
+
+Prove for all $x \in D$, $|x| = 2^n$, where $n$ is the derivation height
+of $x$. 
+%\newpage
+
+\question Consider the following Post System:
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B1} \>
+        \(\begin{array}[t]{l}
+        aa \in E
+        \end{array}\) \\[2ex]
+{\bf B2} \>
+        \(\begin{array}[t]{l}
+        bb \in E
+        \end{array}\) \\[2ex]
+{\bf R} \>
+        \(\begin{array}[t]{l}
+        x \in E \;\;\;y \in E \\
+        \hline
+        x(yx) \in E
+        \end{array}\) 
+\end{tabbing}
+Prove for all $m \in E$, $\frac{|m|}{2}$ is a positive odd integer.  
+
+\end{questions}
+\end{document}
+
+
