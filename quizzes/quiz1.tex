@@ -1,0 +1,145 @@
+\documentclass[addpoints]{exam}
+
+%These tell TeX which packages to use.
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%Here I define some theorem styles and shortcut commands for symbols I use often
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem*{rmk}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem*{joke}{Joke}
+\newtheorem{ex}{Example}
+\newtheorem*{soln}{Solution}
+\newtheorem{prop}{Proposition}
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Ell}{\mathscr{L}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+
+
+
+%\pagestyle{empty} 
+%\footer{}{\thepage}{}
+
+
+\begin{document}
+
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+{\large CS3920: Foundations of Computer Science} &  \makebox[3in]{\large Name:\enspace\hrulefill}\\
+{\large April 9, 2018} & \\
+{\large Quiz 1} & 
+\end{tabular*}\\
+
+\fbox{\fbox{\parbox{6in}{\textbf{Instructions}: Please answer the questions 
+  below to the best of your ability. Be sure to show your work where appropriate. 
+   This quiz is closed book, closed notes, closed computer. There are \numpoints\ 
+   points in total. }}}\\
+\begin{questions}
+\question[3]
+Prove $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$.
+
+
+\vspace{25mm}
+
+\question[4]
+Define the function \emph{trunc}: $\Sigma^+ \to \Sigma$ for some
+alphabet $\Sigma$ such that $trunc(x) = c$
+where $x$ is any string in $\Sigma^+$ and $c$ is the first character in $x$.
+
+Is $trunc$ injective? Give a proof of your answer. 
+\vspace{25mm}
+
+Is $trunc$ surjective? Give a proof of your answer.
+\vspace{25mm}
+
+
+\question[3]
+Let $\Sigma = \{a,b\}$
+Consider the relation $P$ on $\Sigma^*$ where $xPy$ for $x,y \in \Sigma^*$
+if and only if there exists a string $w$ in $\Sigma^*$ such that $y = xw$. 
+For example, if $x = aba$ and $y = ababb$, then $(x,y) \in P$ because $w = bb$
+and $bb \in \Sigma^*$.
+
+Show that $P$ is a partial order.
+\vspace{25mm}
+
+
+\question[4]
+Let $\Sigma = \{a,b,c,d\}$.
+Consider the relation $T$ on $\Sigma^+$ where for any two strings $x,y \in
+\Sigma^+$, $xTy$ if and only if the first character in $x$ is equal to the
+first character in $y$. Prove $T$ is an equivalence relation.
+\vspace{25mm}
+
+How many equivalences classes are there with respect to $T$ on $\Sigma^+$?
+\vspace{10mm}
+
+
+
+%\newpage
+
+\end{questions}
+\end{document}
+
+
