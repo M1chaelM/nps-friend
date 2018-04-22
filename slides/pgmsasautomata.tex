@@ -1,6 +1,7 @@
 \documentclass[style=sailor,size=12pt]{powerdot}
 \usepackage{epic,array,ecltree,wasysym,url}
 \usepackage{mlextra}
+\graphicspath{ {../art/} }
 \begin{document}
 \pdsetup{method=normal}
 
@@ -12,8 +13,12 @@ while (true) \{ \\
 \hspace{1em}push() \\
 \}
 \end{program}
-
-[Give state transition diagram here.]
+\begin{figure}[h]
+\centering
+\includegraphics[width=2.5in, height=.75in,keepaspectratio=true]{switch.eps}
+\caption{A finite automaton modeling an on/off switch}
+\label{2sp}
+\end{figure}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Peterson's algorithm}

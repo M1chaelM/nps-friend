@@ -4,6 +4,7 @@
 \usepackage[nointegrals]{wasysym}
 \usepackage{mathtools}
 \usepackage{graphicx}
+\graphicspath{ {../art/} }
 \usepackage[labelformat=empty]{caption}
 
 \newcommand{\id}[1]{\mbox{\it #1\/}}
@@ -55,13 +56,13 @@
 
 \newcommand{\node}{%
   \begingroup\normalfont
-  \includegraphics[height=\fontcharht\font`\c]{art/node.eps}%
+  \includegraphics[height=\fontcharht\font`\c]{node.eps}%
   \endgroup
 }
 
 \newcommand{\threenode}{%
   \begingroup\normalfont
-  \includegraphics[height=\fontcharht\font`\B]{art/3nodetree.eps}%
+  \includegraphics[height=\fontcharht\font`\B]{3nodetree.eps}%
   \endgroup
 }
 
@@ -361,7 +362,7 @@ lineheight=2cm,topsep=0.3cm
   \onslide{11}{\threenode}}
 %\begin{figure}[h]
 %\centering
-%\includegraphics[width=2.5in, height=.75in,keepaspectratio=true]{art/3_node_tree.eps}
+%\includegraphics[width=2.5in, height=.75in,keepaspectratio=true]{3_node_tree.eps}
 %\caption{3 node rooted tree derived above}
 %\label{2sp}
 %\end{figure}

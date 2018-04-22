@@ -2,12 +2,57 @@
 \documentclass[style=sailor,size=12pt]{powerdot}
 \usepackage{epic,array,ecltree,wasysym,url}
 \usepackage{mlextra}
+\graphicspath{ {../art/} }
 
 \newcommand{\id}[1]{\mbox{\it #1\/}}
 \newcommand{\rid}[1]{\mbox{\rm #1}}
 \newcommand{\sid}[1]{\mbox{\sf #1}}
 \newcommand{\bid}[1]{\mbox{\bf #1}}
 \newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Ell}{\mathscr{L}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+\newcommand{\mli}[1]{\mathit{#1}}
+\newcommand{\ndiv}{\hspace{-3pt}\not|\hspace{2pt}}
+
+
+
 
 \pdsetup{method=normal}
 
@@ -16,6 +61,7 @@
 \begin{wideslide}[bm=,toc=]{Strong induction}
 \begin{itemize}
 \item A Post system supposedly for positive multiples of 3:
+\vspace{-1em}
 \begin{tabbing}
 {\bf R2}XX \=  \kill
 {\bf B} \>
@@ -34,7 +80,7 @@ the set of all positive multiples of 3.
 \end{itemize}
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Strong induction}
+\begin{wideslide}[bm=,toc=]{Soundness by strong induction}
 {\bf Theorem}. $n\in S$ iff $n$ is a positive multiple of 3.
 \vspace{1em}
 
@@ -43,55 +89,183 @@ and the ``if'' part (completeness).
 
 \vspace{1em} 
 (only-if): $n\in S$ only if $n$ is a positive multiple of 3.
+
+\vspace{1em} 
+(if): if $n$ is a positive multiple of 3 then $n\in S$. 
+\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Soundness by strong induction}
+(only-if): $n\in S$ only if $n$ is a positive multiple of 3.
 This is proved by strong induction on the height of the derivation of $n\in S$.
 
 \vspace{1em}
-{\em Basis\/}: derivation height is zero.  Then the derivation must end with an
+$S(k)$: if the derivation of $n\in S$ has height $k$ then $n$ is a positive multiple of 3.
+
+\begin{displaymath}
+\begin{array}[t]{l}
+S(0) \\
+\forall k\geq 0.\, S(0)\wedge S(1) \wedge \cdots \wedge S(k)\Rightarrow S(k+1) \\
+\hline
+\forall k\geq 0.\, S(k)
+\end{array}
+\end{displaymath}
+
+\vspace{1em}
+Basis: Show $S(0)$.
+
+\vspace{1em}
+Inductive hypothesis: Suppose $S(0), S(1),\ldots ,S(k)$ {\bf where} $k\geq 0$.
+
+\vspace{1em}
+Inductive step: Show $S(k+1)$.
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Soundness: basis and inductive step}
+{\em $S(0)$\/}: derivation height is zero. \\ 
+Then the derivation must end with an
 application of rule {\bf B}, which implies $n=3$.
 And 3 is a positive multiple of 3 since $3\cdot 1=3$.
 
 \vspace{1em}
-{\em Inductive hypothesis\/}:  Suppose for all $k$ where $0\leq k\leq n$ and $n\geq 0$,
-$n$ is a positive multiple of 3 if $n\in S$ has derivation height $k$.
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Strong induction}
-{\em Inductive step}.
-We must show $m$ is a positive multiple of 3 if $m\in S$ has derivation height $n+1$ and $n\geq 0$.
+{\em $S(k + 1)$}.
+We must show $n$ is a positive multiple of 3 if $n\in S$ has derivation height $k+1$ and $k\geq 0$.
 
 \vspace{1em}
-Suppose $m\in S$ has derivation height $n+1$ and $n\geq 0$.
-Then since $n\geq 0$, the derivation must end with an application of rule {\bf R}.
-
-\vspace{1em}
-Thus $m$ can be expressed as the sum of $i$ and $j$ where $i\in S$ and $j\in S$.
-By induction, $i$ and $j$ are positive multiples of 3, meaning there are positive integers
-$a$ and $b$ such that $i=a3$ and $j=b3$.
+Suppose $n\in S$ has derivation height $k+1$ and $k\geq 0$.
+Then since $k\geq 0$, the derivation must end with an application of rule {\bf R}.
+Thus $n$ can be expressed as the sum of $i$ and $j$ where $i\in S$ and $j\in S$.
+By induction, $i$ and $j$ are positive multiples of $3$, meaning there are positive integers
+$a$ and $b$ such that $i=3a$ and $j=3b$.
 Hence 
-\[m = i + j = a3 + b3 = (a+b)3
+\[n = i + j = 3a + 3b = 3(a+b)
 \]
-thus establishing $m$ is a positive multiple of 3.
+thus establishing $n$ is a positive multiple of 3.
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Weak induction}
-(if): $n\in S$ if $n$ is a positive multiple of 3.
-Suppose $n$ is a positive multiple of 3.
-Then it can be expressed as $3k$ for some positive integer $k$.
-We prove by weak induction on $k$ that $3k\in S$.
+\begin{wideslide}[bm=,toc=]{Completeness by weak induction}
+(if): if $n$ is a positive multiple of 3 then $n\in S$.
+All positive multiples of 3 can be expressed as $3k$ for some positive integer $k$.
+We prove by {\em weak induction\/} on $k \in \N$ that $3k\in S$.
+
 
 \vspace{1em}
-{\em Basis\/}: $k=1$.  By axiom {\bf B}, $3\in S$ so $3k\in S$
-since $3k = 3$.
+$S(k)$: if $k$ is a positive integer such that $k\geq 1$ then $3k\in S$.
+
+\begin{displaymath}
+\begin{array}[t]{l}
+S(1) \\
+\forall k\geq 1.\, S(k)\Rightarrow S(k+1) \\
+\hline
+\forall k\geq 1.\, S(k)
+\end{array}
+\end{displaymath}
 
 \vspace{1em}
-{\em Inductive hypothesis\/}:  Suppose $3k\in S$ where $k\geq 0$.
+Basis: Show $S(1)$.
 
 \vspace{1em}
-{\em Inductive step}.
-We must show $3(k+1)\in S$ where $k\geq 0$.
+Inductive hypothesis: Suppose $S(k)$ {\bf where} $k\geq 1$.
+
+\vspace{1em} 
+Inductive step: Show $S(k+1)$.
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Completeness by weak induction}
+{\em $S(1)$\/}: $k=1$.\\  
+\vspace{1em}
+By axiom {\bf B}, $3\in S$ so $3k\in S$ since $3k = 3$.
+
+\vspace{2em}
+{\em $S(k + 1)$}:
+We must show $3(k+1)\in S$ where $k\geq 1$.\\
+\vspace{1em}
 We have $3(k+1) = 3k + 3$.
 By induction, $3k\in S$ and by axiom {\bf B}, $3\in S$.
 Therefore by rule {\bf R}, $3k + 3\in S$, or $3(k+1)\in S$.
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Strong induction multiple base cases}
+\begin{itemize}
+\item A Post system with multiple axioms.
+\vspace{-1em}
+\begin{tabbing}
+{\bf R1}XX \=  \kill
+{\bf B1} \>
+        \(\begin{array}[t]{l}
+        4\in P
+        \end{array}\) \\[2ex]
+{\bf B2} \>
+        \(\begin{array}[t]{l}
+        5\in P
+        \end{array}\) \\[2ex]
+        
+{\bf R} \>
+        \(\begin{array}[t]{l}
+        x \in P \;\;\;y \in P \\
+        \hline
+        x + y \in P
+        \end{array}\)
+\end{tabbing}
+\item Claim: any postage of 12 cents or more can be formed using only 4 and 5-cent stamps (Rosen pg.\ 337).
+\item Claim is proven by showing any positive integer at least 12 belongs to {\em P\/}.
+\item This is a {\em completeness\/} result of the Post system.
+\item We say nothing about soundness of the system because it's not of interest. 
+%namely $P=\{4,5,8,10,12,13,14,\ldots\}$.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Completeness by strong induction}
+$S(n)$: if $n$ is a positive integer such that $n\geq 12$ then $n\in P$.
+
+\begin{displaymath}
+\begin{array}[t]{l}
+S(12) \wedge S(13) \wedge S(14) \wedge S(15) \\
+\forall n\geq 15.\, S(12)\wedge S(13)\wedge S(14)\wedge S(15)\wedge\cdots\wedge S(n)\Rightarrow S(n+1) \\
+\hline
+\forall n\geq 12.\, S(n)
+\end{array}
+\end{displaymath}
+
+\vspace{1em}
+Basis: Show $S(12),S(13),S(14)$ and $S(15)$.
+
+\vspace{1em}
+Inductive hypothesis: Suppose $S(12),S(13),\ldots , S(n)$ {\bf where} $n\geq 15$.
+
+\vspace{1em}
+Inductive step: Show $S(n+1)$.
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Completeness by strong induction}
+If $n$ is a positive integer such that $n\geq 12$ then $n\in P$.
+
+\vspace{1em}
+The proof is by strong induction on $n$.
+Suppose $n\geq 12$.
+
+\vspace{1em}
+{\em Basis\/}: There are four cases: $n=12$, $n=13$, $n=14$ and $n=15$.
+
+\vspace{1em}
+$12\in P$ by 3 applications of rule {\bf B1} and two applications of {\bf R}.
+
+$13\in P$ by 2 applications of {\bf B1}, one application of {\bf B2} and two applications of {\bf R}.
+
+$14\in P$ by 2 applications of {\bf B2}, one application of {\bf B1} and two applications of {\bf R}.
+
+$15\in P$ by 3 applications of {\bf B2} and two applications of {\bf R}.
+
+\vspace{1em}
+{\em Inductive hypothesis\/}:  Suppose $n\geq 15$ and $k\in P$ if $12\leq k \leq n$.
+
+\vspace{1em}
+{\em Inductive step}.
+We must show $n+1\in P$ where $n\geq 15$.
+Since $n\geq 15$, $n+1-4\geq 12$.
+By induction, $n-3\in P$.
+By axiom {\bf B1}, $4\in P$.
+So by rule {\bf R} $n-3+4\in P$ or $n+1\in P$.
 \end{wideslide}
 
 \end{document}

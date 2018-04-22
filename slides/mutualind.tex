@@ -2,6 +2,7 @@
 \documentclass[style=sailor,size=12pt]{powerdot}
 \usepackage{epic,array,ecltree,wasysym,url}
 \usepackage{mlextra}
+\graphicspath{ {../art/} }
 
 \newcommand{\id}[1]{\mbox{\it #1\/}}
 \newcommand{\rid}[1]{\mbox{\rm #1}}
@@ -24,15 +25,15 @@
         \end{array}\) \\[2ex]
 {\bf R1} \>
         \(\begin{array}[t]{l}
-        x\in\id{RT}\;\;\;y\in\id{RTL} \\
+        t\in\id{RT}\;\;\;l\in\id{RTL} \\
         \hline
-        \id{cons}(x,y)\in\id{RTL}
+        \id{cons}(t,l)\in\id{RTL}
         \end{array}\) \\[2ex]
 {\bf R2} \>
         \(\begin{array}[t]{l}
-        x\in\id{RTL} \\
+        l\in\id{RTL} \\
         \hline
-        \id{node}(x)\in\id{RT}
+        \id{node}(l)\in\id{RT}
         \end{array}\)
 \end{tabbing}
 \item Compare with definition in Rosen 7th Ed.
@@ -59,65 +60,98 @@ and $\id{\#nodes}(l)$ the number of nodes in $l$.
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Mutual induction}
+
+\vspace{1em}
+$S_1(n)$: if the derivation of $l\in \id{RTL}$ has height $n$ then
+$\id{\#edges}(l) = \id{\#nodes}(l) - |l|$.
+$S_2(n)$: if the derivation of $t\in \id{RT}$ has height $n$ then
+$\id{\#edges}(t) = \id{\#nodes}(t) - 1$.
+
+\vspace{1em}
+
+
+
+\begin{displaymath}
+\begin{array}[t]{l}
+S_1(0)\wedge S_2(0) \\
+\forall n\geq 0.\, S_1(0)\wedge S_2(0) \wedge \cdots \wedge
+S_1(n)\wedge S_2(n)\Rightarrow S_1(n+1)\wedge S_2(n+1)\\
+\hline
+\forall n\geq 0.\, S(n)
+\end{array}
+\end{displaymath}
+
+\vspace{1em}
+Basis: Show $S_1(0)$ and $S_2(0)$.
+
+\vspace{1em}
+Inductive hypothesis: Suppose $S_1(0), S_2(0), S_1(1), S_2(1), \ldots ,S_1(n),S_2(n)$ {\bf where} $n\geq 0$.
+
+\vspace{1em}
+Inductive step: Show $S_1(n+1)$ and $S_2(n+1)$.
+
+\end{wideslide}
+\begin{wideslide}[bm=,toc=]{Mutual induction}
 {\em Basis\/}: derivation height is zero.
 
 \vspace{1em}
-$S_1$: If derivation height is zero then $l\in\id{RTL}$ implies $l=\id{nil}$.
+$S_1(0)$: If derivation height is zero then $l\in\id{RTL}$ implies $l=\id{nil}$.
 Then $\id{\#edges}(\id{nil})=\id{\#nodes}(\id{nil}) - |\id{nil}| = 0$.
 
 \vspace{1em}
-$S_2$: Vacuously true since there's no derivation of height zero for $t\in\id{RT}$.
+$S_2(0)$: Vacuously true since there's no derivation of height zero for $t\in\id{RT}$.
 
 \vspace{2em}
-{\em Inductive hypothesis\/}:  Suppose for all $k$ where $0\leq k\leq n$ and $n\geq 0$,
-$S_1$ holds if $l\in\id{RTL}$ has derivation height $k$ and
-$S_2$ holds if $t\in\id{RT}$ has derivation height $k$.
+{\em Inductive hypothesis (restated)\/} :  Suppose for all $k$ where $0\leq k\leq n$ and $n\geq 0$,
+$S_1(k)$ holds if $l\in\id{RTL}$ has derivation height $k$ and
+$S_2(k)$ holds if $t\in\id{RT}$ has derivation height $k$.
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Mutual induction}
 {\em Inductive step}.
-We must show $S_1$ and $S_2$ for every derivation of height $n+1$ for $n\geq 0$.
-We begin with $S_2$.
+We must show $S_1(n+1)$ and $S_2(n+1)$ for $n\geq 0$.
+We begin with $S_2(n+1)$.
 
 \vspace{1em}
 Suppose $t\in\id{RT}$ has derivation height $n+1$ where $n\geq 0$.
 Then the derivation must end with {\bf R2}. 
-Therefore $t$ has the form $\id{node}(x)$
-where $x\in\id{RTL}$.
-The derivation of $x\in\id{RTL}$ has height $n$.
+Therefore $t$ has the form $\id{node}(l)$
+where $l\in\id{RTL}$.
+The derivation of $l\in\id{RTL}$ has height $n$.
 %So by induction and $S_1$, $\id{\#edges}(x)=\id{\#nodes}(x)$.
 Then
 \begin{displaymath}
 \begin{array}{lll}
-\id{\#nodes}(\id{node}(x)) & = & 1 + \id{\#nodes}(x) \\
-	& = & 1+\id{\#edges}(x) + |x|\;\;\;\rid{by induction and}\;S_1 \\
-	& = & 1+\id{\#edges}(\id{node}(x))
+\id{\#nodes}(\id{node}(l)) & = & 1 + \id{\#nodes}(l) \\
+	& = & 1+\id{\#edges}(l) + |l|\;\;\;\rid{by induction and}\;S_1 \\
+	& = & 1+\id{\#edges}(\id{node}(l))
 \end{array}
 \end{displaymath}
-Ergo, $\id{\#edges}(\id{node}(x))=\id{\#nodes}(\id{node}(x))-1$.
+Ergo, $\id{\#edges}(\id{node}(l))=\id{\#nodes}(\id{node}(l))-1$.
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Mutual induction}
-Now we show $S_1$.
-Suppose $l\in\id{RTL}$ has derivation height $n+1$ where $n\geq 0$.
+Now we show $S_1(n+1)$.
+Suppose $l'\in\id{RTL}$ has derivation height $n+1$ where $n\geq 0$.
 Then the derivation must end with {\bf R1}. 
-Therefore $l$ has the form $\id{cons}(x,y)$
-where $x\in\id{RT}$ and $y\in\id{RTL}$.
-Either the derivation of $x\in\id{RT}$ or $y\in\id{RTL}$ has height $n$ while the other 
+Therefore $l'$ has the form $\id{cons}(t,l)$
+where $t\in\id{RT}$ and $l\in\id{RTL}$.
+Either the derivation of $t\in\id{RT}$ or $l\in\id{RTL}$ has height $n$ while the other 
 has height {\em at most\/} $n$.
 %By induction and $S_2$, $\id{\#edges}(x)=\id{\#nodes}(x)-1$.
 %Also by induction and $S_1$, $\id{\#edges}(y)=\id{\#nodes}(y)$.
 Then
 \begin{displaymath}
 \begin{array}{lll}
-\id{\#edges}(\id{cons}(x,y)) & = & \id{\#edges}(x) + \id{\#edges}(y) \\
-	& = & \id{\#nodes}(x) - 1 + \id{\#edges}(y) \\
+\id{\#edges}(\id{cons}(t,l)) & = & \id{\#edges}(t) + \id{\#edges}(l) \\
+	& = & \id{\#nodes}(t) - 1 + \id{\#edges}(l) \\
  & & \>\>\>\>\>\>\rid{by induction and}\;S_2 \\
-	& = & \id{\#nodes}(x) - 1 + \id{\#nodes}(y) - |y| \\
+	& = & \id{\#nodes}(t) - 1 + \id{\#nodes}(l) - |l| \\
  & & \>\>\>\>\>\>\rid{by induction and}\;S_1 \\
-	& = & \id{\#nodes}(\id{cons}(x,y)) - 1 - |y| \\
-	& = & \id{\#nodes}(\id{cons}(x,y)) - (1 + |y|) \\
-	& = & \id{\#nodes}(\id{cons}(x,y)) - |\id{cons}(x,y)|
+	& = & \id{\#nodes}(\id{cons}(t,l)) - 1 - |l| \\
+	& = & \id{\#nodes}(\id{cons}(t,l)) - (1 + |l|) \\
+	& = & \id{\#nodes}(\id{cons}(t,l)) - |\id{cons}(t,l)|\\
+	& = & \id{\#nodes}(l') - |l'|
 \end{array}
 \end{displaymath}
 %{\em quod erat demonstrandum (Q.E.D.)\/}

@@ -4,6 +4,7 @@
 \usepackage[nointegrals]{wasysym}
 \usepackage{mathtools}
 \usepackage{graphicx}
+\graphicspath{ {../art/} }
 \usepackage[labelformat=empty]{caption}
 
 \newcommand{\id}[1]{\mbox{\it #1\/}}
@@ -55,13 +56,18 @@
 
 \newcommand{\node}{%
   \begingroup\normalfont
-  \includegraphics[height=\fontcharht\font`\c]{art/node.eps}%
+  \includegraphics[height=\fontcharht\font`\c]{node.eps}%
   \endgroup
 }
 
+\newcommand{\twonode}{%
+  \begingroup\normalfont
+  \includegraphics[height=\fontcharht\font`\b]{2nodetree.eps}%
+  \endgroup
+}
 \newcommand{\threenode}{%
   \begingroup\normalfont
-  \includegraphics[height=\fontcharht\font`\B]{art/3nodetree.eps}%
+  \includegraphics[height=\fontcharht\font`\b]{3nodetree.eps}%
   \endgroup
 }
 
@@ -69,7 +75,7 @@
 list={labelsep=1em,leftmargin=1cm,itemsep=0pt,topsep=5pt,parsep=0pt}
 }
 % import from truth and PTL.
-\title{An Application of Post systems}
+\title{Sample Derivations Step-by-Step}
 \author{Foundations of Computer Science}
 \date{\today}
 
@@ -77,54 +83,7 @@ list={labelsep=1em,leftmargin=1cm,itemsep=0pt,topsep=5pt,parsep=0pt}
 \begin{document}
 \maketitle
 
-\begin{wideslide}[bm=,toc=]{Models of computation}
-\begin{itemize}
-\item Different computational models have been developed independently:
-%\item Machine independent: recursive function theory.
-%\item Machine dependent:
-\begin{enumerate}
-\item Turing machines, Alan Turing (covered in CS3101)
-\item Lambda calculus, Alonzo Church
-\item Post systems, Emil Post
-\item and others.
-\end{enumerate}
-\item Post systems are of interest to us.
-\item They can be used to define something (data structure, program).
-\item Definitions may be recursive 
-
-\hspace{2em}$A \equiv \ldots A\ldots$
-
-or mutually recursive
-
-\hspace{2em}$A \equiv \ldots B\ldots$
-
-\hspace{2em}$B \equiv \ldots A\ldots$
-
-\item Post systems admit formal proofs---is a definition correct?
-\end{itemize}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Recursive definitions}
-\begin{itemize}
-\item A recursive definition can be represented in a {\em Post system\/}.
-\item Named after mathematician Emil Leon Post.
-\item A Post system comprises a finite set of {\em variables\/}, {\em signs\/} and {\em productions\/} 
-(inference rules).
-\item An inference rule has the form
-\begin{displaymath}
-\begin{array}{c}
-t_1\;t_2\;\cdots\;t_n\\
-\hline
-t
-\end{array}
-\end{displaymath}
-where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables).
-\item $t_1,\ldots , t_n$ are the {\em antecedents\/} and $t$ the {\em consequent\/} or conclusion.
-\item When $n=0$, an inference rule is called an {\em axiom\/}.
-\end{itemize}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Recursive definitions}
+\begin{wideslide}[bm=,toc=]{Recursive definitions:Positive Multiples of Three}
 \begin{itemize}
 \item A Post system of two productions:
 \vspace{-1em}
@@ -148,6 +107,7 @@ where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables)
 \item ``$n\in S$ if $n$ is a positive multiple of 3'' (system {\em completeness\/}).
 \end{itemize}
 \end{wideslide}
+
 \begin{wideslide}[bm=,toc=]{Example derivation showing $9 \in S$}
 \begin{center}
 \begin{tabular}{lllll}
@@ -159,83 +119,6 @@ where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables)
 \end{tabular}
 \end{center}
 
-\end{wideslide}
-\begin{wideslide}[bm=,toc=]{Recursive Definitions}
-\begin{itemize}
-\item A Post system with multiple axioms.
-\begin{tabbing}
-{\bf R1}XX \=  \kill
-{\bf B1} \>
-        \(\begin{array}[t]{l}
-        4\in P
-        \end{array}\) \\[2ex]
-{\bf B2} \>
-        \(\begin{array}[t]{l}
-        5\in P
-        \end{array}\) \\[2ex]
-        
-{\bf R} \>
-        \(\begin{array}[t]{l}
-        x \in P \;\;\;y \in P \\
-        \hline
-        x + y \in P
-        \end{array}\)
-\end{tabbing}
-\item Claim: every amount of postage at least $12$ can be formed using only $4$
-and $5$-cent stamps (Rosen pg. 337).
-\item Must show every positive integer at least $12$ belongs to $P$. 
-equal to 12.
-\item This is a completeness result of the system.
-\end{itemize}
-\end{wideslide}
-
-
-\begin{wideslide}[bm=,toc=]{Recursive definitions}
-\begin{itemize}
-\item A Post system recursively defining the set {\em P\/} of all well-formed formulae in propositional logic:
-\begin{displaymath}
-\begin{array}{lll}
-        \begin{array}[t]{l}
-        \bid{T}\in P
-        \end{array}
-&
-        \begin{array}[t]{l}
-        \bid{F}\in P
-        \end{array}
-&
-	\begin{array}[t]{l}
-        x \in P \\
-        \hline
-        \neg x \in P
-        \end{array} \\[6ex]
-
-	\begin{array}[t]{l}
-	x \in P \;\;y \in P \\
-	\hline
-	x \wedge y \in P
-	\end{array}
-&
-	\begin{array}[t]{l}
-	x \in P \;\;y \in P \\
-	\hline
-	x \vee y \in P
-	\end{array}
-&
-	\begin{array}[t]{l}
-	x \in P \;\;y \in P \\
-	\hline
-	x \Rightarrow y \in P
-	\end{array} \\[6ex]
-
-	\begin{array}[t]{l}
-        x \in \id{Var} \\
-        \hline
-        x \in P
-        \end{array}
-\end{array}
-\end{displaymath}
-%\item Consequents have larger terms than antecedents except in last rule.
-\end{itemize}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Rooted trees in Rosen 7th Ed.}
@@ -278,12 +161,11 @@ $\id{cons}(2,\id{cons}(5,\id{cons}(3,\id{nil})))$ & $[2,5,3]$ \\ \hline
 
 \vspace{1em}
 \begin{tabular}{|ll|} \hline
-{\em rooted tree list l\/} & {\em rooted tree} $\id{node}(l)$  \\ \hline
-$\id{nil}$ & $\id{node}([\,])$ \\
-$\id{cons}(\id{node}(\id{nil}),\id{nil})$ & 
-$\id{node}(\id{node}([\,]))$ \\
-$\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil}))$ &
-$\id{node}(\id{node}([\,]),\id{node}([\,]))$ \\ \hline
+{\em rooted tree list: \/}$l$ & {\em rooted tree}: $t = \id{node}(l)$  \\ \hline
+$l = \id{nil}$ & $\id{node}(\id{nil}) = $ \node \\
+$l = \id{cons}(\id{node}(\id{nil}), \id{nil})$ & $\id{node}([\node]) = \twonode $ \\
+$l = \id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil}))$ &
+$\id{node}([\node,\node]) = \threenode$ \\ \hline
 \end{tabular}
 \vspace{1em}
 \item Let {\em RT\/} be the set of rooted trees.
@@ -292,19 +174,7 @@ $\id{node}(\id{node}([\,]),\id{node}([\,]))$ \\ \hline
 \end{itemize}
 \end{wideslide}
 
-%\begin{wideslide}[bm=,toc=]{The cons function}
-    %\begin{itemize}
-      %\item It \emph{constructs} a two-cell memory object with references to its
-      %arguments. For example, if we write $ pair = cons(x,y)$, $pair$ will store
-      %references to the elements $x$ and $y$.
-      %\item Repeated calls can be used to create a list. For example, $list =
-      %cons(z,pair)$ creates a list containing elements $z,x,y$, in that order.
-    %%\item If $t$ is a tree and $l$ is a list of trees, $cons(t,l)$ will produce a 
-          %new list of trees that begins with $t$.
-    %\end{itemize}
-%\end{wideslide}
- 
-\begin{wideslide}[bm=,toc=]{Recursive definitions}
+\begin{wideslide}[bm=,toc=]{Recursive definitions: Rooted Trees}
 \begin{itemize}
 \item A mutually-recursive definition of {\em rooted trees\/}:
 \vspace{-1em}
@@ -316,15 +186,15 @@ $\id{node}(\id{node}([\,]),\id{node}([\,]))$ \\ \hline
         \end{array}\) \\[2ex]
 {\bf R1} \>
         \(\begin{array}[t]{l}
-        x\in\id{RT}\;\;\;y\in\id{RTL} \\
+        t\in\id{RT}\;\;\;l\in\id{RTL} \\
         \hline
-        \id{cons}(x,y)\in\id{RTL}
+        \id{cons}(t,l)\in\id{RTL}
         \end{array}\) \\[2ex]
 {\bf R2} \>
         \(\begin{array}[t]{l}
-        x\in\id{RTL} \\
+        l\in\id{RTL} \\
         \hline
-        \id{node}(x)\in\id{RT}
+        \id{node}(l)\in\id{RT}
         \end{array}\)
 \end{tabbing}
 \item Compare with definition in Rosen 7th Ed.
@@ -361,7 +231,7 @@ lineheight=2cm,topsep=0.3cm
   \onslide{11}{\threenode}}
 %\begin{figure}[h]
 %\centering
-%\includegraphics[width=2.5in, height=.75in,keepaspectratio=true]{art/3_node_tree.eps}
+%\includegraphics[width=2.5in, height=.75in,keepaspectratio=true]{3_node_tree.eps}
 %\caption{3 node rooted tree derived above}
 %\label{2sp}
 %\end{figure}
@@ -369,28 +239,6 @@ lineheight=2cm,topsep=0.3cm
 
 
 
-
-\begin{wideslide}[bm=,toc=]{Beyond recursive definitions}
-\begin{itemize}
-\item Post systems are as powerful as any programming language.
-\item Productions can define any computation.
-\item In practice they are used as {\em deductive systems\/}.
-\item Gentzen and Hilbert systems are systems for deducing validity in propositional logic.
-\item For instance, here's a rule of inference for {\em modus ponens\/}:
-\vspace{-1em}
-\begin{tabbing}
-{\bf MP}XX \=  \kill
-{\bf MP} \>
-        \(\begin{array}[t]{l}
-        x\Rightarrow y \in\id{Thm}\;\;\;x\in\id{Thm} \\
-        \hline
-        y\in\id{Thm}
-        \end{array}\)
-\end{tabbing}
-\item Notice term ``$x\Rightarrow y$'' is larger than ``$y$'' in the consequent.
-\item So structural induction is not possible here.
-\end{itemize}
-\end{wideslide}
 
 
 \end{document}
