@@ -1,8 +1,7 @@
 
 .PHONY: all clean install 
 
-TARGETS := lab1.pdf lab1_solutions.pdf lab2.pdf lab2_solutions.pdf lab3.pdf \
-	   lab3_solutions.pdf
+TARGETS := quiz1.pdf quiz2.pdf 
 
 
 all: $(TARGETS)
