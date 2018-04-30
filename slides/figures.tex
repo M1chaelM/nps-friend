@@ -1,0 +1,3852 @@
+\documentclass[style=simple,size=12pt]{powerdot}
+\usepackage{epic,array,ecltree,wasysym,url}
+\usepackage{mlextra}
+\begin{document}
+\pdsetup{method=normal}
+
+
+\begin{wideslide}[bm=,toc=]{}
+\begin{center}
+\sffamily\bfseries\Large Mathematical Logic for Computer Science\\
+\sffamily\bfseries\large (Third Revised Edition)\\\bigskip
+\sffamily\bfseries\normalsize Springer, 2012\\\bigskip\bigskip
+\sffamily\bfseries\normalsize Mordechai (Moti) Ben-Ari\\
+\sffamily\bfseries\normalsize
+\url{http://www.weizmann.ac.il/sci-tea/benari/}\\\bigskip\bigskip
+\sffamily\bfseries\normalsize \copyright{} 2012 by Springer.
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 1.2: A half-adder}
+\begin{center}
+\begin{picture}(280,120)
+\put(-10,  0){\makebox(20,20)[l]{Bit2}}
+\put(-10,100){\makebox(20,20)[l]{Bit1}}
+\put(260, 20){\makebox(25,20)[l]{Sum}}
+\put(260, 90){\makebox(25,20)[l]{Carry}}
+\put(20, 10){\line(1,0){60}}
+\put(20,110){\line(1,0){50}}
+\put(30, 10){\line(1,2){40}}
+\put(30,110){\line(1,-2){40}}
+\put(70, 30){\line(1,0){10}}
+\put(70,80){ %AND gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,0){\line(0,1){40}}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(70,0){ %OR gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,20){\oval(20,40)[r]}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(110,100){\line(1,0){140}}
+\put(110, 20){\line(1,0){60}}
+\put(210, 30){\line(1,0){40}}
+\put(170,10){ %AND gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,0){\line(0,1){40}}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(130,80){  % NOT gate
+  \put( 0, 0){\line(1,0){20}}
+  \put( 0, 0){\line(1,-2){10}}
+  \put(20, 0){\line(-1,-2){10}}
+  \put(10,-23){\circle{6}}
+}
+\put(140,80){\line(0,1){20}}
+\put(140,54){\line(0,-1){14}}
+\put(140,40){\line(1,0){30}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Figure 2.1: Two formulas}
+\begin{center}
+\begin{tabular}{c@{\hspace{4em}}c}
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+\begin{bundle}{$\eqv$}
+\chunk{
+  \begin{bundle}{$\imp$}
+  \chunk{$p$}
+  \chunk{$q$}
+  \end{bundle}
+}
+\chunk{
+  \begin{bundle}{$\imp$}
+  \chunk{
+    \begin{bundle}{$\ngg$}
+    \chunk{$p$}
+    \end{bundle}
+  }
+  \chunk{
+    \begin{bundle}{$\ngg$}
+    \chunk{$q$}
+    \end{bundle}
+  }
+  \end{bundle}
+}
+\end{bundle} &
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+\begin{bundle}{$\imp$}
+\chunk{$p$}
+\chunk{
+  \begin{bundle}{$\eqv$}
+  \chunk{$q$}
+  \chunk{
+    \begin{bundle}{$\ngg$}
+    \chunk{
+      \begin{bundle}{$\imp$}
+      \chunk{$p$}
+      \chunk{
+        \begin{bundle}{$\ngg$}
+        \chunk{$q$}
+        \end{bundle}
+      }
+      \end{bundle}
+    }
+    \end{bundle}
+  }
+  \end{bundle}
+}
+\end{bundle}
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Notation}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Operator & Alternates & Java language\\ \hline
+\hline
+$\ngg$ & $\sim$ & \p{!}\\\hline
+$\wedge$ & $\&$ & \p{\&, \&\&}\\\hline
+$\vee$ & & \p{|, ||}\\\hline
+$\rightarrow$ & $\supset$, $\Rightarrow$ & \\\hline
+$\leftrightarrow$ & $\equiv$, $\Leftrightarrow$ &\\\hline
+$\neqv$ & $\not\equiv$& \p{\p{\^{}}}\\\hline
+$\uparrow$ & $\mid$&\\\hline
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 2.2: Derivation tree for $p \imp q \eqv \ngg p \imp \ngg q$}
+\begin{center}
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+\begin{bundle}{$\fml$}
+\chunk{
+  \begin{bundle}{$\fml$}
+  \chunk{
+    \begin{bundle}{$\fml$}
+    \chunk{$p$}
+    \end{bundle}
+  }
+  \chunk{$\imp$}
+  \chunk{
+    \begin{bundle}{$\fml$}
+    \chunk{$q$}
+    \end{bundle}
+  }
+  \end{bundle}
+}
+\chunk{$\eqv$}
+\chunk{
+  \begin{bundle}{$\fml$}
+  \chunk{
+    \begin{bundle}{$\fml$}
+    \chunk{$\ngg$}
+    \chunk{
+      \begin{bundle}{$\fml$}
+      \chunk{$p$}
+      \end{bundle}
+    }
+    \end{bundle}
+  }
+  \chunk{$\imp$}
+  \chunk{
+    \begin{bundle}{$\fml$}
+    \chunk{$\ngg$}
+    \chunk{
+      \begin{bundle}{$\fml$}
+      \chunk{$q$}
+      \end{bundle}
+    }
+    \end{bundle}
+  }
+  \end{bundle}
+}
+\end{bundle}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 2.3: Truth values of formulas}
+\noindent
+\begin{minipage}{0.42\textwidth}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$A$ & $v(A_{1})$ & $v(A_{2})$ & $v(A)$ \\ \hline \hline
+$\ngg A_{1}$ & $T$ & & $F$  \\
+$\ngg A_{1}$ & $F$ & & $T$ \\ \hline
+$A_{1} \vee A_{2}$ & $F$ & $F$ & $F$ \\
+$A_{1} \vee A_{2}$ & \multicolumn{2}{c|}{otherwise}  & $T$ \\ \hline
+$A_{1} \wedge A_{2}$ & $T$ & $T$ & $T$ \\
+$A_{1} \wedge A_{2}$ & \multicolumn{2}{c|}{otherwise}  & $F$ \\ \hline
+$A_{1} \imp A_{2}$ & $T$ & $F$ & $F$ \\
+$A_{1} \imp  A_{2}$ &
+   \multicolumn{2}{c|}{otherwise}  & $T$ \\ \hline
+\end{tabular}
+\end{minipage}
+\hspace{0.08\textwidth}
+\begin{minipage}{0.42\textwidth}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$A$ & $v(A_{1})$ & $v(A_{2})$ & $v(A)$ \\ \hline \hline
+$A_{1} \uparrow A_{2}$ & $T$ & $T$ & $F$ \\
+$A_{1} \uparrow  A_{2}$ &
+   \multicolumn{2}{c|}{otherwise}  & $T$ \\ \hline
+$A_{1} \downarrow A_{2}$ & $F$ & $F$ & $T$ \\
+$A_{1} \downarrow  A_{2}$ &
+   \multicolumn{2}{c|}{otherwise}  & $F$ \\ \hline
+$A_{1} \eqv A_{2}$ & \multicolumn{2}{c|}{$v(A_{1})=v(A_{2})$} & $T$ \\
+$A_{1} \eqv A_{2}$ & \multicolumn{2}{c|}{$v(A_{1})\neq v(A_{2})$} &
+  $F$ \\ \hline
+$A_{1} \neqv A_{2}$ & \multicolumn{2}{c|}{$v(A_{1})\neq v(A_{2})$} & $T$ \\
+$A_{1} \neqv A_{2}$ & \multicolumn{2}{c|}{$v(A_{1})=v(A_{2})$} &
+  $F$ \\ \hline
+\end{tabular}
+\end{minipage}
+\end{wideslide}
+
+\begin{wideslide}{Example 2.21}
+\begin{center}
+\begin{tabular}{|c|c||c|}
+\hline
+$p$ & $q$ & $p \imp q$ \\ \hline \hline
+$T$ & $T$ & $T$  \\ \hline
+$T$ & $F$ & $F$  \\ \hline
+$F$ & $T$ & $T$  \\ \hline
+$F$ & $F$ & $T$  \\ \hline
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}{Example 2.22}
+\begin{center}
+\begin{tabular}{|c|c||c|c|c|c|c|}
+\hline
+$p$ & $q$ & $p \imp q$ & $\ngg p$ & $\ngg q$ 
+& $\ngg q \imp \ngg p$ & $(p\imp q)\eqv  (\ngg q\imp \ngg p)$\\ \hline \hline
+$T$ & $T$ & $T$  & $F$ & $F$  & $T$ & $T$  \\ \hline
+$T$ & $F$ & $F$ & $F$ & $T$  & $F$ & $T$   \\ \hline
+$F$ & $T$ & $T$ & $T$ & $F$  & $T$ & $T$   \\ \hline
+$F$ & $F$ & $T$ & $T$ & $T$  & $T$ & $T$   \\ \hline
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 2.23}
+\vspace*{-2ex}
+\begin{displaymath}
+\begin{array}{ccccccccc}
+(p & \imp & q) & \eqv & (\ngg & q & \imp & \ngg & p)\\
+T  &      & F  &      &       & F &      &      & T\\
+T  &      & F  &      &   T    & F &      &      & T\\
+T  &      & F  &      &   T    & F &      &  F    & T\\
+T  &      & F  &      &   T    & F &   F   & F     & T\\
+T  &   F  & F  &      &   T    & F &   F   & F     & T\\
+T  &   F  & F  &   T  &   T    & F &   F   & F     & T\\
+\end{array}   
+\end{displaymath}
+\vspace*{-2ex}
+\begin{displaymath}
+\begin{array}{|c|c||c@{\hspace{1.5em}}c@{\hspace{1.5em}}c @{\hspace{2.5em}} c @{\hspace{2.5em}} cc @{\hspace{1.5em}} c @{\hspace{1.5em}} cc|}
+\hline
+p & q & (p & \imp & q) & \eqv & (\ngg & q & \imp & \ngg & p)\\\hline\hline
+T & T & T  &    T & T  &  T   &    F  & T &  T  &   F  & T\\\hline
+T & F & T  &    F & F  &  T   &    T  & F &  F   &   F  & T\\\hline
+F & T & F  &    T & T  &  T   &    F  & T &  T   &   T  & F\\\hline
+F & F & F  &    T & F  &  T   &    T  & F &  T   &   T  & F\\\hline
+\end{array}   
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 2.27}
+\begin{center}
+\begin{tabular}{|c|c||c|c|}
+\hline
+$p$ & $q$ & $v(p \vee q)$ & $v(q \vee p)$ \\ \hline \hline
+$T$ & $T$ & $T$ & $T$ \\ \hline
+$T$ & $F$ & $T$ & $T$ \\ \hline
+$F$ & $T$ & $T$ & $T$ \\ \hline
+$F$ & $F$ & $F$ & $F$ \\ \hline
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 2.4: Subformulas}
+\vspace*{-2ex}
+\begin{center}
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+\begin{bundle}{$\eqv$}
+\chunk{
+  \begin{bundle}{$\imp$}
+  \chunk{$p$}
+  \chunk{$q$}
+  \end{bundle}
+}
+\chunk{
+  \begin{bundle}{$\imp$}
+  \chunk{
+    \begin{bundle}{$\ngg$}
+    \chunk{$p$}
+    \end{bundle}
+  }
+  \chunk{
+    \begin{bundle}{$\ngg$}
+    \chunk{$q$}
+    \end{bundle}
+  }
+  \end{bundle}
+}
+\end{bundle}
+\end{center}
+
+\begin{center}
+\begin{tabular}{c@{\hspace{3em}}c@{\hspace{3em}}c@{\hspace{3em}}c@{\hspace{3em}}c@{\hspace{3em}}c}
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+  \begin{bundle}{$\imp$}
+  \chunk{$p$}
+  \chunk{$q$}
+  \end{bundle}
+&
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+\begin{bundle}{$\imp$}
+\chunk{
+  \begin{bundle}{$\ngg$}
+  \chunk{$p$}
+  \end{bundle}
+}
+\chunk{
+  \begin{bundle}{$\ngg$}
+  \chunk{$q$}
+  \end{bundle}
+}
+\end{bundle}
+&
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+  \begin{bundle}{$\ngg$}
+  \chunk{$p$}
+  \end{bundle}
+&
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+  \begin{bundle}{$\ngg$}
+  \chunk{$p$}
+  \end{bundle}
+&
+  $p$
+&
+  $q$
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Logically equivalent formulas (1)}
+\vspace*{-2ex}
+\begin{displaymath}
+\begin{array}{lcl@{\hspace{4em}}lcl}
+A \vee  \mathit{true} &\logeqv& \mathit{true} &
+  A \wedge \mathit{true} &\logeqv& A \\
+A \vee \mathit{false} &\logeqv& A &
+  A \wedge \mathit{false} &\logeqv&\mathit{false}\\
+A \imp \mathit{true} &\logeqv& \mathit{true} &
+  \mathit{true} \imp A &\logeqv& A \\
+A\imp \mathit{false} &\logeqv& \ngg A &
+  \mathit{false} \imp A &\logeqv& \mathit{true}\\
+A\eqv \mathit{true} &\logeqv& A &
+A \neqv  \mathit{true}&\logeqv&\ngg A\\
+A\eqv \mathit{false} &\logeqv& \ngg A &
+A \neqv  \mathit{false}&\logeqv& A\\
+\end{array}
+\end{displaymath}
+\vspace*{-1ex}
+\begin{displaymath}
+\begin{array}{lcl@{\hspace{4em}}lcl}
+A &\logeqv& \ngg \ngg A & \\
+A &\logeqv& A \wedge A & A &\logeqv& A \vee A \\
+A \vee \ngg A &\logeqv& true &
+  A \wedge \ngg A &\logeqv& \mathit{false} \\
+A \imp A &\logeqv&  \mathit{true}& \\
+A \eqv A &\logeqv&  \mathit{true} &
+A \neqv A   &\logeqv& \mathit{false} \\
+\ngg A &\logeqv& A \uparrow A &
+  \ngg A &\logeqv& A \downarrow A\\
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Logically equivalent formulas (2)}
+
+\begin{displaymath}
+\begin{array}{lcl@{\hspace{5em}}lcl}
+A\vee B &\logeqv& B\vee A & A\wedge B&\logeqv& B\wedge A\\
+A\eqv B &\logeqv& B\eqv A &
+   A\neqv B&\logeqv& B\neqv A\\
+A\uparrow B &\logeqv& B\uparrow A &
+   A\downarrow B&\logeqv& B\downarrow A\\
+\end{array}
+\end{displaymath}
+
+\begin{displaymath}
+\begin{array}{lcl@{\hspace{2em}}lcl}
+A \vee (B\vee C) &\logeqv& (A\vee B) \vee C &
+   A \wedge (B\wedge C) &\logeqv& (A\wedge B) \wedge C \\
+A \eqv (B\eqv C) &\logeqv& (A\eqv B) \eqv C &
+   A \neqv(B\neqv C) &\logeqv&
+   (A\neqv B)\neqv C\\
+\end{array}
+\end{displaymath}
+
+\begin{displaymath}
+\begin{array}{lcl}
+A\vee (B\wedge C) &\logeqv& (A\vee B)\wedge (A\vee C) \\
+   A\wedge (B\vee C) &\logeqv& (A\wedge B) \vee (A\wedge C)\\
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Logically equivalent formulas (3)}
+\begin{displaymath}
+\begin{array}{lcl}
+A \eqv B &\logeqv& (A\imp B) \wedge (B\imp A) \\
+A \neqv B &\logeqv& \ngg\,(A\imp B) \vee \ngg\,(B\imp A)\\
+A \imp B &\logeqv& \ngg A\vee B\\
+   A \imp B &\logeqv& \ngg\,(A\wedge \ngg B) \\
+A \vee B &\logeqv& \ngg\,(\ngg A \wedge \ngg B) \\
+   A \wedge B &\logeqv& \ngg\,(\ngg A\vee \ngg B)\\
+A \vee B &\logeqv& \ngg A \imp B  \\
+   A \wedge B &\logeqv& \ngg\,(A\imp \ngg B)\\
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{One-place operators}
+\begin{displaymath}
+\begin{array}{|c||c|c|c|c|}
+\hline
+x   & \circ_{1}  & \circ_{2}  & \circ_{3}  & \circ_{4} \\ \hline \hline
+T & T & T & F & F \\ \hline
+F & T & F & T & F \\ \hline
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Two-place operators}
+\begin{displaymath}
+\begin{array}{|c|c||c|c|c|c|c|c|c|c|}
+\hline
+x_{1}   & x_{2}   & \circ_{1\ }  & \circ_{2\ }  & \circ_{3\ }  &
+\circ_{4\ }  &
+\circ_{5\ }  & \circ_{6\ }  &
+\circ_{7\ }   & \circ_{8\ } \\ \hline \hline
+T & T & T & T & T & T & T & T & T & T \\ \hline
+T & F & T & T & T & T & F & F & F & F \\ \hline
+F & T & T & T & F & F & T & T & F & F \\ \hline
+F & F & T & F & T & F & T & F & T & F \\ \hline
+\multicolumn{10}{c}{\ }\\
+\hline
+x_{1}   & x_{2}   & \circ_{9\ }  & \circ_{10}  & \circ_{11}  & \circ_{12}  &
+\circ_{13}  & \circ_{14}  & \circ_{15}   & \circ_{16} \\ \hline\hline
+T & T & F & F & F & F & F & F & F & F \\ \hline
+T & F & T & T & T & T & F & F & F & F \\ \hline
+F & T & T & T & F & F & T & T & F & F \\ \hline
+F & F & T & F & T & F & T & F & T & F \\ \hline
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Operator names}
+\begin{center}
+\begin{tabular}{|c|l|c||c|l|c|}
+\hline
+op & name & symbol & op & name & symbol  \\ \hline \hline
+$\circ_{2}$  & disjunction  & $\vee$        &
+$\circ_{15}$ & nor          & $\downarrow$   \\ \hline
+$\circ_{8}$  & conjunction   & $\wedge$      &
+$\circ_{9}$  & nand         & $\uparrow$     \\ \hline
+$\circ_{5}$  & implication  & $\imp$ &$\circ_{12}$&&\\\hline
+$\circ_{3}$  & reverse  implication & $\leftarrow$&$\circ_{14}$&& \\\hline
+$\circ_{7}$  & equivalence  & $\eqv$      &
+$\circ_{10}$ & exclusive or & $\neqv$ \\ \hline
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Valid, satisfiable, falsifiable and unsatisfiable formulas}
+\begin{center}
+\unitlength=1.5pt
+\begin{picture}(200,100)
+\put(0,20){
+\put(100,40){\oval(200,80)}
+\put(60,30){\oval(80,30)}
+\put(35,15){\makebox(50,30){\shortstack[l]%
+{True in\\all interpretations.}}}
+\put(35,50){\makebox(50,30){\shortstack[l]%
+{True in some interpretations;\\false in others.}}}
+\put(120,0){\line(0,1){80}}
+\put(120,35){\makebox(80,30){\shortstack[l]%
+{False in\\all interpretations.}}}
+}
+\put(101,0){\makebox(40,20)[b]{Falsifiable}}
+\put(110,10){\vector(0,1){18}}
+\put(130,10){\vector(0,1){18}}
+\put(151,0){\makebox(40,20)[b]{Unsatisfiable}}
+\put(170,10){\vector(0,1){18}}
+\put(50,0){\makebox(50,20)[b]{Satisfiable}}
+\put(65,10){\vector(0,1){30}}
+\put(85,10){\vector(0,1){18}}
+\put(15,0){\makebox(50,20)[b]{Valid}}
+\put(40,10){\vector(0,1){30}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 2.41}
+\begin{displaymath}
+\begin{array}{|c|c||c|c|c|c|}
+\hline
+p & q & p \vee q & \ngg p & \ngg q &
+(p \vee q) \wedge \ngg p \wedge \ngg q \\ \hline \hline
+T & T & T & F & F & F \\ \hline
+T & F & T & F & T & F \\ \hline
+F & T & T & T & F & F \\ \hline
+F & F & F & T & T & F \\ \hline
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Semantic tableau for $p\wedge (\ngg q\vee \ngg p)$}
+\begin{center}
+$p \wedge (\ngg q \vee \ngg p)$ \\
+$\downarrow$ \\
+$p,\ngg q \vee \ngg p$ \\
+$\swarrow$ \hspace{2em} $\searrow$ \\
+$p, \ngg q$ \hspace{3em} $p, \ngg p$ \\
+$\odot$ \hspace*{5em} $\times$
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Semantic tableaux $(p\vee q)\wedge (\ngg p\wedge \ngg q)$}
+\vspace*{1cm}
+\begin{minipage}[t]{0.4\textwidth}
+\minisp
+\begin{center}
+$(p \vee q) \wedge (\ngg p \wedge \ngg q)$ \\
+$\downarrow$ \\
+$p \vee q, \ngg p \wedge \ngg q$ \\
+$\downarrow$ \\
+$p \vee q, \ngg p, \ngg q$ \\
+$\swarrow$ \hspace{2em} $\searrow$ \\
+$p,\ngg p,\ngg q$ \hspace{3em} $q, \ngg p, \ngg q$ \\
+$\times$ \hspace{5em} $\times$
+\end{center}
+\end{minipage}
+\hspace{0.07\textwidth}
+\begin{minipage}[t]{0.4\textwidth}
+\minisp
+\begin{center}
+$(p \vee q) \wedge (\ngg p \wedge \ngg q)$ \\
+$\downarrow$ \\
+$p \vee q, \ngg p \wedge \ngg q$ \\
+$\swarrow$ \hspace{2em} $\searrow$ \\
+$p,\ngg p \wedge \ngg q$ \hspace{3em} $q, \ngg p\wedge  \ngg q$ \\
+$\downarrow$ \hspace{5em} $\downarrow$ \\
+$p,\ngg p,\ngg q$ \hspace{3em} $q, \ngg p, \ngg q$ \\
+$\times$ \hspace{5em} $\times$
+\end{center}
+\end{minipage}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{$\alpha$-formulas}
+\begin{displaymath}
+\begin{array}{|c|c|c|}
+\hline
+\alpha & \alpha_{1} & \alpha_{2} \\ \hline \hline
+\ngg \ngg A_{1} & A_{1} & \\ \hline
+A_{1} \wedge A_{2} & A_{1} & A_{2} \\ \hline
+\ngg\,(A_{1} \vee A_{2}) & \ngg A_{1} & \ngg A_{2} \\ \hline
+\ngg\,(A_{1} \imp A_{2}) & A_{1} & \ngg A_{2} \\ \hline
+\ngg\,(A_{1} \uparrow A_{2}) & A_{1} & A_{2} \\ \hline
+A_{1} \downarrow A_{2} & \ngg A_{1} & \ngg A_{2} \\ \hline
+A_{1} \eqv A_{2}& A_{1} \!\imp\! A_{2} &
+A_{2} \!\imp\! A_{1} \\ \hline
+\ngg\,(A_{1} \neqv A_{2})& A_{1} \!\imp\! A_{2} &
+ A_{2} \!\imp\! A_{1}  \\ \hline
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{$\beta$-formulas}
+\begin{displaymath}
+\begin{array}{|c|c|c|}
+\hline
+\beta & \beta_{1} & \beta_{2} \\ \hline \hline
+\ngg\,(B_{1} \wedge B_{2}) & \ngg B_{1} & \ngg B_{2} \\ \hline
+B_{1} \vee B_{2} & B_{1} & B_{2} \\ \hline
+B_{1} \imp B_{2} & \ngg B_{1} & B_{2} \\ \hline
+B_{1} \uparrow B_{2} & \ngg B_{1} & \ngg B_{2} \\ \hline
+\ngg\,(B_{1} \downarrow B_{2}) &  B_{1} & B_{2} \\ \hline
+\ngg\,(B_{1} \eqv B_{2})& \ngg\,(B_{1} \!\imp\! B_{2}) &
+ \ngg\,(B_{2} \!\imp\! B_{1})  \\ \hline
+B_{1} \neqv B_{2}& \ngg\,(B_{1} \!\imp\! B_{2}) &
+\ngg\, (B_{2} \!\imp\! B_{1}) \\ \hline
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 2.7.1: Inductive step in proof of soundness}
+\unitlength=0.8pt
+\begin{center}
+\begin{picture}(280,100)
+\put(0,0){
+  \put( 0, 0){\makebox(60,20){$n':\;\{A_{1}, A_{2}\}\cup U_{0}$}}
+  \put( 0,80){\makebox(60,20){$n:\;\{A_{1}\wedge A_{2}\}\cup U_{0}$}}
+  \put(30,20){\line(0,1){60}}
+}
+\put(160,0){
+  \put(-25, 0){\makebox(60,20){$n':\;\{B_{1}\}\cup U_{0}$}}
+  \put(85, 0){\makebox(60,20){$n'':\;\{B_{2}\}\cup U_{0}$}}
+  \put(30,80){\makebox(60,20){$n:\;\{B_{1}\vee B_{2}\}\cup U_{0}$}}
+  \put(0,20){\line(1,1){60}}
+  \put(120,20){\line(-1,1){60}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 2.73: Semantic tableau for $p \wedge (\ngg q \vee \ngg p)$}
+\begin{center}
+$p \wedge (\ngg q \vee \ngg p)$ \\
+$\downarrow$ \\
+$p,(\ngg q \vee \ngg p)$ \\
+$\swarrow$ \hspace{2em} $\searrow$ \\
+$p, \ngg q$ \hspace{3em} $p, \ngg p$ \\
+$\odot$ \hspace*{5em} $\times$
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 2.74: Semantic tableau for $p \vee (q \wedge \ngg q)$}
+\begin{center}
+$p \vee (q \wedge \ngg q)$ \\
+$\swarrow$ \hspace{2em} $\searrow$ \\
+$p$ \hspace{2em} $q \wedge  \ngg q$ \\
+$\odot$ \hspace*{4em} $\downarrow$ \\
+\hspace*{4em} $q, \ngg q$ \\
+\hspace*{4em} $\times$
+\end{center}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Figure 3.1: Classification of $\alpha$-formulas}
+\begin{displaymath}
+\begin{array}{|c|c|c|}
+\hline
+\alpha & \alpha_{1} & \alpha_{2} \\ \hline \hline
+\ngg \ngg A &  A & \\ \hline
+\ngg\,(A_{1} \wedge A_{2}) & \ngg A_{1} & \ngg A_{2} \\ \hline
+A_{1} \vee A_{2} & A_{1} & A_{2} \\ \hline
+A_{1} \imp A_{2} & \ngg A_{1} & A_{2} \\ \hline
+A_{1} \uparrow A_{2} & \ngg A_{1} & \ngg A_{2} \\ \hline
+\ngg\,(A_{1} \downarrow A_{2}) & A_{1} & A_{2} \\ \hline
+\ngg\,(A_{1} \eqv A_{2})& \ngg\,(A_{1} \!\imp\! A_{2}) &
+\ngg\,(A_{2} \!\imp\! A_{1}) \\ \hline
+A_{1} \neqv A_{2}& \ngg\,(A_{1} \!\imp\! A_{2}) &
+\ngg\,(A_{2} \!\imp\! A_{1}) \\ \hline
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 3.1: Classification of $\beta$-formulas}
+\begin{displaymath}
+\begin{array}{|c|c|c|}
+\hline
+\beta & \beta_{1} & \beta_{2} \\ \hline \hline
+B_{1} \wedge B_{2} & B_{1} & B_{2} \\ \hline
+\ngg\,(B_{1} \vee B_{2}) & \ngg B_{1} & \ngg B_{2} \\ \hline
+\ngg\,(B_{1} \imp B_{2}) & B_{1} & \ngg B_{2} \\ \hline
+\ngg\,(B_{1} \uparrow B_{2}) & B_{1} & B_{2} \\ \hline
+B_{1} \downarrow B_{2} & \ngg B_{1} & \ngg B_{2} \\ \hline
+B_{1} \eqv B_{2}& B_{1} \!\imp\! B_{2} &
+B_{2} \!\imp\! B_{1}  \\ \hline
+\ngg\,(B_{1} \neqv B_{2})& B_{1} \!\imp\! B_{2} &
+B_{2} \!\imp\! B_{1}  \\ \hline
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 3.2.1: $\mathcal{G}$ and semantic
+tableaux}
+\vspace*{1ex}
+\begin{minipage}[b]{0.45\textwidth}
+\begin{center}
+$\ngg p, q, p$ \hspace{3em} $\ngg q, q, p$ \\
+$\searrow$ \hspace{2em} $\swarrow$ \\
+$\ngg\,(p\vee q),q,p$ \\
+$\downarrow$ \\
+$\ngg\,(p\vee q),(q\vee p)$ \\
+$\downarrow$ \\
+$(p\vee q)\imp (q\vee p)$
+\end{center}
+\end{minipage}
+\hspace{0.05\textwidth}
+\begin{minipage}[b]{0.45\textwidth}
+\begin{center}
+$\ngg [(p\vee q)\imp (q\vee p)]$ \\
+$\downarrow$ \\
+$p\vee q,\ngg\,(q\vee p)$ \\
+$\downarrow$ \\
+$p\vee q,\ngg q, \ngg p$ \\
+$\swarrow$ \hspace{2em} $\searrow$ \\
+$p,\ngg q,\ngg p$ \hspace{3em} $q, \ngg q, \ngg p$ \\
+$\times$ \hspace{5em} $\times$
+\end{center}
+\end{minipage}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Hilbert system $\mathcal{H}$}
+\begin{eqnarray*}
+\textrm{\bf Axiom 1} & \vdash\!\!\!\! & (A\imp(B\imp A)),\\
+\textrm{\bf Axiom 2} & \vdash\!\!\!\! & (A\imp (B \imp C))  \imp ((A\imp B) \imp
+(A\imp C)),\\
+\textrm{\bf Axiom 3} & \vdash\!\!\!\! & (\ngg B \imp \ngg A) \imp (A
+\imp B).\\
+\mbox{}\\
+\textrm{\bf Modus ponens} & & \frac{\vdash A\hspace{5em}\vdash A\imp B}{\vdash B}.
+\end{eqnarray*}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Derived rules of inference}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{l@{\hspace{1.5cm}}l}
+\textbf{Deduction} & \Large $\frac{U\cup\{A\}\vdash B}{U\vdash A\imp B}$\\
+\textbf{Contrapositive} & \Large $\frac{U\vdash \ngg B \imp \ngg
+A}{U\vdash A\imp B}$\\
+\textbf{Transitivity} & \Large $\frac{U\vdash A\imp B\hspace{5em}U\vdash B\imp C}
+{U\vdash A\imp C}$\\
+\textbf{Exchange of antecedent} & \Large
+$\frac{U\vdash A \imp (B\imp C)}{U\vdash B \imp (A\imp C)}$\\
+\textbf{Double negation} & \Large
+$\frac{U\vdash \ngg \ngg A}{U\vdash A}$\\
+\textbf{Reductio ad absurdum} & \Large
+$\frac{U\vdash \ngg A\imp \mathit{false}}{U\vdash A}$\\
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Theorem 3.37: Soundness of axioms 1 and 3}
+\vspace*{2ex}
+\begin{minipage}[t]{0.35\textwidth}
+\minisp
+\begin{center}
+$\ngg [A \imp (B \imp A)]$ \\
+$\downarrow$ \\
+$A, \ngg\,(B \imp A)$ \\
+$\downarrow$ \\
+$A, B, \ngg A$ \\
+$\times$
+\end{center}
+\end{minipage}
+\hspace{0.03\textwidth}
+\begin{minipage}[t]{0.50\textwidth}
+\minisp
+\begin{center}
+$\ngg [(\ngg B \imp \ngg A) \imp (A \imp B)]$ \\
+$\downarrow$ \\
+$\ngg B \imp \ngg A, \ngg\,(A \imp B)$ \\
+$\downarrow$ \\
+$\ngg B \imp \ngg A, A, \ngg B$ \\
+$\swarrow$ \hspace{2em} $\searrow$ \\
+$\ngg \ngg B, A, \ngg B$ \hspace{3em} $\ngg A, A, \ngg B$ \\
+$\downarrow$ \hspace{7em} $\times$ \\
+$B, A, \ngg B$ \hspace*{8em} \mbox{}\\
+$\times$ \hspace*{8em} \mbox{}
+\end{center}
+\end{minipage}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 3.32: Rules of inference for sequents}
+\hspace*{-7mm}
+\renewcommand{\arraystretch}{2.2}
+\begin{tabular}{|c|c|c|}
+\hline
+$\mathit{op}$& \hspace*{0.5cm}Introduction into consequent\hspace*{0.5cm}%
+&\hspace*{0.5cm}Introduction into antecedent\hspace*{0.5cm}\\\hline\hline
+$\wedge$ &
+$\displaystyle\frac{U\sqnt V\cup \{A\} \hspace{2em}U\sqnt V\cup \{B\}}
+{U\sqnt V \cup \{A\wedge B\}}$ &
+$\displaystyle\frac{U \cup \{A,B\}\sqnt V}%
+{U \cup \{A\wedge B\}\sqnt V}$ \\\hline
+
+$\vee$&
+$\displaystyle\frac{U\sqnt V\cup \{A,B\}}{U\sqnt V \cup \{A\vee B\}}$ &
+$\displaystyle\frac{U\cup \{A\}\sqnt V \hspace{2em}U\cup \{B\}\sqnt V}
+{U\cup \{A\vee B\}\sqnt V}$ \\\hline
+
+$\imp$&
+$\displaystyle\frac{U\cup \{A\}\sqnt V\cup \{B\}}%
+{U\sqnt V\cup \{A\imp B\}}$ &
+$\displaystyle\frac{U\sqnt V\cup \{A\} \hspace{2em}U\cup \{B\}\sqnt V}
+{U\cup \{A\imp B\}\sqnt V}$ \\\hline
+
+$\ngg$&
+$\displaystyle\frac{U\cup \{A\}\sqnt V}{U\sqnt V\cup \{\ngg A\}}$ &
+$\displaystyle\frac{U\sqnt V\cup \{A\}}{U\cup \{\ngg A\}\sqnt V}$ \\\hline
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 3.3: A natural deduction proof}
+\begin{center}
+\framebox[9.5cm][l]{\parbox{9cm}{
+\begin{tabular*}{9cm}{rl@{\extracolsep{\fill}}r}
+1.&$ A \imp \ngg A$ & Assumption
+\end{tabular*}
+\smallskip
+
+\framebox[9cm][l]{\parbox{8.5cm}{
+\begin{tabular*}{8.5cm}{rl@{\extracolsep{\fill}}r}
+2.&$ \ngg \ngg A$ & Assumption \\
+3.&$ A$ & Double neg. 2\\
+4.&$ \ngg A$ & MP 1, 3 \\
+5.&$  A \imp (\ngg A \imp \mathit{false}) $   & Theorem 3.21\\
+6.&$ \ngg A \imp \mathit{false} $   & MP 3, 5\\
+7.&$ \mathit{false}$ & MP 4, 6
+\end{tabular*}
+}}
+
+\begin{tabular*}{9cm}{rl@{\extracolsep{\fill}}r}
+8.&$  \ngg \ngg A \imp \mathit{false}$ & Deduction 2, 7\\
+9.&$ \ngg A $ & Reductio ad absurdum 8
+\end{tabular*}
+}}
+
+\makebox[9.5cm][l]{\parbox{9cm}{
+\begin{tabular*}{9cm}{rl@{\extracolsep{\fill}}r}
+10.&$(A \imp \ngg A) \imp \ngg A $ & Deduction 1, 9
+\end{tabular*}
+}}
+\end{center}
+\end{wideslide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Figure 4.1: Resolution refutation as a tree}
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(200,140)
+\put(130,140){
+  \put( -10,   0){\makebox(20,10){$\Box$}}
+  \put( -70, -40){\makebox(20,10){$\bar{p}$}}
+  \put(  50, -40){\makebox(20,10){$p$}}
+  \put(-110, -90){\makebox(20,10){$\bar{p}\bar{q}$}}
+  \put( -30, -90){\makebox(20,10){$\bar{p}q$}}
+  \put(-130,-140){\makebox(20,10){$\bar{p}\bar{q}r$}}
+  \put(- 90,-140){\makebox(20,10){$\bar{r}$}}
+  \put(   0,   0){\line(-2,-1){58}}
+  \put(   0,   0){\line( 2,-1){58}}
+  \put( -60, -40){\line(-1,-1){38}}
+  \put( -60, -40){\line( 1,-1){38}}
+  \put(-100, -90){\line(-1,-2){18}}
+  \put(-100, -90){\line( 1,-2){18}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 4.2: Incomplete resolution tree}
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(220,100)
+\put(  0,  0){\makebox(20,10){$pq\bar{r}$}}
+\put( 80,  0){\makebox(20,10){$r$}}
+\put(120,  0){\makebox(20,10){$p\bar{q}r$}}
+\put(200,  0){\makebox(20,10){$\bar{r}$}}
+\put( 40, 50){\makebox(20,10){$pq$}}
+\put(160, 50){\makebox(20,10){$p\bar{q}$}}
+\put(100, 90){\makebox(20,10){$p$}}
+\put( 10, 10){\line(1,1){40}}
+\put( 90, 10){\line(-1,1){40}}
+\put(130, 10){\line(1,1){40}}
+\put(210, 10){\line(-1,1){40}}
+\put( 50, 60){\line(2,1){60}}
+\put(170, 60){\line(-2,1){60}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 4.3: Semantic tree}
+\unitlength=0.82pt
+\begin{center}
+\begin{picture}(440,100)
+\put(220,100){
+  \put(0,0){\line(-4,-1){120}}
+  \put(0,0){\line( 4,-1){114}}
+  \put(-70,-15){\makebox(10,10){$p$}}
+  \put( 70,-15){\makebox(10,10){$\bar{p}$}}
+  \put(0,0){\circle*{3}}
+  \put(-120,-30){
+    \put(   0,  0){\circle*{3}}
+    \put( -60,-30){\circle*{3}}
+    \put(  60,-30){\circle{12}}
+    \put(  55,-35){\makebox(10,10){$2$}}
+    \put(   0,  0){\line(-2,-1){ 60}}
+    \put(   0,  0){\line( 2,-1){ 54}}
+    \put(-42,-15){\makebox(10,10){$q$}}
+    \put( 42,-15){\makebox(10,10){$\bar{q}$}}
+    \put( -60,-30){\line(-1,-1){ 36}}
+    \put( -60,-30){\line( 1,-1){ 36}}
+    \put(  20,-70){\line( 1, 1){ 36}}
+    \put( 100,-70){\line(-1, 1){ 36}}
+    \multiput(-90,-50)(120,0){2}{
+      \put(  0,0){\makebox(10,10){$r$}}
+      \put( 50,0){\makebox(10,10){$\bar{r}$}}
+    }
+    \put(-100,-70){\circle{12}}
+    \put(-105,-75){\makebox(10,10){$3$}}
+    \put( -20,-70){\circle{12}}
+    \put( -25,-75){\makebox(10,10){$4$}}
+    \put( 20, -70){\circle*{3}}
+    \put(100, -70){\circle*{3}}
+  }
+  \put( 120,-30){
+    \put(  60, -30){\circle*{3}}
+    \put( -60, -30){\circle*{3}}
+    \put(   0,  0){\circle{12}}
+    \put(  -5, -5){\makebox(10,10){$1$}}
+    \put( -60,-30){\line( 2, 1){ 55}}
+    \put(  60,-30){\line(-2, 1){ 55}}
+    \put(-42,-15){\makebox(10,10){$q$}}
+    \put( 42,-15){\makebox(10,10){$\bar{q}$}}
+    \put( -60,-30){\line(-1,-1){ 40}}
+    \put( -60,-30){\line( 1,-1){ 40}}
+    \put(  60,-30){\line(-1,-1){ 40}}
+    \put(  60,-30){\line( 1,-1){ 40}}
+    \multiput(-90,-50)(120,0){2}{
+      \put(  0,0){\makebox(10,10){$r$}}
+      \put( 50,0){\makebox(10,10){$\bar{r}$}}
+    }
+    \put(  20,-70){\circle*{3}}
+    \put( 100,-70){\circle*{3}}
+    \put( -20,-70){\circle*{3}}
+    \put(-100,-70){\circle*{3}}
+  }
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 4.4: Inference and failure node}
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(100,60)
+\put(40,50){\makebox(20,10){$n$}}
+\put( 0, 0){\makebox(20,10){$n_{1}$}}
+\put(80, 0){\makebox(20,10){$n_{2}$}}
+\put(20,30){\makebox(10,10){$l$}}
+\put(75,30){\makebox(10,10){$l^{c}$}}
+\put(10,10){\line(1,1){40}}
+\put(90,10){\line(-1,1){40}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 4.5: Graph for Tseitin clauses}
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(100,100)
+\put(10,10){\framebox(80,80){\ }}
+\put(10,10){\line(1,1){80}}
+\put(0,0){\makebox(10,10){$0$}}
+\put(45,0){\makebox(10,10)[b]{$t$}}
+\put(90,0){\makebox(10,10){$0$}}
+\put(0,45){\makebox(10,10)[l]{$q$}}
+\put(40,45){\makebox(10,10)[l]{$r$}}
+\put(90,45){\makebox(10,10)[r]{$s$}}
+\put(0,90){\makebox(10,10){$0$}}
+\put(45,90){\makebox(10,10)[t]{$p$}}
+\put(90,90){\makebox(10,10){$1$}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Section 5.1: Efficient truth table for $p \vee (q\wedge r)$}
+\begin{minipage}{0.42\textwidth}
+\begin{tabular}{|c|c|c||c|}
+\hline
+$p$ & $q$ & $r$ & $p \vee (q\wedge r)$ \\ \hline \hline
+$T$ & $T$ & $T$ & $T$ \\ \hline
+$T$ & $T$ & $F$ & $T$ \\ \hline
+$T$ & $F$ & $T$ & $T$ \\ \hline
+$T$ & $F$ & $F$ & $T$ \\ \hline
+$F$ & $T$ & $T$ & $T$ \\ \hline
+$F$ & $T$ & $F$ & $F$ \\ \hline
+$F$ & $F$ & $T$ & $F$ \\ \hline
+$F$ & $F$ & $F$ & $F$ \\ \hline
+\end{tabular}
+\end{minipage}
+\hspace{0.08\textwidth}
+\begin{minipage}{0.42\textwidth}
+\begin{tabular}{|c|c|c||c|}
+\hline
+$p$ & $q$ & $r$ & $p \vee (q\wedge r)$ \\ \hline \hline
+$T$ & $T$ & $*$ & $T$ \\ \hline
+$T$ & $F$ & $*$ & $T$ \\ \hline
+\end{tabular}
+
+\bigskip
+
+\begin{tabular}{|c|c|c||c|}
+\hline
+$p$ & $q$ & $r$ & $p \vee (q\wedge r)$ \\ \hline \hline
+$T$ & $*$ & $*$ & $T$ \\ \hline
+\end{tabular}
+
+\bigskip
+
+\begin{tabular}{|c|c|c||c|}
+\hline
+$p$ & $q$ & $r$ & $p \vee (q\wedge r)$ \\ \hline \hline
+$T$ & $*$ & $*$ & $T$ \\ \hline
+$F$ & $T$ & $T$ & $T$ \\ \hline
+$F$ & $T$ & $F$ & $F$ \\ \hline
+$F$ & $F$ & $*$ & $F$ \\ \hline
+\end{tabular}
+\end{minipage}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 5.1: Efficient truth table for $p \neqv q \neqv r$}
+\begin{minipage}{0.42\textwidth}
+\begin{tabular}{|c|c|c||c|}
+\hline
+$p$ & $q$ & $r$ & $p \neqv q \neqv r$ \\ \hline \hline
+$T$ & $T$ & $T$ & $T$ \\ \hline
+$T$ & $T$ & $F$ & $F$ \\ \hline
+$T$ & $F$ & $T$ & $F$ \\ \hline
+$T$ & $F$ & $F$ & $T$ \\ \hline
+$F$ & $T$ & $T$ & $F$ \\ \hline
+$F$ & $T$ & $F$ & $T$ \\ \hline
+$F$ & $F$ & $T$ & $T$ \\ \hline
+$F$ & $F$ & $F$ & $F$ \\ \hline
+\end{tabular}
+\end{minipage}
+\hspace{0.08\textwidth}
+\begin{minipage}{0.42\textwidth}
+\begin{tabular}{|c|c|c||c|}
+\hline
+$p$ & $q$ & $r$ & $p \neqv q \neqv r$ \\ \hline \hline
+$T$ & $T$ & $T$ & $T$ \\ \hline
+$T$ & $T$ & $F$ & $F$ \\ \hline
+$T$ & $F$ & $T$ & $F$ \\ \hline
+$T$ & $F$ & $F$ & $T$ \\ \hline
+$F$ & $T$ & $*$ & (See rows 3 and 4.) \\ \hline
+$F$ & $F$ & $*$ & (See rows 1 and 2.) \\ \hline
+\end{tabular}
+\end{minipage}
+\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Figure 5.1: BDD for $p \vee (q\wedge r)$}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(250,110)
+\put(120,100){\node{p}}
+\multiput(50,60)(140,0){2}{\node{q}}
+\multiput(20,30)(140,0){2}{
+  \multiput(0,0)(60,0){2}{\node{r}}
+}
+\multiput(140,-2)(60,0){2}{
+  \multiput(0,0)(40,0){2}{\framebox(10,10){T}}
+}
+\multiput(0,-2)(40,0){2}{\framebox(10,10){F}}
+\put(60,-2){\framebox(10,10){F}}
+\put(100,-2){\framebox(10,10){T}}
+\dl{60}{70}{120}{100}
+\put(190, 70){\line(-2, 1){60}}
+\multiput(30,40)(140,0){2}{
+  \dl{0}{0}{20}{20}
+  \put(50,0){\line(-1, 1){20}}
+}
+\multiput(10,10)(140,0){2}{
+  \multiput( 0,0)(60,0){2}{
+    \dl{0}{0}{10}{20}
+    \put(30,0){\line(-1, 2){10}}
+  }
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 5.6: First reduction of BDD for $p \vee (q\wedge r)$}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(250,110)
+\put(120,100){\node{p}}
+\multiput(50,60)(140,0){2}{\node{q}}
+\multiput(20,30)(140,0){2}{
+  \multiput(0,0)(60,0){2}{\node{r}}
+}
+\put( 50,-2){\framebox(10,10){F}}
+\put(190,-2){\framebox(10,10){T}}
+\dl{60}{70}{120}{100}
+\put(190, 70){\line(-2, 1){60}}
+\multiput(30,40)(140,0){2}{
+  \dl{0}{0}{20}{20}
+  \put(50,0){\line(-1, 1){20}}
+}
+\dl{190}{10}{220}{30}
+\drawline(200,10)(230,30)
+\dl{190}{10}{160}{30}
+\drawline(200,10)(170,30)
+
+\drawline(190,10)(90,30)
+\dl{50}{10}{20}{30}
+\drawline(60,10)(30,30)
+\dl{60}{10}{80}{30}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 5.6: Second reduction of BDD for $p \vee (q\wedge r)$}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(130,110)
+\put(120,100){\node{p}}
+\multiput(50,60)(70,0){2}{\node{q}}
+\put(80,30){\node{r}}
+\put( 50,-2){\framebox(10,10){F}}
+\put(120,-2){\framebox(10,10){T}}
+\dl{60}{70}{120}{100}
+\put(125,72){\line(0, 1){26}}
+\dl{123}{10}{123}{58}
+\put(126,10){\line(0,1){48}}
+\drawline(120,10)(90,30)
+\put(80,40){\line(-1, 1){20}}
+\dl{60}{10}{80}{30}
+\dl{55}{10}{55}{58}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 5.6: Third reduction of BDD for $p \vee (q\wedge r)$}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(130,110)
+\put(120,100){\node{p}}
+\put(50,60){\node{q}}
+\put(80,30){\node{r}}
+\put( 50,-2){\framebox(10,10){F}}
+\put(120,-2){\framebox(10,10){T}}
+\dl{60}{70}{120}{100}
+\put(125,10){\line(0, 1){88}}
+\drawline(120,10)(90,30)
+\put(80,40){\line(-1, 1){20}}
+\dl{60}{10}{80}{30}
+\dl{55}{10}{55}{58}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 5.7: BDD for $p \neqv q \neqv r$ after first reduction}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(170,120)
+\put(80,110){\node{p}}
+\multiput(30,80)(100,0){2}{\node{q}}
+\multiput(0,50)(100,0){2}{
+  \multiput(0,0)(60,0){2}{\node{r}}
+}
+\put( 30,-2){\framebox(10,10){F}}
+\put(130,-2){\framebox(10,10){T}}
+\dl{40}{90}{80}{110}
+\put(130,90){\line(-2, 1){40}}
+\multiput(10,60)(100,0){2}{
+  \dl{0}{0}{20}{20}
+  \put(50,0){\line(-1, 1){20}}
+}
+\drawline(140,10)(170,50)
+\drawline(130,10)( 10,50)
+\dl{140}{10}{110}{50}
+\dl{130}{10}{70}{50}
+\drawline(40,10)(100,50)
+\drawline(30,10)( 60,50)
+\dl{40}{10}{160}{50}
+\dl{30}{10}{0}{50}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 5.6: BDD for $p \neqv q \neqv r$ after second reduction}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(70,120)
+\put(30,110){\node{p}}
+\multiput(0,80)(60,0){2}{\node{q}}
+\multiput(0,40)(60,0){2}{\node{r}}
+\put( 0,-2){\framebox(10,10){F}}
+\put(60,-2){\framebox(10,10){T}}
+\dl{10}{90}{30}{110}
+\put(60,90){\line(-1, 1){20}}
+\multiput(0,0)(60,0){2}{
+  \multiput(0,10)(0,40){2}{
+    \dl{5}{0}{5}{30}
+  }
+}
+\multiput(10,10)(0,40){2}{
+  \drawline( 0,0)(50,30)
+  \drawline(50,0)( 0,30)
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{BDD for $(p\neqv q) \neqv (p \neqv r)$
+from BDDs for $p\neqv q$ and $p \neqv r\,$}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(70,40)
+\put(30,30){\node{p}}
+\put( 0,-2){\framebox(10,10){F}}
+\put(60,-2){\framebox(10,10){T}}
+\dl{10}{10}{30}{30}
+\put(60,10){\line(-1, 1){20}}
+\end{picture}
+\end{center}
+
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(210,100)
+\put(0,0){
+  \put(10,80){\makebox(50,20){BDD for $p\neqv q$}}
+  \put(30,60){\node{p}}
+  \multiput(0,30)(60,0){2}{\node{q}}
+  \put( 0,-2){\framebox(10,10){F}}
+  \put(60,-2){\framebox(10,10){T}}
+  \dl{10}{40}{30}{60}
+  \put(60,40){\line(-1, 1){20}}
+  \multiput(0,10)(60,0){2}{\dl{5}{0}{5}{20}}
+  \drawline(10,10)(60,30)
+  \drawline(60,10)(10,30)
+}
+\put(0,60){\makebox(210,15){$\neqv$}}
+\put(140,0){
+  \put(10,80){\makebox(50,20){BDD for $p\neqv r$}}
+  \put(30,60){\node{p}}
+  \multiput(0,30)(60,0){2}{\node{r}}
+  \put( 0,-2){\framebox(10,10){F}}
+  \put(60,-2){\framebox(10,10){T}}
+  \dl{10}{40}{30}{60}
+  \put(60,40){\line(-1, 1){20}}
+  \multiput(0,10)(60,0){2}{\dl{5}{0}{5}{20}}
+  \drawline(10,10)(60,30)
+  \drawline(60,10)(10,30)
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{BDD for $(p\neqv q) \neqv (p \neqv r)$
+from BDDs for $p\neqv q$ and $p \neqv r\,$}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(240,110)
+\put(10,20){
+  \put(10,80){\makebox(50,10){BDD for $p\neqv q$}}
+  \put(30,60){\node{p}}
+  \multiput(0,30)(60,0){2}{\node{q}}
+  \put(-20,-20){\makebox(40,30){BDD for $F\neqv q$}}
+  \put(48,-20){\makebox(40,30){BDD for $T\neqv q$}}
+  \dl{10}{40}{30}{60}
+  \put(60,40){\line(-1, 1){20}}
+%  \dl{0}{30}{-20}{10}
+  \put(0,30){\line(-1,-1){20}}
+  \put(10,30){\line(1,-1){20}}
+  \put(30,10){\line(-1,0){50}}
+%  \dl{60}{30}{40}{10}
+  \put(60,30){\line(-1,-1){20}}
+  \put(70,30){\line(1,-1){20}}
+  \put(90,10){\line(-1,0){50}}
+}
+\put(10,80){\makebox(210,15){$\neqv$}}
+\put(150,20){
+  \put(10,80){\makebox(50,10){BDD for $p\neqv r$}}
+  \put(30,60){\node{p}}
+  \multiput(0,30)(60,0){2}{\node{r}}
+  \put(-15,-20){\makebox(40,30){BDD for $F\neqv r$}}
+  \put(48,-20){\makebox(40,30){BDD for $T\neqv r$}}
+  \dl{10}{40}{30}{60}
+  \put(60,40){\line(-1, 1){20}}
+%  \dl{0}{30}{-20}{10}
+  \put(0,30){\line(-1,-1){20}}
+  \put(10,30){\line(1,-1){20}}
+  \put(30,10){\line(-1,0){50}}
+%  \dl{60}{30}{40}{10}
+  \put(60,30){\line(-1,-1){20}}
+  \put(70,30){\line(1,-1){20}}
+  \put(90,10){\line(-1,0){50}}
+
+%  \dl{0}{30}{-20}{10}
+%  \put(10,30){\line(1,-1){20}}
+%  \dl{60}{30}{40}{10}
+%  \put(70,30){\line(1,-1){20}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{BDD for $(p\neqv q) \neqv (p \neqv r)$
+from BDDs for $p\neqv q$ and $p \neqv r\,$}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(220,90)
+\put(10,0){
+  \put(10,80){\makebox(50,10){BDD for $\ngg q$}}
+  \put(30,60){\node{q}}
+  \put( 0,28){\framebox(10,10){F}}
+  \put(60,28){\framebox(10,10){T}}
+  \put(-20,0){\makebox(40,30){BDD for $\ngg T$}}
+  \put(52,0){\makebox(40,30){BDD for $\ngg F$}}
+  \dl{60}{40}{40}{60}
+  \put(10,40){\line(1, 1){20}}
+}
+\put(10,60){\makebox(210,15){$\neqv$}}
+\put(150,0){
+  \put(10,80){\makebox(50,10){BDD for $\ngg r$}}
+  \put(30,60){\node{r}}
+  \put( 0,28){\framebox(10,10){F}}
+  \put(60,28){\framebox(10,10){T}}
+  \put(-15,0){\makebox(40,30){BDD for $\ngg T$}}
+  \put(50,0){\makebox(40,30){BDD for $\ngg F$}}
+  \dl{60}{40}{40}{60}
+  \put(10,40){\line(1, 1){20}}
+}
+\end{picture}
+\end{center}
+
+\vspace{-5mm}
+
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(220,90)
+\put(10,0){
+  \put(10,80){\makebox(50,10){BDD for $\ngg F$}}
+  \put(30,58){\framebox(10,10){T}}
+}
+\put(10,55){\makebox(210,15){$\neqv$}}
+\put(150,0){
+  \put(10,80){\makebox(50,10){BDD for $\ngg r$}}
+  \put(30,60){\node{r}}
+  \put( 0,28){\framebox(10,10){F}}
+  \put(60,28){\framebox(10,10){T}}
+  \put(-20,0){\makebox(40,30){BDD for $\ngg T$}}
+  \put(55,0) {\makebox(40,30){BDD for $\ngg F$}}
+%  \put(-10,-10){\makebox(40,30){
+%    \shortstack[l]{BDD for \\$(\ngg T) \logeqv F$}
+%  }}
+%  \put(50,-10){\makebox(40,30){
+%    \shortstack[l]{BDD for \\$(\ngg F) \logeqv T$}
+%  }}
+  \dl{60}{40}{40}{60}
+  \put(10,40){\line(1, 1){20}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{BDD for $(p\neqv q) \neqv (p \neqv r)$
+from BDDs for $p\neqv q$ and $p \neqv r\,$}
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(225,30)
+  \put(10,0){\framebox(10,10){T}}
+  \put(100,00){\framebox(10,10){F}}
+  \put(200,00){\framebox(10,10){T}}
+  \put(55,0){\makebox(10,10){$\neqv$}}
+  \put(150,0){\makebox(10,10){$\logeqv$}}
+  \put(0,20){\makebox(30,10){BDD for $\ngg F$}}
+  \put(90,20){\makebox(30,10){BDD for $\ngg T$}}
+  \put(195,20){\makebox(30,10){BDD for $\ngg F \neqv \ngg T$}}
+\end{picture}
+\end{center}
+
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(225,30)
+  \put(10,0){\framebox(10,10){T}}
+  \put(100,00){\framebox(10,10){T}}
+  \put(200,00){\framebox(10,10){F}}
+  \put(55,0){\makebox(10,10){$\neqv$}}
+  \put(150,0){\makebox(10,10){$\logeqv$}}
+  \put(0,20){\makebox(30,10){BDD for $\ngg F$}}
+  \put(90,20){\makebox(30,10){BDD for $\ngg F$}}
+  \put(195,20){\makebox(30,10){BDD for $\ngg F \neqv \ngg F$}}
+\end{picture}
+\end{center}
+
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(270,70)
+\put(0,40){
+  \put(10,0){\framebox(10,10){T}}
+  \put(55,0){\makebox(10,10){$\neqv$}}
+  \put(170,0){\makebox(10,10){$\logeqv$}}
+  \put(0,20){\makebox(30,10){BDD for $\ngg F$}}
+  \put(90,20){\makebox(30,10){BDD for $\ngg r$}}
+  \put(220,20){\makebox(30,10){BDD for $\ngg F\neqv \ngg r$}}
+}
+\put(80,-20){
+  \put(30,60){\node{r}}
+  \put( 0,28){\framebox(10,10){F}}
+  \put(60,28){\framebox(10,10){T}}
+  \dl{60}{40}{40}{60}
+  \put(10,40){\line(1, 1){20}}
+}
+\put(200,-20){
+  \put(30,60){\node{r}}
+  \put( 0,28){\framebox(10,10){T}}
+  \put(60,28){\framebox(10,10){F}}
+  \dl{60}{40}{40}{60}
+  \put(10,40){\line(1, 1){20}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{BDD for $(p\neqv q) \neqv (p \neqv r)$
+from BDDs for $p\neqv q$ and $p \neqv r\,$}
+\vspace*{-5mm}
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(250,110)
+\put(120,100){\node{p}}
+\multiput(50,60)(140,0){2}{\node{q}}
+\multiput(20,30)(140,0){2}{
+  \multiput(0,0)(60,0){2}{\node{r}}
+}
+\multiput(0,-2)(140,0){2}{
+  \multiput( 0,0)(100,0){2}{\framebox(10,10){F}}
+  \multiput(40,0)( 20,0){2}{\framebox(10,10){T}}
+}
+\dl{60}{70}{120}{100}
+\put(190, 70){\line(-2, 1){60}}
+\dl{30}{40}{50}{60}
+\put(80,40){\line(-1, 1){20}}
+\dl{220}{40}{200}{60}
+\put(170,40){\line(1, 1){20}}
+\multiput(10,10)(60,0){2}{
+  \dl{0}{0}{10}{20}
+  \put(30,0){\line(-1, 2){10}}
+}
+\multiput(150,10)(60,0){2}{
+  \dl{30}{0}{20}{20}
+  \put(0,0){\line(1, 2){10}}
+}
+\end{picture}
+\end{center}
+
+\vspace*{-5mm}
+
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(70,100)
+\put(10,80){\makebox(50,20){BDD for $q\neqv r$}}
+\put(30,60){\node{q}}
+\multiput(0,30)(60,0){2}{\node{r}}
+\put( 0,-2){\framebox(10,10){F}}
+\put(60,-2){\framebox(10,10){T}}
+\dl{10}{40}{30}{60}
+\put(60,40){\line(-1, 1){20}}
+\multiput(0,10)(60,0){2}{\dl{5}{0}{5}{20}}
+\drawline(10,10)(60,30)
+\drawline(60,10)(10,30)
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 5.21: Restriction}
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(330,130)
+\put(-50,20){
+  \put(50,-20){\makebox(60,15)[b]{(a)}}
+  \put(100,100){\node{p}}
+  \put(50,60){\node{q}}
+  \put(80,30){\node{r}}
+  \put( 50,-2){\framebox(10,10){F}}
+  \put(100,-2){\framebox(10,10){T}}
+  \dl{60}{70}{100}{100}
+  \put(105,10){\line(0, 1){88}}
+  \drawline(100,10)(90,30)
+  \put(80,40){\line(-1, 1){20}}
+  \dl{60}{10}{80}{30}
+  \dl{55}{10}{55}{58}
+}
+\put(40,20){
+  \put(50,-20){\makebox(60,15)[b]{(b)}}
+  \put(100,100){\node{p}}
+  \put(50,60){\node{q}}
+  \put( 50,-2){\framebox(10,10){F}}
+  \put(100,-2){\framebox(10,10){T}}
+  \dl{60}{70}{100}{100}
+  \put(105,10){\line(0, 1){88}}
+  \drawline(100,10)(60,60)
+  \dl{55}{10}{55}{58}
+}
+\put(130,20){
+  \put(50,-20){\makebox(60,15)[b]{(c)}}
+  \put(100,100){\node{p}}
+  \put(50,60){\node{q}}
+  \put( 50,-2){\framebox(10,10){F}}
+  \put(100,-2){\framebox(10,10){T}}
+  \dl{60}{70}{100}{100}
+  \put(105,10){\line(0, 1){88}}
+  \put(57,10){\line(0, 1){50}}
+  \dl{53}{10}{53}{58}
+}
+\put(220,20){
+  \put(50,-20){\makebox(60,15)[b]{(b)}}
+  \put(100,100){\node{p}}
+  \put( 50,-2){\framebox(10,10){F}}
+  \put(100,-2){\framebox(10,10){T}}
+  \dl{55}{10}{100}{100}
+  \put(107,10){\line(0, 1){88}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{wideslide}[bm=,toc=]{Section 6.4: 4-queens problem}
+\begin{center}
+\unitlength=1.0pt
+\begin{picture}(100,100)
+\put(0,0){
+  \multiputlist(20,0)(20,0){1,2,3,4}
+  \multiputlist(0,20)(0,20){4,3,2,1}
+}
+\put(10,10){
+  \put(0,0){\grid(80,80)(20,20)}
+  \put( 0, 20){\makebox(20,20){Q}}
+  \put(20, 60){\makebox(20,20){Q}}
+  \put(40,  0){\makebox(20,20){Q}}
+  \put(60, 40){\makebox(20,20){Q}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 6.4.1: Encoding the 4-queens problem (1)}
+\begin{displaymath}
+\begin{array}{l}
+11\vee 12 \vee 13 \vee 14,\\
+21\vee 22 \vee 23 \vee 24,\\
+31\vee 32 \vee 33 \vee 34,\\
+41\vee 42 \vee 43 \vee 44.\\
+\end{array}
+\end{displaymath}
+
+\begin{displaymath}
+\begin{array}{l}
+\ov{11}\vee \ov{12}\cm \ov{11}\vee \ov{13}\cm \ov{11}\vee \ov{14}\cm \ov{12}\vee \ov{13}\cm \ov{12}\vee \ov{14}\cm \ov{13}\vee \ov{14}\cm\\
+\ov{21}\vee \ov{22}\cm \ov{21}\vee \ov{23}\cm \ov{21}\vee \ov{24}\cm \ov{22}\vee \ov{23}\cm \ov{22}\vee \ov{24}\cm \ov{23}\vee \ov{24}\cm\\
+\ov{31}\vee \ov{32}\cm \ov{31}\vee \ov{33}\cm \ov{31}\vee \ov{34}\cm \ov{32}\vee \ov{33}\cm \ov{32}\vee \ov{34}\cm \ov{33}\vee \ov{34}\cm\\
+\ov{41}\vee \ov{42}\cm \ov{41}\vee \ov{43}\cm \ov{41}\vee \ov{44}\cm \ov{42}\vee \ov{43}\cm \ov{42}\vee \ov{44}\cm \ov{43}\vee \ov{44},\\
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 6.4.1: Encoding the 4-queens problem (2)}
+\begin{displaymath}
+\begin{array}{l}
+\ov{11}\vee \ov{21}\cm \ov{11}\vee \ov{31}\cm \ov{11}\vee \ov{41}\cm \ov{21}\vee \ov{31}\cm \ov{21}\vee \ov{41}\cm \ov{31}\vee \ov{41}\cm\\
+\ov{12}\vee \ov{22}\cm \ov{12}\vee \ov{32}\cm \ov{12}\vee \ov{42}\cm \ov{22}\vee \ov{32}\cm \ov{22}\vee \ov{42}\cm \ov{32}\vee \ov{42}\cm\\
+\ov{13}\vee \ov{23}\cm \ov{13}\vee \ov{33}\cm \ov{13}\vee \ov{43}\cm \ov{23}\vee \ov{33}\cm \ov{23}\vee \ov{43}\cm \ov{33}\vee \ov{43}\cm\\
+\ov{14}\vee \ov{24}\cm \ov{14}\vee \ov{34}\cm \ov{14}\vee \ov{44}\cm \ov{24}\vee \ov{34}\cm \ov{24}\vee \ov{44}\cm \ov{34}\vee \ov{44}.\\
+\end{array}
+\end{displaymath}
+
+\begin{displaymath}
+\begin{array}{ll}
+\ov{11}\vee \ov{22}\cm \ov{11}\vee \ov{33}\cm \ov{11}\vee \ov{44}\cm
+&
+\ov{12}\vee \ov{21}\cm \ov{12}\vee \ov{23}\cm \ov{12}\vee \ov{34}\cm\\   
+\ov{13}\vee \ov{22}\cm \ov{13}\vee \ov{31}\cm \ov{13}\vee \ov{24}\cm
+&
+\ov{14}\vee \ov{23}\cm \ov{14}\vee \ov{32}\cm \ov{14}\vee \ov{41}\cm\\
+\ov{21}\vee \ov{32}\cm \ov{21}\vee \ov{43}\cm
+&
+\ov{22}\vee \ov{31}\cm \ov{22}\vee \ov{33}\cm \ov{22}\vee \ov{44}\cm\\
+\ov{23}\vee \ov{32}\cm \ov{23}\vee \ov{41}\cm \ov{23}\vee \ov{34}\cm
+&
+\ov{24}\vee \ov{33}\cm \ov{22}\vee \ov{42}\cm\\
+\ov{31}\vee \ov{42}\cm
+&
+\ov{32}\vee \ov{41}\cm \ov{32}\vee \ov{43}\cm\\
+\ov{33}\vee \ov{42}\cm \ov{33}\vee \ov{44}\cm
+&
+\ov{34}\vee \ov{43}.\\
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Figure 7.1: Tree for
+$\forall x(\ngg\exists yp(x,y)\vee\ngg\exists yp(y,x))$}
+\begin{center}
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+\begin{bundle}{$\forall x$\rule[-1mm]{0mm}{1mm}}
+\chunk{
+  \begin{bundle}{$\vee$\rule[-1mm]{0mm}{1mm}}
+  \chunk{
+    \begin{bundle}{$\ngg$\rule[-1mm]{0mm}{1mm}}
+    \chunk{
+      \begin{bundle}{$\exists y$\rule[-1mm]{0mm}{1mm}}
+      \chunk{$p(x,y)$}
+      \end{bundle}
+    }
+    \end{bundle}
+  }
+  \chunk{
+    \begin{bundle}{$\ngg$\rule[-1mm]{0mm}{1mm}}
+    \chunk{
+      \begin{bundle}{$\exists y$\rule[-1mm]{0mm}{1mm}}
+      \chunk{$p(y,x)$}
+      \end{bundle}
+    }
+    \end{bundle}
+  }
+  \end{bundle}
+}
+\end{bundle}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 7.2: Global and local variables}
+\vspace*{-2ex}
+\begin{program}
+class MyClass \{\\
+\>int x;\\
+\>void p() \{\\
+\>\>int x;\\
+\>\>x = 1;\\
+\>\>// Print the value of x\\
+\>\}\\
+\>void q() \{\\
+\>\>// Print the value of x\\
+\>\}\\
+\>... void main(...) \{\\
+\>x = 5;\\
+\>p;\\
+\>q;\\
+\}
+\end{program}
+\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Logically equivalent formulas (1)}
+\vspace*{-8mm}
+\begin{displaymath}
+\begin{array}{ll}
+ \forall xA(x)\eqv \ngg \exists x\ngg A(x) &
+ \exists xA(x)\eqv \ngg \forall x\ngg A(x) \\
+\\
+ \forall x\forall yA(x,y) \eqv \forall y\forall xA(x,y) &
+ \exists x\exists yA(x,y) \eqv \exists y\exists xA(x,y) \\
+ \exists x\forall yA(x,y)\imp \forall y\exists xA(x,y) \\
+\\
+ (\exists xA(x) \vee B) \eqv \exists x(A(x) \vee  B) &
+ (\forall xA(x) \vee B) \eqv \forall x(A(x) \vee  B) \\
+\\
+ (B \vee \exists xA(x)) \eqv \exists x(B \vee A(x)) &
+ (B \vee \forall xA(x)) \eqv \forall x(B \vee A(x)) \\
+\\
+ (\exists xA(x) \wedge B) \eqv \exists x(A(x) \wedge B) &
+ (\forall xA(x) \wedge B) \eqv \forall x(A(x) \wedge B) \\
+\\
+ (B \wedge \exists xA(x)) \eqv \exists x(B \wedge A(x)) &
+ (B \wedge \forall xA(x)) \eqv \forall x(B \wedge A(x)) \\
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Logically equivalent formulas (2)}
+\vspace*{-10mm}
+\begin{displaymath}
+\begin{array}{l}
+ \forall x(A\imp B(x)) \eqv (A \imp \forall xB(x)) \\
+ \forall x(A(x)\imp B) \eqv (\exists xA(x) \imp B) \\
+\\
+ (\exists x(A(x)\vee B(x))
+\eqv (\exists xA(x) \vee \exists xB(x)) \\
+ \forall x(A(x)\wedge B(x))
+\eqv (\forall xA(x) \wedge \forall xB(x)) \\
+\forall xA(x)\vee\forall xB(x))
+\imp \forall x(A(x)\vee B(x)) \\
+ \exists x(A(x)\wedge B(x))\imp
+(\exists xA(x) \wedge \exists xB(x)) \\
+\\
+ \forall x(A(x)\eqv B(x))\imp
+(\forall xA(x) \eqv \forall xB(x)) \\
+ \forall x(A(x)\eqv B(x))\imp
+(\exists xA(x) \eqv \exists xB(x)) \\
+\\
+ \exists x(A(x)\imp B(x))\eqv
+  (\forall xA(x)\imp\exists xB(x))  \\
+ (\exists xA(x)\imp\forall xB(x))\imp
+  \forall x(A(x)\imp B(x))  \\
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Logically equivalent formulas (3)}
+\begin{displaymath}
+\begin{array}{l}
+ \forall x(A(x)\vee B(x)) \imp
+(\forall xA(x) \vee \exists xB(x)) \\
+ \forall x(A(x)\imp B(x))\imp
+  (\forall xA(x)\imp\forall xB(x)) \\
+\\
+\forall x(A(x)\imp B(x))\imp
+  (\exists xA(x)\imp\exists xB(x)) \\
+ \forall x(A(x)\imp B(x))\imp
+  (\forall xA(x)\imp\exists xB(x))
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 7.3: Semantic tableau for a satisfiable formula}
+\begin{center}
+$\ngg\,(\forall x(p(x)\vee q(x)) \imp
+(\forall xp(x) \vee \forall xq(x)))$ \\
+$\downarrow$ \\
+$\forall x(p(x)\vee q(x))\comma \ngg\,(\forall xp(x) \vee \forall xq(x))$ \\
+$\downarrow$ \\
+$\forall x(p(x)\vee q(x))\comma \ngg \forall xp(x)\comma
+  \ngg \forall xq(x)$ \\
+$\downarrow$ \\
+$\forall x(p(x)\vee q(x))\comma \ngg \forall xp(x)\comma \ngg q(a)$ \\
+$\downarrow$ \\
+$\forall x(p(x)\vee q(x))\comma \ngg p(a)\comma \ngg q(a)$ \\
+$\downarrow$ \\
+$p(a)\vee q(a)\comma \ngg p(a)\comma \ngg q(a)$ \\
+$\swarrow$ \hspace{5em} $\searrow$ \\
+$p(a)\comma \ngg p(a)\comma \ngg q(a)$ \hspace{5em}
+  $q(a)\comma \ngg p(a)\comma  \ngg q(a)$ \\
+$\times$ \hspace{9em} $\times$
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 7.4: A tableau that should close, but doesn't}
+\begin{center}
+$\forall x\exists yp(x,y) \;\wedge\; \forall x(q(x) \wedge \ngg q(x))$\\
+$\downarrow$\\
+$\forall x\exists yp(x,y) \comma \forall x(q(x) \wedge \ngg q(x))$\\
+$\downarrow$ \\
+$\forall x\exists yp(x,y)\comma \exists yp(a_{1},y)\comma \forall x(q(x) \wedge \ngg q(x))$ \\
+$\downarrow$ \\
+$\forall x\exists yp(x,y)\comma p(a_{1},a_{2})\comma \forall x(q(x) \wedge \ngg q(x))$\\
+$\downarrow$ \\
+$\forall x\exists yp(x,y)\comma p(a_{1},a_{2})\comma \forall x(q(x) \wedge \ngg q(x))$ \\
+$\downarrow$ \\
+$\forall x\exists yp(x,y)\comma \exists yp(a_{2},y)\comma
+p(a_{1},a_{2})\comma \forall x(q(x) \wedge \ngg q(x))$ \\
+$\downarrow$ \\
+$\forall x\exists yp(x,y) \comma p(a_{2},a_{3})\comma
+  p(a_{1},a_{2})\comma \forall x(q(x) \wedge \ngg q(x))$
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Rules for $\gamma$- and $\delta$-formulas}
+\vspace*{1cm}
+\begin{center}
+\begin{minipage}[t]{0.3\textwidth}
+\minisp
+%\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$\gamma$ & $\gamma(a)$  \\ \hline \hline
+$\forall xA(x)$ & $A(a)$ \\ \hline
+$\ngg \exists xA(x)$ & $\ngg A(a)$ \\ \hline
+\end{tabular}
+%\end{center}
+\end{minipage}
+\hspace{0.07\textwidth}
+\begin{minipage}[t]{0.3\textwidth}
+\minisp
+%\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$\delta$ & $\delta(a)$  \\ \hline \hline
+$\exists xA(x)$ & $A(a)$ \\ \hline
+$\ngg \forall xA(x)$ & $\ngg A(a)$ \\ \hline
+\end{tabular}
+%\end{center}
+\end{minipage}
+\end{center}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Figure 8.1: Semantic tableau in first-order
+logic}
+\begin{center}
+$\underline{\ngg\,((\forall xp(x) \vee \forall xq(x)) \imp
+\forall x(p(x) \vee q(x)))}$ \\
+$\downarrow$ \\
+$\underline{\forall xp(x) \vee \forall xq(x)} \comma
+  \ngg \forall x(p(x) \vee q(x))$ \\
+$\swarrow$ \hspace{8em} $\searrow$ \\
+$\forall xp(x)\comma \underline{\ngg \forall x(p(x) \vee q(x))}$
+\hspace{2em}
+$\forall xq(x)\comma \underline{\ngg \forall x(p(x) \vee q(x))}$ \\
+$\downarrow$ \hspace{10em} $\downarrow$\\
+$\forall xp(x)\comma \underline{\ngg\,(p(a) \vee q(a))}$
+\hspace{2em}
+$\forall xq(x)\comma \underline{\ngg\,(p(a) \vee q(a))}$ \\
+$\downarrow$ \hspace{10em} $\downarrow$\\
+$\underline{\forall xp(x)}\comma \ngg p(a)\comma \ngg q(a)$
+\hspace{2em}
+$\underline{\forall xq(x)}\comma \ngg p(a)\comma \ngg q(a)$ \\
+$\downarrow$ \hspace{10em} $\downarrow$\\
+$\forall xp(x)\comma p(a)\comma \ngg p(a)\comma \ngg q(a)$ \hspace{2em}
+$\forall xq(x)\comma q(a)\comma \ngg p(a)\comma \ngg q(a)$ \\
+$\times$ \hspace{10em} $\times$
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 8.2: Gentzen proof tree in
+first-order logic}
+\begin{center}
+$\underline{\ngg \forall xp(x)\comma \ngg p(a)}
+\comma p(a)\comma q(a)$ \hspace{2em}
+$\underline{\ngg \forall xq(x)\comma \ngg q(a)}
+\comma p(a)\comma q(a)$ \\
+$\downarrow$ \hspace{10em} $\downarrow$\\
+$\ngg \forall xp(x)\comma \underline{p(a)\comma q(a)}$ \hspace{2em}
+$\ngg \forall xq(x)\comma \underline{p(a)\comma q(a)}$ \\
+$\downarrow$ \hspace{10em} $\downarrow$\\
+$\ngg \forall xp(x)\comma \underline{p(a) \vee  q(a)}$ \hspace{2em}
+$\ngg \forall xq(x)\comma \underline{p(a) \vee q(a)}$ \\
+$\downarrow$ \hspace{10em} $\downarrow$\\
+$\underline{\ngg \forall xp(x)}\comma \forall x(p(x) \vee  q(x))$ \hspace{2em}
+$\underline{\ngg \forall xq(x)}\comma \forall x(p(x) \vee q(x))$ \\
+$\searrow$ \hspace{8em} $\swarrow$\\
+$\underline{\ngg\,(\forall xp(x) \vee \forall xq(x))\comma
+  \forall x(p(x) \vee  q(x))}$ \\
+$\downarrow$ \\
+$(\forall xp(x) \vee \forall xq(x)) \imp
+\forall x(p(x) \vee q(x))$ \\
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Rules for $\gamma$- and $\delta$-formulas}
+\begin{displaymath}
+\frac{U\cup \{\gamma, \gamma(a)\}}{U\cup\{\gamma\}} \hspace{2cm}
+\frac{U\cup\{\delta(a)\}}{U\cup\{\delta\}},
+\end{displaymath}
+The rule for $\delta$-formulas can be applied only if the constant $a$
+does not occur in any formula of $U$.
+
+\begin{center}
+\begin{minipage}[t]{0.45\textwidth}
+\minisp
+\begin{displaymath}
+\begin{array}{|c|c|}
+\hline
+\gamma & \gamma(a)  \\ \hline \hline
+\exists xA(x) & A(a) \\ \hline
+\ngg \forall xA(x) & \ngg A(a) \\ \hline
+\end{array}
+\end{displaymath}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+\minisp
+\begin{displaymath}
+\begin{array}{|c|c|}
+\hline
+\delta & \delta(a)  \\ \hline \hline
+\forall xA(x) & A(a) \\ \hline
+\ngg \exists xA(x) & \ngg A(a) \\ \hline
+\end{array}
+\end{displaymath}
+\end{minipage}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 8.3: $\delta$-formulas
+follow $\gamma$-formulas}
+\begin{center}
+$\underline{\ngg \forall y p(a,y)\comma \ngg p(a,b)}\comma
+\ngg p(a,a)\comma \exists xp(x,b)\comma p(a,b)$ \\
+$\downarrow$ \\
+$\underline{\ngg \forall y p(a,y)\comma \ngg p(a,a)}\comma
+  \exists xp(x,b)\comma p(a,b)$ \\
+$\downarrow$ \\
+$\ngg \forall y p(a,y)\comma
+\underline{\exists xp(x,b)\comma p(a,b)}$ \\
+$\downarrow$ \\
+$\ngg \forall y p(a,y)\comma
+\underline{\exists xp(x,b)}$ \\
+$\downarrow$ \\
+$\underline{\ngg \forall y p(a,y)}\comma \forall y \exists xp(x,y)$ \\
+$\downarrow$ \\
+$\underline{\ngg \exists x \forall y p(x,y)
+\comma \forall y \exists xp(x,y)}$ \\
+$\downarrow$ \\
+$\exists x \forall y p(x,y) \imp \forall y \exists xp(x,y)$ \\
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Hilbert system $\mathcal{H}$}
+\vspace*{-2ex}
+\begin{eqnarray*}
+\textrm{\bf Axiom 1} & \vdash \!\!\!\! & (A\imp(B\imp A)),\\
+\textrm{\bf Axiom 2} & \vdash \!\!\!\! & (A\imp (B \imp C))  \imp ((A\imp B) \imp
+(A\imp C)),\\
+\textrm{\bf Axiom 3} & \vdash \!\!\!\! & (\ngg B \imp \ngg A) \imp (A \imp
+B),\\
+\textrm{\bf Axiom 4} & \vdash \!\!\!\! &\forall xA(x) \imp A(a),\\
+\textrm{\bf Axiom 5} & \vdash \!\!\!\! &\forall x(A \imp B(x)) \imp
+(A \imp \forall xB(x)).\\
+\\
+\textrm{Modus ponens} & &\frac{\vdash A \imp B\hspace{1em}\vdash
+A}{\vdash B}\\
+\\
+\textrm{Generalization} && \frac{\vdash A(a)}{\vdash \forall xA(x)}.
+\end{eqnarray*}
+
+In Axiom 5, $B(x)$  is a formula with a free variable $x$,
+while $x$ is \emph{not} a free variable of the formula $A$.
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Derived rules of inference}
+\vspace*{-5mm}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{l@{\hspace{1cm}}l}
+\textbf{Generalization} & \Large $\frac{U\vdash A(a)}{U\vdash \forall xA(x)}$,
+\normalsize $a$ does not appear in $U$.\\
+\textbf{Deduction} & \Large $\frac{U\cup\{A\} \vdash B}{U \vdash A\imp B}$\\
+\textbf{Axiom 4} & \Large $\frac{U\vdash \forall xA(x)}{U\vdash A(a)}$\\
+\textbf{Generalization}  & \Large $\frac{\vdash A(a) \imp B(a)}
+{\vdash \forall xA(x) \imp \forall xB(x)}$\\
+\textbf{C-rule} & \Large $\frac{U \vdash \exists xA(x)}{U \vdash
+A(a)}$, \normalsize $a$ does not appear in $U$ or $\exists xA(x)$.
+\end{tabular}
+\renewcommand{\arraystretch}{1}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Figure 9.1: Finite sequences of terms (1)}
+\vspace*{-4ex}
+\begin{displaymath}
+\begin{array}{ll}
+n=1 & a \\
+n=2 & b \\
+n=3 & f(a)\comma f(b)\comma f(f(a)) \comma f(f(b))\\
+n=4 & f(f(f(a)))\comma f(f(f(b)\comma \\
+    & g(a,a)\comma g(a,b) \comma g(a,f(a))\comma g(a,f(b))\comma
+      g(a,f(f(a))) \comma g(a,f(f(b))),\\  
+    & \textrm{six similar terms with $b$ as the first argument of $g$},\\
+&\\
+    % & g(b,a)\comma g(b,b)\comma g(b,f(a))\comma g(b,f(b))\comma
+      % g(b,f(f(a))) \comma g(b,f(f(b))),\\  
+    & g(f(a),a)\comma g(f(a),b)\comma g(f(a),f(a)) \comma g(f(a),f(b)),\\
+    & g(f(a), f(f(a))) \comma g(f(a), f(f(b))),\\
+    & \textrm{six similar terms with $f(b)$ as the first argument of $g$},\\
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 9.1: Finite sequences of terms (2)}
+\vspace*{-4ex}
+\begin{displaymath}
+\begin{array}{ll}
+%    & g(f(b),a)\comma g(f(b),b)\comma g(f(b),f(a)) \comma g(f(b),f(b)),\\
+%    & g(f(b), f(f(a))) \comma g(f(b), f(f(b))),\\
+    & g(f(f(a)),a)\comma g(f(f(a)),b)\comma g(f(f(a)),f(a)) \comma g(f(f(a)),f(b)),\\
+    & g(f(f(a)), f(f(a))) \comma g(f(f(a)), f(f(b))),\\
+%    & g(f(f(b)),a)\comma g(f(f(b)),b)\comma g(f(f(b)),f(a)) \comma g(f(f(b)),f(b))\comma\\
+%    & g(f(f(b)), f(f(a))) \comma g(f(f(b)), f(f(b))),\\
+    & \textrm{six similar terms with $f(f(b))$ as the first argument of $g$},\\
+&\\
+    & f(g(a,a))\comma f(g(a,b)) \comma f(g(a,f(a))\comma f(g(a,f(b)), \\
+    & \textrm{twelve similar terms with $b, f(a), f(b)$ as the first
+    argument of $g$},\\
+    % & f(g(b,a))\comma f(g(b,b))  \comma f(g(b,f(a))\comma f(g(b,f(b)), \\
+&\\
+    % & f(g(f(a),a))\comma f(g(f(a),b))\comma f(g(f(a),f(a)))\comma f(g(f(a),f(b))),\\
+    % & f(g(f(b),a))\comma f(g(f(b),b))\comma f(g(f(b),f(a)))\comma f(g(f(b),f(b))),\\
+    & f(f(g(a,a)))\comma f(f(g(a,b))) \comma f(f(g(b,a)))\comma f(f(g(b,b))).\\ 
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 9.20: Hebrand universes}
+\vspace*{-5mm}
+\begin{displaymath}
+\begin{array}{lcl}
+S_{1}&=& \{pa\ngg pbqz\comma \ngg qz\ngg pbqz\}\\ \\
+H_{S_{1}}&=& \{a\comma b\}\\ \\
+S_{2}&=&\{\ngg pxf(y)\comma pwg(w)\}\\ \\
+H_{S_{2}}&=&\{a\comma f(a)\comma  g(a)\comma  \\
+& &\, f(f(a))\comma g(f(a))\comma f(g(a))\comma g(g(a))\comma \ldots\}\\ \\
+S_{3}&=&\{\ngg paf(x,y)\comma pbf(x,y)\}\\ \\
+H_{S_{3}}&=& \{a\comma  b\comma  f(a,a)\comma
+             f(a,b)\comma f(b,a)\comma f(b,b), \\
+  & &\,f(a,f(a,a))\comma f(f(a,a),a)\comma \ldots\}
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 10.2: Ground resolution}
+\begin{center}
+\setlength{\GapWidth}{12mm}
+\setlength{\GapDepth}{12mm}
+\begin{bundle}{$\{p(a),\;\; r(a,f(b)),\;\; r(f(a),b)\}$}
+  \chunk{
+  $\{q(f(b)),\;\; r(a,f(b))\}$
+  }
+  \chunk{
+  $\{p(a),\;\; \ngg q(f(b)),\;\; r(f(a),b)\}$
+  }
+\end{bundle}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 10.7: Unification}
+\begin{displaymath}
+\begin{array}{llllll}
+\langle&g(y)=x,&\multicolumn{2}{l}{f(x,h(x),y)=f(g(z),w,z)}&&\rangle\\
+%\langle&x=g(y),&\multicolumn{2}{l}{f(x,h(x),y)=f(g(z),w,z)}&&\rangle\\
+\langle&\multicolumn{2}{l}{f(g(y),h(g(y)),y)=f(g(z),w,z),}&x=g(y)&&\rangle\\
+\langle&g(y)=g(z),&h(g(y))=w,&y=z,&x=g(y)&\rangle\\
+\langle&y=z,&h(g(y))=w,&y=z,&x=g(y)&\rangle\\
+\langle&h(g(z))=w,&z=z,&x=g(z),&y=z&\rangle\\
+\langle&z=z,&x=g(z),&y=z,&w=h(g(z))&\rangle\\
+\langle&x=g(z),&y=z,&w=h(g(z))&&\rangle
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 10.29: Resolution refutation (1)}
+\begin{displaymath}
+\begin{array}{llrr}
+1.&\ngg p(x)\vee q(x) \vee r(x,f(x))&&\\
+2.&\ngg p(x)\vee q(x) \vee s(f(x))&&\\
+3.&t(a)&&\\
+4.&p(a)&&\\
+5.&\ngg r(a,y)\vee t(y)&&\\
+6.&\ngg t(x)\vee \ngg q(x)&&\\
+7.&\ngg t(x)\vee \ngg s(x)&&
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 10.29: Resolution refutation (2)}
+\begin{displaymath}
+\begin{array}{llrr}
+8.&\ngg q(a)&x\leftarrow a&3,6\\
+9.&q(a)\vee s(f(a))&x\leftarrow a&2,4\\
+10.&s(f(a))&&8,9\\
+11.&q(a)\vee r(a,f(a))&x\leftarrow a&1,4\\
+12.&r(a,f(a))&&8,11\\
+13.&t(f(a))&y\leftarrow f(a)&5,12\\
+14.&\ngg s(f(a))&x\leftarrow f(a)&7,13\\
+15.&\Box&&10,14
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 10.30: Resolution refutation}
+\vspace*{-5mm}
+\begin{displaymath}
+\hspace*{-4mm}
+\begin{array}{llrr}
+1.&\ngg p(x,y) \vee p(y,x)&&\\
+2.&\ngg p(x,y) \vee \ngg p(y,z) \vee p(x,z)&&\\
+3.&p(x,f(x)) &&\\
+4.&\ngg p(x,x)&&\\
+3'.&p(x',f(x')) &&\mathrm{Rename~} 3\\
+5.&p(f(x),x)&\sigma_{1}=\{y\leftarrow f(x), x'\leftarrow x\}&1,3'\\
+3''.&p(x'',f(x'')) &&\mathrm{Rename~} 3\\
+6.&\ngg p(f(x),z)\vee p(x,z)&\sigma_{2}=\{y\leftarrow f(x), x''\leftarrow x\}&2,3''\\
+5'''.&p(f(x'''),x''') &&\mathrm{Rename~} 5\\
+7.&p(x,x)&\sigma_{3}=\{z\leftarrow x, x'''\leftarrow x\}&6,5'''\\
+4''''.&\ngg p(x'''',x'''') &&\mathrm{Rename~} 4\\
+8.&\Box&\sigma_{4}=\{x''''\leftarrow x\}&7,4''''
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Theorem 10.33: Lifting Lemma}
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(200,110)
+\put(20,85){\makebox(30,20){$C_{1},C_{2}$}}
+\put(20,5){\makebox(30,20){$C'_{1},C'_{2}$}}
+\put(55,15){\vector(1,0){100}}
+\put(55,95){\vector(1,0){100}}
+\put(55,100){\makebox(100,10){Resolution}}
+\put(55,0){\makebox(100,10){Ground resolution}}
+\put(155,85){\makebox(20,20){$C$}}
+\put(155,5){\makebox(20,20){$C'$}}
+\put(35,85){\vector(0,-1){60}}
+\put(165,85){\vector(0,-1){60}}
+\put(0,50){\makebox(25,10){Instance}}
+\put(175,50){\makebox(25,10){Instance}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 10.1: Example for the lifting lemma (1)}
+\begin{displaymath}
+\begin{array}{lcl}
+C_{1}&=&\{p(x)\comma p(f(y)) \comma p(f(z)) \comma q(x)\}\\
+C_{2}&=&\{\ngg p(f(u)) \comma \ngg p(w) \comma r(u)\}\\
+\\
+\theta_{1}&=&\{x\leftarrow f(a)\comma y\leftarrow a\comma z\leftarrow a\}\\
+\theta_{2}&=&\{u\leftarrow a\comma w\leftarrow f(a) \}\\
+\\
+C_{1}'&=& C_{1}\theta_{1} = \{p(f(a)) \comma  q(f(a))\}\\
+C_{2}'&=& C_{2}\theta_{2} = \{\ngg p(f(a)) \comma r(a)\}\\
+C'&=& Res(C_{1},C_{2}) = \{q(f(a)) \comma r(a)\}
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 10.1: Example for the lifting lemma (2)}
+\vspace*{-1ex}
+\begin{displaymath}
+\begin{array}{lcl}
+L_{1}&=&\{p(x)\comma p(f(y))\comma p(f(z)) \}\\
+\lambda_{1}&=&\{x\leftarrow f(y)\comma z\leftarrow y\}\\
+L_{1}\lambda_{1}&=&\{p(f(y)) \}\\
+L_{2}&=&\{\ngg p(f(u))\comma \ngg p(w) \}\\
+\lambda_{2}&=&\{w\leftarrow f(u)\}\\
+L_{2}\lambda_{2}&=&\{\ngg p(f(u)) \}\\
+\\
+\lambda&=& \lambda_{1}\cup\lambda_{2} =
+  \{x\leftarrow f(y), z\leftarrow y, w\leftarrow f(u) \}\\
+L_{1}\lambda&=&\{p(f(y)) \}\\
+C_{1}\lambda&=& \{p(f(y)) \comma q(f(y))\} \\
+L_{2}\lambda&=&\{\ngg p(f(u)) \}\\
+C_{2}\lambda&=& \{\ngg p(f(u)) \comma r(u)\}
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 10.1: Example for the lifting lemma (3)}
+\vspace*{-5ex}
+\begin{displaymath}
+\begin{array}{lcl}
+\sigma&=&\{u\leftarrow y \}\\
+C&=& Res(C_{1}\lambda,C_{2}\lambda)  = \{q(f(y)) \comma r(y)\}, \;\mbox{using}\; \sigma\\
+\lambda\sigma&=&\{x\leftarrow f(y)\comma z\leftarrow y\comma
+    w\leftarrow f(y)\comma u\leftarrow y \}\\
+C_{1}\lambda\sigma&=& \{p(f(y)) \comma q(f(y))\} \\
+C_{2}\lambda\sigma&=& \{\ngg p(f(y)) \comma r(y)\} \\
+C&=& Res(C_{1},C_{2})  = \{q(f(y)) \comma r(y)\}, \;\mbox{using}\; \lambda\sigma\\
+\\
+\theta_{1}'&=&\{y\leftarrow a\}\\
+C_{1}'&=& C_{1}\theta_{1} = \{p(f(a)) \comma  q(f(a))\} = C_{1}\lambda\sigma\theta_{1}\\
+\theta_{2}'&=&\{y\leftarrow a\}\\
+C_{2}'&=& C_{2}\theta_{2} = \{\ngg p(f(a)) \comma r(a)\} = C_{2}\lambda\sigma\theta_{2}\\
+\\
+\theta'&=&\{y\leftarrow a \}\\
+%C'&=&q(f(a)) \vee r(a)
+C'&=& Res(C_{1}',C_{2}')  = \{q(f(a)) \comma r(a)\}
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Figure 11.1: SLD-tree for selection of leftmost literal}
+\unitlength=0.9pt
+\begin{center}
+\begin{picture}(360,145)
+\put(-28,-15){
+\put(100,135){\makebox(0,10){$(1)$}}
+\put(210,135){\makebox(0,10){$(2)$}}
+\put( 40,88){\makebox(0,10){$(5)$}}
+\put( 85,88){\makebox(0,10){$(6)$}}
+\put(110,88){\makebox(0,10){$(7)$}}
+\put(190,88){\makebox(0,10){$(3)$}}
+\put(310,88){\makebox(0,10){$(10)$}}
+\put(145,50){\makebox(0,10){$(1)$}}
+\put(215,50){\makebox(0,10){$(2)$}}
+\put(285,50){\makebox(0,10){$(1)$}}
+\put(355,50){\makebox(0,10){$(2)$}}
+ 
+\put(140,150){\makebox(20,10){$\underline{q(y,b)}$}}
+\put(140,147){\line(-2,-1){50}}
+\put(160,147){\line( 3,-1){78}}
+\put(25,-2){
+  \put( 40,110){\makebox(20,10){$\underline{p(y,b)}$}}
+  \put(  0, 68){\makebox(20,10){$\Box$}}
+  \put( 40, 68){\makebox(20,10){$\Box$}}
+  \put( 80, 68){\makebox(20,10){$\Box$}}
+\put( 40,106){\line(-1,-1){26}}
+\put( 50,106){\line( 0,-1){26}}
+\put( 60,106){\line( 1,-1){26}}
+}
+\put(230,108){\makebox(40,10){$\underline{p(y,z)},q(z,b)$}}
+\put(240, 65){\makebox(20,10){$\dots$}}
+\put(170, 65){\makebox(20,10){$\underline{q(a,b)}$}}
+\put(310, 65){\makebox(20,10){$\underline{q(h,b)}$}}
+\put(130, 21){\makebox(20,10){$\underline{p(a,b)}$}}
+\put(200, 21){\makebox(40,10){$\underline{p(a,z')},q(z',b)$}}
+\put(270, 21){\makebox(20,10){$\underline{p(h,j)}$}}
+\put(340, 21){\makebox(40,10){$\underline{p(h,z'')},q(z'',j)$}}
+\put(130, 01){\makebox(20,20){$\times$}}
+\put(200, 01){\makebox(20,20){$\vdots$}}
+\put(270, 01){\makebox(20,20){$\times$}}
+\put(340, 01){\makebox(20,20){$\vdots$}}
+\put(240,105){\line(-2,-1){52}}
+\put(260,105){\line( 2,-1){52}}
+\put(170, 61){\line(-1,-1){26}}
+\put(190, 61){\line( 1,-1){26}}
+\put(310, 61){\line(-1,-1){26}}
+\put(330, 61){\line( 1,-1){26}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Theorem 12.3: Church's Theorem}
+\vspace*{-2ex}
+\begin{displaymath}
+S_{M} = \left(\bigwedge_{i=0}^{n} S_{i} \wedge p_{0}(a,a)\right) \imp
+\exists z_{1}\exists z_{2} p_{n}(z_{1},z_{2}).
+\end{displaymath}
+
+\begin{displaymath}
+\begin{array}{|l|l|}
+\hline
+L_{i}& S_{i} \\ \hline
+\mbox{\p{x = x + 1;}}  & \forall x \forall y(p_{i}(x,y)\imp
+  p_{i+1}(s(x),y))\\\hline
+\mbox{\p{y = y + 1;}} & \forall x \forall y(p_{i}(x,y)\imp
+  p_{i+1}(x,s(y)))\\\hline
+\mbox{\p{if (x == 0) goto Lj;}}&
+\forall x (p_{i}(a,x)\imp p_{j}(a,x)) \;\wedge\\
+\mbox{\p{\ \ \ else x = x - 1;}} &
+\forall x \forall y(p_{i}(s(x),y)\imp
+  p_{i+1}(x,y))\\\hline
+\mbox{\p{if (y == 0) then goto Lj;}}&
+\forall x (p_{i}(x,a)\imp p_{j}(x,a)) \;\wedge\\
+\mbox{\p{\ \ \ else y = y - 1;}} &
+\forall x \forall y(p_{i}(x,s(y))\imp
+  p_{i+1}(x,y))\\\hline
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Figure 13.1: State transition diagram}
+\unitlength=1.3pt
+\begin{center}
+\begin{picture}(140,105)
+\put(0,60){
+  \put(10,10){\state{\shortstack{$p$\\$\ngg q$}}{$s_{0}$}}
+  \put(30,20){\vector(1,0){39}}
+  \put(70,10){\state{\shortstack{$p$\\$q$}}{$s_{1}$}}
+  \put(77, 9){\line(0,-1){4}}
+  \put(65, 7){\oval(24,12)[b]}
+  \put(65, 7){\oval(24,12)[tl]}
+  \put(64,13){\vector(1,0){8}}
+  \put(89,25){\vector(1,0){41}}
+  \put(131,15){\vector(-1,0){41}}
+  \put(130,10){\state{\shortstack{$\ngg p$\\$q$}}{$s_{2}$}}
+  \put(127,35){\oval(26,20)[tr]}
+  \put(127,45){\line(-1,0){94}}
+  \put(33, 35){\oval(27,20)[tl]}
+  \put(140,33){\vector(0,-1){0}}
+}
+\put(70,0){
+\put(0,10){\state{\shortstack{$\ngg p$\\$\ngg q$}}{$s_{3}$}}
+\put(10, 9){\line(0,-1){3}}
+\put(22, 7){\oval(24,12)[b]}
+\put(22, 7){\oval(24,12)[tr]}
+\put(24,13){\vector(-1,0){6}}
+\put(10,69){\vector(0,-1){38}}
+\put(18,28){\vector(1,1){44}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 13.2: Alternate representation}
+\unitlength=1.3pt
+\begin{center}
+\begin{picture}(140,105)
+\put(0,60){
+  \put(10,10){\state{$p$}{$s_{0}$}}
+  \put(30,20){\vector(1,0){39}}
+  \put(70,10){\state{\shortstack{$p$\\$q$}}{$s_{1}$}}
+  \put(77, 9){\line(0,-1){4}}
+  \put(65, 7){\oval(24,12)[b]}
+  \put(65, 7){\oval(24,12)[tl]}
+  \put(64,13){\vector(1,0){8}}
+  \put(89,25){\vector(1,0){41}}
+  \put(131,15){\vector(-1,0){41}}
+  \put(130,10){\state{$q$}{$s_{2}$}}
+  \put(127,35){\oval(26,20)[tr]}
+  \put(127,45){\line(-1,0){94}}
+  \put(33, 35){\oval(27,20)[tl]}
+  \put(140,33){\vector(0,-1){0}}
+}
+\put(70,0){
+\put(0,10){\state{}{$s_{3}$}}
+\put(10, 9){\line(0,-1){3}}
+\put(22, 7){\oval(24,12)[b]}
+\put(22, 7){\oval(24,12)[tr]}
+\put(24,13){\vector(-1,0){6}}
+\put(10,69){\vector(0,-1){38}}
+\put(18,28){\vector(1,1){44}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Definition 13.27: Linear temporal logic}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(200,30)
+\put(  0, 0){\state{$\ngg p$}{$s_{0}$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{$\ngg p$}{$s_{1}$}}
+\put( 80,10){\vector(1,0){40}}
+\put(120, 0){\state{$p$}{$s_{2}$}}
+\put(140,10){\vector(1,0){40}}
+\put(180, 5){\makebox(20,10){\ldots}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 13.33}
+\unitlength=.9pt
+\begin{center}
+\begin{picture}(340,30)
+\put(  0, 0){\state{$p$}{$s_{0}$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{$q$}{$s_{1}$}}
+\put( 80,10){\vector(1,0){40}}
+\put(120, 0){\state{$p$}{$s_{2}$}}
+\put(140,10){\vector(1,0){40}}
+\put(180, 0){\state{$q$}{$s_{3}$}}
+\put(200,10){\vector(1,0){40}}
+\put(240, 0){\state{$p$}{$s_{4}$}}
+\put(260,10){\vector(1,0){40}}
+\put(300, 5){\makebox(20,10){\ldots}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Commutativity}
+\unitlength=.9pt
+\begin{center}
+\begin{picture}(380,30)
+\put(  0, 0){\state{$\ngg\!p$}{$s_{0}$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{$\ngg\!p$}{$s_{1}$}}
+\put( 80,10){\vector(1,0){40}}
+\put(120, 0){\state{$p$}{$s_{2}$}}
+\put(140,10){\vector(1,0){40}}
+\put(180, 0){\state{$\ngg\!p$}{$s_{3}$}}
+\put(200,10){\vector(1,0){40}}
+\put(240, 0){\state{$\ngg\!p$}{$s_{4}$}}
+\put(260,10){\vector(1,0){40}}
+\put(300, 0){\state{$p$}{$s_{5}$}}
+\put(320,10){\vector(1,0){40}}
+\put(360, 5){\makebox(20,10){\ldots}}
+\end{picture}
+\end{center}
+
+\begin{center}
+\begin{picture}(380,30)
+\put(  0, 0){\state{$\ngg\!p$}{$s_{0}$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{$\ngg\!p$}{$s_{1}$}}
+\put( 80,10){\vector(1,0){40}}
+\put(120, 0){\state{$\ngg\!p$}{$s_{2}$}}
+\put(140,10){\vector(1,0){40}}
+\put(180, 0){\state{$\ngg\!p$}{$s_{3}$}}
+\put(200,10){\vector(1,0){40}}
+\put(240, 0){\state{$p$}{$s_{4}$}}
+\put(260,10){\vector(1,0){40}}
+\put(300, 0){\state{$p$}{$s_{5}$}}
+\put(320,10){\vector(1,0){40}}
+\put(360, 5){\makebox(20,10){\ldots}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 13.51: Tableaux rules for LTL}
+\hspace*{-5mm}
+\begin{displaymath}
+\begin{array}{|c|c|c|}
+\hline
+\alpha & \alpha_{1} & \alpha_{2} \\ \hline \hline
+\Box A & A & \nxt \Box A \\ \hline
+\ngg \Diamond A & \ngg A & \ngg \nxt \Diamond A \\ \hline
+\end{array}
+\hspace{5mm}
+\begin{array}{|c|c|c|}
+\hline
+\beta & \beta_{1} & \beta_{2} \\ \hline \hline
+\Diamond A & A & \nxt \Diamond A \\ \hline
+\ngg \Box A & \ngg A & \ngg \nxt \Box A \\ \hline
+\end{array}
+\hspace{5mm}
+\begin{array}{|c|c|c|}
+\hline
+X& X_{1} \\ \hline \hline
+\nxt A & A \\ \hline
+\ngg \nxt A &\ngg  A \\ \hline
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{The rule for next formulas (1)}
+\begin{center}
+$(p\vee q) \wedge \nxt (\ngg p \wedge \ngg q)$\\
+$\downarrow$ \\
+$p\vee q\comma \nxt (\ngg p \wedge \ngg q)$\\
+$\swarrow$ \hspace{4em} $\searrow$ \\
+\smallskip
+\fbox{$p\comma \nxt (\ngg p \wedge \ngg q)$} \hspace{3em}
+\fbox{$q\comma \nxt (\ngg p \wedge \ngg q)$} \\
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{The rule for next formulas (2)}
+\begin{center}
+$(p\vee q) \wedge \nxt (\ngg p \wedge \ngg q)$\\
+$\downarrow$ \\
+$p\vee q\comma \nxt (\ngg p \wedge \ngg q)$\\
+$\swarrow$ \hspace{4em} $\searrow$ \\
+\smallskip
+\fbox{$p\comma \nxt (\ngg p \wedge \ngg q)$} \hspace{3em}
+\fbox{$q\comma \nxt (\ngg p \wedge \ngg q)$} \\
+\smallskip
+$\downarrow$ \hspace{9em} $\downarrow$\\
+\smallskip
+$\ngg p \wedge \ngg q$ \hspace{6em} $\ngg p \wedge \ngg q$ \\ 
+$\downarrow$ \hspace{9em} $\downarrow$\\
+\smallskip
+\fbox{$\ngg p\comma \ngg q$} \hspace{6em} \fbox{$\ngg p\comma \ngg q$}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{The rule for next formulas (3)}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(220,30)
+\put(  0, 0){\state{$p$}{$s_{0}$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{\shortstack{$\ngg p$\\$\ngg q$}}{$s_{1}$}}
+\put(140, 0){
+  \put(  0, 0){\state{$q$}{$s_{0}$}}
+  \put( 20,10){\vector(1,0){40}}
+  \put( 60, 0){\state{\shortstack{$\ngg p$\\$\ngg q$}}{$s_{1}$}}
+}
+\end{picture}
+\end{center}
+
+\begin{center}
+\begin{picture}(220,40)
+\put(0,10){
+\put(  0, 0){\state{$p$}{$s_{0}$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{\shortstack{$\ngg p$\\$\ngg q$}}{$s_{1}$}}
+\put(70,0){\line(0,-1){3}}
+\put(82,-2){\oval(24,12)[b]}
+\put(82,-2){\oval(24,12)[tr]}
+\put(83,4){\vector(-1,0){5}}
+}
+\put(140, 10){
+  \put(  0, 0){\state{$q$}{$s_{0}$}}
+  \put( 20,10){\vector(1,0){40}}
+  \put( 60, 0){\state{\shortstack{$\ngg p$\\$\ngg q$}}{$s_{1}$}}
+  \put(70,0){\line(0,-1){3}}
+  \put(82,-2){\oval(24,12)[b]}
+  \put(82,-2){\oval(24,12)[tr]}
+  \put(83,4){\vector(-1,0){5}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Semantic tableau for $\ngg\,(\Box (p\wedge q)\imp \Box p)$}
+\begin{center}
+$\ngg\,(\Box (p\wedge q)\imp \Box p)$ \\
+$\downarrow$ \\
+$\Box (p\wedge q)\comma \Diamond \ngg p$ \\
+$\downarrow$ \\
+$p\wedge q\comma \nxt \Box (p\wedge q)\comma \Diamond \ngg p$\\
+$\downarrow$ \\
+$p\comma q\comma \nxt \Box (p\wedge q)\comma \Diamond \ngg p$\\
+$\swarrow$ \hspace{2em} $\searrow$ \\
+\smallskip
+$p\comma  q\comma  \nxt \Box (p\wedge q)\comma \ngg p$ \hspace{3em}
+\fbox{$p\comma  q\comma  \nxt \Box (p\wedge q)
+  \comma \nxt \Diamond \ngg p$}\\
+$\times$ \hspace*{10em} \mbox{}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Interpretations for $\ngg\,(\Box (p\wedge q)\imp \Box p)$}
+
+\bigskip
+
+\unitlength=1.3pt
+\begin{center}
+\begin{picture}(180,30)
+\put(  0, 0){\state{\shortstack{$p$\\$q$}}{$s_{0}$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{\shortstack{$p$\\$q$}}{$s_{1}$}}
+\put( 80,10){\vector(1,0){40}}
+\put(120, 0){\state{\shortstack{$p$\\$q$}}{$s_{2}$}}
+\put(140,10){\vector(1,0){40}}
+\end{picture}
+\end{center}
+
+\bigskip
+
+\unitlength=1.3pt
+\begin{center}
+\begin{picture}(40,40)
+\put(0,10){\state{\shortstack{$p$\\$q$}}{$s_{0}$}}
+\put(10,10){\line(0,-1){3}}
+\put(22, 8){\oval(24,12)[b]}
+\put(22, 8){\oval(24,12)[tr]}
+\put(23,14){\vector(-1,0){5}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 13.38}
+\begin{center}
+$l_{0}:\Box \Diamond p$ \\
+$\downarrow$ \\
+$l_{1}:\Diamond p\comma \nxt \Box \Diamond p$ \\
+$\swarrow$ \hspace{2em} $\searrow$ \\
+\smallskip
+\hspace*{1em}$l_{2}:\,$\fbox{$p\comma \nxt \Box \Diamond p$} \hspace{3em}
+$l_{3}:\,$\fbox{$\nxt \Diamond p\comma \nxt \Box \Diamond p$} \\
+\smallskip
+\hspace*{1em}$\downarrow$\hspace*{10em}$\downarrow$ \\
+\hspace*{2.5em}$l_{4}:\Box \Diamond p$\hspace*{7em}$l_{5}:\Diamond p\comma \Box \Diamond p$ \\
+\smallskip
+\hspace*{1em}$\downarrow$\hspace*{10em}$\downarrow$ \\
+\hspace*{2em}$l_{6}:\Diamond p\comma \nxt \Box \Diamond p$\hspace*{5em}$l_{7}:\Diamond p\comma \nxt\Box \Diamond p$ \\
+\hspace*{2em}$\swarrow$ \hspace{2em} $\searrow$ \hspace*{6em}$\swarrow$ \hspace{2em} $\searrow$ \\
+\hspace*{2.5em}To $l_{2}$\hspace*{3.5em}To $l_{3}$\hspace*{4em}To $l_{2}$\hspace*{2.5em}To $l_{3}$\\
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 13.43}
+\begin{center}
+$l_{0}:\Box \Diamond p$ \\
+$\downarrow$ \\
+$l_{1}:\Diamond p\comma \nxt \Box \Diamond p$ \\
+$\swarrow$ \hspace{2em} $\searrow$ \\
+\smallskip
+$\hspace*{1em}l_{2}:\,$\fbox{$p\comma \nxt \Box \Diamond p$} \hspace{3em}
+$l_{3}:\,$\fbox{$\nxt \Diamond p\comma \nxt \Box \Diamond p$} \\
+\smallskip
+$\downarrow\hspace*{9em}\downarrow$ \\
+\smallskip
+To $l_{0}$\hspace*{7.5em}To $l_{1}$\\
+\end{center}
+
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(140,50)
+\put(10,10){\state{$p$}{$s_{0}$}}
+\put(17,11){\line(0,-1){4}}
+\put( 5, 8){\oval(24,12)[b]}
+\put( 5, 8){\oval(24,12)[tl]}
+\put( 4,14){\vector(1,0){8}}
+\put( 30,20){\vector(1,0){40}}
+\put( 70,10){\state{\ }{$s_{1}$}}
+\put(82,10){\line(0,-1){3}}
+\put(94, 8){\oval(24,12)[b]}
+\put(94, 8){\oval(24,12)[tr]}
+\put(95,14){\vector(-1,0){6}}
+\put(0,-4){
+\put(67,37){\oval(26,20)[tr]}
+\put(67,47){\line(-1,0){34}}
+\put(33,37){\oval(27,20)[tl]}
+\put(20,35){\vector(0,-1){0}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 13.3: \(\Box (\Diamond (p\wedge q)\wedge \Diamond (\ngg p\wedge q)
+\wedge \Diamond (p\wedge \ngg q))\)}
+\bigskip
+
+\unitlength=1.3pt
+\begin{center}
+\begin{picture}(140,95)
+  \put(10,10){\state{\shortstack{$p$\\$\ngg q$}}{$s_{2}$}}
+  \put(16,10){\line(0,-1){4}}
+  \put( 4, 7){\oval(24,12)[b]}
+  \put( 4, 7){\oval(24,12)[tl]}
+  \put( 3,13){\vector(1,0){8}}
+
+  \put(10,70){\state{\shortstack{$p$\\$q$}}{$s_{0}$}}
+  \put(16,70){\line(0,-1){4}}
+  \put( 4,67){\oval(24,12)[b]}
+  \put( 4,67){\oval(24,12)[tl]}
+  \put( 3,73){\vector(1,0){8}}
+
+  \put(130,70){\state{\shortstack{$\ngg p$\\$q$}}{$s_{1}$}}
+  \put(142,70){\line(0,-1){3}}
+  \put(154,68){\oval(24,12)[b]}
+  \put(154,68){\oval(24,12)[tr]}
+  \put(155,74){\vector(-1,0){6}}
+
+  \put(130,10){\state{\shortstack{$$\\$$}}{$s_{3}$}}
+  \put(142,10){\line(0,-1){3}}
+  \put(154, 8){\oval(24,12)[b]}
+  \put(154, 8){\oval(24,12)[tr]}
+  \put(155,14){\vector(-1,0){6}}
+
+  \put(31, 22){\vector(1,0){98}}
+  \put(129,17){\vector(-1,0){99}}
+  \put(31, 83){\vector(1,0){99}}
+  \put(129,78){\vector(-1,0){98}}
+  \put(20, 31){\vector(0,1){38}}
+  \put(24, 70){\vector(0,-1){39}}
+  \put(139, 31){\vector(0,1){38}}
+  \put(135, 70){\vector(0,-1){39}}
+  \put(29,27){\vector(2,1){98}}
+  \put(130,73){\vector(-2,-1){98}}
+  \put(29,73){\vector(2,-1){97}}
+  \put(130,27){\vector(-2,1){97}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 13.5.4: A linear, fulfilling Hintikka structure}
+\bigskip
+
+\unitlength=1.3pt
+\begin{center}
+\begin{picture}(140,50)
+\put(10,10){\state{\shortstack{$p$\\$q$}}{$s_{0}$}}
+\put(30,20){\vector(1,0){40}}
+\put(70,10){\state{\shortstack{$\ngg p$\\$q$}}{$s_{1}$}}
+\put(90,20){\vector(1,0){40}}
+\put(130,10){\state{\shortstack{$p$\\$\ngg q$}}{$s_{2}$}}
+
+\put(127,38){\oval(26,20)[tr]}
+\put(127,48){\line(-1,0){94}}
+\put(33,38){\oval(27,20)[tl]}
+\put(20,35){\vector(0,-1){0}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 13.4: Strongly connected components}
+\unitlength=1.4pt
+\begin{center}
+\begin{picture}(160,75)
+\put(60,55){
+%  \put(-20,5){\makebox(20,20){$G_{0}$}}
+%  \put(20,15){\oval(40,30)}
+  \put(20,15){\circle{15}}
+  \put(13, 8){\makebox(15,15){$s_{0}$}}
+  \put(25,10){\vector(1,-1){24}}
+  \put(15,10){\vector(-1,-2){23}}
+}
+\put(10,15){
+%  \put(-30,0){\makebox(20,20){$G_{1}$}}
+%  \put(20,10){\oval(60,50)}
+  \put(  5, 0){\circle{15}}
+  \put( 35, 0){\circle{15}}
+  \put( 20,22){\circle{15}}
+  \put( -2,-7){\makebox(15,15){$s_{2}$}}
+  \put( 28,-7){\makebox(15,15){$s_{3}$}}
+  \put( 13,15){\makebox(15,15){$s_{1}$}}
+  \put( 28, 0){\vector(-1,0){16}}
+  \put(  9, 6){\vector(1,1){ 9}}
+  \put( 23,15){\vector(1,-1){9}}
+}
+\put(110,15){
+%  \put(50,0){\makebox(20,20){$G_{2}$}}
+%  \put(20,10){\oval(60,50)}
+  \put( 5,-1){\circle{15}}
+  \put(35,-1){\circle{15}}
+  \put( 5,21){\circle{15}}
+  \put(35,21){\circle{15}}
+  \put( -2,-8){\makebox(15,15){$s_{6}$}}
+  \put( 28,-8){\makebox(15,15){$s_{7}$}}
+  \put( -2,14){\makebox(15,15){$s_{4}$}}
+  \put( 28,14){\makebox(15,15){$s_{5}$}}
+  \put(28, 0){\vector(-1,0){16}}
+  \put(12,20){\vector(1,0){16}}
+  \put( 5, 6){\vector( 0,1){8}}
+  \put(35,14){\vector( 0,-1){8}}
+  \put(-2,21){\vector(-1,0){71}}
+%  \put(-2,-1){\vector(-3,1){70}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 13.5: Component graph}
+\bigskip
+
+\unitlength=1.4pt
+\begin{center}
+\begin{picture}(160,85)
+\thicklines
+  \put( 61,61){\vector(-1,-1){12}}
+  \put( 98,61){\vector( 1,-1){11}}
+  \put(100,25){\vector(-1, 0){40}}
+\thinlines
+\put(60,55){
+  \put(-20,5){\makebox(20,20){$G_{0}$}}
+  \put(20,15){\oval(40,30)}
+  \put(20,15){\circle{15}}
+  \put(13, 8){\makebox(15,15){$s_{0}$}}
+  \put(25,10){\vector(1,-1){24}}
+  \put(15,10){\vector(-1,-2){23}}
+}
+\put(10,15){
+  \put(-30,0){\makebox(20,20){$G_{1}$}}
+  \put(20,10){\oval(60,50)}
+  \put(  5, 0){\circle{15}}
+  \put( 35, 0){\circle{15}}
+  \put( 20,22){\circle{15}}
+  \put( -2,-7){\makebox(15,15){$s_{2}$}}
+  \put( 28,-7){\makebox(15,15){$s_{3}$}}
+  \put( 13,15){\makebox(15,15){$s_{1}$}}
+  \put( 28, 0){\vector(-1,0){16}}
+  \put(  9, 6){\vector(1,1){ 9}}
+  \put( 23,15){\vector(1,-1){9}}
+}
+\put(110,15){
+  \put(50,0){\makebox(20,20){$G_{2}$}}
+  \put(20,10){\oval(60,50)}
+  \put( 5,-1){\circle{15}}
+  \put(35,-1){\circle{15}}
+  \put( 5,21){\circle{15}}
+  \put(35,21){\circle{15}}
+  \put( -2,-8){\makebox(15,15){$s_{6}$}}
+  \put( 28,-8){\makebox(15,15){$s_{7}$}}
+  \put( -2,14){\makebox(15,15){$s_{4}$}}
+  \put( 28,14){\makebox(15,15){$s_{5}$}}
+  \put(28, 0){\vector(-1,0){16}}
+  \put(12,20){\vector(1,0){16}}
+  \put( 5, 6){\vector( 0,1){8}}
+  \put(35,14){\vector( 0,-1){8}}
+  \put(-2,21){\vector(-1,0){71}}
+%  \put(-2,-1){\vector(-3,1){70}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 13.6: An SCC is contained in an MSCC}
+\unitlength=1.4pt
+\begin{center}
+\begin{picture}(180,70)
+\put(90,35){\oval(180,70)}
+\put(0,50){\makebox(20,20){$G'$}}
+\put(25,25){
+  \put(-10,15){\makebox(15,15){$G$}}
+  \put(20,10){\oval(60,50)}
+  \put(  5, 0){\circle{15}}
+  \put( 35, 0){\circle{15}}
+  \put( 20,22){\circle{15}}
+  \put( -2,-7){\makebox(15,15){$s_{2}$}}
+  \put( 28,-7){\makebox(15,15){$s_{3}$}}
+  \put( 13,15){\makebox(15,15){$s_{1}$}}
+  \put( 28, 0){\vector(-1,0){16}}
+  \put(  9, 6){\vector(1,1){ 9}}
+  \put( 23,15){\vector(1,-1){9}}
+  \put(42,0){\vector(1,0){55}}
+}
+\put(125,25){
+  \put( 5,-1){\circle{15}}
+  \put(35,-1){\circle{15}}
+  \put( 5,21){\circle{15}}
+  \put(35,21){\circle{15}}
+  \put( -2,-8){\makebox(15,15){$s_{6}$}}
+  \put( 28,-8){\makebox(15,15){$s_{7}$}}
+  \put( -2,14){\makebox(15,15){$s_{4}$}}
+  \put( 28,14){\makebox(15,15){$s_{5}$}}
+  \put(28, 0){\vector(-1,0){16}}
+  \put(12,20){\vector(1,0){16}}
+  \put( 5, 6){\vector( 0,1){8}}
+  \put(35,14){\vector( 0,-1){8}}
+  \put(-2,21){\vector(-1,0){70}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 13.68}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(180,30)
+\put(  0, 0){\state{\shortstack{$p$}}{$s_{0}$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{\shortstack{$p$}}{$s_{1}$}}
+\put( 80,10){\vector(1,0){40}}
+\put(120, 0){\state{\shortstack{$q$}}{$s_{2}$}}
+\put(140,10){\vector(1,0){40}}
+\put(190,10){$\cdots$}
+\end{picture}
+\end{center}
+
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(180,30)
+\put(  0, 0){\state{\shortstack{$p$}}{$s_{0}$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{\shortstack{$p$}}{$s_{1}$}}
+\put( 80,10){\vector(1,0){40}}
+\put(120, 0){\state{\shortstack{$p$}}{$s_{2}$}}
+\put(140,10){\vector(1,0){40}}
+\put(190,10){$\cdots$}
+\end{picture}
+\end{center}
+
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(180,30)
+\put(  0, 0){\state{\shortstack{$p$}}{$s_{0}$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{\shortstack{$\ngg p$}}{$s_{1}$}}
+\put( 80,10){\vector(1,0){40}}
+\put(120, 0){\state{\shortstack{$q$}}{$s_{2}$}}
+\put(140,10){\vector(1,0){40}}
+\put(190,10){$\cdots$}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Deductive system $\mathcal{L}$}
+\begin{tabular}{ll@{\hspace{1em}}l}
+\textbf{Axiom 0} & \textbf{Prop} &  Any substitution instance\index{Substitution!instance} of\\
+                 &             &  a valid propositional formula.\\
+\textbf{Axiom 1} & \textbf{Distribution of $\Box$} &
+  $\vdash \Box (A\imp B)\imp   (\Box A\imp \Box B)$.\\
+\textbf{Axiom 2} & \textbf{Distribution of $\nxt$} &
+  $\vdash \nxt (A\imp B)\imp (\nxt A\imp \nxt B)$.\\
+\textbf{Axiom 3} & \textbf{Expansion of $\Box$} &
+  $\vdash \Box A\imp (A\,\wedge\, \nxt A\,\wedge\, \nxt \Box A)$.\\
+\textbf{Axiom 4} & \textbf{Induction} &
+  $\vdash \Box (A\imp \nxt A)\imp (A\imp \Box A)$.\\
+\textbf{Axiom 5} & \textbf{Linearity} &
+  $\vdash \nxt A\eqv \ngg \nxt \ngg A$.
+\\
+\\
+\textbf{Modus ponens} &&$\displaystyle \frac{\vdash A\hspace{5em}\vdash
+A\imp B}{\vdash B}$.\\
+\\
+\textbf{Generalization} & &
+\(\displaystyle \frac{\vdash A}{\vdash  \Box A}.\)
+\end{tabular}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 14.9}
+\unitlength=1.1pt
+\begin{center}
+\begin{picture}(255,25)
+\put(  0, 0){\state{$p$}{$s_{0}$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{$\ngg p$}{$s_{1}$}}
+\put( 80,10){\vector(1,0){40}}
+\put(120, 0){\state{$p$}{$s_{2}$}}
+\put(140,10){\vector(1,0){40}}
+\put(180, 0){\state{$\ngg p$}{$s_{3}$}}
+\put(200,10){\vector(1,0){40}}
+\put(245,5){\makebox(10,10){$\cdots$}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Semantic tableau for the negation of $\Box p\imp \nxt \Box p$}
+\begin{center}
+$\ngg\,(\Box p\imp \nxt \Box p)$ \\
+$\downarrow$ \\
+$\Box p\comma \nxt \Diamond \ngg p$ \\
+$\downarrow$ \\
+\smallskip
+$l_{s}\;$ \fbox{$p\comma  \nxt \Box p\comma \nxt \Diamond \ngg p$} \\
+\smallskip
+$\downarrow$ \\
+$\Box p\comma \Diamond \ngg p$ \\
+$\downarrow$ \\
+$p\comma \nxt \Box p\comma \Diamond \ngg p$ \\
+$\swarrow$ \hspace{4em} $\searrow$ \\
+$p\comma   \nxt \Box p\comma \ngg p$ \hspace{2.5em}
+(To node $l_{s}$)\\
+%$p\comma  \nxt \Box p\comma \nxt \Diamond \ngg p$ \\
+$\times$ \hspace*{7em} %$\ast$
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 14.4: Axioms for binary temporal
+operators}
+\vspace*{2ex}
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Axiom 6} & \textbf{Expansion of $\mathcal{U}$} &  $\vdash A \mathcal{U} B \eqv (B \vee (A \wedge  \nxt (A \mathcal{U} B)))$.\\
+\textbf{Axiom 7} & \textbf{Eventuality} & $\vdash A \mathcal{U} B \imp \Diamond B$.
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Definition 15.8: $\mathcal{HL}$ (1)}
+\noindent\textbf{Domain axioms}\\
+\hspace*{1cm}Every true formula over the domain(s)
+of the program variables.
+
+\bigskip
+
+\noindent\textbf{Assignment axiom}
+\[\vdash\induct{p(x)\{x\leftarrow t\}}{x\ :=\ t}{p(x)}.\]
+
+\noindent\textbf{Composition rule}
+\[\frac{\vdash\induct{p}{S1}{q}\hspace{4em}\vdash\induct{q}{S2}{r}}
+{\vdash\induct{p}{S1;S2}{r}}.\]
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Definition 15.8: $\mathcal{HL}$ (2)}
+\noindent\textbf{Alternative rule}
+\[\frac{\vdash\induct{p\wedge B}{S1}{q}\hspace{4em}
+\vdash\induct{p\wedge\ngg B}{S2}{q}}
+{\vdash\induct{p}{if\ B\ then\ S1\ else\ S2}{q}}.\]
+
+\noindent\textbf{Loop rule}
+\[\frac{\vdash\induct{p\wedge B}{S}{p}}
+{\vdash\induct{p}{while\ B\ do\ S}{p\wedge \ngg B}}.\]
+
+\noindent\textbf{Consequence rule}
+\[\frac{\vdash p_{1}\imp p\hspace{3em}\vdash\induct{p}{S}{q}%
+\hspace{3em}\vdash q\imp q_{1}}%
+{\vdash\induct{p_{1}}{S}{q_{1}}}.\]
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 15.3: Program to be verified}
+\begin{program}
+$\{\mathit{true}\}$\\
+x := 0;\\
+$\{x = 0\}$\\
+y := b;\\
+$\{x = 0 \wedge y = b\}$\\
+while y <> 0 do\\
+\>\>$\{x = (b-y)\cdot a\}$\\
+\>\>begin x := x + a; y := y - 1 end;\\
+$\{x = a\cdot b\}$
+\end{program}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 15.4.1: Solution 1 (outline)}
+\begin{program}
+$\{0 \leq a\}$\\
+x = E1(x,a);\\
+while (B(x,a))\\
+\>\>$\{0\leq x^{2}\leq a\}$\\
+\>\>x = E2(x,a);\\
+$\{0\leq x^{2}\leq a < (x+1)^{2}\}$.
+\end{program}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 15.4.1: Solution 1 (final)}
+\begin{program}
+$\{0 \leq a\}$\\
+x = 0;\\
+while ((x+1)*(x+1) <= a)\\
+\>\>$\{0\leq x^{2}\leq a\}$\\
+\>\>x = x + 1;\\
+$\{0\leq x^{2}\leq a < (x+1)^{2}\}.$
+\end{program}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 15.4.1: Solution 2 (outline)}
+\begin{program}
+$\{0 \leq a\}$\\
+x = 0;\\
+y = a+1;\\
+while (y != x+1) \\
+\>\>$\{(0\leq x^{2}\leq a < y^{2})\:\wedge \:(x < y\leq a+1)\}$\\
+\>\>E(x,y,a);\\
+$\{0\leq x^{2}\leq a < (x+1)^{2}\}.$
+\end{program}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 15.4.1: Solution 2 (final)}
+\begin{program}
+$\{0 \leq a\}$\\
+x = 0;\\
+y = a+1;\\
+while (y != x+1) \\
+\>\>$\{0\leq x^{2}\leq a < y^{2}\: \: \wedge \:x < y\leq a+1\}$\\
+\>\>\{\\
+\>\>z = (x+y) / 2;\\
+\>\>if (z*z <= a)\\
+\>\>\>x = z;\\
+\>\>else\\
+\>\>\>y = z;\\
+\>\>\}\\
+$\{0\leq x^{2}\leq a < (x+1)^{2}\}$.
+\end{program}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 15.15: Weaker conditions}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(260,80)
+\put(130,40){\oval(260,80)}
+\multiput(40,30)(60,0){4}{\oval(40,20)}
+\put(160,30){\oval(180,70)[t]}
+\put(100,30){\oval(60,40)[b]}
+\put(160,30){\oval(60,40)[t]}
+\put(220,30){\oval(60,40)[b]}
+\put( 20,20){\makebox(40,20){$y=0$}}
+\put( 80,20){\makebox(40,20){$y=1$}}
+\put(140,20){\makebox(40,20){$y=2$}}
+\put(200,20){\makebox(40,20){$y=3$}}
+\put(140,47){\makebox(40,20){$y=1 \vee y=3$}}
+\put(110,63){\makebox(40,20){$y\le 3$}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Definition 15.21: Sequential composition}
+\unitlength=1.1pt
+\begin{picture}(340,60)
+\put(0,0){
+  \put(50,30){\oval(100,60)}
+  \put(50,30){\oval(80,40)}
+  \put(10,10){\makebox(80,40){$\wpp{S1}{\wpp{S2}{q}}$}}
+  \put(90,30){\vector(1,0){39}}
+}
+\put(120,0){
+  \put(50,30){\oval(100,60)}
+  \put(40,25){\oval(60,40)}
+  \put(10, 5){\makebox(60,40){$\wpp{S2}{q}$}}
+  \put(70,20){\vector(4,1){92}}
+}
+\put(240,0){
+  \put(50,30){\oval(100,60)}
+  \put(60,35){\oval(40,40)}
+  \put(40,15){\makebox(40,40){q}}
+}
+\end{picture}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Corollary 9.26: Excluded miracle}
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(210,110)
+\put(0, 0){
+  \put(0,15){\makebox(140,10){$\underbrace{\hspace{140pt}}$}}
+  \put(0, 0){\makebox(140,15){$\wpp{S}{p}$}}
+}
+\put(70, 85){
+  \put(0, 0){\makebox(140,10){$\overbrace{\hspace{140pt}}$}}
+  \put(0,10){\makebox(140,15){$\wpp{S}{\ngg p}$}}
+}
+\put(0,30){
+  \put(105,25){\oval(210,50)}
+  \put( 70, 0){\line(0,1){50}}
+  \put(140, 0){\line(0,1){50}}
+  \put(  0, 0){\makebox(70,50){$p$}}
+  \put( 70, 0){\makebox(70,50){$\infty$}}
+  \put(140, 0){\makebox(70,50){$\ngg p$}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Theorem 9.28: Monotonicity}
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(220,100)
+\put(0,0){
+  \put(50,40){\oval(100,80)}
+  \put(50,40){\oval(80,60)}
+  \put(10,55){\makebox(60,10){$\wpp{S}{q}$}}
+  \put(45,35){\oval(50,30)}
+  \put(20,30){\makebox(50,10){$\wpp{S}{p}$}}
+  \put(70,35){\vector(1,0){75}}
+  \put(90,45){\vector(1,0){45}}
+}
+\put(120,0){
+  \put(50,40){\oval(100,80)}
+  \put(45,40){\oval(60,50)}
+  \put(14,50){\makebox(60,10){$q$}}
+  \put(45,35){\oval(40,20)}
+  \put(20,30){\makebox(50,10){$p$}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Lemma 15.37}
+\unitlength=1.15pt
+\begin{center}
+\begin{picture}(320,110)
+\put(160,50){\oval(320,110)}
+\put(160,50){\oval(300,100)}
+\put(130,50){\oval(230, 80)}
+\put(120,50){\oval(200, 60)}
+\put( 95,50){\oval(130, 40)}
+\put( 70,50){\oval(65,  30)}
+\put( 40,40){\makebox(60,20){$\bigvee\limits_{k=0}^{0}\wpp{\W{k}}{p}$}}
+\put(105,40){\makebox(50,20){$\bigvee\limits^{1}_{k=0}\wpp{\W{k}}{p}$}}
+\put(165,40){\makebox(50,20){$\bigvee\limits^{2}_{k=0}\wpp{\W{k}}{p}$}}
+\put(208,40){\makebox(50,20){$\cdots$}}
+\put(255,40){\makebox(50,20){$\bigvee\limits^{\infty}_{k=0}\wpp{\W{k}}{p}$}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Example 16.2}
+\begin{center}
+\begin{tabular}{|p{0.4\textwidth}|p{0.4\textwidth}|}
+\hline
+\multicolumn{2}{|c|}{\p{int n = 0}}\\\hline
+\p{Process p} & \p{Process q} \\\hline
+\p{1: n = n $+$ 1} & \p{1: n = n $+$ 1} \\
+\p{2: n = n $+$ 1} & \p{2: n = n $+$ 1} \\
+\p{end: } & \p{end:} \\\hline
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Atomic operations}
+\begin{center}
+\begin{tabular}{|p{0.4\textwidth}|p{0.4\textwidth}|}
+\hline
+\multicolumn{2}{|c|}{\p{int n = 0}}\\\hline
+\p{Process p} & \p{Process q} \\\hline
+\p{1: n = n $+$ 1} & \p{1: n = n $+$ 1} \\
+\p{end: } & \p{end:} \\\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|p{0.4\textwidth}|p{0.4\textwidth}|}
+\hline
+\multicolumn{2}{|c|}{\p{int n = 0}}\\\hline
+\p{Process p} & \p{Process q} \\
+\p{int temp = 0} & \p{int temp = 0} \\\hline
+\p{1: temp = n } & \p{1: temp = n} \\
+\p{2: temp = temp $+$ 1} & \p{2: temp = temp $+$ 1} \\
+\p{3: n = temp} & \p{3: n = temp} \\
+\p{end: } & \p{end:} \\\hline
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Peterson's algorithm}
+\begin{center}
+\begin{tabular}{|p{0.46\textwidth}|p{0.46\textwidth}|}
+\hline
+\multicolumn{2}{|c|}{\p{boolean wantp = false, wantq = false}}\\
+\multicolumn{2}{|c|}{\p{int turn = 1}}\\\hline
+\p{Process p} & \p{Process q} \\
+\hline
+\p{while (true) \{} & \p{while (true) \{} \\
+\p{\ \ non-critical-section} & \p{\ \ non-critical-section} \\
+\p{\ \ wantp = true} & \p{\ \ wantq = true} \\
+\p{\ \ turn = 1} & \p{\ \ turn = 2} \\
+\p{\ \ wait until } & \p{\ \ wait until } \\
+\p{\ \ \ \ (!wantq or turn == 2)} & \p{\ \ \ \ (!wantp or turn == 1)} \\
+\p{\ \ critical-section} & \p{\ \ critical-section} \\
+\p{\ \ wantp = false} & \p{\ \ wantq = false} \\
+\p{\}} & \p{\}} \\\hline
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Abbreviated algorithm}
+\begin{center}
+\begin{tabular}{|p{0.46\textwidth}|p{0.46\textwidth}|}
+\hline
+\multicolumn{2}{|c|}{\p{boolean wantp = false, wantq = false}}\\
+\multicolumn{2}{|c|}{\p{int turn = 1}}\\\hline
+\p{Process p} & \p{Process q} \\
+\hline
+\p{while (true) \{} & \p{while (true) \{} \\
+\p{\ tryp: wantp=true; turn=1} & \p{\ tryq: wantq=true; turn=2} \\
+\p{\ waitp: wait until } & \p{\ waitq: wait until } \\
+\p{\ \ \ \ \ (!wantq or turn == 2)} & \p{\ \ \ \ \ (!wantp or turn == 1)} \\
+\p{\ csp: wantp = false} & \p{\ csq: wantq = false} \\
+\p{\}} & \p{\}} \\\hline
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Progress axioms}
+\begin{center}
+\begin{tabular}{|ll@{\hspace{2em}}|l@{\hspace{2em}}|}
+\hline
+\multicolumn{2}{|c|}{Statement} & \multicolumn{1}{c|}{Progress axioms}\\\hline
+\p{li:}&\p{v := }expression  & $\vdash l_{i} \imp \Diamond l_{i+1}$\\
+\p{li+1:}&&\\\hline
+\p{li:}&\p{if B then} & $\vdash l_{i} \imp \Diamond(l_{t} \vee l_{f})$\\
+\p{lt:}&\p{\ \ \ S1}&$\vdash (l_{i} \wedge \Box B)\imp  \Diamond l_{t}$\\
+&\p{else}&\\
+\p{lf:}&\p{\ \ \ S2}&$\vdash (l_{i} \wedge \Box \ngg B)\imp  \Diamond l_{f}$\\\hline
+\p{li:}&\p{while B do} & $\vdash l_{i} \imp \Diamond(l_{t} \vee l_{f})$\\
+\p{lt:}&\p{\ \ \ S1;}&$\vdash (l_{i} \wedge \Box B)\imp  \Diamond l_{t}$\\
+\p{lf:}&&$\vdash (l_{i} \wedge \Box \ngg B)\imp  \Diamond l_{f}$\\\hline
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Figure 16.3: Finite automata for Peterson's algorithm}
+\begin{center}
+\unitlength=1.1pt
+\begin{picture}(230,180)
+%\put(0,0){\framebox(230,180){}}
+%process p
+\put(0,140){
+\put(0,0){
+  \put(-20,15){\vector(1,0){18}}
+  \put(15,15){\circle{30}}
+  \put( 0, 0){\makebox(30,30){\p{tryp}}}
+  \put(32,15){\vector(1,0){66}}
+  \put(30,17){
+     \makebox(70,20){\shortstack[l]{\p{wantp=true}\\\p{turn=1}}}
+  }
+}
+\put(100,0){
+  \put(15,15){\circle{30}}
+  \put( 0, 0){\makebox(30,30){\p{waitp}}}
+  \put(32,15){\vector(1,0){66}}
+  \put(30,17){
+     \makebox(70,20){\shortstack[l]{\p{!wantq or}\\\p{turn == 2}}}
+  }
+  \put(28,-5){\oval(26,20)[r]}
+  \put(2,-5){\oval(26,20)[l]}
+  \put(28,-15){\line(-1,0){26}}
+  \put(-3,5){\vector(1,0){5}}
+  \put(30,-17){
+     \makebox(70,20){\shortstack[l]{\p{wantq and}\\\p{turn == 1}}}
+  }
+}
+\put(200,0){
+  \put(15,15){\circle{30}}
+  \put( 0, 0){\makebox(30,30){\p{csp}}}
+  \put(15,-2){\line(0,-1){38}}
+  \put(15,-40){\line(-1,0){200}}
+  \put(-185,-40){\vector(0,1){38}}
+  \put(-120,-43){
+     \makebox(70,20){\p{wantp=false}}
+  }
+}
+}
+
+% process q
+\put(0,40){
+\put(0,0){
+  \put(-20,15){\vector(1,0){18}}
+  \put(15,15){\circle{30}}
+  \put( 0, 0){\makebox(30,30){\p{tryq}}}
+  \put(30,15){\vector(1,0){67}}
+  \put(30,17){
+     \makebox(70,20){\shortstack[l]{\p{wantq=true}\\\p{turn=2}}}
+  }
+}
+\put(100,0){
+  \put(15,15){\circle{30}}
+  \put( 0, 0){\makebox(30,30){\p{waitq}}}
+  \put(30,15){\vector(1,0){67}}
+  \put(30,17){
+     \makebox(70,20){\shortstack[l]{\p{!wantp or}\\\p{turn == 1}}}
+  }
+  \put(28,-5){\oval(26,20)[r]}
+  \put(2,-5){\oval(26,20)[l]}
+  \put(28,-15){\line(-1,0){26}}
+  \put(-3,5){\vector(1,0){5}}
+  \put(30,-17){
+     \makebox(70,20){\shortstack[l]{\p{wantp and}\\\p{turn == 2}}}
+  }
+}
+\put(200,0){
+  \put(15,15){\circle{30}}
+  \put( 0, 0){\makebox(30,30){\p{csq}}}
+  \put(15,0){\line(0,-1){40}}
+  \put(15,-40){\line(-1,0){200}}
+  \put(-185,-40){\vector(0,1){40}}
+  \put(-120,-43){
+     \makebox(70,20){\p{wantq=false}}
+  }
+}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Product automaton for Peterson's algorithm}
+\begin{center}
+\unitlength=1.2pt
+\begin{picture}(230,50)
+\put(100,0){
+  \put(15,45){\vector(0,-1){13}}
+  \put(15,15){\circle{30}}
+  \put( 0, 0){\makebox(30,30){\shortstack{\p{tryp}\\\p{tryq}}}}
+  \put(30,15){\vector(1,0){67}}
+  \put(30,17){
+     \makebox(70,20){\shortstack[l]{\p{wantp=true}\\\p{turn=1}}}
+  }
+  \put(-1,15){\vector(-1,0){67}}
+  \put(-70,17){
+     \makebox(70,20){\shortstack[l]{\p{wantq=true}\\\p{turn=2}}}
+  }
+  \put(-85,15){\circle{30}}
+  \put(-100, 0){\makebox(30,30){\shortstack{\p{tryp}\\\p{waitq}}}}
+  \put(115,15){\circle{30}}
+  \put(100, 0){\makebox(30,30){\shortstack{\p{waitp}\\\p{tryq}}}}
+  \put(145,5){\makebox(20,20){$\cdots$}}
+  \put(-130,5){\makebox(20,20){$\cdots$}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 16.2: State space for Peterson's
+algorithm}
+\unitlength=1pt
+\begin{center}
+\begin{picture}(320,195)
+% Each level of the diagram is in a separate "put" to facilitate
+%   moving it up or down
+\put(0,175){
+  \put(120,0){\makebox(80,20){\small 1.\ (\p{tryp},\p{tryq},1)}}
+  \put(150,0){\vector(-2,-1){60}}
+  \put(170,0){\vector( 2,-1){60}}
+}
+\put(0,125){
+  \put( 40,0){\makebox(80,20){\small 2.\ (\p{waitp},\p{tryq},1)}}
+  \put( 70,0){\vector(-1,-1){30}}
+  \put( 90,0){\vector( 1,-1){30}}
+  \put(200,0){\makebox(80,20){\small 3.\ (\p{tryp},\p{waitq},2)}}
+  \put(230,0){\vector(-1,-1){30}}
+  \put(250,0){\vector( 1,-1){30}}
+}
+\put(0,75){
+  \put(-10,0){\makebox(80,20){\small 4.\ (\p{csp},\p{tryq},1)}}
+  \put( 25,0){\pntleft{1}}
+  \put( 45,0){\vector( 1,-1){30}}
+  \put( 80,0){\makebox(80,20){\small 5.\ (\p{waitp},\p{waitq},2)}}
+  \put(115,0){\vector(-1,-1){30}}
+  \put(130,0){\pntright{5}}
+  \put(170,0){\makebox(80,20){\small 6.\ (\p{waitp},\p{waitq},1)}}
+  \put(190,0){\pntleft{6}}
+  \put(205,0){\vector( 0,-1){30}}
+  \put(260,0){\makebox(80,20){\small 7.\ (\p{tryp},\p{csq},2)}}
+  \put(275,0){\vector(-2,-1){60}}
+  \put(295,0){\vector( 0,-1){30}}
+}
+\put(0,25){
+  \put( 40,0){\makebox(80,20){\small 8.\ (\p{csp},\p{waitq},2)}}
+  \put( 70,0){\pntleft{3}}
+  \put( 85,0){\pntright{8}}
+  \put(160,0){\makebox(80,20){\small 9.\ (\p{waitp},\p{csq},1)}}
+  \put(195,0){\pntleft{9}}
+  \put(210,0){\pntright{2}}
+  \put(260,0){\makebox(80,20){\small 10.\ (\p{tryp},\p{tryq},2)}}
+  \put(290,0){\pntleft{2}}
+  \put(300,0){\pntright{3}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 16.5.2: Dijkstra's second attempt}
+\begin{center}
+\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+\hline
+\multicolumn{2}{|c|}{\p{boolean wantp = false, wantq = false}}\\
+\p{Process p} & \p{Process q} \\
+\hline
+\p{while (true) \{} & \p{while (true) \{} \\
+\p{\ waitp: wait until !wantq} & \p{\ waitq: wait until !wantp} \\
+\p{\ tryp: \ wantp = true} & \p{\ tryq: \ wantq = true} \\
+\p{\ csp: \ wantp = false} & \p{\ csq: \ wantq = false} \\
+\p{\}} & \p{\}} \\\hline
+\end{tabular}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 16.3: State space for the second
+attempt}
+\unitlength=0.97pt
+\vspace*{-4ex}
+\begin{center}
+\begin{picture}(320,245)
+% Each level of the diagram is in a separate "put" to facilitate
+%   moving it up or down
+\put(0,225){
+  \put(120,0){\makebox(80,20){\small 1.\ (\p{waitp},\p{waitq},$F$,$F$)}}
+  \put(150,0){\vector(-2,-1){60}}
+  \put(170,0){\vector( 2,-1){60}}
+}
+\put(0,175){
+  \put( 40,0){\makebox(80,20){\small 2.\ (\p{tryp},\p{waitq},$F$,$F$)}}
+  \put( 70,0){\vector(-1,-1){30}}
+  \put( 90,0){\vector( 1,-1){30}}
+  \put(200,0){\makebox(80,20){\small 3.\ (\p{waitp},\p{tryq},$F$,$F$)}}
+  \put(230,0){\vector(-1,-1){30}}
+  \put(250,0){\vector( 1,-1){30}}
+}
+\put(0,125){
+  \put(-10,0){\makebox(80,20){\small 4.\ (\p{csp},\p{waitq},$T$,$F$)}}
+  \put( 25,0){\pntleft{1}}
+  \put( 45,0){\vector( 1,-1){30}}
+  \put(120,0){\makebox(80,20){\small 5.\ (\p{tryp},\p{tryq},$F$,$F$)}}
+  \put(155,0){\vector(-2,-1){60}}
+  \put(170,0){\vector( 2,-1){60}}
+  \put(260,0){\makebox(80,20){\small 6.\ (\p{waitp},\p{csq},$F$,$T$)}}
+  \put(295,0){\pntright{1}}
+  \put(275,0){\vector(-1,-1){30}}
+}
+\put(0,75){
+  \put( 40,0){\makebox(80,20){\small 7.\ (\p{csp},\p{tryq},$T$,$F$)}}
+  \put( 70,0){\pntleft{3}}
+  \put( 85,0){\vector(1,-1){30}}
+  \put(200,0){\makebox(80,20){\small 8.\ (\p{tryp},\p{csq},$F$,$T$)}}
+  \put(235,0){\vector(-1,-1){30}}
+  \put(250,0){\pntright{2}}
+}
+\put(0,25){
+  \put(120,0){\makebox(80,20){\small 10.\ (\p{csp},\p{csq},$T$,$T$)}}
+  \put(150,0){\pntleft{6}}
+  \put(180,0){\pntright{4}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 16.6}
+\unitlength=1.6pt
+\begin{center}
+\begin{picture}(200,38)
+%\put(0,0){\framebox(200,38){}}
+\put(-10,-10){
+\put(10,10){\state{$\p{waitp}$}{$s_{0}$}}
+\put(31,20){\vector(1,0){38}}
+\put(60,0){
+\put(10,10){\state{$\p{waitp}$}{$s_{1}$}}
+\put(31,20){\vector(1,0){38}}
+\put(70,10){\state{$\p{waitp}$}{$s_{2}$}}
+\put(91,20){\vector(1,0){38}}
+\put(130,10){\state{$\p{waitp}$}{$s_{3}$}}
+
+\put(127,35){\oval(26,20)[tr]}
+\put(127,45){\line(-1,0){94}}
+\put(33,35){\oval(27,20)[tl]}
+\put(20,32){\vector(0,-1){0}}
+}
+}
+\end{picture}
+\end{center}
+
+\unitlength=1.6pt
+\begin{center}
+\begin{picture}(200,35)
+%\put(0,0){\framebox(200,35){}}
+\put(-10,-10){
+\put(10,10){\state{$\p{tryp}$}{$s_{0}$}}
+\put(31,20){\vector(1,0){38}}
+\put(70,10){\state{$\p{waitp}$}{$s_{1}$}}
+\put(91,20){\vector(1,0){38}}
+\put(120,0){
+\put(10,10){\state{$\p{waitp}$}{$s_{2}$}}
+\put(31,20){\vector(1,0){38}}
+\put(70,10){\state{$\p{waitp}$}{$s_{3}$}}
+
+\put(67,33){\oval(26,20)[tr]}
+\put(67,43){\line(-1,0){34}}
+\put(33,33){\oval(27,20)[tl]}
+\put(20,32){\vector(0,-1){0}}
+}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 16.6.1}
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(170,45)
+%\put(0,0){\framebox(170,45){}}
+\put(20,15){
+  \put(-18,15){\vector(1,0){18}}
+  \put(15,15){\circle{30}}
+  \put(15,15){\circle{22}}
+  \put( 0, 0){\makebox(30,30){$s_0$}}
+  \put(28,23){\vector(1,0){74}}
+  \put(30,23){
+     \makebox(70,10){$\mathit{true}$}
+  }
+  \put(28,-3){\oval(26,20)[r]}
+  \put(2,-3){\oval(26,20)[l]}
+  \put(28,-13){\line(-1,0){26}}
+  \put(-2,7){\vector(1,0){5}}
+  \put(-22,-16){
+     \makebox(70,15){$\ngg\mathit{waitp} \vee \mathit{csp}$}
+  }
+}
+\put(120,15){
+  \put(15,15){\circle{30}}
+  \put( 0, 0){\makebox(30,30){$s_1$}}
+  \put( 1,11){\vector(-1,0){72}}
+  \put(-70,10){
+     \makebox(70,10){$\mathit{csp}$}
+  }
+  \put(28,-3){\oval(26,20)[r]}
+  \put(2,-3){\oval(26,20)[l]}
+  \put(28,-13){\line(-1,0){26}}
+  \put(-2,7){\vector(1,0){5}}
+  \put(-22,-16){
+     \makebox(70,15){$\mathit{true}$}
+  }
+}
+\end{picture}
+\end{center}
+
+\bigskip
+
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(170,45)
+%\put(0,0){\framebox(170,45){}}
+\put(20,15){
+  \put(-18,15){\vector(1,0){18}}
+  \put(15,15){\circle{30}}
+  \put( 0, 0){\makebox(30,30){$s_0$}}
+  \put(30,15){\vector(1,0){69}}
+  \put(30,15){
+     \makebox(70,10){$\mathit{waitp} \wedge \ngg \mathit{csp}$}
+  }
+  \put(28,-3){\oval(26,20)[r]}
+  \put(2,-3){\oval(26,20)[l]}
+  \put(28,-13){\line(-1,0){26}}
+  \put(-2,7){\vector(1,0){5}}
+  \put(-22,-16){
+     \makebox(70,15){$\mathit{true}$}
+  }
+}
+\put(120,15){
+  \put(15,15){\circle{30}}
+  \put(15,15){\circle{22}}
+  \put( 0, 0){\makebox(30,30){$s_1$}}
+  \put(28,-3){\oval(26,20)[r]}
+  \put(2,-3){\oval(26,20)[l]}
+  \put(28,-13){\line(-1,0){26}}
+  \put(-2,7){\vector(1,0){5}}
+  \put(-22,-16){
+     \makebox(70,15){$\ngg\mathit{csp}$}
+  }
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 16.4: Model checking liveness}
+\vspace*{-3ex}
+\unitlength=1.15pt
+\begin{center}
+\begin{picture}(330,195)
+\put(-10,0){
+% Each level of the diagram is in a separate "put" to facilitate
+%   moving it up or down
+\put(0,175){
+  \thicklines
+  \put(120,0){\framebox(80,20){\small 1.\ (\p{tryp},\p{tryq},1)}}
+  \put(150,0){\vector(-2,-1){60}}
+  \thinlines
+  \put(170,0){\vector( 2,-1){60}}
+}
+\put(0,125){
+  \thicklines
+  \put( 40,0){\framebox(80,20){\small 2.\ (\p{waitp},\p{tryq},1)}}
+  \put( 90,0){\vector( 1,-1){30}}
+  \thinlines
+  \put( 70,0){\vector(-1,-1){30}}
+  \put(200,0){\makebox(80,20){\small 3.\ (\p{tryp},\p{waitq},2)}}
+  \put(230,0){\vector(-1,-1){30}}
+  \put(250,0){\vector( 1,-1){30}}
+}
+\put(0,75){
+  \put(-10,0){\makebox(80,20){\small 4.\ (\p{csp},\p{tryq},1)}}
+  \put( 25,0){\pntleft{1}}
+  \put( 45,0){\vector( 1,-1){30}}
+  \thicklines
+  \put( 80,0){\framebox(80,20){\small 5.\ (\p{waitp},\p{waitq},2)}}
+  \put(130,0){\pntright{5}}
+  \thinlines
+  \put(115,0){\vector(-1,-1){30}}
+  \put(170,0){\makebox(80,20){\small 6.\ (\p{waitp},\p{waitq},1)}}
+  \put(190,0){\pntleft{6}}
+  \put(205,0){\vector( 0,-1){30}}
+  \put(260,0){\makebox(80,20){\small 7.\ (\p{tryp},\p{csq},2)}}
+  \put(275,0){\vector(-2,-1){60}}
+  \put(295,0){\vector( 0,-1){30}}
+}
+\put(0,25){
+  \put( 40,0){\makebox(80,20){\small 8.\ (\p{csp},\p{waitq},2)}}
+  \put( 70,0){\pntleft{3}}
+  \put( 85,0){\pntright{8}}
+  \put(160,0){\makebox(80,20){\small 9.\ (\p{waitp},\p{csq},1)}}
+  \put(195,0){\pntleft{9}}
+  \put(210,0){\pntright{2}}
+  \put(260,0){\makebox(80,20){\small 10.\ (\p{tryp},\p{tryq},2)}}
+  \put(290,0){\pntleft{2}}
+  \put(300,0){\pntright{3}}
+}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 16.5: The state space as a tree}
+\unitlength=1.1pt
+\begin{center}
+\begin{picture}(330,165)
+%\put(0,0){\framebox(330,165){}}
+% Each level of the diagram is in a separate "put" to facilitate
+%   moving it up or down
+\put(0,-30){
+\put(0,175){
+  \put(120,0){\makebox(80,20){\small 1.\ (\p{tryp},\p{tryq},1)}}
+  \put(150,0){\vector(-2,-1){60}}
+  \put(170,0){\vector( 2,-1){60}}
+}
+\put(0,125){
+  \put( 40,0){\makebox(80,20){\small 2.\ (\p{waitp},\p{tryq},1)}}
+  \put( 70,0){\vector(-1,-1){30}}
+  \put( 90,0){\vector( 1,-1){30}}
+  \put(200,0){\makebox(80,20){\small 3.\ (\p{tryp},\p{waitq},2)}}
+  \put(230,0){\vector(-1,-1){30}}
+  \put(250,0){\vector( 1,-1){30}}
+}
+\put(0,75){
+  \put(-10,0){\makebox(80,20){\small 4.\ (\p{csp},\p{tryq},1)}}
+  \put( 25,0){\vector( 0,-1){30}}
+  \put( 45,0){\vector( 1,-1){30}}
+  \put( 80,0){\makebox(80,20){\small 5.\ (\p{waitp},\p{waitq},2)}}
+  \put(115,0){\vector(-1,-1){30}}
+  \put(125,0){\vector( 1,-1){30}}
+  \put(170,0){\makebox(80,20){\small 6.\ (\p{waitp},\p{waitq},1)}}
+  \put(205,0){\vector( 0,-1){30}}
+  \put(220,0){\vector( 1,-1){30}}
+  \put(260,0){\makebox(80,20){\small 7.\ (\p{tryp},\p{csq},2)}}
+  \put(290,0){\vector(-1,-1){30}}
+  \put(305,0){\vector( 0,-1){30}}
+}
+\put(0,25){
+  \put(-10,0){\makebox(80,20){\small 8.\ (\p{t},\p{t},1)}}
+  \put( 40,0){\makebox(80,20){\small 9.\ (\p{c},\p{w},2)}}
+  \put(110,0){\makebox(80,20){\small 10.\ (\p{w},\p{w},2)}}
+  \put(170,0){\makebox(80,20){\small 11.\ (\p{w},\p{w},1)}}
+  \put(220,0){\makebox(80,20){\small 12.\ (\p{w},\p{c},1)}}
+  \put(270,0){\makebox(80,20){\small 13.\ (\p{t},\p{t},2)}}
+}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 16.6: CTL model checking}
+\unitlength=1.1pt
+\vspace*{-1ex}
+\begin{center}
+\begin{picture}(330,195)
+%\put(0,0){\framebox(330,195){}}
+% Each level of the diagram is in a separate "put" to facilitate
+%   moving it up or down
+\put(0,175){
+  \put(120,0){\framebox(80,20){\small 1.\ (\p{tryp},\p{tryq},1)}}
+  \put(150,0){\vector(-2,-1){60}}
+  \put(170,0){\vector( 2,-1){60}}
+}
+\put(0,125){
+  \put( 40,0){\dashbox{4}(80,20){\small 2.\ (\p{waitp},\p{tryq},1)}}
+  \put( 70,0){\vector(-1,-1){30}}
+  \put( 90,0){\vector( 1,-1){30}}
+  \put(200,0){\makebox(80,20){\small 3.\ (\p{tryp},\p{waitq},2)}}
+  \put(230,0){\vector(-1,-1){30}}
+  \put(250,0){\vector( 1,-1){30}}
+}
+\put(0,75){
+  \thicklines
+  \put(-10,0){\framebox(80,20){\small 4.\ (\p{csp},\p{tryq},1)}}
+  \thinlines
+  \put( 25,0){\pntleft{1}}
+  \put( 45,0){\vector( 1,-1){30}}
+  \put( 80,0){\dashbox{4}(80,20){\small 5.\ (\p{waitp},\p{waitq},2)}}
+  \put(115,0){\vector(-1,-1){30}}
+  \put(130,0){\pntright{5}}
+  \put(170,0){\makebox(80,20){\small 6.\ (\p{waitp},\p{waitq},1)}}
+  \put(190,0){\pntleft{6}}
+  \put(205,0){\vector( 0,-1){30}}
+  \put(260,0){\makebox(80,20){\small 7.\ (\p{tryp},\p{csq},2)}}
+  \put(275,0){\vector(-2,-1){60}}
+  \put(295,0){\vector( 0,-1){30}}
+}
+\put(0,25){
+  \thicklines
+  \put( 40,0){\framebox(80,20){\small 8.\ (\p{csp},\p{waitq},2)}}
+  \thinlines
+  \put( 70,0){\pntleft{3}}
+  \put( 85,0){\pntright{8}}
+  \put(160,0){\framebox(80,20){\small 9.\ (\p{waitp},\p{csq},1)}}
+  \put(195,0){\pntleft{9}}
+  \put(210,0){\pntright{2}}
+  \put(260,0){\framebox(80,20){\small 10.\ (\p{tryp},\p{tryq},2)}}
+  \put(290,0){\pntleft{2}}
+  \put(300,0){\pntright{3}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Section 16.8: Symbolic model checking}
+\begin{center}
+\begin{tabular}{|l|l||l|l|}
+\hline
+\p{tryp} & $p_0 \wedge p_1$ & \p{tryq} & $q_0 \wedge q_1$ \\ \hline
+\p{waitp} & $\ngg p_0 \wedge p_1$ & \p{waitq} & $\ngg q_0 \wedge q_1$\\ \hline
+\p{csp} & $p_0 \wedge \ngg p_1$ & \p{csq} & $q_0 \wedge \ngg q_1$ \\\hline
+\end{tabular} 
+\end{center}
+
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(200,52)
+\put(10,10){\state{}{$s_{0}$}}
+\put(31,20){\vector(1,0){38}}
+\put(60,0){
+\put(10,10){\state{}{$s_{1}$}}
+\put(31,20){\vector(1,0){38}}
+\put(70,10){\state{}{$s_{2}$}}
+\put(91,20){\vector(1,0){38}}
+\put(130,10){\state{}{$s_{3}$}}
+
+\put(127,35){\oval(26,20)[tr]}
+\put(127,45){\line(-1,0){94}}
+\put(33,35){\oval(27,20)[tl]}
+\put(20,32){\vector(0,-1){0}}
+}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{wideslide}[bm=,toc=]{Venn diagrams}
+\vspace*{-4mm}
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(160,80)
+\put(80,40){\oval(160,80)}
+\put(80,40){\oval(100,40)}
+\put(30,20){\makebox(100,40){$S$}}
+\put(0,60){\makebox(160,20){$T$}}
+%\put(170,40){\makebox(30,20){$S\subset T$}}
+\end{picture}
+\end{center}
+
+\vspace*{-2mm}
+
+\unitlength=1.0pt
+\begin{center}
+\begin{picture}(260,110)
+\put(80,40){\oval(160,80)}
+\put(180,40){\oval(160,80)}
+\put(  0,0){\makebox(100,80){$S-T$}}
+\put(100,0){\makebox( 60,80){$S\cap T$}}
+\put(160,0){\makebox(100,80){$T-S$}}
+\put(0,60){\makebox(20,20)[r]{S}}
+\put(240,60){\makebox(20,20)[l]{T}}
+\put(20,85){\makebox(220,10){$\overbrace{\hspace*{220pt}}$}}
+\put(100,100){\makebox( 60,10){$S\cup T$}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+
+\end{document}

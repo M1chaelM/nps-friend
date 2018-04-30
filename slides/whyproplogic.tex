@@ -1,0 +1,136 @@
+
+\documentclass[style=sailor,size=12pt]{powerdot}
+\usepackage{epic,array,ecltree,wasysym,url}
+\usepackage{mlextra}
+\graphicspath{ {../art/} }
+
+
+\newcommand{\id}[1]{\mbox{\it #1\/}}
+\newcommand{\rid}[1]{\mbox{\rm #1}}
+\newcommand{\sid}[1]{\mbox{\sf #1}}
+\newcommand{\tid}[1]{\mbox{\tt #1}}
+\newcommand{\bid}[1]{\mbox{\bf #1}}
+\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
+
+\pdsetup{method=normal}
+
+\begin{document}
+
+%\begin{wideslide}[bm=,toc=]{Computational complexity primer}
+%\begin{itemize}
+%\item Computational complexity is about the study of lower and upper bounds on {\em problems\/}.
+%\item We need a problem whose complexity we can investigate.
+%\item We pick {\em satisfiability\/} and {\em validity\/} in propositional logic.
+%\item We will give lower bounds and decision procedures for each.
+%\end{itemize}
+%\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Propositional logic}
+Propositional logic provides a way to
+\begin{itemize}
+\item express assertions precisely
+\item examine consistency among assertions
+%\item express behaviors of some systems
+\item justify simplifications
+\item capture circuits
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Expressing assertions}
+\begin{itemize}
+\item ``The diagnostic message is stored in the buffer or retransmitted.''
+\item ``The diagnostic message is not stored in the buffer.''
+\item ``If the diagnostic message is stored in the buffer then it's retransmitted.''
+\item Let $p$ denote ``The diagnostic message is stored in the buffer.''
+\item Let $q$ denote ``The diagnostic message is retransmitted.''
+\item $p$ and $q$ are called {\em propositional variables\/}.
+\item The 3 facts in order become $p\vee q$, $\neg p$ and $p\Rightarrow q$.
+\item Can be {\em satisfied\/} iff $p$ is false and $q$ is true.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Examine consistency}
+\begin{itemize}
+\item Add to 3 facts: ``The diagnostic message is not retransmitted.''
+\item The 4 facts then become $p\vee q$, $\neg p$, $p\Rightarrow q$ and $\neg q$.
+\item Can no longer be satisfied.
+\item Assertions are {\em inconsistent\/}.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Justify simplifications}
+\begin{itemize}
+\item Consider the expression
+\vspace{-1em}
+\begin{program}
+if (a < b || (a >= b \&\& c == d)) ...
+\end{program}
+It can be simplified to
+\vspace{-1em}
+\begin{program}
+if (a < b || c == d) ...
+\end{program}
+\item Let $p$ and $q$ stand for propositions $\tid{(a < b)}$ and $\tid{(c == d)}$.
+\item The simplification is justfied by $(p\vee ((\neg p) \wedge q)) \equiv (p\vee q)$.
+\item ``$\equiv$'' means ``logically equivalent to''.\footnote{
+A. Aho and J. Ullman, Foundations of Computer Science, W.H. Freeman, 1994.}
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 1.2: A half-adder}
+\begin{center}
+\begin{picture}(280,120)
+\put(-10,  0){\makebox(20,20)[l]{Bit2}}
+\put(-10,100){\makebox(20,20)[l]{Bit1}}
+\put(260, 20){\makebox(25,20)[l]{Sum}}
+\put(260, 90){\makebox(25,20)[l]{Carry}}
+\put(20, 10){\line(1,0){60}}
+\put(20,110){\line(1,0){50}}
+\put(30, 10){\line(1,2){40}}
+\put(30,110){\line(1,-2){40}}
+\put(70, 30){\line(1,0){10}}
+\put(70,80){ %AND gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,0){\line(0,1){40}}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(70,0){ %OR gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,20){\oval(20,40)[r]}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(110,100){\line(1,0){140}}
+\put(110, 20){\line(1,0){60}}
+\put(210, 30){\line(1,0){40}}
+\put(170,10){ %AND gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,0){\line(0,1){40}}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(130,80){  % NOT gate
+  \put( 0, 0){\line(1,0){20}}
+  \put( 0, 0){\line(1,-2){10}}
+  \put(20, 0){\line(-1,-2){10}}
+  \put(10,-23){\circle{6}}
+}
+\put(140,80){\line(0,1){20}}
+\put(140,54){\line(0,-1){14}}
+\put(140,40){\line(1,0){30}}
+\end{picture}
+\end{center}
+
+Carry: $\rid{Bit1}\wedge\rid{Bit2}$
+
+Sum: $(\rid{Bit1}\vee\rid{Bit2})\wedge \neg(\rid{Bit1}\wedge\rid{Bit2})$
+\end{wideslide}
+
+%\begin{wideslide}[bm=,toc=]{Propositional logic}
+%\begin{itemize}
+%\item Begin discussion of propositional logic.
+%\end{itemize}
+%\end{wideslide}
+
+\end{document}

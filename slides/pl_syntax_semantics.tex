@@ -1,0 +1,739 @@
+\documentclass[style=sailor,size=12pt]{powerdot}
+\usepackage{epic,array,ecltree,url,calrsfs}
+\usepackage[nointegrals]{wasysym}
+\usepackage{mlextra}
+\usepackage{listings}
+\graphicspath{ {../art/} }
+
+\newcommand{\id}[1]{\mbox{\it #1\/}}
+\newcommand{\rid}[1]{\mbox{\rm #1}}
+\newcommand{\sid}[1]{\mbox{\sf #1}}
+\newcommand{\bid}[1]{\mbox{\bf #1}}
+\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
+
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {../art/} }
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%Here I define some theorem styles and shortcut commands for symbols I use often
+\theoremstyle{definition}
+
+\newtheorem{innerdefn}{Definition}
+\newenvironment{defn}[1]
+  {\renewcommand\theinnerdefn{#1}\innerdefn}
+  {\endinnerdefn}
+
+\newtheorem{innerexample}{Example}
+\newenvironment{ex}[1]
+  {\renewcommand\theinnerexample{#1}\innerexample}
+  {\endinnerexample}
+
+\newtheorem{innerthm}{Theorem}
+\newenvironment{thm}[1]
+  {\renewcommand\theinnerthm{#1}\innerthm}
+  {\endinnerthm}
+
+
+
+%\newtheorem*{defn}{Definition}
+%\newtheorem{thm}{Theorem}
+%\newtheorem{cor}{Corollary}
+%\newtheorem*{rmk}{Remark}
+%\newtheorem{lem}{Lemma}
+%\newtheorem*{joke}{Joke}
+%\newtheorem{ex}{Example}
+%\newtheorem*{soln}{Solution}
+%\newtheorem{prop}{Proposition}
+
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Ell}{\mathscr{L}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+\newcommand{\mli}[1]{\mathit{#1}}
+\newcommand{\ndiv}{\hspace{-3pt}\not|\hspace{2pt}}
+
+
+\pdsetup{method=normal}
+
+\title{Propositional Logic: Syntax and Semantics}
+\author{Foundations of Computer Science}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\section[slide=true]{Syntax}
+
+\begin{wideslide}[bm=,toc=]{Post System definition}
+Recall the following Post system defining all well-formed formulae in
+propositional logic:
+\begin{displaymath}
+\begin{array}{lll}
+        \begin{array}[t]{l}
+        \bid{T}\in P
+        \end{array}
+&
+        \begin{array}[t]{l}
+        \bid{F}\in P
+        \end{array}
+&
+	\begin{array}[t]{l}
+        x \in P \\
+        \hline
+        \neg x \in P
+        \end{array} \\[6ex]
+
+	\begin{array}[t]{l}
+	x \in P \;\;y \in P \\
+	\hline
+	x \wedge y \in P
+	\end{array}
+&
+	\begin{array}[t]{l}
+	x \in P \;\;y \in P \\
+	\hline
+	x \vee y \in P
+	\end{array}
+&
+	\begin{array}[t]{l}
+	x \in P \;\;y \in P \\
+	\hline
+	x \Rightarrow y \in P
+	\end{array} \\[6ex]
+
+	\begin{array}[t]{l}
+        x \in \id{Var} \\
+        \hline
+        x \in P
+        \end{array}
+\end{array}
+\end{displaymath}
+%\item Consequents have larger terms than antecedents except in last rule.
+
+\end{wideslide}
+
+
+
+\begin{wideslide}[bm=,toc=]{Atoms and Operators}
+\begin{defn}{2.1}[Ben Ari]
+Formulas in propositional logic are composed of the following sets of symbols:
+\begin{itemize}
+\item $\mathcal{P} = \{p,q,r...\}$, the set of \emph{atomic propositions}.
+\begin{itemize}
+\item $\mathcal{P}$ is unbounded---there is no limit to the number of distinct
+propositions.
+\item \emph{Atoms} (propositions) will be denoted by lower case letters.
+\end{itemize}
+\item A finite set of \emph{Boolean operators}:
+\begin{center}
+\begin{tabular}{|c c||c c|}
+\hline
+\emph{negation}     & $\ngg$  & \emph{equivalence}  & $\eqv$  \\
+\emph{disjunction}  & $\lor$  & \emph{exclusive or} & $\oplus$  \\
+\emph{conjunction}  & $\land$ & \emph{nor}          & $\downarrow$  \\
+\emph{implication}  & $\imp$   & \emph{nand}         & $\uparrow$  \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{itemize}
+\end{defn}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Formulas as Trees}
+\begin{defn}{2.2}[Ben Ari]
+A \emph{formula} in propositional logic is an extended binary tree defined recursively:
+\begin{itemize}
+\item A formula is a \emph{leaf} labeled by an atomic proposition.
+\item A formula is a node labeled by $\neg$ with a single child that is a
+formula.
+\item A formula is a node labeled by one of the binary operators with two
+children, both of which are formulas. 
+\end{itemize}
+\end{defn}
+Each formula can be classified by its top-level operator:
+\begin{defn}{2.10}[Ben Ari]
+Let $A \in \mathcal{F}$. If $A$ is not an atom, the operator labeling
+the root of the formula $A$ is the \emph{principal operator} of $A$.
+\end{defn}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Two formulas represented as trees}
+\begin{center}
+\begin{tabular}{c@{\hspace{4em}}c}
+Formula 1 & Formula 2 \\
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+\begin{bundle}{$\eqv$}
+\chunk{
+  \begin{bundle}{$\imp$}
+  \chunk{$p$}
+  \chunk{$q$}
+  \end{bundle}
+}
+\chunk{
+  \begin{bundle}{$\imp$}
+  \chunk{
+    \begin{bundle}{$\ngg$}
+    \chunk{$p$}
+    \end{bundle}
+  }
+  \chunk{
+    \begin{bundle}{$\ngg$}
+    \chunk{$q$}
+    \end{bundle}
+  }
+  \end{bundle}
+}
+\end{bundle} &
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+\begin{bundle}{$\imp$}
+\chunk{$p$}
+\chunk{
+  \begin{bundle}{$\eqv$}
+  \chunk{$q$}
+  \chunk{
+    \begin{bundle}{$\ngg$}
+    \chunk{
+      \begin{bundle}{$\imp$}
+      \chunk{$p$}
+      \chunk{
+        \begin{bundle}{$\ngg$}
+        \chunk{$q$}
+        \end{bundle}
+      }
+      \end{bundle}
+    }
+    \end{bundle}
+  }
+  \end{bundle}
+}
+\end{bundle}
+\end{tabular}
+\end{center}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=,method=direct]{Formulas as Strings}
+\begin{itemize}
+\item A \emph{formula} can also be represented as a string.
+\item The string form of the formula is obtained by \emph{inorder} traversal of
+the tree:
+\end{itemize}
+
+\begin{verbatim}
+Inorder(F)
+  if F is a leaf
+    write its label
+    return
+  let F1 and F2 be the left and right subtrees of F
+  Inorder(F1)
+  write the label of the root of F
+  Inorder(F2)
+
+\end{verbatim}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=, method=file]{Producing strings from trees}
+\begin{center}
+\begin{tabular}{c@{\hspace{4em}}c}
+Formula 1 & Formula 2 \\
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+\begin{bundle}{$\eqv$}
+\chunk{
+  \begin{bundle}{$\imp$}
+  \chunk{$p$}
+  \chunk{$q$}
+  \end{bundle}
+}
+\chunk{
+  \begin{bundle}{$\imp$}
+  \chunk{
+    \begin{bundle}{$\ngg$}
+    \chunk{$p$}
+    \end{bundle}
+  }
+  \chunk{
+    \begin{bundle}{$\ngg$}
+    \chunk{$q$}
+    \end{bundle}
+  }
+  \end{bundle}
+}
+\end{bundle} &
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+\begin{bundle}{$\imp$}
+\chunk{$p$}
+\chunk{
+  \begin{bundle}{$\eqv$}
+  \chunk{$q$}
+  \chunk{
+    \begin{bundle}{$\ngg$}
+    \chunk{
+      \begin{bundle}{$\imp$}
+      \chunk{$p$}
+      \chunk{
+        \begin{bundle}{$\ngg$}
+        \chunk{$q$}
+        \end{bundle}
+      }
+      \end{bundle}
+    }
+    \end{bundle}
+  }
+  \end{bundle}
+}
+\end{bundle}
+\end{tabular}
+\end{center}
+\texttt{Inorder(Formula 1)}: \onslide{2-}{$p \imp q \eqv \ngg p \imp \ngg q$}
+
+\texttt{Inorder(Formula 2)}: \onslide{3-}{$p \imp q \eqv \ngg p \imp \ngg q$}
+
+\onslide{4-}{Our procedure produces an \emph{ambiguous} string representation!}
+
+\end{wideslide}
+\begin{wideslide}[bm=,toc=,method=file]{Resolving Ambiguity with Parentheses}
+
+\begin{verbatim}
+Inorder(F)
+  if F is a leaf
+    write its label
+    return
+  let F1 and F2 be the left and right subtrees of F
+  write a left parenthesis '('
+  Inorder(F1)
+  write the label of the root of F
+  Inorder(F2)
+  write a right parenthesis ')'
+
+\end{verbatim}
+
+\texttt{Inorder(Formula 1)}: \onslide{2-}{$((p \imp q) \eqv ((\ngg p) \imp (\ngg q)))$}
+
+\texttt{Inorder(Formula 2)}: \onslide{3-}{$(p \imp (q \eqv (\ngg (p \imp (\ngg q)))))$}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Other methods of resolving ambiguity}
+\begin{itemize}
+\item Precedence
+\begin{enumerate}
+\item {\bf $\ngg$} 
+\item {\bf $\land,\uparrow$} 
+\item {\bf $\lor,\downarrow$} 
+\item {\bf $\imp$} 
+\item {\bf $\eqv,\oplus$} 
+\end{enumerate}
+\item Polish Notation 
+\begin{itemize}
+\item Uses \emph{pre-order traversal}.
+\item \texttt{Preorder(Formula 1)}: \onslide{2-}{$\eqv \imp p q \imp \ngg p \ngg q$}
+
+\item \texttt{Preorder(Formula 2)}: \onslide{3-}{$\imp p \eqv q \ngg \imp p \ngg q$}
+
+\end{itemize}
+\end{itemize}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Alternative Notations}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Operator          & Alternates                  & Java         & Python \\ \hline
+\hline
+$\ngg$            & $\sim$                      & \p{!}        & \p{not, \~} \\ \hline
+$\wedge$          & $\&$                        & \p{\&, \&\&} & \p{and, \&} \\ \hline
+$\vee$            &                             & \p{|, ||}    & \p{or,  |} \\ \hline
+$\rightarrow$     & $\supset$, $\Rightarrow$    &              & \\ \hline
+$\leftrightarrow$ & $\equiv$, $\Leftrightarrow$ &              & \\ \hline
+$\neqv$           & $\not\equiv$                & \p{\p{\^{}}} & \p{\p{\^{}}} \\ \hline
+$\uparrow$        & $\mid$                      &              & \\ \hline
+\end{tabular}
+\end{center}
+
+\end{wideslide}
+
+
+\section[slide=true]{Semantics}
+\begin{slide}[bm=,toc=]{Interpretations and Truth}
+\begin{defn}{2.15}[Ben Ari]
+Let $A \in \mathcal{F}$ be a formula and let $\mathcal{P}_A$ be the
+  set of atoms appearing in $A$. An \emph{interpretation} for $A$ is a 
+total function $\mathcal{I}_A: \mathcal{P}_A \mapsto \{T,F\}$ that assigns
+one of the \emph{truth values} $T$ or $F$ to \emph{every} atom in
+$\mathcal{P}_A$.
+\end{defn}
+\begin{defn}{2.16}[Ben Ari]
+Let $\mathcal{I}_A$ be an interpretation for $A \in \mathcal{F}$.
+$v_{\mathcal{I}_A}(A)$, the \emph{truth value of A under} $\mathcal{I}_A$
+is defined inductively on the structure of $A$ as shown in Fig. $2.3$.
+\end{defn}
+\end{slide}
+
+\begin{wideslide}[bm=,toc=]{Figure 2.3: Truth values of formulas}
+\noindent
+\begin{minipage}{0.42\textwidth}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$A$ & $v(A_{1})$ & $v(A_{2})$ & $v(A)$ \\ \hline \hline
+$\ngg A_{1}$ & $T$ & & $F$  \\
+$\ngg A_{1}$ & $F$ & & $T$ \\ \hline
+$A_{1} \vee A_{2}$ & $F$ & $F$ & $F$ \\
+$A_{1} \vee A_{2}$ & \multicolumn{2}{c|}{otherwise}  & $T$ \\ \hline
+$A_{1} \wedge A_{2}$ & $T$ & $T$ & $T$ \\
+$A_{1} \wedge A_{2}$ & \multicolumn{2}{c|}{otherwise}  & $F$ \\ \hline
+$A_{1} \imp A_{2}$ & $T$ & $F$ & $F$ \\
+$A_{1} \imp  A_{2}$ &
+   \multicolumn{2}{c|}{otherwise}  & $T$ \\ \hline
+\end{tabular}
+\end{minipage}
+\hspace{0.08\textwidth}
+\begin{minipage}{0.42\textwidth}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$A$ & $v(A_{1})$ & $v(A_{2})$ & $v(A)$ \\ \hline \hline
+$A_{1} \uparrow A_{2}$ & $T$ & $T$ & $F$ \\
+$A_{1} \uparrow  A_{2}$ &
+   \multicolumn{2}{c|}{otherwise}  & $T$ \\ \hline
+$A_{1} \downarrow A_{2}$ & $F$ & $F$ & $T$ \\
+$A_{1} \downarrow  A_{2}$ &
+   \multicolumn{2}{c|}{otherwise}  & $F$ \\ \hline
+$A_{1} \eqv A_{2}$ & \multicolumn{2}{c|}{$v(A_{1})=v(A_{2})$} & $T$ \\
+$A_{1} \eqv A_{2}$ & \multicolumn{2}{c|}{$v(A_{1})\neq v(A_{2})$} &
+  $F$ \\ \hline
+$A_{1} \neqv A_{2}$ & \multicolumn{2}{c|}{$v(A_{1})\neq v(A_{2})$} & $T$ \\
+$A_{1} \neqv A_{2}$ & \multicolumn{2}{c|}{$v(A_{1})=v(A_{2})$} &
+  $F$ \\ \hline
+\end{tabular}
+\end{minipage}
+\end{wideslide}
+\begin{wideslide}[bm=,toc=]{Evaluating the Truth Value of a Formula}
+\begin{ex}{2.17}[Ben Ari]
+Let $A = (p \imp q) \eqv (\ngg q \imp \ngg p)$ and let $\mathcal{I}_A$ be
+the interpretation:
+\begin{center}
+\begin{tabular}{ c c }
+$\mathcal{I}_A(p) = F$, & $\mathcal{I}_A(q) = T$.
+\end{tabular}
+\end{center}
+The truth value of $A$ can be evaluated inductively using Fig. $2.3$ (see previous
+    slide):
+\begin{center}
+\begin{tabular}{ l l }
+\onslide{2-}{$v_\mathcal{I}(p)$}                                     & \onslide{3-}{$= \mathcal{I}_A(p) = F$}\\
+\onslide{4-}{$v_\mathcal{I}(q)$}                                     & \onslide{5-}{$= \mathcal{I}_A(q) = T$} \\
+\onslide{6-}{$v_\mathcal{I}(p \imp q)$}                              & \onslide{7-}{$= T$} \\
+\onslide{8-}{$v_\mathcal{I}(\ngg q)$}                                & \onslide{9-}{$= F$} \\
+\onslide{10-}{$v_\mathcal{I}(\ngg p)$}                               & \onslide{11-}{$= T$} \\
+\onslide{12-}{$v_\mathcal{I}(\ngg q \imp \ngg p)$}                   & \onslide{13-}{$= T$} \\
+\onslide{14-}{$v_\mathcal{I}((p \imp q) \eqv (\ngg q \imp \ngg p))$} & \onslide{15-}{$= T$} \\
+\end{tabular}
+\end{center}\end{ex}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Interpretation for a Set of Formulas}
+\begin{defn}{2.24}[Ben Ari]
+Let $S = \{A_1,...\}$ be a set of formulas and let $\mathcal{P}_S = \bigcup_i
+\mathcal{P}_{A_i}$, that is, $\mathcal{P}_S$ is the set of all the atoms that
+appear in the formulas of $S$. An \emph{interpretation} for $S$ is a function
+$\mathcal{I}_S:\mathcal{P}_S \mapsto \{T,F\}$.
+\end{defn}
+For any $A_i \in S$, $v_{\mathcal{I}_S}(A_i)$, the \emph{truth value of} $A_i$
+\emph{under} $\mathcal{I}_S$ is defined as in Definition $2.16$.
+
+\begin{itemize}
+\item Note the truth value of atoms must be consistent across all formulas in $S$.
+\item This is guaranteed by defining $\mathcal{P}_S$ as the union of sets of
+atoms. 
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Logical Equivalence}
+\begin{defn}{2.24}[Ben Ari]
+Let $A_1,A_2 \in \mathcal{F}$. If $v_{\mathcal{I}}(A_1) = v_{\mathcal{I}}(A_2)$
+  for all interpretations $\mathcal{I}$, then $A_1$ is \emph{logically
+    equivalent} to $A_2$, denoted $A_1 \equiv A_2$. 
+\end{defn}
+Note that $\eqv$ and $\equiv$ have distinct meanings.
+\begin{itemize}
+\item The symbol $\eqv$
+\begin{itemize}
+\item Is a Boolean operator in propositional logic.
+\item Appears in formulas of the logic.
+\end{itemize}
+
+\item The symbol $\equiv$
+\begin{itemize}
+\item Is not a Boolean operator.
+\item Describes a property of pairs of formulas in propositional logic.
+\item Is part of the \emph{metalanguage} we use to reason about propositional
+logic.
+\end{itemize}
+\end{itemize}
+
+\begin{thm}{2.29}[Ben Ari]
+  $A_1 \equiv A_2$ \emph{if and only if} $A_1 \eqv A_2$ \emph{is true in every
+    interpretation.}
+\end{thm}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Constant Atomic Propositions}
+\begin{itemize}
+\item We extend the syntax of Boolean Formulas to include two constant formulas: 
+       \emph{true} and \emph{false}.
+\item \emph{true}:
+\begin{itemize}
+\item Also written: $\top$
+\item Semantics: $\mathcal{I}(true) = T$
+\item Equivalent to: $p \lor \ngg p$
+\end{itemize}
+\item \emph{false}:
+\begin{itemize}
+\item Also written: $\bot$
+\item Semantics: $\mathcal{I}(false) = F$
+\item Equivalent to: $p \land \ngg p$
+\end{itemize}
+\item These are distinct from the truth values $T$ and $F$ that we use to define
+an interpretation: they are constant under all interpretations.
+\end{itemize}
+\end{wideslide}
+\begin{wideslide}[bm=,toc=]{Logically equivalent formulas (1)}
+\vspace*{-2ex}
+Absorption of Constants:
+\vspace*{-2ex}
+\begin{displaymath}
+\begin{array}{lcl@{\hspace{4em}}lcl}
+A \vee  \mathit{true} &\logeqv& \mathit{true} &
+  A \wedge \mathit{true} &\logeqv& A \\
+A \vee \mathit{false} &\logeqv& A &
+  A \wedge \mathit{false} &\logeqv&\mathit{false}\\
+A \imp \mathit{true} &\logeqv& \mathit{true} &
+  \mathit{true} \imp A &\logeqv& A \\
+A\imp \mathit{false} &\logeqv& \ngg A &
+  \mathit{false} \imp A &\logeqv& \mathit{true}\\
+A\eqv \mathit{true} &\logeqv& A &
+A \neqv  \mathit{true}&\logeqv&\ngg A\\
+A\eqv \mathit{false} &\logeqv& \ngg A &
+A \neqv  \mathit{false}&\logeqv& A\\
+\end{array}
+\end{displaymath}
+\vspace*{-3ex}
+Identical Operands:
+\begin{displaymath}
+\begin{array}{lcl@{\hspace{4em}}lcl}
+A &\logeqv& \ngg \ngg A & \\
+A &\logeqv& A \wedge A & A &\logeqv& A \vee A \\
+A \vee \ngg A &\logeqv& true &
+  A \wedge \ngg A &\logeqv& \mathit{false} \\
+A \imp A &\logeqv&  \mathit{true}& \\
+A \eqv A &\logeqv&  \mathit{true} &
+A \neqv A   &\logeqv& \mathit{false} \\
+\ngg A &\logeqv& A \uparrow A &
+  \ngg A &\logeqv& A \downarrow A\\
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Logically equivalent formulas (2)}
+Commutativity:
+\begin{displaymath}
+\begin{array}{lcl@{\hspace{5em}}lcl}
+A\vee B &\logeqv& B\vee A & A\wedge B&\logeqv& B\wedge A\\
+A\eqv B &\logeqv& B\eqv A &
+   A\neqv B&\logeqv& B\neqv A\\
+A\uparrow B &\logeqv& B\uparrow A &
+   A\downarrow B&\logeqv& B\downarrow A\\
+\end{array}
+\end{displaymath}
+
+Associativity:
+\begin{displaymath}
+\begin{array}{lcl@{\hspace{2em}}lcl}
+A \vee (B\vee C) &\logeqv& (A\vee B) \vee C &
+   A \wedge (B\wedge C) &\logeqv& (A\wedge B) \wedge C \\
+A \eqv (B\eqv C) &\logeqv& (A\eqv B) \eqv C &
+   A \neqv(B\neqv C) &\logeqv&
+   (A\neqv B)\neqv C\\
+\end{array}
+\end{displaymath}
+
+Distributivity:
+\begin{displaymath}
+\begin{array}{lcl}
+A\vee (B\wedge C) &\logeqv& (A\vee B)\wedge (A\vee C) \\
+   A\wedge (B\vee C) &\logeqv& (A\wedge B) \vee (A\wedge C)\\
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Logically equivalent formulas (3)}
+Equivalences for eliminating operators:
+\begin{displaymath}
+\begin{array}{lcl}
+A \eqv B &\logeqv& (A\imp B) \wedge (B\imp A) \\
+A \neqv B &\logeqv& \ngg\,(A\imp B) \vee \ngg\,(B\imp A)\\
+A \imp B &\logeqv& \ngg A\vee B\\
+   A \imp B &\logeqv& \ngg\,(A\wedge \ngg B) \\
+A \vee B &\logeqv& \ngg\,(\ngg A \wedge \ngg B) \\
+   A \wedge B &\logeqv& \ngg\,(\ngg A\vee \ngg B)\\
+A \vee B &\logeqv& \ngg A \imp B  \\
+   A \wedge B &\logeqv& \ngg\,(A\imp \ngg B)\\
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Satisfiability and Validity}
+\begin{defn}{2.38}[Ben Ari]
+Let $A \in \mathcal{F}$.
+\begin{itemize}
+\item $A$ is \emph{satisfiable} iff $v_{\mathcal{I}}(A) = T$ for \emph{some}
+      interpretation $\mathcal{I}$.\\
+      An intepretation satisfying $A$ is a \emph{model} for $A$.
+
+\item $A$ is valid, denoted $\models A$, iff $v_{\mathcal{I}}(A)=T$ for
+      \emph{all} interpretations $\mathcal{I}$.\\
+      A valid propositional formula is also called a \emph{tautology}.
+
+\item $A$ is \emph{unsatisfiable} iff it is... not satisfiable. That is, if
+      $v_{\mathcal{I}}(A) = F$ for \emph{all} interpretations $\mathcal{I}$.
+
+\item $A$ is \emph{falsifiable}, denoted $\not\models A$, iff it is not valid,
+      that is, if $v_{\mathcal{I}}(A) = F$ for \emph{some} interpretation
+      $\mathcal{I}$.
+\end{itemize}
+\end{defn}
+\begin{thm}{2.39}[Ben Ari]
+Let $A \in \mathcal{F}$. $A$ is valid if and only if $\ngg A$ is unsatisfiable.
+$A$ is satisfiable if and only if $\ngg A$ is falsifiable.
+\end{thm}
+\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Example 2.21}
+\begin{center}
+\begin{tabular}{|c|c||c|}
+\hline
+$p$ & $q$ & $p \imp q$ \\ \hline \hline
+$T$ & $T$ & $T$  \\ \hline
+$T$ & $F$ & $F$  \\ \hline
+$F$ & $T$ & $T$  \\ \hline
+$F$ & $F$ & $T$  \\ \hline
+\end{tabular}
+\end{center}
+\begin{itemize}
+\item Is $p \imp q$ satisfiable?
+\item Is $p \imp q$ unsatisfiable?
+\item Is $p \imp q$ valid?
+\item Is $p \imp q$ falsifiable?
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example 2.22}
+\begin{center}
+\begin{tabular}{|c|c||c|c|c|c|c|}
+\hline
+$p$ & $q$ & $p \imp q$ & $\ngg p$ & $\ngg q$ 
+& $\ngg q \imp \ngg p$ & $(p\imp q)\eqv  (\ngg q\imp \ngg p)$\\ \hline \hline
+$T$ & $T$ & $T$  & $F$ & $F$  & $T$ & $T$  \\ \hline
+$T$ & $F$ & $F$ & $F$ & $T$  & $F$ & $T$   \\ \hline
+$F$ & $T$ & $T$ & $T$ & $F$  & $T$ & $T$   \\ \hline
+$F$ & $F$ & $T$ & $T$ & $T$  & $T$ & $T$   \\ \hline
+\end{tabular}
+\end{center}
+\begin{itemize}
+\item Is $(p\imp q)\eqv  (\ngg q\imp \ngg p)$ satisfiable?
+\item Is $(p\imp q)\eqv  (\ngg q\imp \ngg p)$ unsatisfiable?
+\item Is $(p\imp q)\eqv  (\ngg q\imp \ngg p)$ valid?
+\item Is $(p\imp q)\eqv  (\ngg q\imp \ngg p)$ falsifiable?
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Valid, satisfiable, falsifiable and unsatisfiable formulas}
+\begin{center}
+\unitlength=1.5pt
+\begin{picture}(200,100)
+\put(0,20){
+\put(100,40){\oval(200,80)}
+\put(60,30){\oval(80,30)}
+\put(35,15){\makebox(50,30){\shortstack[l]%
+{True in\\all interpretations.}}}
+\put(35,50){\makebox(50,30){\shortstack[l]%
+{True in some interpretations;\\false in others.}}}
+\put(120,0){\line(0,1){80}}
+\put(120,35){\makebox(80,30){\shortstack[l]%
+{False in\\all interpretations.}}}
+}
+\put(101,0){\makebox(40,20)[b]{Falsifiable}}
+\put(110,10){\vector(0,1){18}}
+\put(130,10){\vector(0,1){18}}
+\put(151,0){\makebox(40,20)[b]{Unsatisfiable}}
+\put(170,10){\vector(0,1){18}}
+\put(50,0){\makebox(50,20)[b]{Satisfiable}}
+\put(65,10){\vector(0,1){30}}
+\put(85,10){\vector(0,1){18}}
+\put(15,0){\makebox(50,20)[b]{Valid}}
+\put(40,10){\vector(0,1){30}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+
+\end{document}
+
