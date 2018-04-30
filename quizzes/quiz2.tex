@@ -11,6 +11,7 @@
 \usepackage{color}
 \usepackage{array}
 \usepackage{graphicx}
+\graphicspath{ {../art/} }
 \usepackage{bm}
 \usepackage{tikz}
 \usepackage{multicol}
@@ -68,6 +69,12 @@
 \newcommand{\st}{\ni}
 \newcommand{\wh}{\widehat}
 
+\newcommand{\id}[1]{\mbox{\it #1\/}}
+\newcommand{\rid}[1]{\mbox{\rm #1}}
+\newcommand{\sid}[1]{\mbox{\sf #1}}
+\newcommand{\bid}[1]{\mbox{\bf #1}}
+\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
+
 %Pagination stuff.
 \setlength{\topmargin}{-.3 in}
 \setlength{\oddsidemargin}{0in}
@@ -80,6 +87,12 @@
 %\pagestyle{empty} 
 %\footer{}{\thepage}{}
 
+\newcommand{\twonode}{%
+  \begingroup\normalfont
+  \includegraphics[height=\fontcharht\font`\b]{2nodetree.eps}%
+  \endgroup
+}
+
 
 \begin{document}
 
@@ -87,8 +100,8 @@
 \noindent
 \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
 {\large CS3920: Foundations of Computer Science} &  \makebox[3in]{\large Name:\enspace\hrulefill}\\
-{\large April 9, 2018} & \\
-{\large Quiz 1} & 
+{\large April 23, 2018} & \\
+{\large Quiz 2} & 
 \end{tabular*}\\
 
 \fbox{\fbox{\parbox{6in}{\textbf{Instructions}: Please answer the questions 
@@ -96,46 +109,137 @@
    This quiz is closed book, closed notes, closed computer. There are \numpoints\ 
    points in total. }}}\\
 \begin{questions}
-\question[3]
-Prove $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$.
+\question[3] Let $K$ be a set containing \emph{all} strings of odd length over the 
+alphabet $\Sigma = \{a\}$.  Give a Post system for $K$.
+
+\vspace{30mm}
+
+\question Consider the following Post system for strings over $\Sigma = \{b\}$:
+
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B1} \>
+        \(\begin{array}[t]{l}
+        bbb \in P
+        \end{array}\) \\[2ex]
+{\bf B2} \>
+        \(\begin{array}[t]{l}
+        bbbb \in P
+        \end{array}\) \\[2ex]
+{\bf R} \>
+        \(\begin{array}[t]{l}
+        x \in P \;\;\;y \in P \\
+        \hline
+        xy \in P
+        \end{array}\) 
+\end{tabbing}
+
+\begin{parts}
+\part[2] Prove that $bbbbbbbbbb$ (i.e., $b^{10}$) is in $P$. (Hint: a derivation is sufficient).
+\vspace{30mm}
+
+\part[3] Consider the set $L = \left \{x \in \Sigma^* \middle \vert \left |x \right| \geq 6\right\}$. Suppose you
+were asked to prove that all elements of $L$ are contained in $P$. Which of the following induction rules
+should you use:
+
+\begin{tabbing}
+[a]XX \=  \kill
+[a] \>
+	\(\begin{array}[t]{l}
+	S(i) \;\wedge\; \forall n \geq i.\;S(i)\;\wedge\;S(i+1)\;\wedge\cdots\wedge\;S(n) \Rightarrow S(n+1) \\
+	\hline
+	\forall n \geq i. \; S(n)
+	\end{array}\)
+\end{tabbing}
+
+\begin{tabbing}
+[b]XX \=  \kill
+[b] \>
+	\(\begin{array}[t]{l}
+	S(i) \;\wedge\; \forall n \leq i.\;S(i)\;\wedge\;S(i-1)\;\wedge\cdots\wedge\;S(n) \Rightarrow S(n-1) \\
+	\hline
+	\forall n \leq i. \; S(n)
+	\end{array}\)
+\end{tabbing}
+
+
+\begin{tabbing}
+[c]XX \=  \kill
+[c] \>
+	\(\begin{array}[t]{l}
+	S(i) \;\wedge\; S(i+1)\;\wedge\cdots\wedge\;S(j)\;\wedge\; \\
+\forall n \geq j.\;S(i)\;\wedge\;S(i+1)\;\wedge\cdots\wedge\;S(n) \Rightarrow S(n+1) \\
+	\hline
+	\forall n \geq i. \; S(n)
+	\end{array}\) % \\[2ex]
+\end{tabbing}
+
+\begin{tabbing}
+[d]XX \=  \kill
+[d] \>
+	\(\begin{array}[t]{l}
+	S(i) \;\wedge\; \forall n \geq i.\;S(n) \Rightarrow S(n+1) \\
+	\hline
+	\forall n \geq i. \; S(n)
+	\end{array}\) % \\[2ex]
+\end{tabbing}
+~\\Briefly justify your answer:
+\end{parts}
+
+
+
+
+\vspace{25mm}
+\clearpage
+
 
 
 \vspace{25mm}
 
-\question[4]
-Define the function \emph{trunc}: $\Sigma^+ \to \Sigma$ for some
-alphabet $\Sigma$ such that $trunc(x) = c$
-where $x$ is any string in $\Sigma^+$ and $c$ is the first character in $x$.
 
-Is $trunc$ injective? Give a proof of your answer. 
+
 \vspace{25mm}
 
-Is $trunc$ surjective? Give a proof of your answer.
-\vspace{25mm}
+\question[3] 
+Recall our mutually recursive definition of rooted trees.
+\begin{tabbing}
+{\bf R2}XX \=  \kill
+{\bf B} \>
+        \(\begin{array}[t]{l}
+        \id{nil}\in\id{RTL}
+        \end{array}\) \\[2ex]
+{\bf R1} \>
+        \(\begin{array}[t]{l}
+        t\in\id{RT}\;\;\;l\in\id{RTL} \\
+        \hline
+        \id{cons}(t,l)\in\id{RTL}
+        \end{array}\) \\[2ex]
+{\bf R2} \>
+        \(\begin{array}[t]{l}
+        l\in\id{RTL} \\
+        \hline
+        \id{node}(l)\in\id{RT}
+        \end{array}\)
+\end{tabbing}
 
+Given this definition, draw the object described in the derivation below: 
 
-\question[3]
-Let $\Sigma = \{a,b\}$
-Consider the relation $P$ on $\Sigma^*$ where $xPy$ for $x,y \in \Sigma^*$
-if and only if there exists a string $w$ in $\Sigma^*$ such that $y = xw$. 
-For example, if $x = aba$ and $y = ababb$, then $(x,y) \in P$ because $w = bb$
-and $bb \in \Sigma^*$.
-
-Show that $P$ is a partial order.
-\vspace{25mm}
-
-
-\question[4]
-Let $\Sigma = \{a,b,c,d\}$.
-Consider the relation $T$ on $\Sigma^+$ where for any two strings $x,y \in
-\Sigma^+$, $xTy$ if and only if the first character in $x$ is equal to the
-first character in $y$. Prove $T$ is an equivalence relation.
-\vspace{25mm}
-
-How many equivalences classes are there with respect to $T$ on $\Sigma^+$?
-\vspace{10mm}
-
-
+\begin{tabular}{llllllll}
+           &                                 & $\bid{B}$             & $\id{nil}\in\id{RTL}$ & & & &\\ 
+\cline{4-4}
+           &                                 & $\bid{R2}$            & $\id{node}(\id{nil})\in\id{RT}$ & $\id{nil}\in\id{RTL}$ & $\bid{B}$ & & \\ 
+\cline{4-5}
+           &                                 & $\bid{R1}$            & \multicolumn{2}{l}{$\id{cons}(\id{node}(\id{nil}),\id{nil})\in\id{RTL}$}  & & &\\
+\cline{4-5}
+$\bid{B}$  & $\id{nil}\in\id{RTL}$           & $\bid{R2}$            & \multicolumn{2}{l}{$\id{node}(\id{cons}(\id{node}(\id{nil}),\id{nil}))\in\id{RT}$} & $\id{nil}\in\id{RTL}$ & $\bid{B}$ &\\ 
+\cline{2-2} \cline{4-6}
+$\bid{R2}$ & $\id{node}(\id{nil})\in\id{RT}$ & $\bid{R1}$            & \multicolumn{3}{l}{$\id{cons}(\id{node}(\id{cons}(\id{node}(\id{nil}),\id{nil})), \id{nil})\in\id{RTL}$} & & \\
+\cline{2-6}
+$\bid{R1}$ &
+\multicolumn{5}{l}{$\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{cons}(\id{node}(\id{nil}),\id{nil})),\id{nil})) \in \id{RTL}$} & &\\
+\cline{2-6}
+$\bid{R2}$ & \multicolumn{5}{l}{$\id{node}(\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{cons}(\id{node}(\id{nil}),\id{nil})),\id{nil})))\in\id{RT}$} & &
+\end{tabular}
 
 %\newpage
 
