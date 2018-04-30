@@ -4,7 +4,9 @@
 TARGETS := abelson.pdf animate_derivations.pdf automata-mutualind.pdf \
 	discrete_math_review.pdf mutualind.pdf pgmsasautomata.pdf \
 	post.pdf post_animate.pdf sampleRTderivation.pdf strings_sets.pdf \
-	strongind.pdf
+	strongind.pdf logicoverview.pdf whyproplogic.pdf pl_syntax_semantics.pdf \
+       
+
 
 #posts :=$(latex:%.pdf=%.ps)
 
