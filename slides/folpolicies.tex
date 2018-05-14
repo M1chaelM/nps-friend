@@ -1,0 +1,270 @@
+
+\documentclass[style=sailor,size=12pt]{powerdot}
+\usepackage{epic,array,ecltree,url,calrsfs}
+\usepackage[nointegrals]{wasysym}
+\usepackage{mlextra}
+\usepackage{listings}
+\graphicspath{ {../art/} }
+
+\newcommand{\id}[1]{\mbox{\it #1\/}}
+\newcommand{\rid}[1]{\mbox{\rm #1}}
+\newcommand{\sid}[1]{\mbox{\sf #1}}
+\newcommand{\bid}[1]{\mbox{\bf #1}}
+\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
+
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {../art/} }
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%Here I define some theorem styles and shortcut commands for symbols I use often
+\theoremstyle{definition}
+
+\newtheorem{innerdefn}{Definition}
+\newenvironment{defn}[1]
+  {\renewcommand\theinnerdefn{#1}\innerdefn}
+  {\endinnerdefn}
+
+\newtheorem{innerexample}{Example}
+\newenvironment{ex}[1]
+  {\renewcommand\theinnerexample{#1}\innerexample}
+  {\endinnerexample}
+
+\newtheorem{innerthm}{Theorem}
+\newenvironment{thm}[1]
+  {\renewcommand\theinnerthm{#1}\innerthm}
+  {\endinnerthm}
+
+\newtheorem{innerlem}{Lemma}
+\newenvironment{lem}[1]
+  {\renewcommand\theinnerlem{#1}\innerlem}
+  {\endinnerlem}
+
+
+
+
+%\newtheorem*{defn}{Definition}
+%\newtheorem{thm}{Theorem}
+%\newtheorem{cor}{Corollary}
+%\newtheorem*{rmk}{Remark}
+%\newtheorem{lem}{Lemma}
+%\newtheorem*{joke}{Joke}
+%\newtheorem{ex}{Example}
+%\newtheorem*{soln}{Solution}
+%\newtheorem{prop}{Proposition}
+
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Ell}{\mathscr{L}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+\newcommand{\mli}[1]{\mathit{#1}}
+\newcommand{\ndiv}{\hspace{-3pt}\not|\hspace{2pt}}
+
+
+\pdsetup{method=normal}
+
+\begin{document}
+
+\begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\begin{itemize}
+\item English lacks precision, often inviting ambiguity:\footnote{
+J. Halpern and V. Weissman, 
+Using First-Order Logic to Reason about Policies, {\em ACM Trans on Information and System Security\/},
+(11)4, July 2008.}
+\begin{quote}
+``only librarians may edit the online catalog''
+\end{quote}
+\item Forbids anyone who is not a librarian from editing the catalog.
+\item But can a librarian edit the catalog?
+\item Structured policy languages (Extensible rights Markup Language and Open Digital Rights Language)
+permit more formal statements but their semantics are usually in English.
+\item First-order logic has a precise semantics and encourages precise policy specification.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\begin{displaymath}
+\begin{array}{l}
+\forall x(\neg\bid{Librarian}(x)\Rightarrow \neg\bid{Permitted}(x,\rid{edit catalog}) \\[1ex]
+\forall x(\bid{Librarian}(x)\Rightarrow \bid{Permitted}(x,\rid{edit catalog})
+\end{array}
+\end{displaymath}
+First formula alone may convey meaning of English statement.
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\begin{itemize}
+\item An article may be downloaded if a fee has been paid within the past 6 weeks:
+\begin{displaymath}
+\begin{array}{l}
+\forall i\, \forall t\, \forall a\, ((\bid{PaidFee}(i,t)\wedge (\bid{now} - 6 < t < \bid{now})\wedge \\
+\bid{Customer}(i,\bid{now})\wedge\bid{Article}(a) \Rightarrow \bid{Permitted}(i,\rid{download}(a)))
+\end{array}
+\end{displaymath}
+$\bid{now}$ is a constant denoting current time (provided by a global clock).
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\begin{itemize}
+\item General form of a policy:
+\begin{displaymath}
+\begin{array}{l}
+\forall x_1\ldots x_m(f \Rightarrow (\neg)\bid{Permitted}(t,t'))
+\end{array}
+\end{displaymath}
+$f$ is a first-order formula, $t$ denotes a subject and $t'$ an action performed by that subject.
+\item Let $E$ be an {\em environment\/} of statements (e.g.\ $\bid{Librarian}(\id{Alice})$).
+\item Let $p_1,\ldots ,p_n$ be policies governing subjects.
+\item Subject $t$ can perform action $t'$ iff 
+\begin{displaymath}
+E\wedge p_1 \wedge \cdots \wedge p_n \Rightarrow \bid{Permitted}(t,t')
+\end{displaymath}
+is {\em valid\/}; i.e.\ $E\wedge p_1 \wedge \cdots \wedge p_n \wedge \neg\bid{Permitted}(t,t')$ 
+is {\em unsatisfiable\/}.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\begin{itemize}
+\item Policies $p_1,\dots p_n$ and environment $E$ are {\em consistent\/} iff
+\begin{displaymath}
+E\wedge p_1 \wedge \cdots \wedge p_n 
+\end{displaymath}
+is {\em satisfiable\/}.
+\item As we shall see, neither validity ot satisfiability is decidable in first-order logic!
+\item Halpern and Weissman give restrictions on $E$ and $p_1,\ldots ,p_n$ under which
+these problems are decidable without compromising the utility of first-order logic for policies.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\begin{itemize}
+\item Recall the policy:
+\begin{displaymath}
+\begin{array}{l}
+\forall i\, \forall t\, \forall a\, ((\bid{PaidFee}(i,t)\wedge (\bid{now} - 6 < t < \bid{now})\wedge \\
+\bid{Customer}(i,\bid{now})\wedge\bid{Article}(a) \Rightarrow \bid{Permitted}(i,\rid{download}(a)))
+\end{array}
+\end{displaymath}
+%$\bid{now}$ is a constant denoting current time 
+\item {\bf Customer} is parameterized on time.
+\item Its truth varies across time (dynamic truth).
+\item Contrast with {\bf Article} whose truth is static.
+\item A more natural way to express this policy uses {\em temporal logic\/}.
+\end{itemize}
+\end{wideslide}
+
+\end{document}
+\begin{center}
+\begin{picture}(255,50)
+%\begin{picture}(255,25)
+\put(  -15, -20){\makebox(2,12){\small time:}}
+\put(  0, 0){\state{\tinysz{n=0}}{$s_{0}$}}
+\put(  10, -20){\makebox(2,12){\small $t_0$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{\tinysz{n=1}}{$s_{1}$}}
+\put(  70, -20){\makebox(2,12){\small $t_1$}}
+\put( 80,10){\vector(1,0){40}}
+\put(120, 0){\state{\tinysz{n=2}}{$s_{2}$}}
+\put( 130, -20){\makebox(2,12){\small $t_2$}}
+\put(140,10){\vector(1,0){40}}
+\put(180, 0){\state{\tinysz{n=3}}{$s_{3}$}}
+\put( 198, -20){\makebox(2,12){\small $t_3\ldots$}}
+%\put(200,10){\vector(1,0){40}}
+%\put(245,5){\makebox(10,10){$\cdots$}}
+	\put(190,0){\line(0,-1){3}}
+	\put(202,-2){\oval(24,12)[b]}
+	\put(202,-2){\oval(24,12)[tr]}
+	\put(203,4){\vector(-1,0){5}}
+	%\put(70,0){\line(0,-1){3}}
+	%\put(82,-2){\oval(24,12)[b]}
+	%\put(82,-2){\oval(24,12)[tr]}
+	%\put(83,4){\vector(-1,0){5}}
+\end{picture}
+\end{center}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Why Temporal Logic?}
+\begin{displaymath}
+\begin{array}{|l|l|}
+\hline
+\bid{First-order logic} & \bid{Temporal logic analog} \\\hline
+\forall i\geq 0.\, n=_{t_i}2\;\rid{is False} & s_0\not\models\Box n = 2\\\hline
+\exists i\geq 0.\, n=_{t_i}2\;\rid{is True}  & s_0\models\Diamond n = 2\\\hline
+\forall i.\exists j.\, n=_{t_j}3 \wedge j\geq i\;\rid{is True} & s_0\models\Box\Diamond n = 3\\\hline
+\exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3 \wedge i > j\;\rid{is False} & 
+s_0\not\models\Diamond (n = 3\wedge\Diamond n = 2)\\\hline
+\exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3 \wedge i < j\;\rid{is True} & 
+s_0\models\Diamond (n = 2\wedge\Diamond n = 3)\\\hline
+\exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3\;\rid{is True} & 
+\rid{no temporal analog as it} \\
+ & \rid{must order}\;t_i\;\rid{and}\;t_j\\\hline
+\end{array}
+\end{displaymath}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Why Temporal Logic?}
+\begin{enumerate}
+\item FOL doesn't care about temporal ordering.  Can write
+\begin{displaymath}
+\exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3
+\end{displaymath}
+which is true for the C program.
+\item Says nothing about which predicate became true first.
+\item Hence it has no analog in temporal logic.
+\item Temporal logic cares about temporal ordering of events.
+\item Awkward predicates in FOL as they're parameterized on time.
+\item But time is not referenced anywhere in the C program.
+\item Predicates not parametrized on time in temporal logic.
+\end{enumerate}
+\end{wideslide}
+\end{document}
