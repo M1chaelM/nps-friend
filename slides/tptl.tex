@@ -1,0 +1,69 @@
+
+\documentclass[style=sailor,size=12pt]{powerdot}
+\usepackage{epic,array,ecltree,wasysym,url}
+\usepackage{mlextra}
+
+\newcommand{\id}[1]{\mbox{\it #1\/}}
+\newcommand{\rid}[1]{\mbox{\rm #1}}
+\newcommand{\sid}[1]{\mbox{\sf #1}}
+\newcommand{\bid}[1]{\mbox{\bf #1}}
+\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
+
+\pdsetup{method=normal}
+
+\begin{document}
+
+\begin{wideslide}[bm=,toc=]{Timed Propositional Temporal Logic}
+\begin{itemize}
+\item Recall the download policy:
+\begin{displaymath}
+\begin{array}{l}
+\forall i\, \forall t\, \forall a\, ((\bid{PaidFee}(i,t)\wedge (\bid{now} - 6 < t < \bid{now})\wedge \\
+\bid{Customer}(i,\bid{now})\wedge\bid{Article}(a) \Rightarrow \bid{Permitted}(i,\rid{download}(a)))
+\end{array}
+\end{displaymath}
+%$\bid{now}$ is a constant denoting current time
+\item {\bf Customer} is parameterized on time.
+\item Its truth varies across time (dynamic truth).
+\item Contrast with {\bf Article} whose truth is static.
+\item A more natural way to express this policy uses {\em timed propositional temporal logic\/} (TPTL).
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Timed Propositional Temporal Logic}
+\begin{itemize}
+\item Temporal logic is missing a {\bf now} constant.
+\item TPTL introduces it via the ``freeze'' quantifier ``$x.$'' which freezes $x$ to the
+time of the local temporal context.\footnote{
+R. Alur and T. Henzinger, A Really Temporal Logic, {\em J. ACM\/},
+(41)1, Jan 1994.}
+\item We can rewrite the download policy in TPTL.  Suppose
+\begin{enumerate}
+\item $\bid{PaidFee}[i]$ is an integer-valued variable storing
+the discrete time at which customer $i$ paid the fee (one for each customer).
+\item $\bid{Customer}(i)$ is a predicate that is true iff $i$ is a customer.
+\item $\bid{Article}(a)$ is a predicate that is true iff $a$ is an article.
+\item $\bid{Permitted}(i,a)$ is a predicate that is true iff 
+customer $i$ is permitted to download article $a$.
+\end{enumerate}
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Timed Propositional Temporal Logic}
+\begin{enumerate}
+\item Imagine a database updated over time to reflect current customers and when they paid their fees.
+\item Represented as a {\em timed\/} linear interpretation of database states.
+\item So the download policy in TPTL becomes
+\begin{displaymath}
+\begin{array}{l}
+\forall i\, \forall a\, \\
+\>\> \Box\; t.\;t - 6 < \bid{PaidFee}[i] < t\; \wedge \\
+\>\>\>\>\bid{Customer}(i) \wedge \bid{Article}(a) \Rightarrow
+\bid{Permitted}(i,a)
+\end{array}
+\end{displaymath}
+which can be regarded as a correctness criterion for the database.
+\end{enumerate}
+\end{wideslide}
+
+\end{document}
