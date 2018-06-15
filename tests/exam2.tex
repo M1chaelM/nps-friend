@@ -1,0 +1,342 @@
+\documentclass[addpoints]{exam}
+
+\usepackage{epic,array,ecltree,url,calrsfs}
+\usepackage[nointegrals]{wasysym}
+\usepackage{mlextra}
+
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {../art/} }
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+%Here I define some theorem styles and shortcut commands for symbols I use often
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem*{rmk}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem*{joke}{Joke}
+\newtheorem{ex}{Example}
+\newtheorem*{soln}{Solution}
+\newtheorem{prop}{Proposition}
+
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\graph}{\mathrm{graph}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Ell}{\mathscr{L}}
+\newcommand{\Z}{\bb{Z}}
+\newcommand{\Q}{\bb{Q}}
+\newcommand{\R}{\bb{R}}
+\newcommand{\C}{\bb{C}}
+\newcommand{\N}{\bb{N}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\m}{\mathbf{m}}
+\newcommand{\MM}{\mathscr{M}}
+\newcommand{\HH}{\mathscr{H}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Ho}{\in\HH(\Om)}
+\newcommand{\bd}{\partial}
+\newcommand{\del}{\partial}
+\newcommand{\bardel}{\overline\partial}
+\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+\newcommand{\img}{\mathrm{img}}
+\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+\newcommand{\inter}[1]{\mathrm{int}{#1}}
+\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\cnt}{\mathrm{ct}}
+\newcommand{\osc}{\mathrm{osc}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\UU}{\mathbf{U}}
+\newcommand{\support}{\mathrm{support}}
+\newcommand{\AND}{\;\wedge\;}
+\newcommand{\OR}{\;\vee\;}
+\newcommand{\Oset}{\varnothing}
+\newcommand{\st}{\ni}
+\newcommand{\wh}{\widehat}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+
+\newcommand{\tf}[1][{}]{%
+\fillin[#1][0.25in]%
+}
+\newcommand{\id}[1]{\mbox{\it #1\/}}
+\newcommand{\rid}[1]{\mbox{\rm #1}}
+\newcommand{\sid}[1]{\mbox{\sf #1}}
+\newcommand{\bid}[1]{\mbox{\bf #1}}
+\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
+
+
+\noprintanswers
+\unframedsolutions
+\SolutionEmphasis{\itshape\small}
+\SolutionEmphasis{\color{NavyBlue}}
+\checkboxchar{$\Box$}
+\checkedchar{$\blacksquare$}
+
+%\pagestyle{empty} 
+%\footer{}{\thepage}{}
+
+\pointsinmargin
+\begin{document}
+
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+{\large CS3920: Foundations of Computer Science} &  \makebox[3in]{\large Name:\enspace\hrulefill}\\
+{\large May 31, 2018} & \\
+{\large Exam 2} & 
+\end{tabular*}\\
+
+\fbox{\fbox{\parbox{6in}{\textbf{Instructions}: Please answer the questions 
+  below to the best of your ability. Be sure to show your work where appropriate. 
+   This exam is closed book, closed notes, closed computer. There are \numpoints\ 
+   points in total and \numbonuspoints\ possible extra credit points. }}}\\
+\begin{questions}
+
+\question[4] Let $A$ be $(p \land q) \imp (r \land s)$. Write $A$ in
+\emph{\underline{clausal}} form.
+\vspace{30mm}
+
+\question[3] Transform the following formula to prenex normal form:
+$\forall x(p(x) \imp \forall y q(y))$
+\vspace{30mm}
+
+
+
+\question[2] Let $S, S'$ be propositional logic formulas in clausal form, 
+ and $C, C' \in S$ clauses of $S$. 
+
+\begin{parts}
+\part \tf[T] (T/F) If $S$ is satisfiable and $S' \subseteq S$, then $S'$ 
+must be satisfiable.
+\part \tf[T] (T/F) If $C$ is unsatisfiable and $C' \subseteq C$, then $C'$
+must be unsatisfiable.
+\end{parts}
+\vspace{5mm}
+
+\question[3] Let $S = \{sr,ps\bar{r},\bar{u}\bar{t},t\}$.
+
+\begin{parts}
+\part \tf[T] (T/F) If $S$ is satisfiable then $t = T$.
+\part \tf[F] (T/F) If $S$ is satisfiable then $u = T$.
+\part \tf[T] (T/F) If $S$ is satisfiable then $ps = \top$.
+\end{parts}
+\vspace{5mm}
+
+
+%For final, need to add interpretations
+%\question[4] Which of the following statements in first order logic correctly
+%             expresses the anti-symmetric property (choose all that apply):
+%\begin{checkboxes}
+%\CorrectChoice $\forall x \forall y(p(x,y) \land p(y,x) \imp q(x,y)$
+%\choice        $\forall x \forall y (\ngg q(x,y) \imp (p(x,y) \imp \ngg %p(y,x)))
+%\end{checkboxes}
+
+\question[4] Consider the following interpretation $\mathcal{I} = (P,\{L,H\},\{\})$,
+where $P$ is a set of people, $L$ is a unary relation such that $L(x)$ if and
+only if $x$ is a librarian, and $H$ is a unary relation such that $H(x)$ if
+and only if $x$ is happy. Write a statement in first order logic to express
+the following:
+\begin{parts}
+\part All librarians are happy if only librarians are happy.
+\vspace{20mm}
+\part If it is the case that if someone is a librarian, no one is happy, then
+no librarian is happy.
+\vspace{20mm}
+\end{parts}
+
+
+\question[6] Let $S$ be a propositional logic formula in clausal form, such that
+$S = \{s\bar{t}, p\bar{r}\bar{s}, \bar{p}\bar{r}, r\bar{s}, \bar{p}rs, st, pt,
+  rt, t\}$. Use DPLL to prove $S$ is a contradiction. Draw the execution tree.
+
+\vspace{60mm}
+
+
+\question The following is proposed as an alternative one-bit adder design:
+
+\begin{center}
+\begin{picture}(280,120)
+\put(-10,  0){\makebox(20,20)[l]{$b_2$}}
+\put(-10,100){\makebox(20,20)[l]{$b_1$}}
+\put(260, 20){\makebox(25,20)[l]{Sum}}
+\put(260, 80){\makebox(25,20)[l]{Carry}}
+\put(20, 10){\line(1,0){50}}
+\put(20,110){\line(1,0){60}}
+\put(30, 10){\line(1, 2){40}}
+\put(30,110){\line(1,-2){40}}
+\put(70, 90){\line(1,0){10}}
+\put(70,80){ %OR gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,20){\oval(20,40)[r]}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(70,0){ %AND gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,0){\line(0,1){40}}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(110,100){\line(1,0){60}}
+\put(110, 20){\line(1,0){60}}
+\put(210, 30){\line(1,0){40}}
+\put(210, 90){\line(1,0){40}}
+\put(170,70){ %AND gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,0){\line(0,1){40}}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}\put(170,10){ %AND gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,0){\line(0,1){40}}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(120,80){  % NOT gate
+  \put( 0, 0){\line(1,0){20}}
+  \put( 0, 0){\line(1,-2){10}}
+  \put(20, 0){\line(-1,-2){10}}
+  \put(10,-23){\circle{6}}
+}
+\put(130,80){\line(0,1){20}}
+\put(130,54){\line(0,-1){14}}
+\put(130,40){\line(1,0){40}}
+\put(150,80){\line(1,0){20}}
+\put(150,20){\line(0,1){60}}
+\end{picture}
+\end{center}
+
+\begin{parts}
+\part[4] Write a propositional logic statement using $b_1$ and $b_2$ that is
+true if and only if:
+\begin{subparts}
+\subpart the carry bit is set
+\vspace{15mm}
+\subpart the sum bit is set
+\vspace{15mm}
+\end{subparts}
+\part[4] Use your statements to evaluate the proposed design:
+\begin{subparts}
+\subpart Does the carry-bit give the correct output? If yes, explain how you
+know this. If no, provide an example. 
+\vspace{20mm}
+\subpart For which values of $b_1$ and $b_2$, if any, does the circuit as a
+whole give the correct output?
+\vspace{20mm}
+\end{subparts}
+\end{parts}
+
+
+
+
+\clearpage
+\question[4] Fill in the blanks to produce an interpretation that
+\emph{\underline{satisfies}} the
+formula: 
+
+\begin{parts}
+\part $A = \forall n p(n,f(a,n))$, and $\mathcal{I}_A = \{\Z^+, \{=\}, \{\times\}, \{\fillin[1][1cm]\} \}$
+\part $A = \forall n p(n,f(a,n))$, and $\mathcal{I}_A = \{\N_0, \{=\}, \{\fillin[+][1cm]\}, \{0\}\}$
+\part $A = \exists x p(x,a) \imp \forall x p(x,a)$, and $\mathcal{I}_A = \{\fillin[\{1\}][1cm], \{\geq\}, \{\fillin[1][1cm]\} \}$
+\end{parts}
+\vspace{5mm}
+
+\question[4] Fill in the blanks to produce an interpretation that
+\emph{\underline{falsifies}} the
+formula: 
+
+\begin{parts}
+\part $A = \forall x \forall y (p(x,y) \imp
+    p(f(x,a),f(y,a)))$, $\mathcal{I}_A = \{\Z, \{< \}, \{\fillin[][1cm]\}, \fillin[][1cm] \}$
+\part $A = (\exists x p(x) \land \exists x q(x) ) \imp \exists x (p(x) \land
+    q(x))$, $\mathcal{I}_A = \{\N_0, \{\{1\},\fillin[][1cm] \}, \{\} \}$ 
+\part $A = \exists x \exists y (p(x) \land \ngg p(y))$, $\mathcal{I}_A =
+\{\fillin[][1cm], \{\{1\} \}, \{\} \}$
+\end{parts}
+\vspace{5mm}
+
+
+
+\question[4] Let $A$ and $B$ be problems such that $A$ reduces to $B$, and
+evaluate each of the following claims:
+\begin{parts}
+\part \tf[T] (T/F) If $B$ is decidable, $A$ is decidable.
+\part \tf[F] (T/F) If $B$ is NP-Hard, $A$ is decidable.
+\part \tf[T] (T/F) If FOL-VAL reduces to $A$, $B$ is undecidable.
+\part \tf[F] (T/F) If $B$ reduces to FOL-SAT, $B$ is undecidable.
+\end{parts}
+
+\vspace{5mm}
+
+\question Let $\mathcal{F}$ be the set of all formulas in propositional logic.
+Define $A \subseteq \mathcal{F}$ to be the set of formulas that your instructor
+finds interesting, and let $B$ be the set of all other formulas.
+\begin{parts}
+
+\part[4] Assume we show that a non-deterministic Turing machine can determine
+whether a formula is in $A$ in polynomial time. Which of the following can you 
+conclude (choose all that apply)?
+\begin{checkboxes}
+\CorrectChoice $A$ is in NP. 
+\choice        $A$ is NP-Hard.
+\CorrectChoice $A$ is decidable. 
+\CorrectChoice $A$ is semi-decidable. 
+\end{checkboxes}
+
+\vspace{5mm}
+\part[4] Now assume PL-SAT reduces to $A$ in polynomial time. Which of the following can you 
+conclude (choose all that apply)?
+\begin{checkboxes}
+\CorrectChoice $A$ is NP-Complete.
+\CorrectChoice $A$ is NP-Hard.
+\CorrectChoice $B$ is in CoNP.
+\CorrectChoice $B$ is CoNP-Complete.
+\end{checkboxes}
+\end{parts}
+
+\vspace{5mm}
+%\question Let $FOL$ be the set of all formulas in first-order logic, and $A$-FOL  
+
+
+
+%\part[1] $A = (\forall x p(x) \imp \forall x q(x)) \imp \forall x (p(x) \imp q(x))$ and $\mathcal{I}_A = \{\N_0, \{=\}, \{\times\}, \fillin \}$
+
+\bonusquestion[2] Let $D$ be the relation such that $(a,b) \in D$ iff $a$ divides
+$b$, for integers $a$ and $b$. 
+
+\begin{parts}
+\part Write an expression in first order logic and give an 
+appropriate interpretation to define $D$ in terms of equality and
+multiplication. 
+\vspace{10mm}
+\part Express the claim that $D$ is antisymmetric. 
+\end{parts}
+
+\end{questions}
+\end{document}
+
+
