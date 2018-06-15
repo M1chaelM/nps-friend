@@ -5,6 +5,10 @@ TARGETS := abelson.pdf animate_derivations.pdf automata-mutualind.pdf \
 	discrete_math_review.pdf mutualind.pdf pgmsasautomata.pdf \
 	post.pdf post_animate.pdf sampleRTderivation.pdf strings_sets.pdf \
 	strongind.pdf logicoverview.pdf whyproplogic.pdf pl_syntax_semantics.pdf \
+        decisionproc.pdf folpolicies.pdf fol_syntax_semantics.pdf \
+        fol_sat_val.pdf fol_functions_pcnf.pdf fol_comp_dec.pdf \
+        whytemporallogic.pdf ptl_syntax_semantics.pdf ptl_sat_val.pdf \
+        tptl.pdf mutexproof.pdf 
        
 
 

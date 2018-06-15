@@ -120,7 +120,7 @@
 \begin{slide}[bm=,toc=]{Validity in FOL is Undecidable}
 There is no decision procedure for validity in first order logic.
 \begin{itemize}
-\item First proved by Alonzo Church.
+\item First proved by Alonzo Church in 1936.
 \item Proof uses a reduction \emph{from} the halting problem.
 \item That is $\id{HALT} \leq \id{FOL-VAL}$
 \begin{itemize}
@@ -241,7 +241,7 @@ These classes are conveniently abbreviated:
 \begin{wideslide}[bm=,toc=]{Undecidable Subclasses}
 \begin{thm}{12.6}
 There are \emph{no} decision procedures for the validity of pure PCNF formulas whose
-prefixes are of one of the following forms:
+prefixes have one of the following forms:
 \[ \exists z \forall x_1\cdots \forall x_n \exists y_1 \cdots \exists y_m, \]
 \[ \forall x_1\cdots \forall x_n \exists y_1 \exists y_2 \exists y_2 \forall z_1 \cdots \forall z_m. \]
 For the first prefix, the result holds even if $n = m = 1$:
@@ -251,6 +251,51 @@ and for the second prefix, the result holds even if $n = 0, m = 1$:
 Even if the matrix is restricted to contain only binary predicate symbols, there
 is still no decision procedure.
 \end{thm}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Application to Policy Statements}
+\begin{ex}{3.2}[Halpern and Weissman]
+Consider the policy `anyone who is accompanied by a librarian
+may enter the stacks'.\\~\\
+In first-order logic:
+\begin{align*}
+& \forall x_1 (\exists x_2 (\bid{Librarian}(x_2) \land \bid{Accompanies}(x_2,x_1)) \imp \\
+& \bid{Permitted}(x_1, enter(stacks)))
+\end{align*}
+\end{ex}
+\begin{itemize} 
+\item Note that \emph{enter} is a function.
+\item Validity for existential formulas with functions is undecidable. 
+\item Need a more restricted sublanguage.
+\item Decidable is not enough---must also be \emph{tractable}.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{A Tractable Sublanguage for Access
+  Control}
+Halpern and Weissman propose and analyze the complexity and expressiveness
+of several fragments of FOL. One example:
+\begin{thm}{4.2}[Halpern and Weissman]
+Let $\Phi$ be a vocabulary that contains {\bf Permitted} (and possibly
+other predicate, constant, and function symbols). Let $\mathcal{L}_6$
+consist of all closed formulas in $\mathcal{L}^{fo}(\Phi)$ of the
+form $E \land P \imp \bid{Permitted}(t,t')$, where $P$ is a conjunction
+of standard policies and both $t$ and $t'$ and closed terms of the
+appropriate sort, such that
+\end{thm}
+\vspace{-2ex}
+\begin{enumerate}
+\renewcommand{\labelenumi}{\alph{enumi})}
+\item E is a basic environment with $m$ constants,
+\item no policy in P has an inequality in its antecendent, and
+\item there are no bipolars in P relative to the equality statements
+in E.
+\end{enumerate}
+\emph{If each literal in each policy has at most one variable
+  that does not appear in {\bf Permitted}, then we can determine
+    the validity of the formula in time $O((|E| + m|P|)log|E|)$.}
+
+    {\tiny (Refer to paper for detailed explanation of these constraints.)}
 \end{wideslide}
 
 

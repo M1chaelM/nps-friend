@@ -1,7 +1,7 @@
 
 .PHONY: all clean install 
 
-TARGETS := quiz1.pdf quiz2.pdf 
+TARGETS := quiz1.pdf quiz2.pdf quiz3.pdf quiz4.pdf quiz5.pdf exam1.pdf exam2.pdf exam3.pdf
 
 
 all: $(TARGETS)

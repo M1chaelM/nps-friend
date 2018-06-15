@@ -112,10 +112,58 @@
 \pdsetup{method=normal}
 
 \begin{document}
+\begin{wideslide}[bm=,toc=]{Limitations of Propositional Logic}
+Previously, we used propositional logic to simplify the conditional statement:
+\begin{program}
+if (a < b || (a >= b \&\& c == d)) ...
+\end{program}
+to the equivalent statement
+\vspace{-1em}
+\begin{program}
+if (a < b || c == d) ...
+\end{program}
+However, there are other equivalences that propositional logic cannot justify.
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{First Order Logic Equivalence Example}
+Consider the expression:
+\begin{program}
+if ((a < b) and (a < c) and (b < c))...
+\end{program}
+which can be simplified to
+\vspace{-1em}
+\begin{program}
+if ((a < b) and (b < c))...
+\end{program}
+\vspace{-1em}
+In propositional logic, this equivalence would be written as:\\~\\
+$p \land q \land r \equiv p \land r$\\~\\
+which is not true for the interpretation $v_{\mathcal{I}}(p) = T$,
+   $v_{\mathcal{I}}(q) = F$, $v_{\mathcal{I}}(r) = T$
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{First Order Logic and Predicates}
+First-order logic allows propositions to contain arguments.
+\begin{itemize}
+\item Called ``predicates''
+\item Values of propositions no longer restricted to T/F.
+\item Predicates can express set-theoretic relations.
+\end{itemize}
+\begin{ex}{}[Ullman]
+Define the relation $\id{lt}$ such that $\id{lt}(x,y)$ iff $x < y$ and let $p = \id{lt}(a,b)$, $q = \id{lt}(a,c)$, and $r = \id{lt}(b,c)$.
+\\~\\
+We can now rewrite the equivalent statements as:\\
+$(\id{lt}(a,b) \land \id{lt}(a,c) \land \id{lt}(b,c)) \equiv (\id{lt}(a,b) \land \id{lt}(b,c))$
+\\~\\
+First order logic allows us to express that $\id{lt}$ is transitive, and further that the above
+equivalence holds for \emph{all} predicates that express transitive relations.
+\end{ex}
+\end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Policies in first-order logic}
 \begin{itemize}
-\item English lacks precision, often inviting ambiguity:\footnote{
+\item First order logic can also be used to express access control policies.
+\item Informal policy statements often invite ambiguity:\footnote{
 J. Halpern and V. Weissman, 
 Using First-Order Logic to Reason about Policies, {\em ACM Trans on Information and System Security\/},
 (11)4, July 2008.}
@@ -137,7 +185,7 @@ permit more formal statements but their semantics are usually in English.
 \forall x(\bid{Librarian}(x)\Rightarrow \bid{Permitted}(x,\rid{edit catalog})
 \end{array}
 \end{displaymath}
-First formula alone may convey meaning of English statement.
+First formula alone may convey the meaning of the English statement.
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Policies in first-order logic}
