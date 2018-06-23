@@ -1,0 +1,113 @@
+% For tweaking page size
+\newcommand*{\enlarge}{\enlargethispage{\baselineskip}}
+
+% Increase spacing in tabular and array
+\setlength\extrarowheight{2pt}
+\setlength\tabcolsep{5pt}
+\setlength\arraycolsep{5pt}
+
+% Hyphenation patterns 
+\hyphenation{BDD}\hyphenation{BDDs}\hyphenation{OBDD}\hyphenation{OBDDs}
+\hyphenation{tab-leau tab-leaux}
+
+% Tabular environment for formal proofs with "reasons"
+% First column is number, second is formula, third is reason
+%   "reasonp" with proof environment
+%   "reasonw" with environment for proofs of wp
+
+\newenvironment{reason}%
+{\begin{tabular*}{.9\textwidth}{rl@{\extracolsep{\fill}}r}}%
+{\end{tabular*}\mbox{}\\}
+
+\newenvironment{reasonp}%
+{\begin{proof}\mbox{}\\\begin{reason}}%
+{\end{reason}\qed\end{proof}}
+
+\newenvironment{reasonw}%
+{\begin{tabular*}{.95\textwidth}{@{\hspace*{-1em}}rl@{\extracolsep{\fill}}r}}%
+{\end{tabular*}}
+
+% Environment (tabbing) for a program and a Prolog program
+\newenvironment{program}%
+{ \begin{center} \begin{tt} \begin{minipage}{\textwidth} \begin{tabbing}
+mm\=mm\=mm\=mm\=mm\=mm\=mm\=mm\=mm\=mm\= \kill }%
+{\end{tabbing} \end{minipage} \end{tt} \end{center} }
+
+\newenvironment{prolog}%
+{\begin{quote}\begin{tt}\begin{minipage}{\textwidth}\begin{tabbing}
+mm\=mm\=mm\=mm\=mm\=mm\=mm\=mm\=mmmmmmmmmmmmmmmmmmmm\= \kill}%
+{\end{tabbing}\end{minipage}\end{tt}\end{quote}}
+
+% Graphics: nodes and states, dotted line for BDDs
+\newcommand*{\node}[1]{
+  \put(5,5){\circle{10}}
+  \put(0,0){\makebox(10,10){\small $#1$}}
+}
+\newcommand*{\state}[2]{
+  \put(10,10){\circle{20}}
+  \put( 0, 0){\makebox(20,20){#1}}
+  \put( 0,20){\makebox(2,12){\small #2}}
+}
+\newcommand*{\dl}[4]{\thicklines\dottedline{3}(#1,#2)(#3,#4)\thinlines}
+
+
+% Commands for symbols and constructs
+
+% Inductive assertion {pre}prog{post}
+\newcommand*{\induct}[3]{\{#1\}\:{\p{#2}}\:\{#3\}}
+
+% Comma with extra space, lots of space, abbreviation of overline
+\newcommand*{\comma}{,\:}
+\newcommand*{\cm}{,\;\;}
+\newcommand*{\ov}[1]{\overline{#1}}
+
+% Entity in a program
+\newcommand*{\p}[1]{\textup{\texttt{#1}}}
+
+% Weakest precondition wp(construct, formula)
+\newcommand{\wpp}[2]{\mathit{wp}(\p{#1},\,#2)}
+
+% Remove space in minipage
+\newcommand*{\minisp}{\vspace{-\abovedisplayskip}}
+
+% Indent
+\newcommand*{\ind}{\hspace*{2em}}
+
+% Logical operators \ngg (negation), \imp (implication),
+%   \revimp (reverse implication), \eqv (equivalence),
+%   \neqv (non-equivalence), \logeqv (logical equivalence),
+\newcommand*{\ngg}{\mathop{\neg}}
+\newcommand*{\imp}{\mathbin{\rightarrow}}
+\newcommand*{\revimp}{\mathbin{\leftarrow}}
+\newcommand*{\eqv}{\mathbin{\leftrightarrow}}
+\newcommand*{\neqv}{\mathbin{\oplus}}
+\newcommand*{\logeqv}{\mathrel{\equiv}}
+\newcommand*{\fml}{\mathit{fml}}
+
+% \sqnt (sequent)
+\newcommand*{\sqnt}{\mathrel{\Rightarrow}}
+% \nxt (next operation in LTL),
+\newcommand*{\nxt}{\mathord{\ocircle}}
+% \W - shortcut for W with superscript in wp proofs
+\newcommand*{\W}[1]{\p{W}$^{#1}$}
+
+% Command for drawing directed graphs
+%   Used in the chapter on the verification of concurrent programs
+\newcommand*{\pntleft}[1]{
+  \put(  0,0){\vector(-1,-1){15}}
+  \put(-20,-20){\circle{10}}
+  \put(-25,-25){\makebox(10,10){\small #1}}
+}
+\newcommand*{\pntright}[1]{
+  \put(  0,0){\vector(1,-1){15}}
+  \put( 20,-20){\circle{10}}
+  \put( 15,-25){\makebox(10,10){\small #1}}
+}
+\newcommand*{\xright}{
+  \put(  0,0){\line(1,-1){15}}
+  \put( 15,-25){\makebox(10,10){\small $\times$}}
+}
+\newcommand*{\xleft}{
+  \put(  0,0){\line(-1,-1){15}}
+  \put(-25,-25){\makebox(10,10){\small $\times$}}
+}
