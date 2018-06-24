@@ -2,7 +2,6 @@
 
 \usepackage{epic,array,ecltree,url,calrsfs}
 \usepackage[nointegrals]{wasysym}
-\usepackage{mlextra}
 
 \usepackage{array,epsfig}
 \usepackage{amsmath}
@@ -10,6 +9,7 @@
 \usepackage{amssymb}
 \usepackage{amsxtra}
 \usepackage{amsthm}
+\usepackage{mlextra} % must be below ams packages
 \usepackage{mathrsfs}
 \usepackage{color}
 \usepackage{array}
@@ -18,59 +18,6 @@
 \usepackage{bm}
 \usepackage{tikz}
 \usepackage{multicol}
-
-\renewcommand\qedsymbol{$\blacksquare$}
-
-%Here I define some theorem styles and shortcut commands for symbols I use often
-\theoremstyle{definition}
-\newtheorem{defn}{Definition}
-\newtheorem{thm}{Theorem}
-\newtheorem{cor}{Corollary}
-\newtheorem*{rmk}{Remark}
-\newtheorem{lem}{Lemma}
-\newtheorem*{joke}{Joke}
-\newtheorem{ex}{Example}
-\newtheorem*{soln}{Solution}
-\newtheorem{prop}{Proposition}
-
-\newcommand{\lra}{\longrightarrow}
-\newcommand{\ra}{\rightarrow}
-\newcommand{\surj}{\twoheadrightarrow}
-\newcommand{\graph}{\mathrm{graph}}
-\newcommand{\bb}[1]{\mathbb{#1}}
-\newcommand{\Ell}{\mathscr{L}}
-\newcommand{\Z}{\bb{Z}}
-\newcommand{\Q}{\bb{Q}}
-\newcommand{\R}{\bb{R}}
-\newcommand{\C}{\bb{C}}
-\newcommand{\N}{\bb{N}}
-\newcommand{\M}{\mathbf{M}}
-\newcommand{\m}{\mathbf{m}}
-\newcommand{\MM}{\mathscr{M}}
-\newcommand{\HH}{\mathscr{H}}
-\newcommand{\Om}{\Omega}
-\newcommand{\Ho}{\in\HH(\Om)}
-\newcommand{\bd}{\partial}
-\newcommand{\del}{\partial}
-\newcommand{\bardel}{\overline\partial}
-\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
-\newcommand{\img}{\mathrm{img}}
-\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
-\newcommand{\inter}[1]{\mathrm{int}{#1}}
-\newcommand{\exter}[1]{\mathrm{ext}{#1}}
-\newcommand{\cl}[1]{\mathrm{cl}{#1}}
-\newcommand{\ds}{\displaystyle}
-\newcommand{\vol}{\mathrm{vol}}
-\newcommand{\cnt}{\mathrm{ct}}
-\newcommand{\osc}{\mathrm{osc}}
-\newcommand{\LL}{\mathbf{L}}
-\newcommand{\UU}{\mathbf{U}}
-\newcommand{\support}{\mathrm{support}}
-\newcommand{\AND}{\;\wedge\;}
-\newcommand{\OR}{\;\vee\;}
-\newcommand{\Oset}{\varnothing}
-\newcommand{\st}{\ni}
-\newcommand{\wh}{\widehat}
 
 %Pagination stuff.
 \setlength{\topmargin}{-.3 in}
@@ -82,12 +29,6 @@
 \newcommand{\tf}[1][{}]{%
 \fillin[#1][0.25in]%
 }
-\newcommand{\id}[1]{\mbox{\it #1\/}}
-\newcommand{\rid}[1]{\mbox{\rm #1}}
-\newcommand{\sid}[1]{\mbox{\sf #1}}
-\newcommand{\bid}[1]{\mbox{\bf #1}}
-\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
-
 
 \noprintanswers
 \unframedsolutions
@@ -96,8 +37,6 @@
 \checkboxchar{$\Box$}
 \checkedchar{$\blacksquare$}
 
-%\pagestyle{empty} 
-%\footer{}{\thepage}{}
 
 \pointsinmargin
 \begin{document}
