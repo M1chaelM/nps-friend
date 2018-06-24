@@ -8,7 +8,7 @@
 \usepackage{amsxtra}
 \usepackage{amsthm}
 \usepackage{mathrsfs}
-\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{array}
 \usepackage{graphicx}
 \graphicspath{ {../art/} }
@@ -83,6 +83,12 @@
 \date{\today}
 %\pagestyle{empty} 
 %\footer{}{\thepage}{}
+\noprintanswers
+\unframedsolutions
+\SolutionEmphasis{\itshape\small}
+\SolutionEmphasis{\color{NavyBlue}}
+
+
 
 \begin{document}
 
@@ -96,24 +102,46 @@ Sam says: ``I'll call you if I'm interested.'' A few days later, he calls you.
 
 Is Sam interested? Assume he's not a liar.
 
+\begin{solution}
+Unknown.
+\end{solution}
+
 \question
 Rouben says: ``If I call you, I'm interested.'' A few days later, he calls you.
 
 Is Rouben interested? Assume he's not a liar.
 
+\begin{solution}
+Yes.
+\end{solution}
+
+
 \question If it's raining, Steve brings an umbrella.\\
     Today, Steve brought an umbrella.\\
     Is it raining today?
 
+\begin{solution}
+Unknown.
+\end{solution}
+
+
 \question Joe breathes when he eats.\\
     Joe is breathing.\\
     Is Joe eating?
+\begin{solution}
+Unknown.
+\end{solution}
+
 
 \question Let $p$ be the statement ``Beau likes fish.''\\
     Let $q$ be the statement ``1 = 0.''\\
     Let $s$ be the statement $p \implies q$.\\
     Assume $s$ is True.\\
     Does Beau like fish?
+\begin{solution}
+No.
+\end{solution}
+
 
 \section*{Review of Sets and Functions}
 \subsection*{Sets}
@@ -122,9 +150,45 @@ Recall $a|b$ for $a,b \in \Z$ if and only if there exists some $k \in \Z$ such t
    Let $A = \{a \in \N| a \text{ divides } c \}$ and let\\ 
    $B = \{b \in \N| b\text{ divides }d \}$. Prove $A \subseteq B$.
 
+\begin{solution}
+\begin{proof}
+To show $A \subseteq B$ we will show that $x \in A$ implies $x \in B$.
+By definition of division, $x \in A$ implies that there is an integer
+$k$ such that $c = kx$. Moreover, we know that $c$ divides $d$ so
+there is some integer $m$ such that $d = mc$. Subsituting for
+$c$ yields $c = (mk)x$. Since $mk \in \Z$, $x$ divides $d$, so $x \in B$.
+\end{proof}
+\end{solution}
+
+
 \question
 Prove $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$.
+\begin{solution}
+\begin{proof}
+To show equality between sets, we show first $A \cup (B \cap C) \subseteq (A
+    \cup B) \cap (A \cup C)$, then 
+$(A \cup B) \cap (A \cup C) \subseteq A \cup (B \cap C)$:
 
+Beginning with the former, let $x$ be an arbitrary element of 
+$A \cup (B \cap C)$. We will show it must also be in $(A \cup B) \cap (A \cup C)$. 
+There are two cases: $x \in A$ and $x \notin A$. If $x \in A$, it is in both
+ $(A \cup B)$ and $(A \cup C)$, by definition of union. It must also therefore
+ be in $(A \cup B) \cap (A \cup C)$, by definition of intersection. If $x \notin A$, 
+ it is in $B \cap C$. Therefore $x \in B$ and $x \in C$, so $x \in (A \cup B)$ and 
+ $x \in (A \cup C)$, and also their intersection $(A \cup B) \cap (A \cup C)$.
+This shows $A \cup (B \cap C) \subseteq (A \cup B) \cap (A \cup C)$.
+\\~\\
+Next, we show $x \in (A \cup B) \cap (A \cup C)$ implies 
+$x \in A \cup (B \cap C)$. Again consider the cases $x \in A$ and $x \notin A$.
+If $x \in A$, it is immediate that $x \in A \cup (B \cap C)$, by definition
+of union. If $x \notin A$, note that by definition of intersection we have that
+$x \in (A \cup B) \cap (A \cup C)$ implies $x \in (A \cup B)$ and $x \in (A \cup C)$,
+so it must follow that $x \in C$ and $x \in B$. Therefore, it is in the
+intersection of $B$ and $C$ and, consequently, $x \in A \cup (B \cap C)$.
+
+\end{proof}
+
+\end{solution}
 
 
 \subsection*{Functions}
@@ -138,8 +202,25 @@ exists $x \in A$ such that $f(x) = y$.
 
 \begin{enumerate}[label=\alph*)]
 \item Is $f$ injective? Give a proof of your answer.
+\begin{solution}
+Yes.
+\begin{proof}
+$f(x) = f(y)$ implies $x^2 = y^2$. Since $x,y \in \N$, they
+are positive, so it must be the case that $x = y$.
+\end{proof}
+
+
+\end{solution}
 
 \item Is $f$ surjective? Give a proof of your answer.
+\begin{solution}
+No.
+\begin{proof}
+$2$ is a natural number, but there is no natural number $k$ such that
+$k^2 = 2$.
+\end{proof}
+\end{solution}
+
 \end{enumerate}
 
 
@@ -147,7 +228,38 @@ exists $x \in A$ such that $f(x) = y$.
 and $f(x) = -\left (\frac{x+1}{2} \right) $ if $x$ is odd.
 \begin{enumerate}[label=\alph*)]
 \item Is $f$ injective? Give a proof of your answer.
+\begin{solution}
+Yes.
+\begin{proof}
+We want to show $f(x) = f(y)$ implies $x = y$. There are three cases:
+$x$ and $y$ are even, $x$ and $y$ are odd and $x$ is even and $y$ is odd.
+\\~\\
+If $x$ and $y$ are even, $f(x) = f(y) \implies \frac{x}{2} = \frac{y}{2}
+\implies x = y$.
+\\~\\
+If $x$ and $y$ are odd, 
+$f(x) = f(y) \implies - \left (\frac{x + 1}{2} \right ) = - \left (\frac{y + 1}{2} \right
+    ) \implies x + 1 = y + 1 \implies x = y$.
+\\~\\
+If $x$ is even and $y$ is odd, then $f(x) \neq f(y)$, since $f(x)$ will be
+positive and $f(y)$ will be negative. Therefore, it is vacously true that
+$f(x) = f(y) \implies x = y$.
+\end{proof}
+
+
+\end{solution}
 \item Is $f$ surjective? Give a proof of your answer.
+\begin{solution}
+Yes.
+\begin{proof}
+We must show that for any integer $z$ there is a natural number $n$ such that
+$f(n) = z$. If $z$ is positive or zero, choose $n = 2z$. Clearly, $n$ is an 
+even natural number, so $f(n) = \frac{2z}{2} = z$. If $z$ is negative, 
+choose $n = -2z - 1$. Since $-2z$ is even and positive, $n$ must be odd.
+The smallest even positive number is $2$, so $n \geq 1$. Therefore, $n$
+is a natural number and $f(n) = -\frac{-2z -1 + 1}{2} = z$.
+\end{proof}
+\end{solution}
 \end{enumerate}
 
 \question
@@ -156,8 +268,20 @@ $n \leq x < n+1$.(Note that $\R^+$ denotes the positive real numbers.)
 
 \begin{enumerate}[label=\alph*)]
 \item Is $floor$ injective? Give a proof of your answer. 
+\begin{solution}
+No.
+\begin{proof}
+Choose $x = 1.5$ and $y = 1.75$. $f(x) = f(y)$, but $x \neq y$.
+\end{proof}
+\end{solution}
 
 \item Is $floor$ surjective? Give a proof of your answer.
+\begin{solution}
+Yes.
+\begin{proof}
+Any natural number is also a positive real number, so for any $n$ we have $f(n) = n$. 
+\end{proof}
+\end{solution}
 
 \end{enumerate}
 
@@ -168,6 +292,25 @@ $n \leq x < n+1$.(Note that $\R^+$ denotes the positive real numbers.)
           if and only if $a$ and $b$ have the same parity. Prove that
           $P$ is an equivalence relation.
 
+\begin{solution}
+\textbf{Note:} This is a trivial proof; the intent is just to show the form of the
+  argument.
+\begin{proof}
+To show $P$ is an equivalence relation, we must show it is reflexive, symmetric
+and transitive.
+\\~\\
+REFLEXIVE: Any integer $a \in \Z$ has the same parity as itself, so $(a,a) \in
+P$.
+\\~\\
+SYMMETRIC: If $aPb$, $a$ and $b$ have the same parity, so clearly it is also the
+case that $bPa$.
+\\~\\
+TRANSITIVE: If $aPb$ and $bPc$, then $a$ has the same parity as $b$ and $b$ has
+the same parity as $c$ so $a$ has the same parity of $c$, and therefore $(a,c)
+\in P$. 
+\end{proof}
+
+\end{solution}
 
 \question
 Let $\Sigma = \{a,b\}$
@@ -176,23 +319,57 @@ if and only if there exists a string $w$ in $\Sigma^*$ such that $y = wx$.
 \begin{enumerate}[label=\alph*)]
 \item Assume $w = aba$. Find $3$ pairs $(x_1,y_1),(x_2,y_2),(x_3,y_3)$ that belong
 to the relation $P$.
+\begin{solution}~\\
+$y = aba$, $x = \epsilon$\\
+$y = abaa$, $x = a$\\
+$y = abab$, $x = b$\\
+\end{solution}
 
 \item Now assume $w$ can be any string in $\Sigma^*$. Is the pair $(x,y) \in P$,
 where $x = bb$ and $y = abbabbabb$? If so, what is $w$? If not, why
 not?
+\begin{solution}
+Yes. $w = abbabba$.
+\end{solution}
 
 \item Consider $x = abababa$ and $y = aba$. Is the pair $(x,y) \in P$? If so,
 what is $w$? If not, why not?
+\begin{solution}
+No. $|x| > |y|$ so there is no $w$ such that $y = wx$.
+\end{solution}
 
 \item Characterize the relation in informal English. What does $xPy$ mean about $x$
 and $y$?\\
+\begin{solution}
+$x$ is a suffix of $y$.
+\end{solution}
 
 \end{enumerate}
 \question Prove the division relation, $a | b$, is a partial order on the set
 of positive integers. 
+\begin{solution}
+See slides on partial orders for the proof.
+\end{solution}
 
 \question Prove the subset relation, $A \subseteq B$, is a partial order on
 sets. 
+\begin{solution}
+\begin{proof}
+To show the subset relation is a partial order, we must show it is reflexive, 
+antisymmetric and transitive.
+\\~\\
+REFLEXIVE: For any set $A$, $A \subseteq A$, so the subset relation is
+reflexive.
+\\~\\
+ANTISYMMETRIC: $A \subseteq B$ and $B \subseteq A$ if and only if any element
+of $A$ is in $B$ and any element of $B$ is in $A$. That is, if and only if 
+$A = B$. 
+\\~\\
+TRANSITIVE: $A \subseteq B$ and $B \subseteq C$ implies that all elements of $A$
+are in $B$ and all elements of $B$ are in $C$. Therefore all elements of $A$ are
+in $C$ so $A \subseteq C$.
+\end{proof}
+\end{solution}
 
 \question 
 Let $\Sigma = \{0,1,2\}$.  Let $T = \{t \in \Sigma^* | |t| \geq 3\}$.
@@ -202,8 +379,42 @@ and string $m$ in $\Sigma^3$ such that $x = rm$ and $y = sm$.
 
 \begin{enumerate}[label=\alph*)]
 \item Prove $Z$ is an equivalence relation.
+\begin{solution}
+\begin{proof}
+To show $Z$ is an equivalence relation, we must show it is reflexive, symmetric
+and transitive.
+\\~\\
+REFLEXIVE: $(x,x) \in Z$ if and only if there exist strings $r,s \in \Sigma^*$ and
+string $m \in \Sigma^3$ such that $x = rm$ and $x = sm$. This is the case
+for any $m$ and any $r$ if we choose $s = r$. Note that this applies to
+all $x$ in $T$ because $x \in T$ implies $x$ has at least $3$ characters. (If
+$x$ had fewer than $3$ characters there would be no choice of $s,m$ that would
+satisfy $x = sm$.)
+\\~\\
+SYMMETRIC: $(x,y) \in Z$ if and only if there exist strings $r,s \in \Sigma^*$ and
+string $m \in \Sigma^3$ such that $x = rm$ and $y = sm$. However, this is
+the same criteria required to show $(y,x) \in Z$ (since the choice of variable
+names $r,s$ is arbitrary), so $bZa$.
+\\~\\
+TRANSITIVE: We want to show that $xZy$ and $yZz$ implies $xZz$. $(x,y) \in Z$
+if and only if there exists $r,s \in \Sigma^*$ and $m \in \Sigma^3$ such 
+that $x = rm$ and $y = sm$.  Also, $(y,z) \in Z$ if and only if there 
+exists $r',s' \in \Sigma^*$ 
+and $m' \in \Sigma^3$ such that $y = r'm'$ and $z = s'm'$. If $y = rm$
+and $y = s'm'$ where $m$ and $m'$ are strings of length three, then
+it must be the case that $m = m'$. Therefore $r, s'$ are strings in
+$\Sigma^*$ such that $x = rm$ and $z = s'm$, which proves $(x,z) \in Z$.
+\end{proof}
+\end{solution}
 
 \item How many equivalences classes are there with respect to $Z$ on $T$?
+\begin{solution}
+27
+\\~\\
+($Z$ is the equivalence class of strings of length $3$ or more that end in
+the same last three characters. There are $3$ characters in the alphabet,
+so the total number of distinct strings of length $3$ is $3^3 = 27$).
+\end{solution}
 \end{enumerate}
 
 %\newpage
