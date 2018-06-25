@@ -10,7 +10,7 @@ all: $(TARGETS)
 	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make $<
 
 install: 
-	cp $(TARGETS) ~/google_drive/NPS/teaching/2018/CS3920/labs/
+	cp $(TARGETS) ~/google_drive/NPS/teaching/2018/CS3920/tests/
 
 
 clean: 
