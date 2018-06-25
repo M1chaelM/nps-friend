@@ -8,7 +8,7 @@
 \usepackage{amsxtra}
 \usepackage{amsthm}
 \usepackage{mathrsfs}
-\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{array}
 \usepackage{graphicx}
 \graphicspath{ {../art/} }
@@ -98,14 +98,18 @@
 %\pagestyle{empty} 
 %\footer{}{\thepage}{}
 
+\noprintanswers
+\unframedsolutions
+\SolutionEmphasis{\itshape\small}
+\SolutionEmphasis{\color{NavyBlue}}
+
+
 \begin{document}
 
 \maketitle
 
 \setlength{\columnseprule}{1pt}
 \begin{questions}
-%This week: strong induction vs. weak induction.
-%Mutual recursive definition and mutual induction.
 
 
 \question Consider the following recursive definitions of sets of strings. 
@@ -203,13 +207,24 @@ for proving properties of the system defined:
 ~\\
     
 \end{multicols}
+\begin{solution}
+Note that the question asks for the ``most suitable'' rule given
+the structure of the system, but to choose a definitive answer you would need to
+also be given the property that you are proving. With this caveat, reasonable
+choices are rule [3] or [2] for system $1$, rule [3] or [2] for system $2$, and 
+rule [1] (weak induction) for system $3$. 
+\end{solution}
 
 \question What is the meaning of $j$ in the third induction rule? What does it
 represent, and what determines its value relative to $i$?
+\begin{solution}
+$j$ represents the index of the last base case. If there are
+$b$ base cases, the value of $j$ will be $i + b - 1$.
+\end{solution}
+
 
 \question Referencing the definition of rooted trees given in the slides,
 draw the structure produced in the following derivation:
-
 \begin{center}
 \begin{tabular}{lllll}
   $\bid{B}$  & $\id{nil}\in\id{RTL}$            &                       & &
@@ -224,13 +239,19 @@ draw the structure produced in the following derivation:
   \multicolumn{3}{l}{$\id{cons}(\id{node}(\id{cons}(\id{node}(\id{nil}),\id{nil})), \id{nil})\in\id{RTL}$}
 \end{tabular}
 \end{center}
+\begin{solution}
+$[\twonode]$
+\end{solution}
 
 \question What is the derivation height of the following tree:  
 
 \begin{center}
 \includegraphics[height=2cm]{2nodetree.eps}%
 \end{center}
-\clearpage
+\begin{solution}
+3
+\end{solution}
+
 \question Reproduced below is the argument from slide $6$ of the mutual
 induction slide set, which proves that the number of edges in a rooted
 tree list, $l'$, of derivation height $n + 1$ is equal to the number of nodes
