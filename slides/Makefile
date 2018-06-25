@@ -32,4 +32,4 @@ install:
 
 
 clean: 
-	latexmk -C
+	latexmk -C && rm *.bm && rm *.vrb
