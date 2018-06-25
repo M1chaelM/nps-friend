@@ -1,2 +1,8 @@
 # Files only to ignore in this project
 *.log
+*.toc
+*.fls
+*.aux
+*.fdb_latexmk
+*.bm
+*.vrb
