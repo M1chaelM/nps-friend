@@ -1,0 +1,88 @@
+\documentclass[addpoints]{exam}
+
+%These tell TeX which packages to use.
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mlextra} % must be below ams packages
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+
+
+
+%\pagestyle{empty} 
+%\footer{}{\thepage}{}
+
+
+\begin{document}
+
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+{\large CS3920: Foundations of Computer Science} &  \makebox[3in]{\large Name:\enspace\hrulefill}\\
+%{Points: /\numpoints\. } \\
+%{\large June 8, 2018} & \\
+{\large Quiz 3} & \\
+{\large Points: \hspace{1cm}/\numpoints} & 
+\end{tabular*}\\
+
+\fbox{\fbox{\parbox{6in}{\textbf{Instructions}: Please answer the questions 
+  below to the best of your ability. \textbf{Show your work} where appropriate to receive credit. 
+   This quiz is closed book, closed notes, closed computer. }}}\\
+\begin{questions}
+
+\question
+Consider the following formula: $A= q \land (p \lor \lnot p)$.
+
+\begin{parts}
+
+
+\part[2] Which of the following correctly characterize(s) $A$? (Select all that apply.)
+
+$\square$ Valid \hspace{1cm} $\square$ Falsifiable \hspace{1cm} $\square$ Satisfiable \hspace{1cm} $\square$ Unsatisfiable
+
+\vspace{.5cm}
+
+\part[2] Which of the following correctly characterize(s) $\lnot A$? (Select all that apply.)
+
+$\square$ Valid \hspace{1cm} $\square$ Falsifiable \hspace{1cm} $\square$ Satisfiable \hspace{1cm} $\square$ Unsatisfiable
+\end{parts}
+\vspace{8mm}	
+
+
+
+\question
+Let $A$ be the formula $(p \implies q) \implies  \lnot (p \land q)$
+\begin{parts}
+	
+\part[3] Write $A$ in conjunctive normal form.
+
+\vspace{7cm}
+
+\part[2] Show $A$ is valid or give an interpretation that falsifies $A$. 
+\end{parts}
+\vspace{5cm}
+
+\question[2]
+Let $U$ be a set of formulas, and let $A$ be any formula.\\
+If $U$ is unsatisfiable, what can you say about $U\cup A$?
+
+\end{questions}
+\end{document}
+
+

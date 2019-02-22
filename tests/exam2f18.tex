@@ -1,0 +1,277 @@
+\documentclass[addpoints]{exam}
+
+\usepackage{epic,array,ecltree,url}
+\usepackage[nointegrals]{wasysym}
+
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mlextra} % must be below ams packages
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {../art/} }
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{pifont}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+
+\newcommand{\tf}[1][{}]{%
+\fillin[#1][0.25in]%
+}
+
+
+\pointsinmargin
+\begin{document}
+
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+	{\large CS3920: Foundations of Computer Science} &  \makebox[3in]{\large Name:\enspace\hrulefill}\\
+	%{Points: /\numpoints\. } \\
+	%{\large June 8, 2018} & \\
+	{\large Exam 2} & \\
+	{\large Points: \hspace{1cm}/\numpoints} & 
+\end{tabular*}\\
+
+\fbox{\fbox{\parbox{6in}{\textbf{Instructions}: Please answer the questions 
+  below to the best of your ability. Be sure to show your work where appropriate. 
+   This exam is closed book, closed notes, closed computer. There are \numpoints\ 
+   points in total with points denoted in parentheses.
+%    and \numbonuspoints\ possible extra credit points. 
+    }}}\\
+\begin{questions}
+\vspace{1cm}
+
+\question Consider the following formula: $A=( p \rightarrow q) \lor p$.
+\begin{parts}
+	
+	
+	\part[1] Which of the following conclusions can be made? (Select all that apply.)
+	
+	$\square$ Valid \hspace{1cm} $\square$ Falsifiable \hspace{1cm} $\square$ Satisfiable \hspace{1cm} $\square$ Unsatisfiable
+	
+	\vspace{.5cm}
+	
+	\part[1] Which of the following correctly characterize(s) $\lnot A$? (Select all that apply.)
+	
+	$\square$ Valid \hspace{1cm} $\square$ Falsifiable \hspace{1cm} $\square$ Satisfiable \hspace{1cm} $\square$ Unsatisfiable
+\end{parts}
+
+\vspace{1cm}
+
+
+
+%\question[6]
+%Let $A$ be a problem relati such that $A$ is in class . Which of the following conclusions can be made? (Select all that apply.)
+
+\question[2] What does it mean for a problem $A$ to be decidable in time $t$?
+
+\vspace{3cm}
+
+\question[3]
+Let $A= p \leftrightarrow (q \land r)$.
+%Let $A= (p\land t) \rightarrow (q \land s)$.
+Write $A$ in clausal form. Circle your final answer.
+
+\vspace{8cm}
+
+\question[2] Let $B$ is equivalent to some formula $(\lnot(p \land q) \rightarrow r) \rightarrow (s \land \lnot s)$, and let $A$ be a logical consequent of $U$.
+
+What can we say about $A$ with respect to $U \cup \{B\}$?
+
+\vspace{3cm}
+
+\newpage
+
+
+\question[4] Use DPLL to show that $A=\{p\bar{q}r, q \bar{r}, \bar{r}p, \bar{q}\bar{p}\}$ is satisfiable or unsatisfiable. Draw the full execution tree. 
+
+If $A$ is satisfiable, give an interpretation that satisfies $A$, else explain why it is unsatisfiable.
+\vspace{7cm}
+
+
+
+
+
+\question Let $p$ be a binary relation on the set S. 
+
+\begin{parts}
+\part[2] Write a formula in first order logic to express the claim that $p$ is reflexive. (Do \textbf{ not} write an interpretation.)
+
+\vspace{1.5cm}
+
+\part[2] Write a formula in first order logic to express the claim that $p$ is symmetric. (Do \textbf{ not} write an interpretation.)
+\vspace{1.5cm}
+
+
+\part[2] Write a formula in first order logic to express the claim that $p$ is transitive. (Do \textbf{ not} write an interpretation.)
+
+
+\vspace{1.5cm}
+
+\part[2] Write a formula in first order logic to express the claim that $p$ is an equivalence relation. (Do \textbf{ not} write an interpretation.)
+	
+\end{parts}
+
+
+
+\vspace{2cm}
+
+	
+	\question[4]
+	Let $A$ and $B$ be two problems such that $A$ is reducible to $B$. Which of the following conclusions can be made? (Select all that apply.)
+	
+	\begin{itemize}
+		\renewcommand{\labelitemi}{$\square$}
+		\renewcommand{\labelitemii}{$\square$}
+		\renewcommand{\labelitemiii}{$\square$}
+		\renewcommand{\labelitemiv}{$\square$}
+		\item If $A$ is P, $B$ is NP.
+		\item If $B$ is P, $A$ is NP.
+		\item If $A$ is NP-hard, $B$ is NP-hard.
+		\item If $B$ is NP-hard, $A$ is NP-hard.
+		%\item If $A$ is semi-decidable, $B$ is semi-decidable.
+		%\item If $B$ is semi-decidable, $A$ is semi-decidable. 
+	\end{itemize}
+	
+	\vspace{5mm}
+
+
+\question[4]
+
+Let $A,A'$ be propositional logic formulas in clausal form, and $ C, C' \in A$ be clauses of A.
+
+\begin{parts}
+\part \underline{\hspace{1cm}} (T/F) If $A$ is satisfiable and $A \subseteq A'$ then $A'$ must be satisfiable.
+\part \underline{\hspace{1cm}} (T/F) If $C$ is unsatisfiable and $C \subseteq C'$ then $C'$ must be unsatisfiable. 
+\end{parts}
+
+\vspace{.5cm}
+
+
+
+\question
+Consider the following interpretation $\mathscr{I} = (P, \{H, T, Q\}, \{\})$ where  $P$ is a set of people and
+\begin{itemize}
+\item $H$ is a unary
+relation such that $H(x)$ if and only if $x$ has pie on Thanksgiving,
+\item $T$ is a unary
+relation such that $T(x)$ if and only if $x$ has turkey on Thanksgiving,
+\item and $Q$ is a unary relation such that $Q(x)$ if and
+only if $x$ is celebrating.
+\end{itemize}  Write formulas in first order logic to express each of the following statements:
+
+\begin{parts}
+	\part[2] Everyone who has pie on Thanksgiving is celebrating.
+	
+	\vspace{1.5cm}
+	
+	\part[2] If everyone is celebrating, then someone has either pie or turkey on Thanksgiving. 
+	
+%	someone does not have either pie or turkey on Thanksgiving, then they are not celebrating.
+%	\vspace{1cm}
+	
+\end{parts}
+
+\vspace{2cm}
+	
+	
+	\question
+	Consider the following formula: 
+	
+	$\exists x \forall y p(x,y) \land p (a, x)$. 
+	\begin{parts}
+		
+		
+		
+		\part[2] Write a sentence in English for the meaning of the interpretation $(\mathbb{N}, \{ \leq \}, \{0\})$ under this formula. 
+		
+		
+		\vspace{1.5cm}
+		
+		\part[1] Fill in the blank to produce an interpretation that satisfies the formula: \\
+		
+		$\mathscr{S}=(\mathbb{R}, \{\underline{\hspace{3cm}}\}, \{1\} )$.
+		
+		
+	\end{parts}
+	
+	
+	\vspace{.5cm}
+	
+	
+	
+	
+%\question[4]
+%Let $\mathscr{F}$ be the set of all formulas in propositional logic. Define $A \subseteq \mathscr{F}$ to be the set of formulas that your instructor finds interesting, and let $B$ be the set of all other formulas. 	
+%
+%Assume that we show that a non-deterministic Turing machine can determine whether or not a formula is in $A$ in polynomial time $t$. Which of the following can you conclude (check all that apply)?
+%
+%\begin{itemize}
+%	\renewcommand{\labelitemi}{$\square$}
+%	\renewcommand{\labelitemii}{$\square$}
+%	\renewcommand{\labelitemiii}{$\square$}
+%	\renewcommand{\labelitemiv}{$\square$}
+%	\item $A$ is NP.
+%	\item $A$ is NP-hard.
+%	\item $A$ is decidable.
+%	\item $A$ is semi-decidable. 
+%	
+%	%\item If $A$ is semi-decidable, $B$ is semi-decidable.
+%	%\item If $B$ is semi-decidable, $A$ is semi-decidable. 
+%\end{itemize}
+%%	\part[2] If someone does not 
+
+
+\question[4] Use resolution to show that $S=\{p\bar{q}r, q \bar{r}, \bar{r}p, \bar{q}\bar{p}, r \}$ is satisfiable or unsatisfiable.
+
+ State what the new full set of clauses $S$ was before the last step of the resolution algorithm.
+
+
+\vspace{7cm}
+
+
+
+
+
+
+\question[4] Prove $\models \exists x (A(x)\rightarrow B(x)) \leftrightarrow (\forall x A(x) \rightarrow \exists x B(x))$.
+
+\vspace{8cm}
+
+\question[6]
+Consider the reduction $A \leq_{T} B$.  
+
+Claim: Turing reduction, $\leq_{T}$, is \textbf{not} a partial order on the set of all problems. 
+
+Which properties of partial ordering hold and which do not? Justify your answers.
+
+\vspace{8cm}
+
+% DPLL \done
+%Resoltion \done
+% theory
+% FOL proof
+% FOL interpretation
+% FOL satisfy / falsify
+% draw dpll tree \done
+% draw resolution tree  \done
+
+
+\end{questions}
+\end{document}
+
+
