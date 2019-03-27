@@ -112,10 +112,33 @@ mm\=mm\=mm\=mm\=mm\=mm\=mm\=mm\=mmmmmmmmmmmmmmmmmmmm\= \kill}%
   \put(-25,-25){\makebox(10,10){\small $\times$}}
 }
 
+\newcommand{\id}[1]{\mbox{\it #1\/}}
+\newcommand{\rid}[1]{\mbox{\rm #1}}
+\newcommand{\sid}[1]{\mbox{\sf #1}}
+\newcommand{\bid}[1]{\mbox{\bf #1}}
+\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
+
+
 \renewcommand\qedsymbol{$\blacksquare$}
 
 %Here I define some theorem styles and shortcut commands for symbols I use often
 \theoremstyle{definition}
+
+\newtheorem{innerdefn}{Definition}
+\newenvironment{defn}[1]
+  {\renewcommand\theinnerdefn{#1}\innerdefn}
+  {\endinnerdefn}
+
+\newtheorem{innerexample}{Example}
+\newenvironment{ex}[1]
+  {\renewcommand\theinnerexample{#1}\innerexample}
+  {\endinnerexample}
+
+\newtheorem{innerthm}{Theorem}
+\newenvironment{thm}[1]
+  {\renewcommand\theinnerthm{#1}\innerthm}
+  {\endinnerthm}
+
 %\newtheorem{defn}{Definition}
 %\newtheorem{thm}{Theorem}
 \newtheorem{cor}{Corollary}
@@ -172,24 +195,4 @@ mm\=mm\=mm\=mm\=mm\=mm\=mm\=mm\=mmmmmmmmmmmmmmmmmmmm\= \kill}%
 \setlength{\textheight}{9.in}
 \setlength{\textwidth}{6.5in}
 
-\newcommand{\id}[1]{\mbox{\it #1\/}}
-\newcommand{\rid}[1]{\mbox{\rm #1}}
-\newcommand{\sid}[1]{\mbox{\sf #1}}
-\newcommand{\bid}[1]{\mbox{\bf #1}}
-\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
-
-\newtheorem{innerdefn}{Definition}
-\newenvironment{defn}[1]
-  {\renewcommand\theinnerdefn{#1}\innerdefn}
-  {\endinnerdefn}
-
-\newtheorem{innerexample}{Example}
-\newenvironment{ex}[1]
-  {\renewcommand\theinnerexample{#1}\innerexample}
-  {\endinnerexample}
-
-\newtheorem{innerthm}{Theorem}
-\newenvironment{thm}[1]
-  {\renewcommand\theinnerthm{#1}\innerthm}
-  {\endinnerthm}
 
