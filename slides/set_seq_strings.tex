@@ -250,7 +250,7 @@ $\emph{n-tuples}$ $(s_1,...,s_n)$ such that $s_i \in S_i$.
 \end{slide}
 
 
-\begin{slide}[bm=,toc=]{Powers of sets}
+\begin{slide}[bm=,toc=]{Powers of sets of strings}
 \begin{itemize}
 \item \emph{Powers} of a set $A$ (i.e.\ $A^n$) are defined inductively:
 \[
@@ -265,6 +265,12 @@ $\emph{n-tuples}$ $(s_1,...,s_n)$ such that $s_i \in S_i$.
       even when one of $m$ or $n$ is zero. 
 \item As a special case, if $A$ is an \emph{alphabet} then $A^n$ is the set of all strings
 over $A$ of length $n$.
+\item \textbf{Note:} 
+\begin{itemize}
+    \item The notation for the $n^{th}$ power of a set of strings is identical to
+    the notation for the \emph{n-ary} Cartesian power.
+    \item Need to determine the meaning from context.
+\end{itemize}
 \end{itemize}
 \end{slide}
 
@@ -379,7 +385,7 @@ Properties of Kleene closure:
 \begin{itemize}
 \item $A^*A^* = A^*$
 \item $(A^*)^* = A^*$
-\item $A^* = \{\epsilon \cup AA^* = \{\epsilon\}\cup A^*A \}$
+\item $A^* = \{\epsilon\} \cup AA^* = \{\epsilon\}\cup A^*A $
 \item $\emptyset^* = \{\epsilon\}$ 
 \item $\{\epsilon\}^* = \{\epsilon\}$ 
 \item $AA^* = A^*A$ 
