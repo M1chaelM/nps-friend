@@ -28,7 +28,7 @@ all: $(TARGETS)
 	latexmk -use-make $<
 
 install: 
-	cp $(TARGETS) ~/google_drive/NPS/teaching/2018/CS3920/new_slides/
+	cp $(TARGETS) ~/google_drive/NPS/teaching/2019/CS3001/slides/
 
 clean: 
 	latexmk -c && rm *.bm && rm *.vrb
