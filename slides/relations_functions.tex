@@ -731,6 +731,66 @@ and only if for all $y \in S_2$ there is a $x \in S_1$ such that
 $\mathcal{F}(x) = y$. 
 \end{itemize}
 \end{defn}
+\vspace{-5mm}
+\begin{figure}[b]
+\subcaptionbox*{Injective}[.4\linewidth]{
+\begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
+\tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
+\tikzset{edge/.style = {->,> = latex'}}
+
+\draw (0, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](a5) at (0,0) {\tiny $3,1$};
+\node[vertex](a4) at (0,1) {\tiny $2,2$};
+\node[vertex](a3) at (0,2) {\tiny $2,1$};
+\node[vertex](a2) at (0,3) {\tiny $1,2$};
+\node[vertex](a1) at (0,4) {\tiny $1,1$};
+
+\draw (3, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](b6) at (3,0)   {\tiny  $6$};
+\node[vertex](b5) at (3,0.8) {\tiny  $5$};
+\node[vertex](b4) at (3,1.6) {\tiny  $4$};
+\node[vertex](b3) at (3,2.4) {\tiny  $3$};
+\node[vertex](b2) at (3,3.2) {\tiny  $2$};
+\node[vertex](b1) at (3,4) {\tiny    $1$};
+
+\draw[edge] (a1) to (b1);
+\draw[edge] (a2) to (b3);
+\draw[edge] (a3) to (b5);
+\draw[edge] (a5) to (b2);
+\end{tikzpicture}
+}
+\qquad
+\subcaptionbox*{Not Injective}[.4\linewidth]{
+\begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
+\tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
+\tikzset{edge/.style = {->,> = latex'}}
+\draw (0, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](a5) at (0,0) {\tiny $3,1$};
+\node[vertex](a4) at (0,1) {\tiny $2,2$};
+\node[vertex](a3) at (0,2) {\tiny $2,1$};
+\node[vertex](a2) at (0,3) {\tiny $1,2$};
+\node[vertex](a1) at (0,4) {\tiny $1,1$};
+
+\draw (3, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](b3) at (3,0)   {\tiny  $3$};
+\node[vertex](b2) at (3,2) {\tiny  $2$};
+\node[vertex](b1) at (3,4) {\tiny  $1$};
+
+\draw[edge] (a1) to (b1);
+\draw[edge] (a2) to (b1);
+\draw[edge] (a3) to (b2);
+\draw[edge] (a4) to (b2);
+\draw[edge] (a5) to (b3);
+
+\end{tikzpicture}
+}
+
+\end{figure}
+
 \end{slide}
 
 \begin{slide}[bm=,toc=]{Bijective Functions}
