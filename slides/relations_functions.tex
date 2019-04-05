@@ -49,6 +49,15 @@ an \emph{n-ary} relation on $S$.
 \item A 1-ary (unary) relation is simply a subset.
 \end{itemize}
 \end{defn}
+\vspace{-3mm}
+\textbf{Notation:}~\\
+Let $R$ be a relation on set $S$ that contains elements $x$ and $y$. 
+The following statements are equivalent: 
+\begin{itemize}
+\item $x$ is related to $y$ under $R$
+\item $xRy$
+\item $(x,y) \in R$
+\end{itemize}
 \end{slide}
 
 \begin{slide}[bm=,toc=]{Examples of Binary Relations}
@@ -409,6 +418,51 @@ A relation is an equivalence relation if it is:
 \item $R_{l}$ 
 \end{itemize}
 \end{slide}
+
+\begin{slide}[bm=,toc=]{Equivalence Classes}
+\begin{defn}{--- Equivalence Classes}~\\
+Let $E$ be an equivalence relation on a set $S$. 
+~\\
+For any element $x \in S$:
+\begin{itemize}
+\item We define the \emph{equivalence class} of $x$ as the set of elements in
+      $S$ that are related to $x$ under relation $E$.
+\item The equivalence class of $x$ is denoted $[x]_{E}$ (or simply $[x]$ if
+      the relation is clear from context).
+\item In symbols, $[x] = \{y \in S| (x,y) \in E\}$
+\end{itemize}
+\end{defn}
+~\\
+\begin{thm}{ -- $S$ is the union of its equivalence classes}~\\
+Let $E$ be an equivalence relation on a set $S$. Then
+\[
+  \bigcup_{x \in X} [x]_E = S
+  \]
+\end{thm}
+This follows from the fact that $E$ is reflexive.
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Equivalence Classes Partition a Set}
+\begin{thm}{ -- Equivalence classes are empty or disjoint}~\\
+The following are equivalent:
+\begin{itemize}
+\item $xEy$ 
+\item $[x] = [y]$ 
+\item $[x] \cap [y] \neq \emptyset$ 
+\end{itemize}
+Consquently, if $x$ and $y$ are not related by $E$, then:
+\item $[x] \neq [y]$, and
+\item $[x] \cap [y] = \emptyset$.
+\end{thm}
+Colloquially, equivalence classes cannot partially overlap. 
+\vspace{5mm}
+\begin{thm}{ -- Equivalence classes partition a set}~\\
+This follows directly from two preceding theorems. 
+\end{thm}
+\end{slide}
+
+
+
 
 \begin{slide}[bm=,toc=]{Partial Orders}
 \begin{defn}{--- Partial Orders}~\\
