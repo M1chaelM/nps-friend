@@ -21,7 +21,7 @@
 \usepackage{enumitem}
 
 
-\title{Lab 1: Sets, Functions, Relations}
+\title{Lab 1: Sets and Relations}
 \author{Foundations of Computer Science}
 \date{\today}
 %\pagestyle{empty} 
@@ -30,8 +30,6 @@
 \unframedsolutions
 \SolutionEmphasis{\itshape\small}
 \SolutionEmphasis{\color{NavyBlue}}
-
-
 
 \begin{document}
 
@@ -85,11 +83,12 @@ Unknown.
 No.
 \end{solution}
 
-
-\section*{Review of Sets and Functions}
-\subsection*{Sets}
+\newpage
+\section*{Sets}
+\question
 Recall $a|b$ for $a,b \in \Z$ if and only if there exists some $k \in \Z$ such that $b = ka$.
-\question Let $c, d$ be natural numbers such that $c$ divides $d$.
+\\~\\
+Let $c, d$ be natural numbers such that $c$ divides $d$.
    Let $A = \{a \in \N| a \text{ divides } c \}$ and let\\ 
    $B = \{b \in \N| b\text{ divides }d \}$. Prove $A \subseteq B$.
 
@@ -134,99 +133,100 @@ intersection of $B$ and $C$ and, consequently, $x \in A \cup (B \cap C)$.
 \end{solution}
 
 
-\subsection*{Functions}
-Recall a function $f: A \to B$ is injective if and only if $f(x) = f(y) \implies
-x = y$ for all $x,y \in A$.
-
-A function $f: A \to B$ is surjective if and only if for all $y \in B$ there
-exists $x \in A$ such that $f(x) = y$. 
-
-\question Consider $f: \N \to \N$, where $f(x) = x^2$.
-
-\begin{enumerate}[label=\alph*)]
-\item Is $f$ injective? Give a proof of your answer.
-\begin{solution}
-Yes.
-\begin{proof}
-$f(x) = f(y)$ implies $x^2 = y^2$. Since $x,y \in \N$, they
-are positive, so it must be the case that $x = y$.
-\end{proof}
-
-
-\end{solution}
-
-\item Is $f$ surjective? Give a proof of your answer.
-\begin{solution}
-No.
-\begin{proof}
-$2$ is a natural number, but there is no natural number $k$ such that
-$k^2 = 2$.
-\end{proof}
-\end{solution}
-
-\end{enumerate}
-
-
-\question Consider $f: \N \to \Z$, where $f(x) = \frac{x}{2}$ if $x$ is even
-and $f(x) = -\left (\frac{x+1}{2} \right) $ if $x$ is odd.
-\begin{enumerate}[label=\alph*)]
-\item Is $f$ injective? Give a proof of your answer.
-\begin{solution}
-Yes.
-\begin{proof}
-We want to show $f(x) = f(y)$ implies $x = y$. There are three cases:
-$x$ and $y$ are even, $x$ and $y$ are odd and $x$ is even and $y$ is odd.
-\\~\\
-If $x$ and $y$ are even, $f(x) = f(y) \implies \frac{x}{2} = \frac{y}{2}
-\implies x = y$.
-\\~\\
-If $x$ and $y$ are odd, 
-$f(x) = f(y) \implies - \left (\frac{x + 1}{2} \right ) = - \left (\frac{y + 1}{2} \right
-    ) \implies x + 1 = y + 1 \implies x = y$.
-\\~\\
-If $x$ is even and $y$ is odd, then $f(x) \neq f(y)$, since $f(x)$ will be
-positive and $f(y)$ will be negative. Therefore, it is vacously true that
-$f(x) = f(y) \implies x = y$.
-\end{proof}
-
-
-\end{solution}
-\item Is $f$ surjective? Give a proof of your answer.
-\begin{solution}
-Yes.
-\begin{proof}
-We must show that for any integer $z$ there is a natural number $n$ such that
-$f(n) = z$. If $z$ is positive or zero, choose $n = 2z$. Clearly, $n$ is an 
-even natural number, so $f(n) = \frac{2z}{2} = z$. If $z$ is negative, 
-choose $n = -2z - 1$. Since $-2z$ is even and positive, $n$ must be odd.
-The smallest even positive number is $2$, so $n \geq 1$. Therefore, $n$
-is a natural number and $f(n) = -\frac{-2z -1 + 1}{2} = z$.
-\end{proof}
-\end{solution}
-\end{enumerate}
-
-\question
-Define the function \emph{floor}: $\R^+ \to \N$ as $floor(x) = n$ if and only if
-$n \leq x < n+1$.(Note that $\R^+$ denotes the positive real numbers.)
-
-\begin{enumerate}[label=\alph*)]
-\item Is $floor$ injective? Give a proof of your answer. 
-\begin{solution}
-No.
-\begin{proof}
-Choose $x = 1.5$ and $y = 1.75$. $f(x) = f(y)$, but $x \neq y$.
-\end{proof}
-\end{solution}
-
-\item Is $floor$ surjective? Give a proof of your answer.
-\begin{solution}
-Yes.
-\begin{proof}
-Any natural number is also a positive real number, so for any $n$ we have $f(n) = n$. 
-\end{proof}
-\end{solution}
-
-\end{enumerate}
+%\subsection*{Functions}
+%Recall a function $f: A \to B$ is injective if and only if $f(x) = f(y) \implies
+%x = y$ for all $x,y \in A$.
+%
+%A function $f: A \to B$ is surjective if and only if for all $y \in B$ there
+%exists $x \in A$ such that $f(x) = y$. 
+%
+%\question Consider $f: \N \to \N$, where $f(x) = x^2$.
+%
+%\begin{enumerate}[label=\alph*)]
+%\item Is $f$ injective? Give a proof of your answer.
+%\begin{solution}
+%Yes.
+%\begin{proof}
+%$f(x) = f(y)$ implies $x^2 = y^2$. Since $x,y \in \N$, they
+%are positive, so it must be the case that $x = y$.
+%\end{proof}
+%
+%
+%\end{solution}
+%
+%\item Is $f$ surjective? Give a proof of your answer.
+%\begin{solution}
+%No.
+%\begin{proof}
+%$2$ is a natural number, but there is no natural number $k$ such that
+%$k^2 = 2$.
+%\end{proof}
+%\end{solution}
+%
+%\end{enumerate}
+%
+%
+%\question Consider $f: \N \to \Z$, where $f(x) = \frac{x}{2}$ if $x$ is even
+%and $f(x) = -\left (\frac{x+1}{2} \right) $ if $x$ is odd.
+%\begin{enumerate}[label=\alph*)]
+%\item Is $f$ injective? Give a proof of your answer.
+%\begin{solution}
+%Yes.
+%\begin{proof}
+%We want to show $f(x) = f(y)$ implies $x = y$. There are three cases:
+%$x$ and $y$ are even, $x$ and $y$ are odd and $x$ is even and $y$ is odd.
+%\\~\\
+%If $x$ and $y$ are even, $f(x) = f(y) \implies \frac{x}{2} = \frac{y}{2}
+%\implies x = y$.
+%\\~\\
+%If $x$ and $y$ are odd, 
+%$f(x) = f(y) \implies - \left (\frac{x + 1}{2} \right ) = - \left (\frac{y + 1}{2} \right
+%    ) \implies x + 1 = y + 1 \implies x = y$.
+%\\~\\
+%If $x$ is even and $y$ is odd, then $f(x) \neq f(y)$, since $f(x)$ will be
+%positive and $f(y)$ will be negative. Therefore, it is vacously true that
+%$f(x) = f(y) \implies x = y$.
+%\end{proof}
+%
+%
+%\end{solution}
+%\item Is $f$ surjective? Give a proof of your answer.
+%\begin{solution}
+%Yes.
+%\begin{proof}
+%We must show that for any integer $z$ there is a natural number $n$ such that
+%$f(n) = z$. If $z$ is positive or zero, choose $n = 2z$. Clearly, $n$ is an 
+%even natural number, so $f(n) = \frac{2z}{2} = z$. If $z$ is negative, 
+%choose $n = -2z - 1$. Since $-2z$ is even and positive, $n$ must be odd.
+%The smallest even positive number is $2$, so $n \geq 1$. Therefore, $n$
+%is a natural number and $f(n) = -\frac{-2z -1 + 1}{2} = z$.
+%\end{proof}
+%\end{solution}
+%\end{enumerate}
+%
+%\question
+%Define the function \emph{floor}: $\R^+ \to \N$ as $floor(x) = n$ if and only if
+%$n \leq x < n+1$.(Note that $\R^+$ denotes the positive real numbers.)
+%
+%\begin{enumerate}[label=\alph*)]
+%\item Is $floor$ injective? Give a proof of your answer. 
+%\begin{solution}
+%No.
+%\begin{proof}
+%Choose $x = 1.5$ and $y = 1.75$. $f(x) = f(y)$, but $x \neq y$.
+%\end{proof}
+%\end{solution}
+%
+%\item Is $floor$ surjective? Give a proof of your answer.
+%\begin{solution}
+%Yes.
+%\begin{proof}
+%Any natural number is also a positive real number, so for any $n$ we have $f(n) = n$. 
+%\end{proof}
+%\end{solution}
+%
+%\end{enumerate}
+%
 
 \section*{Relations}
 
@@ -291,13 +291,37 @@ $x$ is a suffix of $y$.
 \question Prove the division relation, $a | b$, is a partial order on the set
 of positive integers. 
 \begin{solution}
-See slides on partial orders for the proof.
+Recall $a|b$ for $a,b \in \Z^+$ if and only if there exists 
+some $k \in \Z^+$ such that $b = ka$.
+
+To show $a | b$ is a partial order on the set of positive integers, we must
+show it is reflexive, antisymmetric and transitive.
+\\~\\
+REFLEXIVE:  We want to prove that $a | a$ for all positive integers $a$. This
+is the case if and only if for every choice of $a$ there exists some $k \in
+\Z^+$ such that $a = ka$. Choose $k = 1$. Then we have $a = 1a = a$, so $a | a$
+for any $a \in Z^+$. Thus, the divisibility relation is reflexive.
+\\~\\
+ANTISYMMETRIC: We need to show that if $a$ and $b$ are positive integers and 
+$a | b$ and $b | a$, then it follows that $a = b$. Assume $a | b$ and $b | a$.
+Then there are positive integers $k$ and $j$ such that $b = ka$ and $a = jb$.
+Substituting for $a$ in the former equation, we get $b = kjb$, and 
+therefore $b = kj$. Substituting for $b$ in the latter equation yields $a =
+jka$, and therefore $a = jk$. Thus, $a = jk = b$, which proves the claim.
+\\~\\
+TRANSITIVE: For $a,b,c \in \Z^+$, we must prove that if $a | b$ and $b | c$
+then $a | c$. To see this is the case, assume $a | b$ and $b | c$. Then there
+are positive integers $k$ and $j$ such that $b = ka$ and $c = jb$. Substituting
+for $b$ in the latter equation gives $c = jka$. Since positive integers are
+closed under multiplication, $jk$ is a positive integer, so it follows that
+$a | c$.
 \end{solution}
 
 \question Prove the subset relation, $A \subseteq B$, is a partial order on
 sets. 
 \begin{solution}
 \begin{proof}
+
 To show the subset relation is a partial order, we must show it is reflexive, 
 antisymmetric and transitive.
 \\~\\
