@@ -52,7 +52,7 @@ elements of $S$ such that $xRy$. Which of the following statements \emph{must}
 be true?
 
 \begin{checkboxes}
-\CorrectChoice $[y]_R = [x]_R$
+\CorrectChoice $[x]_R = [y]_R$
 \CorrectChoice $yRx$.
 \choice $[x]_R \cap [y]_R = \emptyset$
 \choice $S = [x]_R \cup [y]_R$
@@ -61,7 +61,7 @@ be true?
 
 \question Let $\Sigma = \{a,b,c\}$ and define $Z$ to be a relation on $\Sigma^*$ such
 that $(x,y) \in Z$ if and only if there exists a string $m \in \Sigma^*$
-and such that $x = ym$.
+such that $x = ym$.
 \begin{parts}
 \part[2] Which of the following pairs are in $Z$:
 \begin{checkboxes}
@@ -76,6 +76,7 @@ and such that $x = ym$.
 
 \end{solution}
 
+\end{parts}
 \question
 Let $\Sigma = \{a,b\}$. Define $S = \{s \in \Sigma^* | 3 \geq |s|\}$ and
 $T = \{t | t = xy \text{ for } x,y \in S\}$.
@@ -93,6 +94,7 @@ $T = \{t | t = xy \text{ for } x,y \in S\}$.
 \end{solution}
 
 \end{parts}
+\end{questions}
 
 %\question
 %
@@ -119,9 +121,21 @@ $T = \{t | t = xy \text{ for } x,y \in S\}$.
 %\end{parts}
 
 
-%\newpage
+\newpage
+\fbox{\fbox{\parbox{6in}{\textbf{Facts}: 
+Let $R$ be a binary relation on $S$.
+\begin{itemize}
+\item $R$ is \emph{reflexive} if and only if $R(x,x)$ for all $x \in S$.
 
-\end{questions}
+\item $R$ is \emph{symmetric} if and only if $R(x_1,x_2)$ implies $R(x_2,x_1)$.
+
+\item $R$ is \emph{antisymmetric} if and only if $(x_1,x_2) \in R$ and $(x_2,x_1) \in
+R$ implies $x_1 = x_2$.
+
+\item $R$ is \emph{transitive} if and only if $R(x_1,x_2)$ and $R(x_2,x_3)$ implies $R(x_1,x_3)$.
+
+\end{itemize}}}}\\
+
 \end{document}
 
 
