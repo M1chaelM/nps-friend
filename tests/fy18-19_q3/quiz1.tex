@@ -7,7 +7,7 @@
 \usepackage{amssymb}
 \usepackage{amsxtra}
 \usepackage{amsthm}
-\usepackage{mlextra} % must be below ams packages
+\usepackage{../mlextra} % must be below ams packages
 \usepackage{mathrsfs}
 \usepackage{color}
 \usepackage{array}
@@ -35,9 +35,9 @@
 
 \noindent
 \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
-{\large CS3920: Foundations of Computer Science} &  \makebox[3in]{\large Name:\enspace\hrulefill}\\
-{\large June 8, 2018} & \\
-{\large Quiz 1 Take 4} & 
+{\large CS3001: Foundations of Computer Science} &  \makebox[3in]{\large Name:\enspace\hrulefill}\\
+{\large April 8, 2019} & \\
+{\large Quiz 1} & 
 \end{tabular*}\\
 
 \fbox{\fbox{\parbox{6in}{\textbf{Instructions}: Please answer the questions 
@@ -45,46 +45,78 @@
    This quiz is closed book, closed notes, closed computer. There are \numpoints\ 
    points in total. }}}\\
 \begin{questions}
-\question[3]
-Prove $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$. (Reminder: proof by
-    membership table is disallowed for this exercise.)
+
+\question[2]
+Let $R$ be a binary equivalence relation on a set $S$, and let $x,y$ be
+elements of $S$ such that $xRy$. Which of the following statements \emph{must}
+be true?
+
+\begin{checkboxes}
+\CorrectChoice $[y]_R = [x]_R$
+\CorrectChoice $yRx$.
+\choice $[x]_R \cap [y]_R = \emptyset$
+\choice $S = [x]_R \cup [y]_R$
+\end{checkboxes}
 
 
-\vspace{30mm}
+\question Let $\Sigma = \{a,b,c\}$ and define $Z$ to be a relation on $\Sigma^*$ such
+that $(x,y) \in Z$ if and only if there exists a string $m \in \Sigma^*$
+and such that $x = ym$.
+\begin{parts}
+\part[2] Which of the following pairs are in $Z$:
+\begin{checkboxes}
+\CorrectChoice $(baabac,baa)$
+\choice $(cabacaca,cabacab)$
+\CorrectChoice $(aaaaa,\epsilon)$
+\CorrectChoice $(\epsilon,\epsilon)$
+\end{checkboxes}
 
-\question[4]
-Define the function \emph{trunc}: $\Sigma^+ \to \Sigma$ for some
-alphabet $\Sigma$ such that $trunc(x) = c$
-where $x$ is any string in $\Sigma^+$ and $c$ is the first character in $x$.
+\part[3] Prove $Z$ is antisymmetric.
+\begin{solution}[30mm]
 
-Is $trunc$ injective? Give a proof of your answer. 
-\vspace{18mm}
+\end{solution}
 
-Is $trunc$ surjective? Give a proof of your answer.
-\vspace{18mm}
+\question
+Let $\Sigma = \{a,b\}$. Define $S = \{s \in \Sigma^* | 3 \geq |s|\}$ and
+$T = \{t | t = xy \text{ for } x,y \in S\}$.
 
+\begin{parts}
+\part[2] What is $|S|$?
+\begin{solution}[10mm]
 
-\question[3]
-Let $\Sigma = \{a,b\}$
-Consider the relation $P$ on $\Sigma^*$ where $xPy$ for $x,y \in \Sigma^*$
-if and only if there exists a string $w$ in $\Sigma^*$ such that $y = xw$. 
-For example, if $x = aba$ and $y = ababb$, then $(x,y) \in P$ because $w = bb$
-and $bb \in \Sigma^*$.
-
-Show that $P$ is a partial order.
-\vspace{30mm}
+\end{solution}
 
 
-\question[4]
-Let $\Sigma = \{a,b,c,d\}$.
-Consider the relation $T$ on $\Sigma^+$ where for any two strings $x,y \in
-\Sigma^+$, $xTy$ if and only if the first character in $x$ is equal to the
-first character in $y$. Prove $T$ is an equivalence relation.
-\vspace{30mm}
+\part[3] Prove $S \subset T$.
+\begin{solution}[30mm]
 
-How many equivalences classes are there with respect to $T$ on $\Sigma^+$?
-\vspace{10mm}
+\end{solution}
 
+\end{parts}
+
+%\question
+%
+%Let $\Sigma = \{a,b,c\}$. Define $Z$ to be a relation on $\Sigma^+$ such
+%that $(x,y) \in Z$ if and only if there exist strings $r,s \in \Sigma^*$
+%and string $t \in \Sigma$ such that $x = tr$ and $y = ts$.
+%
+%\begin{parts}
+%\part[2] Which of the following pairs are in $Z$:
+%\begin{checkboxes}
+%\choice $(cac,bac)$
+%\CorrectChoice $(baabaa,bac)$
+%\choice $(\epsilon,\epsilon)$
+%\CorrectChoice $(aaaaa,a)$
+%\end{checkboxes}
+%
+%\part[3] Prove $Z$ is transitive.
+%\begin{solution}[30mm]
+%
+%\end{solution}
+%
+%%\bonuspart[1] Assume $Z$ is an equivalence relation. How many equivalence
+%%classes are there with respect to $Z$ on $\Sigma^+$?
+%\end{parts}
 
 
 %\newpage
