@@ -5,7 +5,6 @@
 \usepackage{mathtools}
 \usepackage{graphicx}
 \graphicspath{ {../art/} }
-
 \usepackage[labelformat=empty]{caption}
 
 \newcommand{\id}[1]{\mbox{\it #1\/}}
@@ -153,11 +152,11 @@ where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables)
 \begin{wideslide}[bm=,toc=]{Example derivation showing $9 \in S$}
 \begin{center}
 \begin{tabular}{lllll}
-  $\bid{B}$  & $\id{3}\in \id{S}$           & $\id{3}\in \id{S}$ & $\bid{B}$
-  \\ \cline{2-3}
-  $\bid{R}$  & $\id{3} + \id{3} \in \id{S}$ &                    & $\id{3}\in \id{S}$ & $\bid{B}$ 
-  \\ \cline{2-4} 
-  $\bid{R}$  & $\id{3} + \id{3} + \id{3} \in \id{S}$ &           &                    &  \\ 
+  \onslide{2-}{$\bid{B}$  & $\id{3}\in \id{S}$}           & \onslide{3-}{$\id{3}\in \id{S}$ & $\bid{B}$}
+  \onslide{4-}{\\ \cline{2-3}}
+  \onslide{5-}{$\bid{R}$  & $\id{3} + \id{3} \in \id{S}$} &                    & \onslide{6-}{$\id{3}\in \id{S}$ & $\bid{B}$} 
+  \onslide{7-}{\\ \cline{2-4}} 
+  \onslide{8-}{$\bid{R}$  & $\id{3} + \id{3} + \id{3} \in \id{S}$ &           & &  \\} 
 \end{tabular}
 \end{center}
 
@@ -338,29 +337,29 @@ $\id{node}(\id{node}([\,]),\id{node}([\,]))$ \\ \hline
 \begin{wideslide}[bm=,toc=]{Sample RT derivation}
 \begin{center}
 \begin{tabular}{llllll}
-  \onslide{1-}{             &                                 & $\bid{B}$ & $\id{nil}\in\id{RTL}$           &                       &} 
-  \onslide{1-}{\\ \cline{4-4}} 
-  \onslide{1-}{$\bid{B}$  & $\id{nil}\in\id{RTL}$}
-  &\onslide{1-}{$\bid{R2}$             & $\id{node}(\id{nil})\in\id{RT}$} & \onslide{1-}{$\id{nil}\in\id{RTL}$ & $\bid{B}$} 
-  \onslide{1-}{\\ \cline{2-2} \cline{4-5}}
-  \onslide{1-}{$\bid{R2}$ & $\id{node}(\id{nil})\in\id{RT}$} & \onslide{1-}{$\bid{R1}$ & \multicolumn{2}{l}{ $\id{cons}(\id{node}(\id{nil}),\id{nil})\in\id{RTL}$} &} 
-  \onslide{1-}{\\ \cline{2-5}}
-  \onslide{1-}{$\bid{R1}$ & \multicolumn{4}{l}{$\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil}))
+  \onslide{2-}{             &                                 & $\bid{B}$ & $\id{nil}\in\id{RTL}$           &                       &} 
+  \onslide{3-}{\\ \cline{4-4}} 
+  \onslide{4-}{$\bid{B}$  & $\id{nil}\in\id{RTL}$}
+  &\onslide{3-}{$\bid{R2}$             & $\id{node}(\id{nil})\in\id{RT}$} & \onslide{4-}{$\id{nil}\in\id{RTL}$ & $\bid{B}$} 
+  \onslide{5-}{\\ \cline{2-2} \cline{4-5}}
+  \onslide{6-}{$\bid{R2}$ & $\id{node}(\id{nil})\in\id{RT}$} & \onslide{7-}{$\bid{R1}$ & \multicolumn{2}{l}{ $\id{cons}(\id{node}(\id{nil}),\id{nil})\in\id{RTL}$} &} 
+  \onslide{8-}{\\ \cline{2-5}}
+  \onslide{9-}{$\bid{R1}$ & \multicolumn{4}{l}{$\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil}))
       \in \id{RTL}$}} 
-  \onslide{1-}{ \\ \cline{2-5}}
-  \onslide{1-}{$\bid{R2}$ & \multicolumn{4}{l}{$\id{node}(\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil})))\in\id{RT}$}}
+  \onslide{10-}{ \\ \cline{2-5}}
+  \onslide{11-}{$\bid{R2}$ & \multicolumn{4}{l}{$\id{node}(\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil})))\in\id{RT}$}}
 \end{tabular}
 \end{center}
 \twocolumn[
 lfrprop={},
 lineheight=2cm,topsep=0.3cm
 ]{Rooted Tree Lists \\ \vspace{1mm}\hrule \vspace{1mm} 
-    \onslide{1-}{[]}\\
-    \onslide{1-}{[\node]}\\ 
-    \onslide{1-}{[\node,\node]}
+    \onslide{2-}{[]}\\
+    \onslide{7-}{[\node]}\\ 
+    \onslide{9-}{[\node,\node]}
 }{Rooted Trees \\ \vspace{1mm}\hrule \vspace{1mm} 
-  \onslide{1-}{\node}\\ 
-  \onslide{1}{\threenode}}
+  \onslide{3-}{\node}\\ 
+  \onslide{11}{\threenode}}
 %\begin{figure}[h]
 %\centering
 %\includegraphics[width=2.5in, height=.75in,keepaspectratio=true]{3_node_tree.eps}
