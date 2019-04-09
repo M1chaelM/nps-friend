@@ -190,6 +190,72 @@ equal to 12.
 \end{itemize}
 \end{wideslide}
 
+\begin{wideslide}[bm=,toc=]{Recursive Definitions}
+\begin{itemize}
+\item  Another Post system with multiple axioms.
+\begin{tabbing}
+{\bf R1}XX \=  \kill
+{\bf B1} \>
+        \(\begin{array}[t]{l}
+        \epsilon \in \id{Pal}
+        \end{array}\) \\[2ex]
+{\bf B2} \>
+        \(\begin{array}[t]{l}
+        a\in \id{Pal}
+        \end{array}\) \\[2ex]
+
+ {\bf B3} \>
+        \(\begin{array}[t]{l}
+        b\in \id{Pal}
+        \end{array}\) \\[2ex]
+        
+{\bf R} \>
+        \(\begin{array}[t]{l}
+        x \in \id{Pal} \;\;\;y \in \id{Pal} \\
+        \hline
+        x(yx) \in \id{Pal}
+        \end{array}\)
+\end{tabbing}
+\item Claim:  $\id{Pal}$ defines exactly the set of palindromes over $\{a,b\}^*$.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Recursive Definitions}
+\begin{itemize}
+\item  A Post system with multiple recursive rules.
+\begin{tabbing}
+{\bf R1}XX \=  \kill
+{\bf B} \>
+        \(\begin{array}[t]{l}
+        \epsilon \in \id{X}
+        \end{array}\) \\[2ex]
+
+{\bf R1} \>
+        \(\begin{array}[t]{l}
+        x\in \id{X} \\
+        \hline
+        1x0 \in \id{X}
+        \end{array}\) \\[2ex]
+
+{\bf R2} \>
+        \(\begin{array}[t]{l}
+        x\in \id{X} \\
+        \hline
+        0x1 \in \id{X}
+        \end{array}\) \\[2ex]
+       
+{\bf R3} \>
+        \(\begin{array}[t]{l}
+        x \in \id{X} \;\;\;y \in \id{X} \\
+        \hline
+        xy \in \id{X}
+        \end{array}\)
+\end{tabbing}
+\item Claim: for all $y \in \{0,1\}^*$, $y \in \id{X}$ iff $y$ has an equal
+number of $0$s and $1$s.
+\item Rule $\bid{R3}$ is needed to show $1001 \in \id{X}$, for instance.
+\end{itemize}
+\end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Recursive definitions}
 \begin{itemize}
