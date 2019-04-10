@@ -345,12 +345,12 @@ $\id{cons}(2,\id{cons}(5,\id{cons}(3,\id{nil})))$ & $[2,5,3]$ \\ \hline
 
 \vspace{1em}
 \begin{tabular}{|ll|} \hline
-{\em rooted tree list l\/} & {\em rooted tree} $\id{node}(l)$  \\ \hline
+{\em rooted tree list $l$\/} & {\em rooted tree} $\id{node}(l)$  \\ \hline
 $\id{nil}$ & $\id{node}([\,])$ \\
 $\id{cons}(\id{node}(\id{nil}),\id{nil})$ & 
-$\id{node}(\id{node}([\,]))$ \\
+$\id{node}([\id{node}([\,])])$ \\
 $\id{cons}(\id{node}(\id{nil}),\id{cons}(\id{node}(\id{nil}),\id{nil}))$ &
-$\id{node}(\id{node}([\,]),\id{node}([\,]))$ \\ \hline
+$\id{node}(\left [\id{node}([\,]),\id{node}([\,]) \right])$ \\ \hline
 \end{tabular}
 \vspace{1em}
 \item Let {\em RT\/} be the set of rooted trees.
