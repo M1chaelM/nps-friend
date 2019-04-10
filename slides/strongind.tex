@@ -70,7 +70,7 @@ $S(k)$: if the derivation of $n\in S$ has height $k$ then $n$ is a positive mult
 \begin{displaymath}
 \begin{array}[t]{l}
 S(0) \\
-\forall k\geq 0.\, S(0)\wedge S(1) \wedge \cdots \wedge S(k)\Rightarrow S(k+1) \\
+\forall k\geq 0.\, S(0)\wedge \cdots \wedge S(k)\Rightarrow S(k+1) \\
 \hline
 \forall k\geq 0.\, S(k)
 \end{array}
@@ -80,7 +80,7 @@ S(0) \\
 Basis: Show $S(0)$.
 
 \vspace{1em}
-Inductive hypothesis: Suppose $S(0), S(1),\ldots ,S(k)$ {\bf where} $k\geq 0$.
+Inductive hypothesis: Suppose $S(0),\ldots ,S(k)$ {\bf where} $k\geq 0$.
 
 \vspace{1em}
 Inductive step: Show $S(k+1)$.
@@ -196,7 +196,7 @@ S(12) \wedge S(13) \wedge S(14) \wedge S(15) \\
 Basis: Show $S(12),S(13),S(14)$ and $S(15)$.
 
 \vspace{1em}
-Inductive hypothesis: Suppose $S(12),S(13),\ldots , S(n)$ {\bf where} $n\geq 15$.
+Inductive hypothesis: Suppose $S(12), \ldots , S(n)$ {\bf where} $n\geq 15$.
 
 \vspace{1em}
 Inductive step: Show $S(n+1)$.
