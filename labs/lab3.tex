@@ -33,7 +33,7 @@
 %\pagestyle{empty} 
 %\footer{}{\thepage}{}
 
-\noprintanswers
+\printanswers
 \unframedsolutions
 \SolutionEmphasis{\itshape\small}
 \SolutionEmphasis{\color{NavyBlue}}
@@ -47,9 +47,10 @@
 \begin{questions}
 
 
-\question Consider the following recursive definitions of sets of strings. 
-For each of the definitions given, choose the induction rule most suitable 
-for proving properties of the system defined:
+\question Consider the following recursive definitions of sets of strings
+(left) and the three induction rules listed (right).  For each of the 
+claims made about these sets below, choose the induction rule most suitable 
+for proving the claim. 
 \begin{multicols}{2}
 {\bf Recursive Definitions:}\\
 \begin{enumerate}
@@ -58,17 +59,17 @@ for proving properties of the system defined:
 {\bf R2}XX \=  \kill
 {\bf B1} \>
         \(\begin{array}[t]{l}
-        a \in S
+        aa \in S_1
         \end{array}\) \\[2ex]
 {\bf B2} \>
         \(\begin{array}[t]{l}
-        b \in S
+        \epsilon \in S_1
         \end{array}\) \\[2ex]
 {\bf R} \>
         \(\begin{array}[t]{l}
-        x \in S \;\;\;y \in S \\
+        x \in S_1 \;\;\;y \in S_1 \\
         \hline
-        xy \in S
+        xy \in S_1
         \end{array}\)
 \end{tabbing}
 \hrule
@@ -77,13 +78,13 @@ for proving properties of the system defined:
 {\bf R2}XX \=  \kill
 {\bf B} \>
         \(\begin{array}[t]{l}
-        a \in S
+        a \in S_2
         \end{array}\) \\[2ex]
 {\bf R} \>
         \(\begin{array}[t]{l}
-        x \in S \;\;\;y \in S \\
+        x \in S_2 \;\;\;y \in S_2 \\
         \hline
-        xy \in S
+        xyx \in S_2
         \end{array}\)
 \end{tabbing}
 \hrule
@@ -93,13 +94,13 @@ for proving properties of the system defined:
 {\bf R2}XX \=  \kill
 {\bf B} \>
         \(\begin{array}[t]{l}
-        a \in S
+        a \in S_3
         \end{array}\) \\[2ex]
 {\bf R} \>
         \(\begin{array}[t]{l}
-        x \in S \\
+        x \in S_3 \\
         \hline
-        xbx \in S
+        xbx \in S_3
         \end{array}\)
 \end{tabbing}
 \end{enumerate}
@@ -142,21 +143,51 @@ for proving properties of the system defined:
 ~\\
     
 \end{multicols}
+\textbf{Claims:}
 \begin{solution}
-Note that the question asks for the ``most suitable'' rule given
-the structure of the system, but to choose a definitive answer you would need to
-also be given the property that you are proving. With this caveat, reasonable
-choices are rule [3] or [2] for system $1$, rule [3] or [2] for system $2$, and 
-rule [1] (weak induction) for system $3$. 
+Note that there can be more than one possible proof for a given claim, so
+there are multiple acceptable answers, though some are more obvious than
+others. In the solutions below, the choice corresponding to what seems
+like the most obvious approach is given, along with a brief description
+of that approach.
+\end{solution}
+\begin{parts}
+\part All elements of $S_1$ have even length.
+\begin{solution}
+Rule [2]. Strong induction over derivation height using a single base case.
 \end{solution}
 
+\part All elements of $S_2$ have odd length.
+\begin{solution}
+Rule [2]. Strong induction over derivation height using a single base case.
+\end{solution}
+
+\part All elements of $S_3$ begin and end in $a$. 
+\begin{solution}
+Rule [1]. Weak induction over derivation height using a single base case.
+\end{solution}
+
+\part All odd length strings of $a$'s are contained in $S_2$.
+\begin{solution}
+Rule [1]. Weak induction over the natural numbers, where $k \in \N$ and the $k^{th}$ 
+odd length string of $a$'s is defined as the unique string of $a$'s with length $2k-1$. 
+
+Note that it would also be possible to use Rule [3] and perform strong induction 
+over strings of length $k$ where
+$S(k)$ is written as ``If $x$ is a string of $a$'s with length $k$ and $k$ is
+odd, then $x \in S_2$.'' In this approach, you would likely need two base cases:
+one in which $k$ is odd and one in which $k$ is even. Although the structure
+of this argument is more complicated, it avoids the need
+to give a special definition of the set of odd length strings of $a$'s.
+\end{solution}
+
+\end{parts}
 \question What is the meaning of $j$ in the third induction rule? What does it
 represent, and what determines its value relative to $i$?
 \begin{solution}
 $j$ represents the index of the last base case. If there are
 $b$ base cases, the value of $j$ will be $i + b - 1$.
 \end{solution}
-
 
 \question Referencing the definition of rooted trees given in the slides,
 draw the structure produced in the following derivation:
@@ -174,6 +205,7 @@ draw the structure produced in the following derivation:
   \multicolumn{3}{l}{$\id{cons}(\id{node}(\id{cons}(\id{node}(\id{nil}),\id{nil})), \id{nil})\in\id{RTL}$}
 \end{tabular}
 \end{center}
+\vspace{-5mm}
 \begin{solution}
 $[\twonode]$
 \end{solution}
@@ -183,6 +215,7 @@ $[\twonode]$
 \begin{center}
 \includegraphics[height=2cm]{2nodetree.eps}%
 \end{center}
+\vspace{-5mm}
 \begin{solution}
 3
 \end{solution}
@@ -207,7 +240,9 @@ as needed).
 8. & 	& = & \id{\#nodes}(l') - |l'|
 \end{array}
 \end{displaymath}
-
+\begin{solution}
+omitted
+\end{solution}
 
 % MAYBE NEXT WEEK
 %
