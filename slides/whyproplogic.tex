@@ -21,16 +21,13 @@
 
 \pdsetup{method=normal}
 
-\begin{document}
+\title{Some Common Applications of Propositional Logic}
+\author{Foundations of Computer Science}
+\date{\today}
 
-%\begin{wideslide}[bm=,toc=]{Computational complexity primer}
-%\begin{itemize}
-%\item Computational complexity is about the study of lower and upper bounds on {\em problems\/}.
-%\item We need a problem whose complexity we can investigate.
-%\item We pick {\em satisfiability\/} and {\em validity\/} in propositional logic.
-%\item We will give lower bounds and decision procedures for each.
-%\end{itemize}
-%\end{wideslide}
+
+\begin{document}
+\maketitle
 
 \begin{wideslide}[bm=,toc=]{Propositional logic}
 Propositional logic provides a way to
@@ -51,18 +48,40 @@ Propositional logic provides a way to
 \item Let $p$ denote ``The diagnostic message is stored in the buffer.''
 \item Let $q$ denote ``The diagnostic message is retransmitted.''
 \item $p$ and $q$ are called {\em propositional variables\/}.
-\item The 3 facts in order become $p\vee q$, $\neg p$ and $p\Rightarrow q$.
+\item The 3 facts in order become $p\lor q$, $\ngg p$ and $p \imp q$.
 \item Can be {\em satisfied\/} iff $p$ is false and $q$ is true.
 \end{itemize}
+\begin{center}
+\begin{tabular}{c|c||c|c|c}
+$p$ & $q$ & $p \lor q$ & $\ngg p$ & $p \imp q$ \\
+\hline
+$1$ & $1$ & $1$ & $0$ & $1$ \\
+$1$ & $0$ & $1$ & $0$ & $0$ \\
+$0$ & $1$ & $1$ & $1$ & $1$ \\
+$0$ & $0$ & $0$ & $1$ & $1$ 
+\end{tabular}
+\end{center}
+
+
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Examine consistency}
 \begin{itemize}
 \item Add to 3 facts: ``The diagnostic message is not retransmitted.''
-\item The 4 facts then become $p\vee q$, $\neg p$, $p\Rightarrow q$ and $\neg q$.
+\item The 4 facts then become $p\lor q$, $\ngg p$, $p\imp q$ and $\ngg q$.
 \item Can no longer be satisfied.
 \item Assertions are {\em inconsistent\/}.
 \end{itemize}
+\begin{center}
+\begin{tabular}{c|c||c|c|c|c}
+$p$ & $q$ & $p \lor q$ & $\ngg p$ & $p \imp q$ & $\ngg q$ \\
+\hline
+$1$ & $1$ & $1$ & $0$ & $1$ & $0$\\
+$1$ & $0$ & $1$ & $0$ & $0$ & $1$\\
+$0$ & $1$ & $1$ & $1$ & $1$ & $0$\\
+$0$ & $0$ & $0$ & $1$ & $1$ & $1$
+\end{tabular}
+\end{center}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Justify simplifications}
