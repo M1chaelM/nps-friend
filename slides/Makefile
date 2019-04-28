@@ -8,7 +8,7 @@ TARGETS := abelson.pdf animate_derivations.pdf automata-mutualind.pdf \
         decisionproc.pdf folpolicies.pdf fol_syntax_semantics.pdf \
         fol_sat_val.pdf fol_functions_pcnf.pdf fol_comp_dec.pdf \
         whytemporallogic.pdf ptl_syntax_semantics.pdf \
-        tptl.pdf relations_functions.pdf
+        tptl.pdf relations_functions.pdf pl_sat_val.pdf
        
 
 
