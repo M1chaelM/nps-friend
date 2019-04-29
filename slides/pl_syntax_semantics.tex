@@ -21,7 +21,7 @@
 
 \pdsetup{method=normal}
 
-\title{Propositional Logic: Syntax and Semantics}
+\title{Syntax and Semantics of\\ Propositional Logic}
 \author{Foundations of Computer Science}
 \date{\today}
 
@@ -46,25 +46,25 @@ propositional logic:
 	\begin{array}[t]{l}
         x \in P \\
         \hline
-        \neg x \in P
+        \ngg x \in P
         \end{array} \\[6ex]
 
 	\begin{array}[t]{l}
 	x \in P \;\;y \in P \\
 	\hline
-	x \wedge y \in P
+	x \land y \in P
 	\end{array}
 &
 	\begin{array}[t]{l}
 	x \in P \;\;y \in P \\
 	\hline
-	x \vee y \in P
+	x \lor y \in P
 	\end{array}
 &
 	\begin{array}[t]{l}
 	x \in P \;\;y \in P \\
 	\hline
-	x \Rightarrow y \in P
+	x \imp y \in P
 	\end{array} \\[6ex]
 
 	\begin{array}[t]{l}
@@ -338,7 +338,7 @@ $\mathcal{P}_A$.
 \end{defn}
 \begin{defn}{2.16}[Ben Ari]
 Let $\mathcal{I}_A$ be an interpretation for $A \in \mathcal{F}$.
-$v_{\mathcal{I}_A}(A)$, the \emph{truth value of A under} $\mathcal{I}_A$
+$v_{\mathcal{I}_A}(A)$, the \emph{truth value of $A$ under} $\mathcal{I}_A$
 is defined inductively on the structure of $A$ as shown in Fig. $2.3$.
 \end{defn}
 \end{slide}
@@ -555,215 +555,6 @@ A \vee B &\logeqv& \ngg A \imp B  \\
 \end{displaymath}
 \end{wideslide}
 
-
-\begin{wideslide}[bm=,toc=]{Satisfiability and Validity}
-\begin{defn}{2.38}[Ben Ari]
-Let $A \in \mathcal{F}$.
-\begin{itemize}
-\item $A$ is \emph{satisfiable} iff $v_{\mathcal{I}}(A) = T$ for \emph{some}
-      interpretation $\mathcal{I}$.\\
-      An intepretation satisfying $A$ is a \emph{model} for $A$.
-
-\item $A$ is valid, denoted $\models A$, iff $v_{\mathcal{I}}(A)=T$ for
-      \emph{all} interpretations $\mathcal{I}$.\\
-      A valid propositional formula is also called a \emph{tautology}.
-
-\item $A$ is \emph{unsatisfiable} iff it is... not satisfiable. That is, if
-      $v_{\mathcal{I}}(A) = F$ for \emph{all} interpretations $\mathcal{I}$.
-
-\item $A$ is \emph{falsifiable}, denoted $\not\models A$, iff it is not valid,
-      that is, if $v_{\mathcal{I}}(A) = F$ for \emph{some} interpretation
-      $\mathcal{I}$.
-\end{itemize}
-\end{defn}
-\begin{thm}{2.39}[Ben Ari]
-Let $A \in \mathcal{F}$. $A$ is valid if and only if $\ngg A$ is unsatisfiable.
-$A$ is satisfiable if and only if $\ngg A$ is falsifiable.
-\end{thm}
-\end{wideslide}
-
-
-\begin{wideslide}[bm=,toc=]{Example 2.21}
-\begin{center}
-\begin{tabular}{|c|c||c|}
-\hline
-$p$ & $q$ & $p \imp q$ \\ \hline \hline
-$T$ & $T$ & $T$  \\ \hline
-$T$ & $F$ & $F$  \\ \hline
-$F$ & $T$ & $T$  \\ \hline
-$F$ & $F$ & $T$  \\ \hline
-\end{tabular}
-\end{center}
-\begin{itemize}
-\item Is $p \imp q$ satisfiable?
-\item Is $p \imp q$ unsatisfiable?
-\item Is $p \imp q$ valid?
-\item Is $p \imp q$ falsifiable?
-\end{itemize}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Example 2.22}
-\begin{center}
-\begin{tabular}{|c|c||c|c|c|c|c|}
-\hline
-$p$ & $q$ & $p \imp q$ & $\ngg p$ & $\ngg q$ 
-& $\ngg q \imp \ngg p$ & $(p\imp q)\eqv  (\ngg q\imp \ngg p)$\\ \hline \hline
-$T$ & $T$ & $T$  & $F$ & $F$  & $T$ & $T$  \\ \hline
-$T$ & $F$ & $F$ & $F$ & $T$  & $F$ & $T$   \\ \hline
-$F$ & $T$ & $T$ & $T$ & $F$  & $T$ & $T$   \\ \hline
-$F$ & $F$ & $T$ & $T$ & $T$  & $T$ & $T$   \\ \hline
-\end{tabular}
-\end{center}
-\begin{itemize}
-\item Is $(p\imp q)\eqv  (\ngg q\imp \ngg p)$ satisfiable?
-\item Is $(p\imp q)\eqv  (\ngg q\imp \ngg p)$ unsatisfiable?
-\item Is $(p\imp q)\eqv  (\ngg q\imp \ngg p)$ valid?
-\item Is $(p\imp q)\eqv  (\ngg q\imp \ngg p)$ falsifiable?
-\end{itemize}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Example 2.41}
-\begin{displaymath}
-\begin{array}{|c|c||c|c|c|c|}
-\hline
-p & q & p \vee q & \ngg p & \ngg q &
-(p \vee q) \wedge \ngg p \wedge \ngg q \\ \hline \hline
-T & T & T & F & F & F \\ \hline
-T & F & T & F & T & F \\ \hline
-F & T & T & T & F & F \\ \hline
-F & F & F & T & T & F \\ \hline
-\end{array}
-\end{displaymath}
-\begin{itemize}
-\item Is $(p\imp q)\eqv  (\ngg q\imp \ngg p)$ satisfiable?
-\item Is $(p\imp q)\eqv  (\ngg q\imp \ngg p)$ unsatisfiable?
-\item Is $(p\imp q)\eqv  (\ngg q\imp \ngg p)$ valid?
-\item Is $(p\imp q)\eqv  (\ngg q\imp \ngg p)$ falsifiable?
-\end{itemize}
-\end{wideslide}
-
-
-\begin{wideslide}[bm=,toc=]{Valid, satisfiable, falsifiable and unsatisfiable formulas}
-\begin{center}
-\unitlength=1.5pt
-\begin{picture}(200,100)
-\put(0,20){
-\put(100,40){\oval(200,80)}
-\put(60,30){\oval(80,30)}
-\put(35,15){\makebox(50,30){\shortstack[l]%
-{True in\\all interpretations.}}}
-\put(35,50){\makebox(50,30){\shortstack[l]%
-{True in some interpretations;\\false in others.}}}
-\put(120,0){\line(0,1){80}}
-\put(120,35){\makebox(80,30){\shortstack[l]%
-{False in\\all interpretations.}}}
-}
-\put(101,0){\makebox(40,20)[b]{Falsifiable}}
-\put(110,10){\vector(0,1){18}}
-\put(130,10){\vector(0,1){18}}
-\put(151,0){\makebox(40,20)[b]{Unsatisfiable}}
-\put(170,10){\vector(0,1){18}}
-\put(50,0){\makebox(50,20)[b]{Satisfiable}}
-\put(65,10){\vector(0,1){30}}
-\put(85,10){\vector(0,1){18}}
-\put(15,0){\makebox(50,20)[b]{Valid}}
-\put(40,10){\vector(0,1){30}}
-\end{picture}
-\end{center}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Satisfiability of a Set of Formulas}
-\begin{defn}{2.42}[Ben Ari]
-A set of formulas $U = \{A_1,....\}$ is (\emph{simultaneously})
-\emph{satisfiable} iff there exists an interpretation $\mathcal{I}$
-such that $v_{\mathcal{I}}(A_i) = T$ for all $i$. The satisfying interpretation
-is a \emph{model} of $U$. $U$ is \emph{unsatisfiable} iff for every
-interpretation $\mathcal{I}$, there exists an $i$ such that $v_{\mathcal{I}}(A_i) = F$.
-\end{defn}
-\begin{ex}{2.43}[Ben Ari]
-\end{ex}
-\vspace*{-3ex}
-\begin{itemize}
-\item $U_1 = \{p, \ngg p \lor q, q \land r \}$
-\item $U_2 = \{p, \ngg p \lor q, \ngg p \}$
-\end{itemize}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Satisfiability of Sets of Formulas:\\ Some Elementary
-Theorems}
-\begin{thm}{2.44}
-{ \em If} $U$ {\em is satisfiable, then so is} $U - \{A_i\}$ {\em for all} $i$. 
-\end{thm}
-\begin{thm}{2.45}
-{ \em If} $U$ {\em is satisfiable and B is valid, then} $U \cup \{B\}$ {\em is
-  satisfiable}. 
-\end{thm}
-\begin{thm}{2.46}
-{ \em If} $U$ {\em is unsatisfiable, then for any formula B,} $U \cup \{B\}$ {\em is
-  unsatisfiable}. 
-\end{thm}
-\begin{thm}{2.47}
-{ \em If} $U$ {\em is unsatisfiable and for some } $i$, $A_i$ { \em is valid,
-  then} $U - \{A_i\}$ {\em is unsatisfiable}. 
-\end{thm}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Logical Consequence}
-\begin{defn}{2.48}[Ben Ari]
-Let $U$ be a set of formulas and $A$ a formula. $A$ is a \emph{logical
-  consequence} of $U$, denoted $U \models A$, iff every model of $U$ is a
-  model of $A$.
-\end{defn}
-The effect of $U$ is to reduce the number of interpretations that must satisfy
-$A$.
-\begin{ex}{2.49}[Ben Ari]
-Let $A = (p \lor r) \land (\ngg q \lor \ngg r)$ and $U = \{p,\ngg q\}$.
-Then $U \models A$, but $\not\models A$.
-\end{ex}
-Note that $\implies$ is an operator in the object language, whereas $\models$
-is a symbol for a concept in the metalanguage. However:
-\begin{thm}{2.50}
-$U \models A$ \emph{if and only if } $\bigwedge\limits_{i} A_i \implies A$. 
-\end{thm}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Logical Consequence}
-\begin{ex}{2.52}[Ben Ari]
-~\\
-$\{p,\ngg q\} \models (p \lor r) \land (\ngg q \lor \ngg r)$, so it follows that\\
-$\models (p \land \ngg q) \implies (p \lor r) \land (\ngg q \lor \ngg r)$
-(by Theorem 2.50).
-\end{ex}
-\begin{thm}{2.53}
-If $U \models A$ \emph{then} $U \cup \{B\} \models A$ \emph{for any formula} $B$. 
-\end{thm}
-\begin{thm}{2.54}
-If $U \models A$ \emph{ and B is valid then} $U - \{B\} \models A$. 
-\end{thm}
-
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Theories}
-\begin{defn}{2.55}[Ben Ari]
-Let $\mathcal{T}$ be a set of formulas. $\mathcal{T}$ \emph{is closed under
-logical consequence} iff for all formulas $A$, if $\mathcal{T} \models A$ then
-$A \in \mathcal{T}$. A set of formulas that is closed under logical consequence
-is a \emph{theory}. The elements of $\mathcal{T}$ are \emph{theorems}.
-\end{defn}
-\begin{defn}{2.56}[Ben Ari]
-Let $\mathcal{T}$ be a theory. $\mathcal{T}$ is said to be \emph{axiomatizable} 
-iff there exists a set of formulas $U$ such that  $\mathcal{T} = \{A | U \models
-A\}$. The set of formulas $U$ are the \emph{axioms} of $\mathcal{T}$. If $U$ is
-finite, $\mathcal{T}$ is said to be \emph{finitely axiomatizable}.
-\end{defn}
-Examples:
-\begin{itemize}
-\item Euclidean Geometry---consequences of $5$ formulas.
-\item Peano Arithmetic---axiomatizable, but not finitely axiomatizable.
-\end{itemize}
-
-
-\end{wideslide}
 
 
 \end{document}

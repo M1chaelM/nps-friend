@@ -1,2 +1,4 @@
-# No pdfs from this folder
+# No pdfs or gzips from this folder
 *.pdf
+*.gz
+# synctex produces gz files apparently

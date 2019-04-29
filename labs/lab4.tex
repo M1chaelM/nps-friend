@@ -33,7 +33,6 @@
 %\pagestyle{empty} 
 %\footer{}{\thepage}{}
 
-\noprintanswers
 \unframedsolutions
 \SolutionEmphasis{\itshape\small}
 \SolutionEmphasis{\color{NavyBlue}}
@@ -140,19 +139,21 @@ rule $R$ in the Post system for $S$ and choosing $x'$ for both the $x$ and $y$
 inputs, we have $xy = x'x' \in S$, which completes the proof.
 \end{proof}
 
-Further notes: In class, to practice proving the subset relation, we assumed that the
-comprehensions given for $S$ and $T$ in question (\ref{ques:defSandT}) are 
-correct, then showed that an arbitrary element of $T$ must also be in $x$.
-The argument depends on how the sets have been described. Here is a proof
-using this method with the definitions given above:
+Further notes: Assuming you have correctly translated the Post systems into
+set comprehensions, it is also possible to prove $S \subseteq T$ by showing
+an arbitrary element described by the comprehension for $T$ is also described
+by the comprehension given for $S$. The argument will depend on how the sets 
+have been described. Here is a proof using this method with the set comprehension 
+definitions given for $S$ and 
+$T$ in the solution to question (\ref{ques:defSandT}) above:
 \begin{proof}
 If $x \in T$ then $x = a^{2^k}$. Let $k' = 2^k$. Then $x = 2^{k'}$ and 
 $k' \in \Z^+$ (since $k \in \N_0$), so $x \in T$.
 \end{proof}
-As mentioned in class, in order to make this rigorous one would
-have to first prove that the set comprehensions given are a correct representation
-of the sets defined by the Post systems.
-  
+Strictly speaking, one would have to first prove that the set comprehensions 
+given are a correct representation of the sets defined by the Post
+systems---i.e., that the solution given to question (\ref{ques:defSandT}) 
+is in fact correct.  
 \end{solution}
 \end{parts}
 
@@ -194,7 +195,7 @@ $N = \Z^+$
 \end{solution}
 \end{parts}
 
-
+\newpage
 \uplevel{\section*{Trees}
 Answer the questions below referring to the following definitions:
 \begin{itemize}
@@ -221,7 +222,7 @@ Answer the questions below referring to the following definitions:
         \(\begin{array}[t]{l}
         t\in\id{RT}\;\;\;u\in\id{RT} \\
         \hline
-        \id{cons}(t,u)\in\id{RTL}
+        \id{cons}(t,\id{cons}(u,nil))\in\id{RTL}
         \end{array}\) \\[2ex]
 {\bf R2} \>
         \(\begin{array}[t]{l}
@@ -244,7 +245,7 @@ Answer the questions below referring to the following definitions:
         \(\begin{array}[t]{l}
         t\in\id{RT}\;\;\;u\in\id{RT} \\
         \hline
-        \id{cons}(t,u)\in\id{RTL}
+        \id{cons}(t,\id{cons}(u,nil))\in\id{RTL}
         \end{array}\) \\[2ex]
 {\bf R2} \>
         \(\begin{array}[t]{l}
@@ -263,117 +264,119 @@ Answer the questions below referring to the following definitions:
 
 \end{solution}
 
-\question Let $L$ be the number of leaf nodes and $I$ be the number
-          of internal nodes. Suppose you are asked to prove that for all 
-          full binary trees, $L = I + 1$.
-\begin{parts}
-\part What induction rule should you use? 
-\begin{solution}
-Strong mutual induction with multiple base cases.  
-\end{solution}
-\part What variable will you perform induction over? 
-\begin{solution}
-Derivation height.
-\end{solution}
-\part Set up the proof: write the base case, inductive hypothesis and inductive step.
-\begin{solution}
-~\\{\bf Base Cases:}\\
-$S_1(0), S_1(1), S_1(2)$: If the derivation of $l\in \id{RTL}$ has height $0$,
-  $1$ or $2$, then $L = I + |l|$.
-
-$S_2(0), S_2(1), S_2(2)$: If the derivation of $t\in \id{RT}$ has height $0$,
-  $1$ or $2$, then $L = I + 1$.
-
-{ \bf Inductive Hypothesis:}\\
-$S_1(k)$: If the derivation of $l\in \id{RTL}$ has height $k$ where $2 \leq k
-\leq n$ and $n \geq 0$, then $L = I + |l|$.
-
-$S_2(k)$: If the derivation of $t\in \id{RT}$ has height $k$ where $2 \leq k
-\leq n$ and $n \geq 0$, then $L = I + 1$.
-
-{\bf Inductive Step:}\\
-$S_1(n+1)$: Assuming the inductive hypothesis, we must show if the derivation of $l\in \id{RTL}$ 
-            has height $n+1$ then $L = I + |l|$.
-
-$S_2(n+1)$: Assuming the inductive hypothesis, we must show if the derivation of $t\in \id{RT}$ 
-            has height $n+ 1$ then $L = I + 1$.
-
-
-\end{solution}
-\part Prove the base case.
-\begin{solution}
-%omitted
-~\\
-$S_1(0)$: If the derivation of $l\in \id{RTL}$ has height $0$, it was
-produced by rule $B$. Therefore, it is the empty list, so $L = I = |l| = 0$,
-and $ 0 = 0 + 0$, so the formula holds.
-
-$S_2(0)$: There is no $t\in \id{RT}$ with a derivation height of $0$. Therefore
-this statement is vacuously true. 
-
-$S_1(1)$: If the derivation of $l\in \id{RTL}$ has height $1$, then it was
-produced by rule $R1$. However, this implies that it has the form $cons(t,u)$
-where the derivation height of $t,u \in RT$ is $0$. Since no elements of $RT$
-have a derivation height of $0$, this is false, so the implication is vacuously
-true.
-
-$S_2(1)$: If $t\in \id{RT}$ has a derivation height of $1$, it has the form
-$node(l)$ where $l \in RTL$ has a derivation height of $0$. Therefore
-$l$ was produced by rule $B$, so $l$ is the empty list, and the tree $t$ is a
-single root. The root $t$ has no children, so it is a leaf, and $t$ has no
-internal nodes. Therefore subsituting into $L = I + 1$ gives $1 = 0 + 1$,
-and the formula holds.
-
-$S_1(2)$: If the derivation of $l\in \id{RTL}$ has height $2$, then it was
-produced by rule $R1$. This implies that it has the form $cons(t,u)$
-where the derivation height of $t,u \in RT$ is $1$. Therefore both $t$ and $u$
-have the form $node(l')$ where $l'$ has a derivation height of $0$, and is
-therefore the empty list. Consequently, both $t$
-and $u$ are single node trees, and both have a single leaf and no internal
-nodes. It follows that $l$ has $2$ leaf nodes and $0$ internal nodes, so
-substituting for the formula $L = I + |l|$ gives $2 = 0 + 2$, which is correct.
-
-$S_2(2)$: If $t\in \id{RT}$ has a derivation height of $2$, it has the form
-$node(l)$ where $l \in RTL$ has a derivation height of $1$. However, this
-implies $l$ has the form $cons(t,u)$, where $t$ and $u$ have a derivation
-height of $0$, which is impossible, since there is no axiom that produces
-elements of $RT$. Therefore the premise is false, and the implication
-is vacuously true.
+% Question below omitted because:
+% It needs work, is too challenging, and there is already too much material.
+%\question Let $L$ be the number of leaf nodes and $I$ be the number
+%          of internal nodes. Suppose you are asked to prove that for all 
+%          full binary trees, $L = I + 1$.
+%\begin{parts}
+%\part What induction rule should you use? 
+%\begin{solution}
+%Strong mutual induction with multiple base cases.  
+%\end{solution}
+%\part What variable will you perform induction over? 
+%\begin{solution}
+%Derivation height.
+%\end{solution}
+%\part Set up the proof: write the base case, inductive hypothesis and inductive step.
+%\begin{solution}
+%~\\{\bf Base Cases:}\\
+%$S_1(0), S_1(1), S_1(2)$: If the derivation of $l\in \id{RTL}$ has height $0$,
+%  $1$ or $2$, then $L = I + |l|$.
 %
-\end{solution}
-\part Prove the inductive step.
-\begin{solution}
-%omitted
-\begin{proof}
-$S_1(n+1)$: If the derivation of $l'\in \id{RTL}$ has height $n+1$ then it was
-produced by rule $R1$ so it has the form $ l' = cons(t,u)$, where $t$ and $u$ are
-in $RT$ and have derivation height $k$, where $2 \geq k \geq n$. Let $L$ be the
-number of leaf nodes in $l'$, $L_t$ be the number of leaf nodes in $t$ and $L_u$ 
-be the number of leaf nodes in $u$. Similarly, let $I, I_t,I_u$ represent the
-number of internal nodes in $l',t,u$, respectively. Clearly, $L' = L_t + L_u$
-and $I = I_t + I_u$. Moreover, by the inductive hypothesis $S_2$, we have 
-$L_t = I_t + 1$ and $L_u = I_u + 1$. Thus, $L =  L_t + L_u = I_t + 1 + I_u + 1 =
-I_t + I_u + |l'| = I + |l'|$. This proves $S_1(k) \land S_2(k) \implies S_1(n+1)$
-where $2 \leq k \leq n$.
-
-$S_2(n+1)$: All elements of $\id{RT}$ are produced by $R2$ so if $t' \in RT$
-and $t'$ has a derivation height of $n+ 1$ then it has the form $node(l)$, where 
-$l \in RTL$ and $l$ has a derivation height of $n$. Since $2 \leq k \leq n$, 
-$n$ is a possible value of $k$ and the inductive hypothesis applies.  Let $L, I$ 
-be the number of leaf nodes and internal nodes in $t'$, respectively, and 
-let $L_l,I_l$ be the number of leaf nodes and internal nodes in $l$. Since the 
-derivation height of $l$ is at least $2$ it must have been produced by
-rule $R1$. Therefore $|l| = 2$ and $l = cons(t,u)$, where $t$ and $u$ have
-derivation heights of at least $1$ (and thus contain at least one node).
-It follows that $L = L_l$, since the process of forming a tree with $node$ 
-does not add any more leaves, and $I = I_l + 1$, since forming a tree from 
-the trees in $l$ produces one extra internal node (the new root). By the 
-inductive hypothesis, we have that $L_l = I_l + |l|$, so by substitution 
-$L = I_l + |l|$. Moreover, because $|l| = 2$, $L = I_l + |l| = I_l + 1 + 1 = I +
-1$. This proves $S_1(k) \land S_2(k) \implies S_2(n+1)$ where $2 \leq k \leq n$.
-\end{proof}
-\end{solution}
-\end{parts}
+%$S_2(0), S_2(1), S_2(2)$: If the derivation of $t\in \id{RT}$ has height $0$,
+%  $1$ or $2$, then $L = I + 1$.
+%
+%{ \bf Inductive Hypothesis:}\\
+%$S_1(k)$: If the derivation of $l\in \id{RTL}$ has height $k$ where $2 \leq k
+%\leq n$ and $n \geq 0$, then $L = I + |l|$.
+%
+%$S_2(k)$: If the derivation of $t\in \id{RT}$ has height $k$ where $2 \leq k
+%\leq n$ and $n \geq 0$, then $L = I + 1$.
+%
+%{\bf Inductive Step:}\\
+%$S_1(n+1)$: Assuming the inductive hypothesis, we must show if the derivation of $l\in \id{RTL}$ 
+%            has height $n+1$ then $L = I + |l|$.
+%
+%$S_2(n+1)$: Assuming the inductive hypothesis, we must show if the derivation of $t\in \id{RT}$ 
+%            has height $n+ 1$ then $L = I + 1$.
+%
+%
+%\end{solution}
+%\part Prove the base case.
+%\begin{solution}
+%%omitted
+%~\\
+%$S_1(0)$: If the derivation of $l\in \id{RTL}$ has height $0$, it was
+%produced by rule $B$. Therefore, it is the empty list, so $L = I = |l| = 0$,
+%and $ 0 = 0 + 0$, so the formula holds.
+%
+%$S_2(0)$: There is no $t\in \id{RT}$ with a derivation height of $0$. Therefore
+%this statement is vacuously true. 
+%
+%$S_1(1)$: If the derivation of $l\in \id{RTL}$ has height $1$, then it was
+%produced by rule $R1$. However, this implies that it has the form $cons(t,u)$
+%where the derivation height of $t,u \in RT$ is $0$. Since no elements of $RT$
+%have a derivation height of $0$, this is false, so the implication is vacuously
+%true.
+%
+%$S_2(1)$: If $t\in \id{RT}$ has a derivation height of $1$, it has the form
+%$node(l)$ where $l \in RTL$ has a derivation height of $0$. Therefore
+%$l$ was produced by rule $B$, so $l$ is the empty list, and the tree $t$ is a
+%single root. The root $t$ has no children, so it is a leaf, and $t$ has no
+%internal nodes. Therefore subsituting into $L = I + 1$ gives $1 = 0 + 1$,
+%and the formula holds.
+%
+%$S_1(2)$: If the derivation of $l\in \id{RTL}$ has height $2$, then it was
+%produced by rule $R1$. This implies that it has the form $cons(t,u)$
+%where the derivation height of $t,u \in RT$ is $1$. Therefore both $t$ and $u$
+%have the form $node(l')$ where $l'$ has a derivation height of $0$, and is
+%therefore the empty list. Consequently, both $t$
+%and $u$ are single node trees, and both have a single leaf and no internal
+%nodes. It follows that $l$ has $2$ leaf nodes and $0$ internal nodes, so
+%substituting for the formula $L = I + |l|$ gives $2 = 0 + 2$, which is correct.
+%
+%$S_2(2)$: If $t\in \id{RT}$ has a derivation height of $2$, it has the form
+%$node(l)$ where $l \in RTL$ has a derivation height of $1$. However, this
+%implies $l$ has the form $cons(t,u)$, where $t$ and $u$ have a derivation
+%height of $0$, which is impossible, since there is no axiom that produces
+%elements of $RT$. Therefore the premise is false, and the implication
+%is vacuously true.
+%%
+%\end{solution}
+%\part Prove the inductive step.
+%\begin{solution}
+%%omitted
+%\begin{proof}
+%$S_1(n+1)$: If the derivation of $l'\in \id{RTL}$ has height $n+1$ then it was
+%produced by rule $R1$ so it has the form $ l' = cons(t,u)$, where $t$ and $u$ are
+%in $RT$ and have derivation height $k$, where $2 \geq k \geq n$. Let $L$ be the
+%number of leaf nodes in $l'$, $L_t$ be the number of leaf nodes in $t$ and $L_u$ 
+%be the number of leaf nodes in $u$. Similarly, let $I, I_t,I_u$ represent the
+%number of internal nodes in $l',t,u$, respectively. Clearly, $L' = L_t + L_u$
+%and $I = I_t + I_u$. Moreover, by the inductive hypothesis $S_2$, we have 
+%$L_t = I_t + 1$ and $L_u = I_u + 1$. Thus, $L =  L_t + L_u = I_t + 1 + I_u + 1 =
+%I_t + I_u + |l'| = I + |l'|$. This proves $S_1(k) \land S_2(k) \implies S_1(n+1)$
+%where $2 \leq k \leq n$.
+%
+%$S_2(n+1)$: All elements of $\id{RT}$ are produced by $R2$ so if $t' \in RT$
+%and $t'$ has a derivation height of $n+ 1$ then it has the form $node(l)$, where 
+%$l \in RTL$ and $l$ has a derivation height of $n$. Since $2 \leq k \leq n$, 
+%$n$ is a possible value of $k$ and the inductive hypothesis applies.  Let $L, I$ 
+%be the number of leaf nodes and internal nodes in $t'$, respectively, and 
+%let $L_l,I_l$ be the number of leaf nodes and internal nodes in $l$. Since the 
+%derivation height of $l$ is at least $2$ it must have been produced by
+%rule $R1$. Therefore $|l| = 2$ and $l = cons(t,u)$, where $t$ and $u$ have
+%derivation heights of at least $1$ (and thus contain at least one node).
+%It follows that $L = L_l$, since the process of forming a tree with $node$ 
+%does not add any more leaves, and $I = I_l + 1$, since forming a tree from 
+%the trees in $l$ produces one extra internal node (the new root). By the 
+%inductive hypothesis, we have that $L_l = I_l + |l|$, so by substitution 
+%$L = I_l + |l|$. Moreover, because $|l| = 2$, $L = I_l + |l| = I_l + 1 + 1 = I +
+%1$. This proves $S_1(k) \land S_2(k) \implies S_2(n+1)$ where $2 \leq k \leq n$.
+%\end{proof}
+%\end{solution}
+%\end{parts}
 \uplevel{\section*{Simple Automata}}
 \question The diagram below shows a slightly modified version of the simple
 switch discussed in class. \\
