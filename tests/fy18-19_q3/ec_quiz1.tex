@@ -1,0 +1,133 @@
+\documentclass[addpoints]{exam}
+
+%These tell TeX which packages to use.
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{../mlextra} % must be below ams packages
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {../../art/} }
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+
+
+
+%\pagestyle{empty} 
+%\footer{}{\thepage}{}
+
+
+\begin{document}
+
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+{\large CS3001: Foundations of Computer Science} &  \makebox[3in]{\large Name:\enspace\hrulefill}\\
+{\large April 15, 2019} & \\
+{\large EC Quiz} & 
+\end{tabular*}\\
+
+\fbox{\fbox{\parbox{6in}{\textbf{Instructions}: Please answer the questions 
+  below to the best of your ability. Be sure to show your work where appropriate. 
+   This quiz is closed book, closed notes, closed computer. There are \numpoints\ 
+   points in total. }}}\\
+
+
+\begin{questions}
+\question[3]
+Let $\Sigma = \{0,1,2\}$.  Let $T = \{t \in \Sigma^* | |t| \geq 3\}$.
+Now define $Z$ to be a relation on $T$ such that $xZy$ for $x,y \in
+T$ if and only if there exist strings $r,s \in \Sigma^*$
+and string $m$ in $\Sigma^3$ such that $x = rm$ and $y = sm$. 
+\\~\\
+Prove $Z$ is an equivalence relation.
+\begin{solution}[5in]
+\begin{proof}
+To show $Z$ is an equivalence relation, we must show it is reflexive, symmetric
+and transitive.
+\\~\\
+REFLEXIVE: $(x,x) \in Z$ if and only if there exist strings $r,s \in \Sigma^*$ and
+string $m \in \Sigma^3$ such that $x = rm$ and $x = sm$. This is the case
+for any $m$ and any $r$ if we choose $s = r$. Note that this applies to
+all $x$ in $T$ because $x \in T$ implies $x$ has at least $3$ characters. (If
+$x$ had fewer than $3$ characters there would be no choice of $s,m$ that would
+satisfy $x = sm$.)
+\\~\\
+SYMMETRIC: $(x,y) \in Z$ if and only if there exist strings $r,s \in \Sigma^*$ and
+string $m \in \Sigma^3$ such that $x = rm$ and $y = sm$. However, this is
+the same criteria required to show $(y,x) \in Z$ (since the choice of variable
+names $r,s$ is arbitrary), so $bZa$.
+\\~\\
+TRANSITIVE: We want to show that $xZy$ and $yZz$ implies $xZz$. $(x,y) \in Z$
+if and only if there exists $r,s \in \Sigma^*$ and $m \in \Sigma^3$ such 
+that $x = rm$ and $y = sm$.  Also, $(y,z) \in Z$ if and only if there 
+exists $r',s' \in \Sigma^*$ 
+and $m' \in \Sigma^3$ such that $y = r'm'$ and $z = s'm'$. If $y = rm$
+and $y = s'm'$ where $m$ and $m'$ are strings of length three, then
+it must be the case that $m = m'$. Therefore $r, s'$ are strings in
+$\Sigma^*$ such that $x = rm$ and $z = s'm$, which proves $(x,z) \in Z$.
+\end{proof}
+\end{solution}
+
+
+\fbox{\fbox{\parbox{6in}{\textbf{Facts}: 
+Let $R$ be a binary relation on $S$.
+\begin{itemize}
+\item $R$ is \emph{reflexive} if and only if $R(x,x)$ for all $x \in S$.
+
+\item $R$ is \emph{symmetric} if and only if $R(x_1,x_2)$ implies $R(x_2,x_1)$.
+
+\item $R$ is \emph{antisymmetric} if and only if $(x_1,x_2) \in R$ and $(x_2,x_1) \in
+R$ implies $x_1 = x_2$.
+
+\item $R$ is \emph{transitive} if and only if $R(x_1,x_2)$ and $R(x_2,x_3)$ implies $R(x_1,x_3)$.
+
+\end{itemize}}}}\\
+
+
+
+
+
+\end{questions}
+
+%\question
+%
+%Let $\Sigma = \{a,b,c\}$. Define $Z$ to be a relation on $\Sigma^+$ such
+%that $(x,y) \in Z$ if and only if there exist strings $r,s \in \Sigma^*$
+%and string $t \in \Sigma$ such that $x = tr$ and $y = ts$.
+%
+%\begin{parts}
+%\part[2] Which of the following pairs are in $Z$:
+%\begin{checkboxes}
+%\choice $(cac,bac)$
+%\CorrectChoice $(baabaa,bac)$
+%\choice $(\epsilon,\epsilon)$
+%\CorrectChoice $(aaaaa,a)$
+%\end{checkboxes}
+%
+%\part[3] Prove $Z$ is transitive.
+%\begin{solution}[30mm]
+%
+%\end{solution}
+%
+%%\bonuspart[1] Assume $Z$ is an equivalence relation. How many equivalence
+%%classes are there with respect to $Z$ on $\Sigma^+$?
+%\end{parts}
+
+
+\end{document}
+
+
