@@ -27,7 +27,7 @@
 %\pagestyle{empty} 
 %\footer{}{\thepage}{}
 
-\noprintanswers
+\printanswers
 \unframedsolutions
 \SolutionEmphasis{\itshape\small}
 \SolutionEmphasis{\color{NavyBlue}}
@@ -146,9 +146,10 @@ For the following proofs, begin by setting up the correct basis, hypothesis
 and inductive step in terms of $S(n)$.
 
 
-\question Prove for all $n \geq 1$, $\sum_{i=1}^{n} (2n - 1) = n^2$. 
+\question Prove for all $n \geq 1$, $\sum_{i=1}^{n} (2i - 1) = n^2$. 
 \begin{solution}
 \begin{proof}
+We prove this claim by weak induction over the positive integers. 
 First, set up the basis, hypothesis and induction step in terms of $S(n)$:
 ~\\
 \textbf{Basis:} Show $S(1): \sum_{i=1}^1 (2i - 1) = 1^2$. We have $ \sum_{i=1}^1
@@ -185,6 +186,7 @@ which proves the result.
 \item Prove $m \in S$ only if $m$ is a positive even integer (soundness). 
 \begin{solution}
 \begin{proof}
+We prove this claim by strong induction over derivation height. 
 First, set up the basis, hypothesis and induction step in terms of $S(n)$ and
 derivation height:
 ~\\
@@ -210,6 +212,7 @@ their sum, $m'$, is also a positive even integer.
 \item Prove if $m$ is a positive even integer, $m \in S$ (completeness).
 \begin{solution}
 \begin{proof}
+We will prove this claim by weak induction over the positive integers. 
 First, set up the basis, hypothesis and induction step in terms of $S(k)$,
 where $k$ is a positive integer such that $m = 2k$, and we want to show
 $2k \in S$ for all $k \geq 1$:
@@ -246,6 +249,7 @@ of $x$.
 %\newpage
 \begin{solution}
 \begin{proof}
+We prove by weak induction over derivation height. 
 First, set up the basis, hypothesis and induction step in terms of $S(n)$ and
 derivation height:
 ~\\
@@ -287,16 +291,17 @@ $|x| = 2^n$, and therefore $|xx| = 2(2^n) = 2^{n+1}$.
 Prove for all $m \in E$, $\frac{|m|}{2}$ is a positive odd integer.  
 \begin{solution}
 \begin{proof}
-First, set up the basis, hypothesis and induction step in terms of $S(n)$ and
-derivation height:
+We will use strong induction over derivation height. First, set up the basis, 
+hypothesis and induction step in terms of $S(n)$ and derivation height:
 ~\\
 \textbf{Basis:} Show $S(0):$ if $m \in E$ and $m$ has a derivation height of
 $0$, then $m$ must be produced by rule $B1$ or $B2$. Therefore $m$ is $aa$ or $bb$ 
 and $|m| = 2$. Since $\frac{2}{2} = 1$ is a positive odd integer, the base
 case holds.
 ~\\
-\textbf{Inductive Hypothesis:} Suppose $S(n)$: Assume $\frac{|m|}{2}$ is odd
-for $m \in E$ when $m$ has a derivation height of $n$.
+\textbf{Inductive Hypothesis:} Suppose $S(k)$ for $0 \leq k \leq n$: 
+Assume $\frac{|m|}{2}$ is odd
+for $m \in E$ when $m$ has a derivation height of $k$.
 ~\\
 \textbf{Inductive Step:} Show $S(n+1)$: Show if $m' \in E$ and $m'$ has a
 derivation height of $n + 1$, then $\frac{|m'|}{2}$ is odd.  Since $n \geq 0$,
