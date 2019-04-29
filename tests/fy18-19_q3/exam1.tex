@@ -72,8 +72,8 @@
 
 \vspace{5mm}
 \part[2] Let $\Sigma$ be some alphabet and consider the function $f: \Sigma^+
-\to \Sigma$, where $c \in \Sigma$ and we define $f(x) = c$ if there is some $y$ in
-$\Sigma^*$ such that $cy = x$. 
+\to \Sigma$, where $c \in \Sigma$ and we define $f(x) = c$ if there is some $y
+\in \Sigma^*$ such that $cy = x$. 
 
 \begin{oneparcheckboxes}
 \choice injective 
@@ -82,7 +82,7 @@ $\Sigma^*$ such that $cy = x$.
 \choice both (bijective) 
 \end{oneparcheckboxes}
 \end{parts}
-\vspace{10mm}
+\vspace{8mm}
 
 \question[4] Let $\Sigma = \{a,b\}$ and let $R$ be an equivalence relation on $\Sigma^*$. 
 Which of the following statements \emph{must} be true? Choose all that apply.
@@ -94,18 +94,45 @@ Which of the following statements \emph{must} be true? Choose all that apply.
 \CorrectChoice $(a,a) \in R$.
 \end{checkboxes}
 
-\vspace{10mm}
+\vspace{8mm}
 \question[5]
 Let $S$ be a set with at least one element and let $R$ be a partial order on $S$. 
 Which of the following statements \emph{must} be true? Choose all that apply.
 
 \begin{checkboxes}
-\CorrectChoice If $x = y$ then $(x,y) \in R$ and $(y,x) \in R$. 
 \CorrectChoice If $(x,y) \in R$ and $(y,x) \in R$ then $x = y$. 
+\CorrectChoice If $x = y$ then $(x,y) \in R$ and $(y,x) \in R$. 
 \choice If $(x,y) \in R$ and $(x,z) \in R$ then $(y,z) \in R$. 
 \choice $R$ is not symmetric. 
 \CorrectChoice $R \neq \emptyset$.
 \end{checkboxes}
+
+\vspace{5mm}
+\fbox{\fbox{\parbox{6in}{\textbf{Helpful Facts}: 
+
+Let $R$ be a binary relation on $S$.
+\begin{itemize}
+\item $R$ is \emph{reflexive} if and only if $R(x,x)$ for all $x \in S$.
+
+\item $R$ is \emph{symmetric} if and only if $R(x_1,x_2)$ implies $R(x_2,x_1)$.
+
+\item $R$ is \emph{antisymmetric} if and only if $(x_1,x_2) \in R$ and $(x_2,x_1) \in
+R$ implies $x_1 = x_2$.
+
+\item $R$ is \emph{transitive} if and only if $R(x_1,x_2)$ and $R(x_2,x_3)$ implies $R(x_1,x_3)$.
+
+\end{itemize}
+
+Let $f$ be a function mapping from set $A$ to set $B$.
+
+\begin{itemize}
+\item $f$ is injective if and only if $f(x) = f(y) \implies x = y$ for all $x,y \in A$.
+
+\item $f: A \to B$ is surjective if and only if for all $y \in B$ there
+exists $x \in A$ such that $f(x) = y$. 
+\end{itemize}}}}\\
+
+
 
 
 
@@ -242,14 +269,16 @@ above claim soundness or completeness with respect to $P$?
 \end{tabbing}
 
 \begin{parts}
-\part[4] Evaluate the implications below. Write $T$ if the implication is
+\part[5] Evaluate the implications below. Write $T$ if the implication is
 logically correct, $F$ otherwise.
 \begin{subparts}
 \subpart \tf[T] (T/F) If $l \in RTL$ has derivation height $0$, then $|l| = 0$.
 \subpart \tf[T] (T/F) If $l \in RTL$ has derivation height $2$, then the number of edges
 in $l$ is $0$.
-\subpart \tf[F] (T/F) If $l \in RTL$ has derivation height $4$, then it contains at
-least four nodes.
+\subpart \tf[F] (T/F) If $t \in RT$ has derivation height $1$, then it contains
+a single edge.
+\subpart \tf[F] (T/F) If $l \in RTL$ has derivation height $4$ and was formed
+by rule $R3$, then it contains at least four nodes.
 %\subpart \tf[T] (T/F) If $t \in RT$ has derivation height $1$, then the number of nodes 
 %in $t$ is $1$.
 \subpart \tf[T] (T/F) If $t \in RT$ has derivation height $2$, then the number of nodes 
@@ -352,90 +381,65 @@ the Post system given on the right.
 %strings in $L$ by induction on $k$.\\
 \begin{parts}
 \part[3] Write out the three shortest strings contained in the set $R$.
-\vspace{10mm}
+\vspace{15mm}
 
 \part[3] Give a set comprehension for $L$. 
-\vspace{10mm}
+\vspace{15mm}
 
 \part[3] We claim that if a string in $R$ has derivation height $n$, it is accepted
 by the automaton. Prove this claim holds for $n=0$.
-\vspace{25mm}
+\vspace{30mm}
 
 \part We claim that if a string in $Q$ has a derivation height $n$, this string 
 will put the automaton in the start state.  
 \begin{subparts} 
-\subpart[3] Prove this claim holds for $n=1$.
-\vspace{25mm}
+\subpart[5] Prove this claim holds for $n=1$.
+\vspace{30mm}
 \subpart[2] Does the claim hold for $n=0$? Justify your answer.
 \vspace{15mm}
 \end{subparts} 
 
-\part[3] Suppose you are asked to prove, by induction on derivation height, that
-all strings in $R$ are accepted by the automaton (i.e, $R \subseteq L$).  
-Which of the following induction rules should you choose?
-\begin{choices}
-
-\choice 
-	\(\begin{array}[t]{l}
-	S_1(i)\;\wedge\;S_2(i)\;\wedge\;\forall n \geq i.\;S_1(n)\;\wedge\;S_2(n)\Rightarrow S_1(n+1)\;\wedge\;S_2(n+1)\\
-	\hline
-	\forall n \geq i. \; S_1(n)\;\wedge\;S_2(n)
-	\end{array}\) % \\[2ex]
-
-\choice 
-	\(\begin{array}[t]{l}
-	S_1(i) \;\wedge\;S_2(i) \;\wedge\; \forall n \geq i.\;S_1(i)\;\wedge\;S_2(i)\;\wedge\cdots\wedge\;S_1(n)\;\wedge\;S_2(n)\Rightarrow S_1(n+1)\;\wedge\;S_2(n+1)\\
-	\hline
-	\forall n \geq i. \; S_1(n)\;\wedge\;S_2(n)
-	\end{array}\)
-
-\choice 
-	\(\begin{array}[t]{l}
-	S(i) \;\wedge\; \forall n \geq i.\;S(n) \Rightarrow S(n+1) \\
-	\hline
-	\forall n \geq i. \; S(n)
-	\end{array}\) % \\[2ex]
-
-\choice 
-	\(\begin{array}[t]{l}
-	S_1(i) \;\wedge\; S_2(i)\;\wedge\;S_1(i+1) \;\wedge\; S_2(i+1)\;\wedge\;\cdots\wedge\;S_1(j)\;\wedge\;S_2(j) \\
-\forall n \geq
-j.\;S_1(i)\;\wedge\;S_2(i)\;\wedge\cdots\wedge\;S_1(n)\wedge\;S_2(n)\Rightarrow S_1(n+1)\wedge\;S_2(n+1)\\
-	\hline
-	\forall n \geq i. \; S_1(n)\;\wedge\;S_2(n)
-	\end{array}\) % \\[2ex]
-
-
-\end{choices}
-\part[2] Briefly justify your answer to part (a):
-\vspace{160mm}
-
+%\part[3] Suppose you are asked to prove, by induction on derivation height, that
+%all strings in $R$ are accepted by the automaton (i.e, $R \subseteq L$).  
+%Which of the following induction rules should you choose?
+%\begin{choices}
+%
+%\choice 
+%	\(\begin{array}[t]{l}
+%	S_1(i)\;\wedge\;S_2(i)\;\wedge\;\forall n \geq i.\;S_1(n)\;\wedge\;S_2(n)\Rightarrow S_1(n+1)\;\wedge\;S_2(n+1)\\
+%	\hline
+%	\forall n \geq i. \; S_1(n)\;\wedge\;S_2(n)
+%	\end{array}\) % \\[2ex]
+%
+%\choice 
+%	\(\begin{array}[t]{l}
+%	S_1(i) \;\wedge\;S_2(i) \;\wedge\; \forall n \geq i.\;S_1(i)\;\wedge\;S_2(i)\;\wedge\cdots\wedge\;S_1(n)\;\wedge\;S_2(n)\Rightarrow S_1(n+1)\;\wedge\;S_2(n+1)\\
+%	\hline
+%	\forall n \geq i. \; S_1(n)\;\wedge\;S_2(n)
+%	\end{array}\)
+%
+%\choice 
+%	\(\begin{array}[t]{l}
+%	S(i) \;\wedge\; \forall n \geq i.\;S(n) \Rightarrow S(n+1) \\
+%	\hline
+%	\forall n \geq i. \; S(n)
+%	\end{array}\) % \\[2ex]
+%
+%\choice 
+%	\(\begin{array}[t]{l}
+%	S_1(i) \;\wedge\; S_2(i)\;\wedge\;S_1(i+1) \;\wedge\; S_2(i+1)\;\wedge\;\cdots\wedge\;S_1(j)\;\wedge\;S_2(j) \\
+%\forall n \geq
+%j.\;S_1(i)\;\wedge\;S_2(i)\;\wedge\cdots\wedge\;S_1(n)\wedge\;S_2(n)\Rightarrow S_1(n+1)\wedge\;S_2(n+1)\\
+%	\hline
+%	\forall n \geq i. \; S_1(n)\;\wedge\;S_2(n)
+%	\end{array}\) % \\[2ex]
+%
+%
+%\end{choices}
+%\part[2] Briefly justify your answer to part (a):
+%\vspace{160mm}
+%
 \end{parts}
-
-\fbox{\fbox{\parbox{6in}{\textbf{Helpful Facts}: 
-
-Let $R$ be a binary relation on $S$.
-\begin{itemize}
-\item $R$ is \emph{reflexive} if and only if $R(x,x)$ for all $x \in S$.
-
-\item $R$ is \emph{symmetric} if and only if $R(x_1,x_2)$ implies $R(x_2,x_1)$.
-
-\item $R$ is \emph{antisymmetric} if and only if $(x_1,x_2) \in R$ and $(x_2,x_1) \in
-R$ implies $x_1 = x_2$.
-
-\item $R$ is \emph{transitive} if and only if $R(x_1,x_2)$ and $R(x_2,x_3)$ implies $R(x_1,x_3)$.
-
-\end{itemize}
-
-Let $f$ be a function mapping from set $A$ to set $B$.
-
-\begin{itemize}
-\item $f$ is injective if and only if $f(x) = f(y) \implies x = y$ for all $x,y \in A$.
-
-\item $f: A \to B$ is surjective if and only if for all $y \in B$ there
-exists $x \in A$ such that $f(x) = y$. 
-\end{itemize}}}}\\
-
 
 
 %Prove injective / surjective.
