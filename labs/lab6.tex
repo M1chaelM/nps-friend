@@ -62,15 +62,34 @@ $\eqv$
 \end{solution}
 \end{parts}
 
-\question Transform the set of formulas
+\question Transform the set of formulas below into clausal form and refute 
+          using resolution.
 \[
-  \{p,\: p\implies ((q\lor r) \land \ngg (q \land r)),\: p \implies ((s \lor t) \land
-      \ngg (s \land t)),\:  s \implies q,\: \ngg r \implies t,\: t \implies s \}
+  \{p,\: p\imp ((q\lor r) \land \ngg (q \land r)),\: p \imp ((s \lor t) \land
+      \ngg (s \land t)),\:  s \imp q,\: \ngg r \imp t,\: t \imp s \}
   \]
-into clausal form and refute using resolution.
 \begin{solution}
-~\\{ \bf Clausal Form:}\\
-$\{p, \bar{p}qr, \bar{p}\bar{q}\bar{r}, \bar{p}st, \bar{p}\bar{s}\bar{t}, \bar{s}q, rt, \bar{t}s\}$\\
+Proceed by changing all formulas to their corresponding CNF. The first formula
+is trivial. The second can be converted as follows:
+\begin{align*}
+&p \imp ((q\lor r) \land \ngg (q \land r))                            && \text{original} & \\
+&\equiv \ngg p\lor ((q\lor r) \land \ngg (q \land r))                 && A\imp B \equiv \ngg A \lor B &\\ 
+&\equiv \ngg p\lor ((q\lor r) \land (\ngg q \lor \ngg r))             && \text{De Morgan's Laws} &\\  
+&\equiv (\ngg p\lor (q\lor r)) \land (\ngg p\lor (\ngg q \lor \ngg r))&& A \lor (B \land C) \equiv (A \lor B) \land (B \lor C)&\\ 
+&\equiv (\ngg p\lor q\lor r) \land (\ngg p \lor \ngg q \lor \ngg r)   && \text{associative property} &\\   
+&\equiv \{\bar{p}qr, \bar{p}\bar{q}\bar{r} \}                         && \text{clausal form}&\\ 
+\end{align*}
+The third formula has the same form with different variables, so by the same transformations:
+\begin{align*}
+&p \imp ((s \lor t) \land \ngg (s \land t)) \\ 
+&\equiv \{\bar{p}st, \bar{p}\bar{s}\bar{t} \} \\ 
+\end{align*}
+The rest of the formulas follow immediately from simple transformations.
+Putting these all together in a single set, we have
+
+\[
+  \{p, \bar{p}qr, \bar{p}\bar{q}\bar{r}, \bar{p}st, \bar{p}\bar{s}\bar{t}, \bar{s}q, rt, \bar{t}s\}
+\]
 ~\\{ \bf One possible refutation:}
 \begin{enumerate}
 \item $p,\bar{p}st$: $st$
@@ -83,7 +102,6 @@ $\{p, \bar{p}qr, \bar{p}\bar{q}\bar{r}, \bar{p}st, \bar{p}\bar{s}\bar{t}, \bar{s
 \item $\bar{r}, rt$: $t$
 \item $t,\bar{t}$: $\Box$
 \end{enumerate}
-
 
 \end{solution}
 \question Refer to the following diagram of a half-adder circuit and
@@ -132,27 +150,22 @@ answer the questions below:
 \end{picture}
 \end{center}
 
+(Note: In the questions below the variables $b_1$,$b_2$, $c$ and $s$ refer to
+``Bit1'', ``Bit2'', ``Carry'', and ``Sum'', respectively, in the above
+diagram.)
 \begin{parts}
-\part Let $A$ be a formula in propositional logical such that $c \eqv A$, where
-$c$ is the carry bit in the half-adder. Write an expression for $A$ in terms of
-$b1$ and $b2$.
+\part Write a formula in propositional logic that expresses the relationship
+between $b_1$, $b_2$ and $c$. The formula should be true when the
+values of the three variables correspond to the expected behavior of the
+circuit, and false otherwise.
 \begin{solution}
-$A \equiv b1 \land b2$
+$c \eqv b_1 \land b_2$
 \end{solution}
 
-\part Let $B$ be a formula in propositional logical such that $s \eqv B$, where
-$s$ is the sum bit in the half-adder. Write an expression for $B$ in terms of
-$b1$ and $b2$.
+\part Write a formula in propositional logic that expresses the relationship
+between $b1$, $b2$ and $s$.
 \begin{solution}
-$B \equiv \ngg(b1 \land b2) \land (b1 \lor b2)$
-\end{solution}
-\part Subsitute your formulas for $A$ and $B$ to produce a pair of formulas
-of the form $c \eqv A$, $s \eqv B$, but with all literals explicitly written
-out. For example, if your formula for $A$ were $p \lor \ngg p$, you would
-write $c \eqv p \lor \ngg p$. If you have already derived the formulas, this
-step should be trivial.
-\begin{solution}
-$c \equiv b1 \land b2$, $s \equiv \ngg(b1 \land b2) \land (b1 \lor b2)$
+$s \eqv \ngg(b1 \land b2) \land (b1 \lor b2)$
 \end{solution}
 \part Transform the formulas to a set of clauses.
 \begin{solution}

@@ -44,8 +44,8 @@
 \setlength{\columnseprule}{1pt}
 \begin{questions}
 
-\question Answer the questions below for the formula $A$, where $A \equiv (p \implies q)
-  \eqv (\ngg p \implies \ngg q)$.
+\question Answer the questions below for the formula $A$, where $A \equiv (p \imp q)
+  \eqv (\ngg p \imp \ngg q)$.
 \begin{parts}
 \part What is $\mathcal{P}_A$? 
 \begin{solution}
@@ -58,7 +58,7 @@ T$, $\mathcal{I}_A(q) = F$.  Is $\mathcal{I}_A$ a model for $A$?
 No.
 \end{solution}
 
-\part Given an interpretation that satisfies $A$ or prove $A$ is not
+\part Give an interpretation that satisfies $A$ or prove $A$ is not
 satisfiable.
 \begin{solution}
 $\mathcal{I}_A(p) = T$, $\mathcal{I}_A(q) = T$ or $\mathcal{I}_A(p) = F$, $\mathcal{I}_A(q) = F$ \\
@@ -66,7 +66,7 @@ $\mathcal{I}_A(p) = T$, $\mathcal{I}_A(q) = T$ or $\mathcal{I}_A(p) = F$, $\math
 \end{parts}
 
 
-\question Answer the questions below for the formula $A$, where $A \equiv (p \implies q) \implies q) \implies q$.
+\question Answer the questions below for the formula $A$, where $A \equiv ((p \imp q) \imp q) \imp q$.
 \begin{parts}
 \part What is $\mathcal{P}_A$? 
 \begin{solution}
@@ -86,12 +86,12 @@ Yes.
 
 \part Prove $\models A$ or give an interpretation that falsifies $A$.
 \begin{solution}
-$\mathcal{I}_A(p) = T$, $\mathcal{I}_A(q) = F$ or $\mathcal{I}_A(p) = F$, $\mathcal{I}_A(q) = T$
+$\mathcal{I}_A(p) = T$, $\mathcal{I}_A(q) = F$ 
 \end{solution}
  
 \end{parts}
 
-\question Answer the questions below for the formula $A$, where $A \equiv (p \eqv q) \eqv (q \eqv (q \eqv p))$.
+\question Answer the questions below for the formula $A$, where $A \equiv (p \eqv q) \eqv (p \eqv (q \eqv p))$.
 \begin{parts}
 \part Give an interpretation that satisfies $A$.
 \begin{solution}
@@ -103,66 +103,84 @@ $\mathcal{I}_A(p) = F$, $\mathcal{I}_A(q) = F$ or $\mathcal{I}_A(p) = F$, $\math
 \end{solution}
 \end{parts}
 
-\question Answer the questions below for the formula $A$, where $A \equiv ((p \land q) \implies
-    r) \implies ((p \implies r) \lor (q \implies r))$ 
+\question Answer the questions below for the formula $A$, where $A \equiv ((p \land q) \imp
+    r) \imp ((p \imp r) \lor (q \imp r))$ 
 \begin{parts}
-\part Change $A$ to Negative Normal Form. 
+\part\label{p:nnf} Change $A$ to Negation Normal Form. 
 \begin{solution}
-~\\
-%$((p \land q) \implies r) \implies ((p \implies r) \lor (q \implies r))$\\
-%$(\ngg (p \land q) \lor r) \implies ((\ngg p \lor r) \lor (\ngg q \lor r))$\\
-%$\ngg (\ngg (p \land q) \lor r) \lor ((\ngg p \lor r) \lor (\ngg q \lor r))$\\
-%$ ( (p \land q) \land \ngg r) \lor ((\ngg p \lor r) \lor (\ngg q \lor r))$\\
-$ ((p \land q) \land \ngg r) \lor (\ngg p \lor r \lor \ngg q)$\\
+\begin{align*}
+&((p \land q) \imp r) \imp ((p \imp r) \lor (q \imp r)) & \text{original} \\
+&\equiv \ngg (\ngg (p \land q) \lor r) \lor ((\ngg p \lor r) \lor (\ngg q \lor r))& \text{eliminate ``}\imp \text{'' symbols} \\
+&\equiv ( (p \land q) \land \ngg r) \lor ((\ngg p \lor r) \lor (\ngg q \lor r))& \text{distribute negation} \\
+&\equiv ((p \land q) \land \ngg r) \lor (\ngg p \lor r \lor \ngg q)& \text{simplify} 
+\end{align*}
 
 \end{solution}
-\part Change $A$ to Conjunctive Normal Form.
+\part\label{p:cnf} Change $A$ to Conjunctive Normal Form.
 \begin{solution}
-%$ ( (p \land q) \land \ngg r) \lor ((\ngg p \lor r) \lor (\ngg q \lor r))$\\
-%$ ( (p \land q)\lor (\ngg p \lor r \lor \ngg q )) \land (\ngg r \lor (\ngg p \lor r \lor \ngg q )) $\\
-$ (p \lor \ngg p \lor r \lor \ngg q ) \land (q \lor \ngg p \lor r \lor \ngg q  ) \land (\ngg r \lor \ngg p \lor r \lor \ngg q ) $\\
+\begin{align*}
+&((p \land q) \imp r) \imp ((p \imp r) \lor (q \imp r)) & \text{original} \\
+&\equiv ((p \land q) \land \ngg r) \lor (\ngg p \lor r \lor \ngg q)& \text{NNF (see above)} \\
+&\equiv ( (p \land q)\lor (\ngg p \lor r \lor \ngg q )) \land (\ngg r \lor (\ngg p \lor r \lor \ngg q )) & \text{distribute over } \land \\
+&\equiv ( (p \lor (\ngg p \lor r \lor \ngg q )) \land (q \lor (\ngg p \lor r \lor \ngg q ) )) \land (\ngg r \lor (\ngg p \lor r \lor \ngg q )) & \text{distribute over } \land \\
+&\equiv ( (p \lor \ngg p \lor r \lor \ngg q ) \land (q \lor \ngg p \lor r \lor \ngg q )) \land (\ngg r \lor \ngg p \lor r \lor \ngg q ) & \text{remove unneeded parentheses } \\
+&\equiv (p \lor \ngg p \lor r \lor \ngg q ) \land (q \lor \ngg p \lor r \lor \ngg q ) \land (\ngg r \lor \ngg p \lor r \lor \ngg q ) & \text{CNF } \\
+\end{align*}
 \end{solution}
 \part Prove $\models A$.
 \begin{solution}
-$A \equiv (p \lor \ngg p \lor r \lor \ngg q ) \land (q \lor \ngg p \lor r \lor \ngg q  ) \land (\ngg r \lor \ngg p \lor r \lor \ngg q ) $\\
-$((p \lor \ngg p) \lor r \lor \ngg q) \equiv 
-           (\top \lor r \lor \ngg q ) \equiv \top$ \\
-$(q \lor \ngg p \lor r \lor \ngg q )  \equiv 
- ((q \lor \ngg q) \lor \ngg p \lor r) \equiv 
-           (\top \lor \ngg p \lor r ) \equiv \top$ \\
-  $(\ngg r \lor \ngg p \lor r \lor \ngg q ) \equiv 
- ((\ngg r \lor r) \lor \ngg p \lor \ngg q ) \equiv 
-            (\top \lor \ngg p \lor \ngg q ) \equiv \top$\\
+~\\
+    By parts (\ref{p:nnf}) and (\ref{p:cnf}) above we have \[
+A \equiv (p \lor \ngg p \lor r \lor \ngg q ) \land (q \lor \ngg p \lor r \lor \ngg q  ) \land (\ngg r \lor \ngg p \lor r \lor \ngg q )
+  \]
+  Simplifying each of the three conjunctions, we find:
+\begin{align*}
+  (p \lor \ngg p \lor r \lor \ngg q ) &\equiv ((p \lor \ngg p) \lor r \lor \ngg q) \equiv (\top \lor r \lor \ngg q ) \equiv \top & \text{1st conjunction} \equiv \top\\
+  (q \lor \ngg p \lor r \lor \ngg q ) & \equiv ((q \lor \ngg q) \lor \ngg p \lor r) \equiv (\top \lor \ngg p \lor r ) \equiv \top & \text{2nd conjunction} \equiv \top \\
+  (\ngg r \lor \ngg p \lor r \lor \ngg q ) &\equiv ((\ngg r \lor r) \lor \ngg p \lor \ngg q ) \equiv (\top \lor \ngg p \lor \ngg q ) \equiv \top & \text{3rd conjunction} \equiv \top\\
+\end{align*}
 Therefore, $A \equiv \top \land \top \land \top \equiv \top$ 
 \end{solution}
+
 \part Show that $\ngg A$ is unsatisfiable.
 \begin{solution}
 By theorem (2.39) in Ben Ari, $\ngg A$ is unsatisfiable if and only if $A$ is
 valid. We have proved that $A$ is valid in the previous problem, so $\ngg A$ is unsatisfiable.
-
 \end{solution}
 \end{parts}
 
-\question Answer the questions below for the formula $A$, where $A \equiv (p \implies q) \lor (q \implies r)$ 
+\question Answer the questions below for the formula $A$, where 
+          $A \equiv (p \imp q) \lor (q \imp r)$ 
+
 \begin{parts}
-\part Change $A$ to Negative Normal Form. 
+
+\part Change $A$ to Negation Normal Form. 
 \begin{solution}
-~\\
-$A \equiv (p \implies q) \lor (q \implies r)$\\
-$ \equiv (\ngg p \lor q) \lor (\ngg q \lor r)$
+\begin{align*}
+A &\equiv (p \imp q) \lor (q \imp r) &\text{original} \\
+ &\equiv (\ngg p \lor q) \lor (\ngg q \lor r) &\text{eliminate ``}\imp \text{'' symbols} 
+\end{align*}
 \end{solution}
+
 \part Change $A$ to Conjunctive Normal Form.
 \begin{solution}
-$A \equiv (\ngg p \lor q) \lor (\ngg q \lor r)$ 
-$\equiv (\ngg p \lor q \lor \ngg q \lor r) $
+\begin{align*}
+A &\equiv (p \imp q) \lor (q \imp r) &\text{original} \\
+ &\equiv (\ngg p \lor q) \lor (\ngg q \lor r) &\text{NNF (see above)} \\ 
+ & \equiv \ngg p \lor q \lor \ngg q \lor r &\text{eliminate unneeded parentheses} 
+\end{align*}
 \end{solution}
+
 \part Prove $\models A$.
 \begin{solution}
-$A \equiv (\ngg p \lor q \lor \ngg q \lor r) 
-  \equiv (\ngg p \lor (q \lor \ngg q) \lor r)
-  \equiv (\ngg p \lor \top \lor r)
-  \equiv \top$
+\begin{align*}
+A &\equiv (\ngg p \lor q \lor \ngg q \lor r) &\text{CNF (see above)}\\
+   &\equiv (\ngg p \lor (q \lor \ngg q) \lor r)&\text{associative property} \\
+   &\equiv (\ngg p \lor \top \lor r)& A \lor \ngg A \equiv \top \\
+   &\equiv \top & \top \lor A \equiv \top 
+\end{align*}
 \end{solution}
+
 \part Show that $\ngg A$ is unsatisfiable.
 \begin{solution}
 Again, by theorem (2.39) in Ben Ari, $\ngg A$ is unsatisfiable if and only if $A$ is
@@ -170,63 +188,117 @@ valid.
 \end{solution}
 \end{parts}
 
-\question Change $A$ to Conjunctive Normal Form. 
+\question\label{q:bigCNF} Change $A$ to Conjunctive Normal Form. 
 \begin{parts}
+
 \part\label{q:4lit} $A \equiv (p_1 \land q_1) \lor (p_2 \land q_2)$.
 \begin{solution}
-~\\
-$A \equiv (p_1 \land q_1) \lor (p_2 \land q_2)$.\\
-$\equiv ((p_1 \lor (p_2 \land q_2)) \land (q_1 \lor (p_2 \land q_2)$.\\
-$\equiv (p_1 \lor p_2) \land (p_1 \lor q_2) \land (q_1 \lor p_2) \land (q_1 \lor q_2)$.\\
+\begin{align*}
+A &\equiv (p_1 \land q_1) \lor (p_2 \land q_2).\\
+  &\equiv (p_1 \lor (p_2 \land q_2)) \land (q_1 \lor (p_2 \land q_2)).\\
+  &\equiv (p_1 \lor p_2) \land (p_1 \lor q_2) \land (q_1 \lor p_2) \land (q_1 \lor q_2).\\
+\end{align*}
 \end{solution}
+
 \part\label{q:6lit} $A \equiv (p_1 \land q_1) \lor (p_2 \land q_2) \lor (p_3 \land q_3)$.
 \begin{solution}
-~\\
-$A \equiv (p_1 \land q_1) \lor (p_2 \land q_2) \lor (p_3 \land q_3)$.\\
-$\equiv ((p_1 \lor p_2) \land (p_1 \lor q_2) \land (q_1 \lor p_2) \land (q_1 \lor q_2)) \lor (p_3 \land q_3)$. (by part (a) above)\\
-$\equiv ((p_1 \lor p_2) \land (p_1 \lor q_2) \land (q_1 \lor p_2)) \land (q_1 \lor q_2) \lor (p_3 \land q_3)$.
+\begin{align*}
+ A &\equiv& &(p_1 \land q_1) \lor (p_2 \land q_2) \lor (p_3 \land q_3)\\
+ &\equiv& &((p_1 \lor p_2) \land (p_1 \lor q_2) \land (q_1 \lor p_2) \land (q_1 \lor q_2)) 
+                                                                    \lor (p_3 \land q_3) 
+                                                  &\text{ by part (\ref{q:4lit}) above}\\
+ %%%%%%%%%%%%%%
+ &\equiv& &(((p_1 \lor p_2) \land (p_1 \lor q_2) \land (q_1 \lor p_2)) \lor (p_3 \land q_3)) 
+                                               \land ((q_1 \lor q_2) \lor (p_3 \land q_3))
+                                                  &\text{distribute }(p_3 \land q_3)\\
+ %%%%%%%%%%%%%%
+ &\equiv& &(((p_1 \lor p_2) \land (p_1 \lor q_2) \land (q_1 \lor p_2)) \lor (p_3 \land q_3)) 
+                         \land (((q_1 \lor q_2) \lor p_3) \land ((q_1 \lor q_2) \lor q_3)) 
+                                                       &\text{distribute }(q_1 \lor q_2)\\
+ %%%%%%%%%%%%%%
+ &\equiv& &(((p_1 \lor p_2) \land (p_1 \lor q_2) \land (q_1 \lor p_2)) \lor (p_3 \land q_3)) 
+                               \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3) 
+                                                                        &\text{simplify}\\
+ %%%%%%%%%%%%%%
+ &\equiv& &((((p_1 \lor p_2) \land (p_1 \lor q_2)) \land (q_1 \lor p_2)) \lor (p_3 \land q_3)) 
+                                                                        &\text{associate}\\
+ & & & \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3) \\
+ %%%%%%%%%%%%%%
+  &\equiv& &(((((p_1 \lor p_2) \land (p_1 \lor q_2)) \lor (p_3 \land q_3)))
+                               \land ((q_1 \lor p_2) \lor (p_3 \land q_3))) 
+                                                        &\text{distribute }(p_3 \land q_3)\\
+ & & & \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3) \\
+ %%%%%%%%%%%%%%
+  &\equiv& &(((((p_1 \lor p_2) \land (p_1 \lor q_2)) \lor (p_3 \land q_3)))
+                               \land (((q_1 \lor p_2) \lor p_3) \land ((q_1 \lor p_2) \lor q_3))) 
+                                                        &\text{distribute }(q_1 \lor p_2)\\
+ & & & \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3) \\
+ %%%%%%%%%%%%%%
+  &\equiv& &(((p_1 \lor p_2) \land (p_1 \lor q_2)) \lor (p_3 \land q_3))
+                                                        &\text{simplify } \\
+ & & & \land (q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3) 
+       \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3) \\
+ %%%%%%%%%%%%%%
+  &\equiv& &(((p_1 \lor p_2)\lor (p_3 \land q_3)) \land ((p_1 \lor q_2)\lor (p_3 \land q_3)))
+                                                        &\text{distribute }(p_3 \land q_3)\\
+ & & & \land (q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3) 
+       \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3) \\
+ %%%%%%%%%%%%%%
+  &\equiv& &(((p_1 \lor p_2)\lor (p_3 \land q_3)) \land 
+            (((p_1 \lor q_2) \lor p_3) \land
+             ((p_1 \lor q_2) \lor q_3)))
+                                                        &\text{distribute }(p_1 \lor q_2)\\
+ & & & \land (q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3) 
+       \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3) \\
+ %%%%%%%%%%%%%%
+ &\equiv& &(((p_1 \lor p_2)\lor (p_3 \land q_3)) 
+       \land (p_1 \lor q_2 \lor p_3) \land (p_1 \lor q_2 \lor q_3)
+                                                        &\text{simplify } \\
+ & & & \land (q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3) 
+       \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3) \\
+ %%%%%%%%%%%%%%
+ &\equiv& & (((p_1 \lor p_2)\lor p_3) \land ((p_1 \lor p_2) \lor q_3)) 
+      \land (p_1 \lor q_2 \lor p_3) \land (p_1 \lor q_2 \lor q_3)
+                                                        &\text{distribute }(p_1 \lor p_2)\\
+ & & & \land (q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3) 
+       \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3) \\
+ %%%%%%%%%%%%%%
+&\equiv& &   (p_1 \lor p_2 \lor p_3) \land (p_1 \lor p_2 \lor q_3) 
+       \land (p_1 \lor q_2 \lor p_3) \land (p_1 \lor q_2 \lor q_3)
+                                                        &\text{simplify } \\
+ & & & \land (q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3) 
+       \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3) \\
+ %%%%%%%%%%%%%%
+\end{align*}
 
-$\equiv (((p_1 \lor p_2) \land (p_1 \lor q_2) \land (q_1 \lor p_2)) \lor (p_3 \land q_3)) 
-  \land ((q_1 \lor q_2) \lor (p_3 \land q_3))$.
   
-$\equiv (((p_1 \lor p_2) \land (p_1 \lor q_2) \land (q_1 \lor p_2)) \lor (p_3 \land q_3)) 
-  \land (((q_1 \lor q_2) \lor p_3) \land ((q_1 \lor q_2) \lor q_3))$.
+%\equiv (((p_1 \lor p_2) \land (p_1 \lor q_2)) \lor (p_3 \land q_3)) 
+% \land (((q_1 \lor p_2) \lor p_3 \land (q_1 \lor p_2) \lor q_3)) 
+% \land ((q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3).
 
-$\equiv (((p_1 \lor p_2) \land (p_1 \lor q_2)) \land (q_1 \lor p_2) \lor (p_3 \land q_3)) 
-  \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3)$.
+%\equiv ((p_1 \lor p_2) \land (p_1 \lor q_2) \lor (p_3 \land q_3)) 
+% \land ((q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3)) 
+% \land ((q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3).
 
-$\equiv (((p_1 \lor p_2) \land (p_1 \lor q_2)) \lor (p_3 \land q_3))
-  \land ((q_1 \lor p_2) \lor (p_3 \land q_3)) 
-  \land ((q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3)$.
+%\equiv ((p_1 \lor p_2) \lor (p_3 \land q_3)) 
+% \land ((p_1 \lor q_2) \lor (p_3 \land q_3)) 
+% \land ((q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3)) 
+% \land ((q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3).
 
-$\equiv (((p_1 \lor p_2) \land (p_1 \lor q_2)) \lor (p_3 \land q_3)) 
-  \land (((q_1 \lor p_2) \lor p_3 \land (q_1 \lor p_2) \lor q_3)) 
-  \land ((q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3)$.
+%\equiv ((p_1 \lor p_2) \lor p_3 \land q_3) 
+% \land ((p_1 \lor q_2) \lor p_3 \land q_3) 
+% \land ((q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3)) 
+% \land ((q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3).
 
-$\equiv ((p_1 \lor p_2) \land (p_1 \lor q_2) \lor (p_3 \land q_3)) 
-  \land ((q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3)) 
-  \land ((q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3)$.
+%\equiv ((p_1 \lor p_2) \lor p_3 \land (p_1 \lor p_2) \lor q_3) 
+% \land ((p_1 \lor q_2) \lor p_3 \land (p_1 \lor q_2) \lor q_3) 
+% \land ((q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3)) 
+% \land ((q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3).
 
-$\equiv ((p_1 \lor p_2) \lor (p_3 \land q_3)) 
-  \land ((p_1 \lor q_2) \lor (p_3 \land q_3)) 
-  \land ((q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3)) 
-  \land ((q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3)$.
-
-$\equiv ((p_1 \lor p_2) \lor p_3 \land q_3) 
-  \land ((p_1 \lor q_2) \lor p_3 \land q_3) 
-  \land ((q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3)) 
-  \land ((q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3)$.
-
-$\equiv ((p_1 \lor p_2) \lor p_3 \land (p_1 \lor p_2) \lor q_3) 
-  \land ((p_1 \lor q_2) \lor p_3 \land (p_1 \lor q_2) \lor q_3) 
-  \land ((q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3)) 
-  \land ((q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3)$.
-
-$\equiv (p_1 \lor p_2 \lor p_3) \land (p_1 \lor p_2 \lor q_3) 
-  \land (p_1 \lor q_2 \lor p_3) \land (p_1 \lor q_2 \lor q_3) 
-  \land (q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3) 
-  \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3)$.
-
+%\equiv (p_1 \lor p_2 \lor p_3) \land (p_1 \lor p_2 \lor q_3) 
+% \land (p_1 \lor q_2 \lor p_3) \land (p_1 \lor q_2 \lor q_3) 
+% \land (q_1 \lor p_2 \lor p_3) \land (q_1 \lor p_2 \lor q_3) 
+% \land (q_1 \lor q_2 \lor p_3) \land (q_1 \lor q_2 \lor q_3).
 
 \end{solution}
 \end{parts}
@@ -234,15 +306,35 @@ $\equiv (p_1 \lor p_2 \lor p_3) \land (p_1 \lor p_2 \lor q_3)
 \question Let $A$ be a formula of the form $(p_1 \land q_1) \lor (p_2 \land
     q_2)\lor ...\lor (p_n \land q_n)$
 \begin{parts}
+\part In terms of $n$, how many conjunctions are in $A$?
+\begin{solution}
+There are $n$ conjunctions (numbered $1$ to $n$).
+\end{solution}
 \part In terms of $n$, how many literals are in $A$?
 \begin{solution}
 $2n$
 \end{solution}
-\part Based on the pattern observed in the previous question, how many literals
-will be in the CNF of $A$ (in terms of $n$)?
+\part Answer the following questions about the CNF of $A$ based on the pattern 
+observed in question \ref{q:bigCNF}:
+\begin{subparts}
+\subpart How many literals will there be in each disjunction in the CNF of $A$ 
+         (in terms of $n$)?
+\begin{solution}
+$n$. Each disjunction contains one literal from each of the conjunctions in
+$A$.
+\end{solution}
+\subpart How many disjunctions will there be in the CNF of $A$ (in terms of $n$)? 
+\begin{solution}
+$2^n$. There are two literals in each of the $n$ conjunctions of $A$. Each
+disjunction in the CNF of $A$ contains exactly one representative from 
+each of the original conjunctions. Subject to these constraints, there is a
+disjunction for every possible combination.
+\end{solution}
+\subpart In total, how many literals will be in the CNF of $A$ (in terms of $n$)?
 \begin{solution}
 $n(2^n)$
 \end{solution}
+\end{subparts}
 \end{parts}
 \question  Using the modified version of the \texttt{Inorder} Function and
 the formula \texttt{F1} given below, write the output of \texttt{Inorder(F1,0)}.
@@ -329,7 +421,7 @@ before the next function call.
 \item $((p[2] \imp[1] q[2]) \eqv[0] ((\ngg [2] p[3]) \imp [1] $
 \item $((p[2] \imp[1] q[2]) \eqv[0] ((\ngg [2] p[3]) \imp [1] ($
 \item $((p[2] \imp[1] q[2]) \eqv[0] ((\ngg [2] p[3]) \imp [1] (\ngg [2] $
-\item $((p[2] \imp[1] q[2]) \eqv[0] ((\ngg [2] p[3]) \imp [1] (\ngg [2] q[3]))$
+\item $((p[2] \imp[1] q[2]) \eqv[0] ((\ngg [2] p[3]) \imp [1] (\ngg [2] q[3])))$
 \end{enumerate}
 
 \end{multicols}
