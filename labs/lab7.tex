@@ -29,7 +29,7 @@
 \newcommand{\tf}[1][{}]{%
 \fillin[#1][0.25in]%
 }
-\title{Lab 7: Complexity, DPLL, FOL Basics}
+\title{Lab 7: First Order Logic}
 \author{Foundations of Computer Science}
 \date{\today}
 %\pagestyle{empty} 
@@ -43,280 +43,7 @@
 
 \maketitle
 \setlength{\columnseprule}{1pt}
-\section*{Complexity}
 \begin{questions} 
-\question If a problem $A$ is in $\id{NP}$, its complement is in \fillin[CoNP].
-\question We say $A$ is $\id{NP}$-Hard iff it is \fillin all problems in $\id{NP}$.
-\begin{checkboxes}
-\choice harder than
-\choice as hard as
-\CorrectChoice at least as hard as
-\choice no harder than
-\end{checkboxes}
-
-\question \tf[F] (T/F) If $A$ is $\id{NP}$-Hard, $A$ is in $\id{NP}$.
-\question \tf[T] (T/F) If $A$ is $\id{NP}$-Complete, $A$ is in $\id{NP}$.
-\question \tf[T] (T/F) If $A$ is $\id{NP}$-Complete, $A$ is $\id{NP}$-Hard.
-
-\question Let $A$ and $B$ be problems such that $A$ is $\id{NP}$-Complete
-and $A$ reduces to $B$. What can we say about $B$?
-\begin{checkboxes}
-\choice It is smaller than $A$.
-\choice It is harder than $A$.
-\CorrectChoice It is at least as hard as $A$.
-\CorrectChoice It is $\id{NP}$-Hard.
-\end{checkboxes}
-
-\section*{DPLL}
-
-\question Let $S$ be a formula of propositional logic in clausal form such that
-$S = \{pqr, \bar{p}q, \bar{q}\bar{r}, r \}$\\
-
-\begin{parts}
-\part\label{q:dpllpT} Assume $p$ is $T$, and produce an equisatisfiable formula under this
-assumption.
-\begin{solution}
-$\{q, \bar{q}\bar{r}, r \}$
-\end{solution}
-
-\part Repeat part (\ref{q:dpllpT}) but assume $p$ is $F$.
-\begin{solution}
-$S = \{qr, \bar{q}\bar{r}, r \}$\\
-\end{solution}
-
-\end{parts}
-
-\question Use DPLL to refute the following formula from Lab 6: $\{p, \bar{p}qr, \bar{p}\bar{q}\bar{r}, \bar{p}st, \bar{p}\bar{s}\bar{t}, \bar{s}q, rt, \bar{t}s\}$\\
-Draw the recursive execution tree. 
-\begin{solution}
-\begin{center}
-\begin{picture}(200,160)
-\put(100,160){
-  \put( -10,   0){\makebox(20,10){$\{p, \bar{p}qr, \bar{p}\bar{q}\bar{r}, \bar{p}st, \bar{p}\bar{s}\bar{t}, \bar{s}q, rt, \bar{t}s\}$}}
-  \put( -60, -17){\makebox(20,10){$p$}}
-  \put(  45, -17){\makebox(20,10){$\bar{p}$}}
-  \put( -85, -35){\makebox(20,10){$\{qr, \bar{q}\bar{r}, st, \bar{s}\bar{t}, \bar{s}q, rt, \bar{t}s\}$}}
-  \put(  65, -35){\makebox(20,10){$\{\Box, \bar{s}q, rt, \bar{t}s\}$}}
-  \put(-122, -55){\makebox(20,10){$s$}}
-  \put(- 42, -55){\makebox(20,10){$\bar{s}$}}
-  \put(-142, -76){\makebox(20,10){$\{qr, \bar{q}\bar{r}, \bar{t}, q, rt \}$}}
-  \put( -22, -76){\makebox(20,10){$\{qr, \bar{q}\bar{r}, t, rt, \bar{t}\,\}$}}
-% \put(  65, -76){\makebox(20,10){true}}
-  \put(- 42, -90){\makebox(20,10){$t$}}
-  \put(   3, -90){\makebox(20,10){$\bar{t}$}}
-  \put(-167, -90){\makebox(20,10){$q$}}
-  \put(-122, -90){\makebox(20,10){$\bar{q}$}}
-  \put(-175,-108){\makebox(20,10){$\{\bar{r}, \bar{t}, rt \}$}}
-  \put(-110,-108){\makebox(20,10){$\{r, \bar{t}, \Box, rt \}$}}
-  \put(- 50,-108){\makebox(20,10){$\{qr, \bar{q}\bar{r}, \Box \}$}}
-  \put(  15,-108){\makebox(20,10){$\{qr, \bar{q}\bar{r}, \Box, r \}$}}
-  \put(-203,-122){\makebox(20,10){$r$}}
-  \put(-155,-122){\makebox(20,10){$\bar{r}$}}
-  \put(-212,-140){\makebox(20,10){$\{\Box, \bar{t} \}$}}
-  \put(-150,-140){\makebox(20,10){$\{\bar{t}, t \}$}}
-  \put(-165,-153){\makebox(20,10){$t$}}
-  \put(-135,-153){\makebox(20,10){$\bar{t}$}}
-  \put(-170,-170){\makebox(20,10){$\{\Box, \Box \}$}}
-  \put(-130,-170){\makebox(20,10){$\{\Box, \Box \}$}}
-  \put(   0,   0){\line(-3,-1){68}}
-  \put(   0,   0){\line( 3,-1){68}}
-  \put( -74, -35){\line(-2,-1){58}}
-  \put( -74, -35){\line( 2,-1){58}}
-% \put(  75, -35){\line(0,-1){28}}
-  \put(-135, -76){\line(-3,-2){30}}
-  \put(-135, -76){\line( 3,-2){30}}
-  \put(- 10, -76){\line(-3,-2){30}}
-  \put(- 10, -76){\line( 3,-2){30}}
-  \put(-170,-108){\line(-3,-2){30}}
-  \put(-170,-108){\line( 3,-2){30}}
-  \put(-140,-140){\line(-1,-1){18}}
-  \put(-140,-140){\line( 1,-1){18}}
-}
-\end{picture}
-\end{center}
-
-
-\end{solution}
-\question Let $A$ be the formula $(r \imp s) \land (s \imp \ngg t) \land (\ngg r \imp \ngg t)$.
-Use DPLL to determine whether $A$ is a contradiction. If it is not, give an
-interpretation that satisfies $A$.
-\begin{solution}
-~\\
-First, change to clausal form: $\{\bar{r}s,\bar{s}\bar{t},r\bar{t}\}$\\
-Then eliminate $\bar{t}$, since it only appears with one polarity, to get: $\{\bar{r}s,\bar{s},r\}$\\
-Unit propagation on $r$ gives: $\{s,\bar{s}\}$\\
-Unit propagation on $s$ gives: $\{\}$\\
-Therefore, the formula is satisfiable. Tracing back the steps, we have
-$v_{\mathcal{I}_A}(s) = T, v_{\mathcal{I}_A}(r) = T$ and $v_{\mathcal{I}_A}(r)$
-can be true or false.
-\end{solution}
-
-\question Let $p_{ij}$ represent the statement ``pidgeon number $i$ is in hole number $j$.''
-\begin{parts}
-\part Give an informal summary of the following statement:\\ 
-$(p_{11} \lor p_{12} \lor p_{13}) \land  
- (p_{21} \lor p_{22} \lor p_{23}) \land  
- (p_{31} \lor p_{32} \lor p_{33}) \land  
- (p_{41} \lor p_{42} \lor p_{43})$
-\begin{solution}
-Pidgeons $1,2,3$ and $4$ are in holes $1,2$ or $3$.
-\end{solution}
-
-\part Give an informal summary of the following statement:\\
-$\ngg (p_{11} \land p_{21}) \land
- \ngg (p_{11} \land p_{31}) \land
- \ngg (p_{11} \land p_{41}) \land
- \ngg (p_{21} \land p_{31}) \land
- \ngg (p_{21} \land p_{41}) \land
- \ngg (p_{31} \land p_{41})$
-\begin{solution}
-Only one of the pidgeons $1,2,3$ and $4$ is in hole $1$.
-\end{solution}
-
-
-\part Build on the statements above to express the pidgeon-hole problem for the
-      case where there are $3$ holes and $4$ pigeons.
-\begin{solution}
-~\\
-$(p_{11} \lor p_{12} \lor p_{13}) \land  
- (p_{21} \lor p_{22} \lor p_{23}) \land  
- (p_{31} \lor p_{32} \lor p_{33}) \land  
- (p_{41} \lor p_{42} \lor p_{43}) \land $\\
-$\ngg (p_{11} \land p_{21}) \land
- \ngg (p_{11} \land p_{31}) \land
- \ngg (p_{11} \land p_{41}) \land
- \ngg (p_{21} \land p_{31}) \land
- \ngg (p_{21} \land p_{41}) \land
- \ngg (p_{31} \land p_{41}) \land$ \\
-$\ngg (p_{12} \land p_{22}) \land
- \ngg (p_{12} \land p_{32}) \land
- \ngg (p_{12} \land p_{42}) \land
- \ngg (p_{22} \land p_{32}) \land
- \ngg (p_{22} \land p_{42}) \land
- \ngg (p_{32} \land p_{42}) \land$ \\
-$\ngg (p_{13} \land p_{23}) \land
- \ngg (p_{13} \land p_{33}) \land
- \ngg (p_{13} \land p_{43}) \land
- \ngg (p_{23} \land p_{33}) \land
- \ngg (p_{23} \land p_{43}) \land
- \ngg (p_{33} \land p_{43}) $
- 
- \end{solution}
-
-
-\part Change your statement to clausal form.
-\begin{solution}
-~\\
-$\{p_{11}p_{12}p_{13}, 
-   p_{21}p_{22}p_{23}, 
-   p_{31}p_{32}p_{33}, 
-   p_{41}p_{42}p_{43},
- \bar{p_{11}}\bar{p_{21}},
- \bar{p_{11}}\bar{p_{31}},
- \bar{p_{11}}\bar{p_{41}},
- \bar{p_{21}}\bar{p_{31}},
- \bar{p_{21}}\bar{p_{41}},
- \bar{p_{31}}\bar{p_{41}},$ \\
-$\bar{p_{12}}\bar{p_{22}},
- \bar{p_{12}}\bar{p_{32}},
- \bar{p_{12}}\bar{p_{42}},
- \bar{p_{22}}\bar{p_{32}},
- \bar{p_{22}}\bar{p_{42}},
- \bar{p_{32}}\bar{p_{42}},
- \bar{p_{13}}\bar{p_{23}},
- \bar{p_{13}}\bar{p_{33}},
- \bar{p_{13}}\bar{p_{43}},
- \bar{p_{23}}\bar{p_{33}},
- \bar{p_{23}}\bar{p_{43}},
- \bar{p_{33}}\bar{p_{43}}\}$ 
- \end{solution}
-
-
-\part Use DPLL to show the statement is unsatisfiable for \emph{one} assignment.
-\begin{solution}
-~\\Checking one assignment is equivalent to only taking one branch at each split.
-\begin{enumerate}
-\item Begin with $v(p_{11}) = T$. The equisatisfiable clause under this case is:\\
-$\{ 
-   p_{21}p_{22}p_{23}, 
-   p_{31}p_{32}p_{33}, 
-   p_{41}p_{42}p_{43},$ \\
-$            \bar{p_{21}},
-             \bar{p_{31}},
-             \bar{p_{41}},
- \bar{p_{21}}\bar{p_{31}},
- \bar{p_{21}}\bar{p_{41}},
- \bar{p_{31}}\bar{p_{41}},$ \\
-$\bar{p_{12}}\bar{p_{22}},
- \bar{p_{12}}\bar{p_{32}},
- \bar{p_{12}}\bar{p_{42}},
- \bar{p_{22}}\bar{p_{32}},
- \bar{p_{22}}\bar{p_{42}},
- \bar{p_{32}}\bar{p_{42}},
- \bar{p_{13}}\bar{p_{23}},$ \\
-$\bar{p_{13}}\bar{p_{33}},
- \bar{p_{13}}\bar{p_{43}},
- \bar{p_{23}}\bar{p_{33}},
- \bar{p_{23}}\bar{p_{43}},
- \bar{p_{33}}\bar{p_{43}}\}$ \\
-\item This leaves unit clauses $\bar{p_{21}}, \bar{p_{31}}, \bar{p_{41}}$. Performing
-unit propagation on these leaves:\\
-$\{ 
-         p_{22}p_{23}, 
-         p_{32}p_{33}, 
-         p_{42}p_{43},$ \\
-$\bar{p_{12}}\bar{p_{22}},
- \bar{p_{12}}\bar{p_{32}},
- \bar{p_{12}}\bar{p_{42}},
- \bar{p_{22}}\bar{p_{32}},
- \bar{p_{22}}\bar{p_{42}},
- \bar{p_{32}}\bar{p_{42}},$\\
-$\bar{p_{13}}\bar{p_{23}},
- \bar{p_{13}}\bar{p_{33}},
- \bar{p_{13}}\bar{p_{43}},
- \bar{p_{23}}\bar{p_{33}},
- \bar{p_{23}}\bar{p_{43}},
- \bar{p_{33}}\bar{p_{43}}\}$ \\
-
-\item Next assign $v(p_{22}) = T$. This leads to the following clause:\\
-$\{ 
-         p_{32}p_{33}, 
-         p_{42}p_{43},$ \\
-$\bar{p_{12}},
- \bar{p_{12}}\bar{p_{32}},
- \bar{p_{12}}\bar{p_{42}},
-             \bar{p_{32}},
-             \bar{p_{42}},
- \bar{p_{32}}\bar{p_{42}},$\\
-$\bar{p_{13}}\bar{p_{23}},
- \bar{p_{13}}\bar{p_{33}},
- \bar{p_{13}}\bar{p_{43}},
- \bar{p_{23}}\bar{p_{33}},
- \bar{p_{23}}\bar{p_{43}},
- \bar{p_{33}}\bar{p_{43}}\}$ \\
-\item Next perform unit propagation again on $\bar{p_{12}}, \bar{p_{32}}$ and
-$\bar{p_{42}}$ to get:\\
-$\{ 
-               p_{33}, 
-               p_{43},
- \bar{p_{13}}\bar{p_{23}},
- \bar{p_{13}}\bar{p_{33}},
- \bar{p_{13}}\bar{p_{43}},
- \bar{p_{23}}\bar{p_{33}},
- \bar{p_{23}}\bar{p_{43}},
- \bar{p_{33}}\bar{p_{43}}\}$ \\
-\item Finally, unit propagation on $p_{33}$ and $p_{43}$ produce:\\
-$\{ 
-               p_{43},
- \bar{p_{13}}\bar{p_{23}},
- \bar{p_{13}}            ,
- \bar{p_{13}}            ,
- \bar{p_{23}}            ,
- \bar{p_{23}}            ,
-             \Box       \}$ \\
-\end{enumerate}
-\end{solution}
-\end{parts}
 \section*{First Order Logic}
 \question Write an informal statement of the following formula under the
 interpretations given below:\\ 
@@ -371,6 +98,150 @@ a substring of $s_2$.
 % The author can delete it.
 % Anyone in the class can edit it.
 % A
+\question Find a falsifying interpretation:
+\begin{parts}
+\part $\forall x (A(x) \imp B(x)) \imp (\exists x A(x) \imp \forall x B(x))$
+\begin{solution}
+~\\Domain = $\N_0$\\
+$A(x) = $ the unary relation where $x \in A$ iff $x + 1$ is even.\\
+$B(x) = $ the unary relation where $x \in B$ iff $x$ is odd.\\
+$A(x)$ always implies $B(x)$ so $\forall x (A(x) \imp B(x))$ is true. However,
+  the existence of a number $x$ such that $x + 1$ is even does not imply all
+  natural numbers are odd.
+\end{solution}
+\part $(\forall x A(x) \lor \exists x B(x)) \imp \forall x (A(x) \lor B(x))$
+\begin{solution}
+~\\Same interpretation as above. The left disjunction is always true because there
+exists an odd natural number. The right is false when $x$ is even.
+\end{solution}
+\part $(\exists x A(x) \imp \exists x B(x)) \imp \forall x(A(x) \imp B(x))$
+\begin{solution}
+A ``minimal'' interpretation that falsifies this formula is:\\
+$(\{1,2\},\{\{1\},\{2\}\},\{\})$\\
+In this example, the unary relations are simply listed in set form.\\
+Another interpretation that falsifies the formula is:
+~\\Domain = $\N_0$\\
+$A(x) = $ the unary relation where $x \in A$ iff $x$ is even.\\
+$B(x) = $ the unary relation where $x \in B$ iff $x$ is odd.\\
+Since there are even and odd natural numbers, the left implication
+is always true. The right is always false, since no number is even
+and odd.
+\end{solution}
+\end{parts}
+\question\label{q:tf} For each of the following expressions, give one interpretation that
+makes it true and one interpretation that makes it false.
+\begin{parts}
+\part $\exists x p(x) \imp \forall x p(x)$
+\begin{solution}
+~\\
+true: $(\{1\},\{\{1\}\},\{\})$ (That is, $p(x)$ is the property of being equal
+    to $1$ and the domain contains only the number $1$.\\
+false: $(\{1,2\},\{\{1\}\},\{\})$
+\end{solution}
+\part\label{q:antisym} $\forall x \forall y ((p(x,y) \land p(y,x)) \imp q(x,y))$
+\begin{solution}
+~\\
+true: $(\N_0,\{\leq, = \},\{\})$\\ 
+false: $(\N_0,\{=, < \},\{\})$
+\end{solution}
+\part $\forall x \forall y (f(x,y) \imp f(y,x))$
+\begin{solution}
+~\\
+true: $(\N_0,\{ \},\{+\}, \{\})$\\ 
+false:$(\N_0,\{ \},\{\div \}, \{\})$\\
+Note that $f$ is a function and there is no relation in this formula.
+\end{solution}
+
+\part $\forall x \forall y \forall z (p(x,y) \imp p(f(x,z),f(y,z)))$
+\begin{solution}
+~\\
+true: $(\Z,\{ < \},\{+\}, \{\})$\\ 
+false:$(\Z,\{ < \},\{\times \}, \{\})$
+\end{solution}
+\end{parts}
+
+\question Write an interpretation to the formula in question \ref{q:tf} part \ref{q:antisym}) 
+above to express the claim that the substring relation is
+anti-symmetric in the domain $\Sigma^*$.
+\begin{solution}
+$(\Sigma^*, \{substr, = \}, \{\})$
+\end{solution}
+
+\question Suppose that we allowed the domain of an interpretation to be
+$\emph{empty}$. What would this mean for the equivalence:
+\[ \forall y p(y,y) \lor \exists x q(x,x) \equiv \exists x (\forall y p (y,y) \lor q(x,x))\]
+\begin{solution}
+~\\
+From Ben Ari:\\
+``A universal quantified formula $\forall xA(x)$ is true in an empty domain: it has to be true 
+for all elements of the domain, but there aren’t any so it is vacuously true. An existentially 
+quantified formula $\exists A(x)$ is false in an empty domain: it has to be true for some 
+element of the domain, but there aren’t any so it can’t be true. The equivalence is therefore 
+incorrect: the left-hand side is true because $\forall yp(y,y)$ is vacuously true, while the 
+right-hand side is false because it is an existentially quantified formula and the domain is 
+empty. If the domain is non-empty, the equivalence holds.''
+\end{solution}
+
+\question Recall that the ``brute force'' approach to satisfiability in
+propositional logic involves enumerating all possible interpretations of a
+formula, which requires $2^n$ interpretations for a formula with $n$ variables.
+\begin{parts}
+\part Why can't we do this for first order logic?
+\begin{solution}
+In propositional logic interpretations assign each atom a value from a binary
+domain. In first order logic, the interpretation must first specify a domain,
+which can be chosen from an infinite number of sets. In addition, the number
+of $n-ary$ functions and relations that can be a assigned is a function of the size
+of the chosen domain. In the case that the domain is infinite, these are also
+infinite.
+\end{solution}
+\part Assume we restrict our attention to interpretations where the domain is
+$\{1,2,3\}$. How many possible binary relations are there over this domain?  
+\begin{solution}
+A binary relation is a set of tuples $(x,y)$ where $x, y \in \{1,2,3\}$.
+Therefore, the total number of possible relations is the number of subsets
+of $\{1,2,3\} \times \{1,2,3\}$, which is $2^{3^2} = 512$.
+\end{solution}
+\part How many possible binary functions are there over the same domain?
+\begin{solution}
+A binary function is a type of binary relation, so it can also be represented
+as a set of pairs. Since functions can have only one output per input, there
+are at most three tuples in the set. If we assume the function is a total
+function over the domain, all three input values, must be represented so
+there is exactly three tuples in the set. In this case, the number of
+possibilities is $3^3 = 27$ (each of the three inputs can have one of $3$
+outputs). If we include partial functions, we have to add in functions that
+map only $1$ value, only $2$, values, or $0$ values (i.e. the empty function).
+There are $9$ functions that map only one value ($3$ possible input values
+and $3$ values each they could map to) and $27$ functions that map only two
+values ($3$ choices of which pairs of values to map and $3$ possible mappings
+for each of the input values in the pair). Finally, there is only one empty
+function, so the total number of partial functions is $64$.
+\end{solution}
+\part Consider the set of formulas in first order logic that are restricted to
+binary relations (no constants or functions). Is there a viable brute force approach 
+to the satisfiability problem when the domain is restricted to $\{1,2,3\}$? If
+not, why not? If so, how many interpretations do we need to check in the worst
+case?
+\begin{solution}
+Yes. Since there are $512$ binary relations and $3$ choices of variable
+assignments for each of the $2$ input variables for each binary relation,
+a brute force approach would require checking $512 \times 3^2 = 4068$ 
+possibilities for a formula with a single predicate. Therefore, a formula
+with $n$ predicates would require enumeration of $4068^n$ possibilities. 
+\end{solution}
+\part How does the above answer change if we allow binary functions (but still
+    no constants)?
+\begin{solution}
+The answer does not change. Since we know each function must have an output
+in the domain, we can ignore the interpretation assigned to the function and
+just check all possible outputs of any function, which is the same as all
+elements in the domain. This amounts to checking against all possible
+inputs to the relations, which is equivalent to checking the same formula with
+no functions in it.
+\end{solution}
+\end{parts}
+
 
 \end{questions}
 \end{document}

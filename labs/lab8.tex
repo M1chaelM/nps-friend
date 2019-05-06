@@ -110,75 +110,6 @@ also semi-decidable.
 \clearpage
 
 \uplevel{\section*{First Order Logic}}
-\question Find a falsifying interpretation:
-\begin{parts}
-\part $\forall x (A(x) \imp B(x)) \imp (\exists x A(x) \imp \forall x B(x))$
-\begin{solution}
-~\\Domain = $\N_0$\\
-$A(x) = $ the unary relation where $x \in A$ iff $x + 1$ is even.\\
-$B(x) = $ the unary relation where $x \in B$ iff $x$ is odd.\\
-$A(x)$ always implies $B(x)$ so $\forall x (A(x) \imp B(x))$ is true. However,
-  the existence of a number $x$ such that $x + 1$ is even does not imply all
-  natural numbers are odd.
-\end{solution}
-\part $(\forall x A(x) \lor \exists x B(x)) \imp \forall x (A(x) \lor B(x))$
-\begin{solution}
-~\\Same interpretation as above. The left disjunction is always true because there
-exists an odd natural number. The right is false when $x$ is even.
-\end{solution}
-\part $(\exists x A(x) \imp \exists x B(x)) \imp \forall x(A(x) \imp B(x))$
-\begin{solution}
-A ``minimal'' interpretation that falsifies this formula is:\\
-$(\{1,2\},\{\{1\},\{2\}\},\{\})$\\
-In this example, the unary relations are simply listed in set form.\\
-Another interpretation that falsifies the formula is:
-~\\Domain = $\N_0$\\
-$A(x) = $ the unary relation where $x \in A$ iff $x$ is even.\\
-$B(x) = $ the unary relation where $x \in B$ iff $x$ is odd.\\
-Since there are even and odd natural numbers, the left implication
-is always true. The right is always false, since no number is even
-and odd.
-\end{solution}
-\end{parts}
-\question\label{q:tf} For each of the following expressions, give one interpretation that
-makes it true and one interpretation that makes it false.
-\begin{parts}
-\part $\exists x p(x) \imp \forall x p(x)$
-\begin{solution}
-~\\
-true: $(\{1\},\{\{1\}\},\{\})$ (That is, $p(x)$ is the property of being equal
-    to $1$ and the domain contains only the number $1$.\\
-false: $(\{1,2\},\{\{1\}\},\{\})$
-\end{solution}
-\part\label{q:antisym} $\forall x \forall y ((p(x,y) \land p(y,x)) \imp q(x,y))$
-\begin{solution}
-~\\
-true: $(\N_0,\{\leq, = \},\{\})$\\ 
-false: $(\N_0,\{=, < \},\{\})$
-\end{solution}
-\part $\forall x \forall y (f(x,y) \imp f(y,x))$
-\begin{solution}
-~\\
-true: $(\N_0,\{ \},\{+\}, \{\})$\\ 
-false:$(\N_0,\{ \},\{\div \}, \{\})$\\
-Note that $f$ is a function and there is no relation in this formula.
-\end{solution}
-
-\part $\forall x \forall y \forall z (p(x,y) \imp p(f(x,z),f(y,z)))$
-\begin{solution}
-~\\
-true: $(\Z,\{ < \},\{+\}, \{\})$\\ 
-false:$(\Z,\{ < \},\{\times \}, \{\})$
-\end{solution}
-\end{parts}
-
-\question Write an interpretation to the formula in question \ref{q:tf} part \ref{q:antisym}) 
-above to express the claim that the substring relation is
-anti-symmetric in the domain $\Sigma^*$.
-\begin{solution}
-$(\Sigma^*, \{substr, = \}, \{\})$
-\end{solution}
-
 \question Transform each of the following formulas to prenex normal form:
 \begin{parts}
 \part $\forall x(p(x) \imp \exists y q(y))$
@@ -207,84 +138,9 @@ $(\Sigma^*, \{substr, = \}, \{\})$
 \begin{tabular}{ll}
 \text{Original formula:} & $\exists x(\ngg \exists yp(y) \imp \exists z(q(z) \imp r(x))$\\
 \text{Simplify Boolean Operators:} & $\exists x(\ngg \ngg \exists yp(y) \lor \exists z(\ngg q(z) \lor r(x))$\\
-\text{Push negation invwards:} & $\exists x(\exists yp(y) \lor \exists z(\ngg q(z) \lor r(x))$\\
+\text{Push negation inwards:} & $\exists x(\exists yp(y) \lor \exists z(\ngg q(z) \lor r(x))$\\
 \text{Extract quantifiers:} & $\exists x \exists y \exists z (p(y) \lor \ngg q(z) \lor r(x))$\\
 \end{tabular}
-\end{solution}
-\end{parts}
-
-\question Suppose that we allowed the domain of an interpretation to be
-$\emph{empty}$. What would this mean for the equivalence:
-\[ \forall y p(y,y) \lor \exists x q(x,x) \equiv \exists x (\forall y p (y,y) \lor q(x,x))\]
-\begin{solution}
-~\\
-From Ben Ari:\\
-``A universal quantified formula $\forall xA(x)$ is true in an empty domain: it has to be true 
-for all elements of the domain, but there aren’t any so it is vacuously true. An existentially 
-quantified formula $\exists A(x)$ is false in an empty domain: it has to be true for some 
-element of the domain, but there aren’t any so it can’t be true. The equivalence is therefore 
-incorrect: the left-hand side is true because $\forall yp(y,y)$ is vacuously true, while the 
-right-hand side is false because it is an existentially quantified formula and the domain is 
-empty. If the domain is non-empty, the equivalence holds.''
-\end{solution}
-
-\question Recall that the ``brute force'' approach to satisfiability in
-propositional logic involves enumerating all possible interpretations of a
-formula, which requires $2^n$ interpretations for a formula with $n$ variables.
-\begin{parts}
-\part Why can't we do this for first order logic?
-\begin{solution}
-In propositional logic interpretations assign each atom a value from a binary
-domain. In first order logic, the interpretation must first specify a domain,
-which can be chosen from an infinite number of sets. In addition, the number
-of $n-ary$ functions and relations that can be a assigned is a function of the size
-of the chosen domain. In the case that the domain is infinite, these are also
-infinite.
-\end{solution}
-\part Assume we restrict our attention to interpretations where the domain is
-$\{1,2,3\}$. How many possible binary relations are there over this domain?  
-\begin{solution}
-A binary relation is a set of tuples $(x,y)$ where $x, y \in \{1,2,3\}$.
-Therefore, the total number of possible relations is the number of subsets
-of $\{1,2,3\} \times \{1,2,3\}$, which is $2^{3^2} = 512$.
-\end{solution}
-\part How many possible binary functions are there over the same domain?
-\begin{solution}
-A binary function is a type of binary relation, so it can also be represented
-as a set of pairs. Since functions can have only one output per input, there
-are at most three tuples in the set. If we assume the function is a total
-function over the domain, all three input values, must be represented so
-there is exactly three tuples in the set. In this case, the number of
-possibilities is $3^3 = 27$ (each of the three inputs can have one of $3$
-outputs). If we include partial functions, we have to add in functions that
-map only $1$ value, only $2$, values, or $0$ values (i.e. the empty function).
-There are $9$ functions that map only one value ($3$ possible input values
-and $3$ values each they could map to) and $27$ functions that map only two
-values ($3$ choices of which pairs of values to map and $3$ possible mappings
-for each of the input values in the pair). Finally, there is only one empty
-function, so the total number of partial functions is $64$.
-\end{solution}
-\part Consider the set of formulas in first order logic that are restricted to
-binary relations (no constants or functions). Is there a viable brute force approach 
-to the satisfiability problem when the domain is restricted to $\{1,2,3\}$? If
-not, why not? If so, how many interpretations do we need to check in the worst
-case?
-\begin{solution}
-Yes. Since there are $512$ binary relations and $3$ choices of variable
-assignments for each of the $2$ input variables for each binary relation,
-a brute force approach would require checking $512 \times 3^2 = 4068$ 
-possibilities for a formula with a single predicate. Therefore, a formula
-with $n$ predicates would require enumeration of $4068^n$ possibilities. 
-\end{solution}
-\part How does the above answer change if we allow binary functions (but still
-    no constants)?
-\begin{solution}
-The answer does not change. Since we know each function must have an output
-in the domain, we can ignore the interpretation assigned to the function and
-just check all possible outputs of any function, which is the same as all
-elements in the domain. This amounts to checking against all possible
-inputs to the relations, which is equivalent to checking the same formula with
-no functions in it.
 \end{solution}
 \end{parts}
 
