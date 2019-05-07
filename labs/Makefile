@@ -13,14 +13,13 @@ problems: $(TARGETS)
 
 solutions: $(SOLS)
 
-%_solutions.pdf: PDFLATEXOPTS := -pdflatex='pdflatex %O -interaction=nonstopmode -synctex=1 -shell-escape "\PassOptionsToClass{answers}{exam}\input{%S}"'
-%_solutions.pdf: %.tex
-	latexmk -pdf $(PDFLATEXOPTS) -use-make $< && mv $*.pdf $*_solutions.pdf
-
 %.pdf: PDFLATEXOPTS := -pdflatex='pdflatex -interaction=nonstopmode -shell-escape'
 %.pdf: %.tex
 	latexmk -pdf $(PDFLATEXOPTS) -use-make $<
 
+%_solutions.pdf: PDFLATEXOPTS := -pdflatex='pdflatex %O -interaction=nonstopmode -synctex=1 -shell-escape "\PassOptionsToClass{answers}{exam}\input{%S}"'
+%_solutions.pdf: %.tex
+	latexmk -pdf $(PDFLATEXOPTS) -use-make $< && mv $*.pdf $*_solutions.pdf
 
 install: 
 	cp $(TARGETS) $(SOLS) ~/google_drive/NPS/teaching/2019/CS3001/labs/
