@@ -31,9 +31,9 @@ install:
 
 clean: 
 	latexmk -c
-	latexmk -c -outdir=solutions
+	if [ -d "solutions" ]; then latexmk -c -outdir=solutions; fi
 
 distclean: 
 	latexmk -C
-	latexmk -C -outdir=solutions && rmdir solutions
+	if [ -d "solutions" ]; then latexmk -C -outdir=solutions && rmdir solutions; fi
 
