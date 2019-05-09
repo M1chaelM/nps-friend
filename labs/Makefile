@@ -15,15 +15,15 @@ problems: $(TARGETS)
 
 solutions: $(SOLS)
 
-solutions/%.pdf: PDFLATEXOPTS := -pdflatex='pdflatex %O -interaction=nonstopmode -synctex=1 -shell-escape "\PassOptionsToClass{answers}{exam}\input{%S}"'
-solutions/%.pdf: %.tex
-	@mkdir -p $(@D)
-	latexmk -pdf $(PDFLATEXOPTS) -outdir=solutions -use-make $< 
-
 %.pdf: PDFLATEXOPTS := -pdflatex='pdflatex -interaction=nonstopmode -shell-escape'
 %.pdf: %.tex
 	@mkdir -p $(@D)
 	latexmk -pdf $(PDFLATEXOPTS) -use-make $<
+
+solutions/%.pdf: PDFLATEXOPTS := -pdflatex='pdflatex %O -interaction=nonstopmode -synctex=1 -shell-escape "\PassOptionsToClass{answers}{exam}\input{%S}"'
+solutions/%.pdf: %.tex
+	@mkdir -p $(@D)
+	latexmk -pdf $(PDFLATEXOPTS) -outdir=solutions -use-make $< 
 
 install: 
 	cp $(TARGETS) $(INSTALL_DIR)
