@@ -27,7 +27,7 @@ solutions/%.pdf: %.tex
 
 install: 
 	cp $(TARGETS) $(INSTALL_DIR)
-	if [ -d "solutions" ]; then mkdir -p $(INSTALL_DIR)/solutions && cp $(SOLS) $(INSTALL_DIR); fi
+	if [ -d "solutions" ]; then mkdir -p $(INSTALL_DIR)/solutions && cp $(SOLS) $(INSTALL_DIR)/solutions; fi
 
 clean: 
 	latexmk -c
