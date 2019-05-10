@@ -12,7 +12,7 @@ TARGETS := abelson.pdf animate_derivations.pdf automata-mutualind.pdf \
 
 PRINTVERS := $(TARGETS:%.pdf=printable/%.pdf)
 
-INSTALL_DIR := ~/google_drive/NPS/teaching/2019/CS3001/labs/
+INSTALL_DIR := ~/google_drive/NPS/teaching/2019/CS3001/slides/
 
 all: $(TARGETS) $(PRINTVERS) 
 
