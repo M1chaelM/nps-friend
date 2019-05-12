@@ -19,19 +19,30 @@
 \usepackage{multicol}
 \usepackage{enumitem}
 
+\def\labelitemi{\textbullet}
+\def\labelitemii{$\circ$}
+
 \pdsetup{method=normal}
 
+\title{First Order Logic: Motivation and Applications}
+\author{Foundations of Computer Science}
+\date{\today}
+
 \begin{document}
+\maketitle
+
 \begin{wideslide}[bm=,toc=]{Limitations of Propositional Logic}
 Previously, we used propositional logic to simplify the conditional statement:
 \begin{program}
 if (a < b || (a >= b \&\& c == d)) ...
 \end{program}
+\pause 
 to the equivalent statement
 \vspace{-1em}
 \begin{program}
 if (a < b || c == d) ...
 \end{program}
+\pause
 However, there are other equivalences that propositional logic cannot justify.
 \end{wideslide}
 
@@ -40,67 +51,120 @@ Consider the expression:
 \begin{program}
 if ((a < b) and (a < c) and (b < c))...
 \end{program}
+\pause
 which can be simplified to
 \vspace{-1em}
 \begin{program}
 if ((a < b) and (b < c))...
 \end{program}
 \vspace{-1em}
+\pause
 In propositional logic, this equivalence would be written as:\\~\\
 $p \land q \land r \equiv p \land r$\\~\\
+\pause
 which is not true for the interpretation $v_{\mathcal{I}}(p) = T$,
    $v_{\mathcal{I}}(q) = F$, $v_{\mathcal{I}}(r) = T$
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{First Order Logic and Predicates}
-First-order logic allows propositions to contain arguments.
+First-order logic allows propositions to contain ``\emph{arguments}.''
 \begin{itemize}
-\item Called ``predicates''
-\item Values of propositions no longer restricted to T/F.
-\item Predicates can express set-theoretic relations.
+\item<2-> Called \emph{predicates}
+\item<3->Interpretations are no longer restricted to assignments of $T$ or $F$.
+\item<4->Predicates can express set-theoretic relations.
 \end{itemize}
+\pause[4]
 \begin{ex}{}[Ullman]
-Define the relation $\id{lt}$ such that $\id{lt}(x,y)$ iff $x < y$ and let $p = \id{lt}(a,b)$, $q = \id{lt}(a,c)$, and $r = \id{lt}(b,c)$.
+Define the relation $\id{lt}$ such that $\id{lt}(x,y)$ iff $x < y$ and 
+let $p = \id{lt}(a,b)$, $q = \id{lt}(a,c)$, and $r = \id{lt}(b,c)$.
 \\~\\
+\pause
 We can now rewrite the equivalent statements as:\\
 $(\id{lt}(a,b) \land \id{lt}(a,c) \land \id{lt}(b,c)) \equiv (\id{lt}(a,b) \land \id{lt}(b,c))$
 \\~\\
+\pause
 First order logic allows us to express that $\id{lt}$ is transitive, and further that the above
 equivalence holds for \emph{all} predicates that express transitive relations.
 \end{ex}
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\begin{wideslide}[bm=,toc=]{FOL Application to Access Control Policies}
+First order logic can also be used to express access control policies.
+\\~\\
+\pause
+\textbf{Motivation:} 
 \begin{itemize}
-\item First order logic can also be used to express access control policies.
-\item Informal policy statements often invite ambiguity:\footnote{
+\item Informal policy statements often invite ambiguity.\footnote{ \footnotesize
 J. Halpern and V. Weissman, 
 Using First-Order Logic to Reason about Policies, {\em ACM Trans on Information and System Security\/},
 (11)4, July 2008.}
-\begin{quote}
-``only librarians may edit the online catalog''
-\end{quote}
-\item Forbids anyone who is not a librarian from editing the catalog.
-\item But can a librarian edit the catalog?
-\item Structured policy languages (Extensible rights Markup Language and Open Digital Rights Language)
-permit more formal statements but their semantics are usually in English.
-\item First-order logic has a precise semantics and encourages precise policy specification.
+\item Difficult to ensure consistency automatically. \pause
+\begin{itemize}
+\item (How difficult? How do we measure the difficulty?) 
+\end{itemize}
+\end{itemize}
+\pause
+~\\
+\textbf{Example:} 
+\begin{itemize}
+\item ``Only librarians may edit the online catalog.''
+\begin{itemize}
+\item<5-> Forbids anyone who is not a librarian from editing the catalog.
+\item<6-> But can a librarian edit the catalog?
+\end{itemize}
 \end{itemize}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\textbf{Approaches:}
+\begin{itemize}
+\item<2-> Structured policy languages
+\begin{itemize}
+\item<3-> Extensible rights Markup Language, Open Digital Rights Language
+\item<4-> Permit more formal statements but their semantics are usually in English.
+\end{itemize}
+\item<2-> First-order logic 
+\begin{itemize}
+\item<5-> Has a precise semantics.
+\item<6-> Encourages precise policy specification. 
+\end{itemize}
+\end{itemize}
+\pause[6]
+\textbf{Consider:}
+\vspace{-2mm}
 \begin{displaymath}
 \begin{array}{l}
-\forall x(\neg\bid{Librarian}(x)\Rightarrow \neg\bid{Permitted}(x,\rid{edit catalog}) \\[1ex]
-\forall x(\bid{Librarian}(x)\Rightarrow \bid{Permitted}(x,\rid{edit catalog})
+\forall x(\neg\bid{Librarian}(x))\imp \neg\bid{Permitted}(x,\rid{edit catalog}) \\[1ex]
+\forall x(\bid{Librarian}(x))\imp \bid{Permitted}(x,\rid{edit catalog})
 \end{array}
 \end{displaymath}
+\vspace{3mm}
+\pause
 First formula alone may convey the meaning of the English statement.
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\begin{wideslide}[bm=,toc=]{Halpern and Weissman's Access Control Proposal}
+\textbf{General form of a policy:}
+\begin{displaymath}
+\begin{array}{l}
+\forall x_1\ldots x_m(f \imp (\neg)\bid{Permitted}(t,t'))
+\end{array}
+\end{displaymath}
+\vspace{-15mm}
 \begin{itemize}
-\item An article may be downloaded if a fee has been paid within the past 6 weeks:
+\item[] \phantom{empty bullet}
+\begin{itemize}
+\item $f$ is a first-order formula
+\item $t$ denotes a subject and 
+\item $t'$ an action performed by that subject.
+\end{itemize}
+\end{itemize}
+\vspace{3mm}
+\pause
+\textbf{Example:}\\
+\vspace{2mm}
+``An article may be downloaded if a fee has been paid within the past 6 weeks.''
+\vspace{-2mm}
 \begin{displaymath}
 \begin{array}{l}
 \forall i\, \forall t\, \forall a\, ((\bid{PaidFee}(i,t)\wedge (\bid{now} - 6 < t < \bid{now})\wedge \\
@@ -108,121 +172,45 @@ First formula alone may convey the meaning of the English statement.
 \end{array}
 \end{displaymath}
 $\bid{now}$ is a constant denoting current time (provided by a global clock).
-\end{itemize}
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\begin{wideslide}[bm=,toc=]{Halpern and Weissman's Access Control Proposal}
+\textbf{Expressing Permission:}
 \begin{itemize}
-\item General form of a policy:
+\item<2-> Let $E$ be an {\em environment\/} of statements (e.g.\ $\bid{Librarian}(\id{Alice})$).
+\item<3-> Let $p_1,\ldots ,p_n$ be policies governing subjects.
+\item<4-> Subject $t$ can perform action $t'$ iff the following is {\em valid\/}:
+\pause[4]
 \begin{displaymath}
-\begin{array}{l}
-\forall x_1\ldots x_m(f \Rightarrow (\neg)\bid{Permitted}(t,t'))
-\end{array}
+E\wedge p_1 \wedge \cdots \wedge p_n \imp \bid{Permitted}(t,t')
 \end{displaymath}
-$f$ is a first-order formula, $t$ denotes a subject and $t'$ an action performed by that subject.
-\item Let $E$ be an {\em environment\/} of statements (e.g.\ $\bid{Librarian}(\id{Alice})$).
-\item Let $p_1,\ldots ,p_n$ be policies governing subjects.
-\item Subject $t$ can perform action $t'$ iff 
-\begin{displaymath}
-E\wedge p_1 \wedge \cdots \wedge p_n \Rightarrow \bid{Permitted}(t,t')
-\end{displaymath}
-is {\em valid\/}; i.e.\ $E\wedge p_1 \wedge \cdots \wedge p_n \wedge \neg\bid{Permitted}(t,t')$ 
+\vspace{-5mm}
+\item<6->  that is, $E\wedge p_1 \wedge \cdots \wedge p_n \wedge \neg\bid{Permitted}(t,t')$ 
 is {\em unsatisfiable\/}.
 \end{itemize}
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\begin{wideslide}[bm=,toc=]{Halpern and Weissman's Access Control Proposal}
+\textbf{Checking Consistency:}
 \begin{itemize}
 \item Policies $p_1,\dots p_n$ and environment $E$ are {\em consistent\/} iff
+the following is {\em satisfiable\/}:
 \begin{displaymath}
 E\wedge p_1 \wedge \cdots \wedge p_n 
 \end{displaymath}
-is {\em satisfiable\/}.
-\item As we shall see, neither validity ot satisfiability is decidable in first-order logic!
-\item Halpern and Weissman give restrictions on $E$ and $p_1,\ldots ,p_n$ under which
-these problems are decidable without compromising the utility of first-order logic for policies.
 \end{itemize}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\pause
+\textbf{Difficulty of Checking Consistency:}
 \begin{itemize}
-\item Recall the policy:
-\begin{displaymath}
-\begin{array}{l}
-\forall i\, \forall t\, \forall a\, ((\bid{PaidFee}(i,t)\wedge (\bid{now} - 6 < t < \bid{now})\wedge \\
-\bid{Customer}(i,\bid{now})\wedge\bid{Article}(a) \Rightarrow \bid{Permitted}(i,\rid{download}(a)))
-\end{array}
-\end{displaymath}
-%$\bid{now}$ is a constant denoting current time 
-\item {\bf Customer} is parameterized on time.
-\item Its truth varies across time (dynamic truth).
-\item Contrast with {\bf Article} whose truth is static.
-\item A more natural way to express this policy uses {\em temporal logic\/}.
+\item<3-> As we shall see, neither validity or satisfiability is decidable in first-order logic!
+\item<4-> Halpern and Weissman give restrictions on $E$ and $p_1,\ldots ,p_n$ under which
+these problems are:
+\begin{itemize}
+\item<5->decidable,
+\item<5->tractable
+\item<5->sufficiently expressive to remain useful. 
+\end{itemize}
 \end{itemize}
 \end{wideslide}
-
 \end{document}
-\begin{center}
-\begin{picture}(255,50)
-%\begin{picture}(255,25)
-\put(  -15, -20){\makebox(2,12){\small time:}}
-\put(  0, 0){\state{\tinysz{n=0}}{$s_{0}$}}
-\put(  10, -20){\makebox(2,12){\small $t_0$}}
-\put( 20,10){\vector(1,0){40}}
-\put( 60, 0){\state{\tinysz{n=1}}{$s_{1}$}}
-\put(  70, -20){\makebox(2,12){\small $t_1$}}
-\put( 80,10){\vector(1,0){40}}
-\put(120, 0){\state{\tinysz{n=2}}{$s_{2}$}}
-\put( 130, -20){\makebox(2,12){\small $t_2$}}
-\put(140,10){\vector(1,0){40}}
-\put(180, 0){\state{\tinysz{n=3}}{$s_{3}$}}
-\put( 198, -20){\makebox(2,12){\small $t_3\ldots$}}
-%\put(200,10){\vector(1,0){40}}
-%\put(245,5){\makebox(10,10){$\cdots$}}
-	\put(190,0){\line(0,-1){3}}
-	\put(202,-2){\oval(24,12)[b]}
-	\put(202,-2){\oval(24,12)[tr]}
-	\put(203,4){\vector(-1,0){5}}
-	%\put(70,0){\line(0,-1){3}}
-	%\put(82,-2){\oval(24,12)[b]}
-	%\put(82,-2){\oval(24,12)[tr]}
-	%\put(83,4){\vector(-1,0){5}}
-\end{picture}
-\end{center}
-\end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Why Temporal Logic?}
-\begin{displaymath}
-\begin{array}{|l|l|}
-\hline
-\bid{First-order logic} & \bid{Temporal logic analog} \\\hline
-\forall i\geq 0.\, n=_{t_i}2\;\rid{is False} & s_0\not\models\Box n = 2\\\hline
-\exists i\geq 0.\, n=_{t_i}2\;\rid{is True}  & s_0\models\Diamond n = 2\\\hline
-\forall i.\exists j.\, n=_{t_j}3 \wedge j\geq i\;\rid{is True} & s_0\models\Box\Diamond n = 3\\\hline
-\exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3 \wedge i > j\;\rid{is False} & 
-s_0\not\models\Diamond (n = 3\wedge\Diamond n = 2)\\\hline
-\exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3 \wedge i < j\;\rid{is True} & 
-s_0\models\Diamond (n = 2\wedge\Diamond n = 3)\\\hline
-\exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3\;\rid{is True} & 
-\rid{no temporal analog as it} \\
- & \rid{must order}\;t_i\;\rid{and}\;t_j\\\hline
-\end{array}
-\end{displaymath}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Why Temporal Logic?}
-\begin{enumerate}
-\item FOL doesn't care about temporal ordering.  Can write
-\begin{displaymath}
-\exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3
-\end{displaymath}
-which is true for the C program.
-\item Says nothing about which predicate became true first.
-\item Hence it has no analog in temporal logic.
-\item Temporal logic cares about temporal ordering of events.
-\item Awkward predicates in FOL as they're parameterized on time.
-\item But time is not referenced anywhere in the C program.
-\item Predicates not parametrized on time in temporal logic.
-\end{enumerate}
-\end{wideslide}
-\end{document}
