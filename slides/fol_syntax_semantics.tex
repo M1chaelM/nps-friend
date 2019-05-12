@@ -21,13 +21,203 @@
 
 \pdsetup{method=normal}
 
-\title{First Order Logic: Syntax and Semantics}
+\title{First Order Logic: Part I}
 \author{Foundations of Computer Science}
 \date{\today}
 
 \begin{document}
 \maketitle
-\section[slide=false]{Syntax}
+\begin{slide}[toc=,bm=]{Overview}
+This slide set covers the following topics in first order logic:
+
+\vspace{10mm}
+\tableofcontents[content=sections]
+\end{slide}
+
+\section[slide=true]{Motivations and Applications}
+\begin{wideslide}[bm=,toc=]{Limitations of Propositional Logic}
+Previously, we used propositional logic to simplify the conditional statement:
+\begin{program}
+if (a < b || (a >= b \&\& c == d)) ...
+\end{program}
+\pause 
+to the equivalent statement
+\vspace{-1em}
+\begin{program}
+if (a < b || c == d) ...
+\end{program}
+\pause
+However, there are other equivalences that propositional logic cannot justify.
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{First Order Logic Equivalence Example}
+Consider the expression:
+\begin{program}
+if ((a < b) and (a < c) and (b < c))...
+\end{program}
+\pause
+which can be simplified to
+\vspace{-1em}
+\begin{program}
+if ((a < b) and (b < c))...
+\end{program}
+\vspace{-1em}
+\pause
+In propositional logic, this equivalence would be written as:\\~\\
+$p \land q \land r \equiv p \land r$\\~\\
+\pause
+which is not true for the interpretation $v_{\mathcal{I}}(p) = T$,
+   $v_{\mathcal{I}}(q) = F$, $v_{\mathcal{I}}(r) = T$
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{First Order Logic and Predicates}
+First-order logic allows propositions to contain ``\emph{arguments}.''
+\begin{itemize}
+\item<2-> Called \emph{predicates}
+\item<3->Interpretations are no longer restricted to assignments of $T$ or $F$.
+\item<4->Predicates can express set-theoretic relations.
+\end{itemize}
+\pause[4]
+\begin{ex}{}[Ullman]
+Define the relation $\id{lt}$ such that $\id{lt}(x,y)$ iff $x < y$ and 
+let $p = \id{lt}(a,b)$, $q = \id{lt}(a,c)$, and $r = \id{lt}(b,c)$.
+\\~\\
+\pause
+We can now rewrite the equivalent statements as:\\
+$(\id{lt}(a,b) \land \id{lt}(a,c) \land \id{lt}(b,c)) \equiv (\id{lt}(a,b) \land \id{lt}(b,c))$
+\\~\\
+\pause
+First order logic allows us to express that $\id{lt}$ is transitive, and further that the above
+equivalence holds for \emph{all} predicates that express transitive relations.
+\end{ex}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{FOL Application to Access Control Policies}
+First order logic can also be used to express access control policies.
+\\~\\
+\pause
+\textbf{Motivation:} 
+\begin{itemize}
+\item Informal policy statements often invite ambiguity.\footnote{ \footnotesize
+J. Halpern and V. Weissman, 
+Using First-Order Logic to Reason about Policies, {\em ACM Trans on Information and System Security\/},
+(11)4, July 2008.}
+\item Difficult to ensure consistency automatically. \pause
+\begin{itemize}
+\item (How difficult? How do we measure the difficulty?) 
+\end{itemize}
+\end{itemize}
+\pause
+~\\
+\textbf{Example:} 
+\begin{itemize}
+\item ``Only librarians may edit the online catalog.''
+\begin{itemize}
+\item<5-> Forbids anyone who is not a librarian from editing the catalog.
+\item<6-> But can a librarian edit the catalog?
+\end{itemize}
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Policies in first-order logic}
+\textbf{Approaches:}
+\begin{itemize}
+\item<2-> Structured policy languages
+\begin{itemize}
+\item<3-> Extensible rights Markup Language, Open Digital Rights Language
+\item<4-> Permit more formal statements but their semantics are usually in English.
+\end{itemize}
+\item<2-> First-order logic 
+\begin{itemize}
+\item<5-> Has a precise semantics.
+\item<6-> Encourages precise policy specification. 
+\end{itemize}
+\end{itemize}
+\pause[6]
+\textbf{Consider:}
+\vspace{-2mm}
+\begin{displaymath}
+\begin{array}{l}
+\forall x(\neg\bid{Librarian}(x))\imp \neg\bid{Permitted}(x,\rid{edit catalog}) \\[1ex]
+\forall x(\bid{Librarian}(x))\imp \bid{Permitted}(x,\rid{edit catalog})
+\end{array}
+\end{displaymath}
+\vspace{3mm}
+\pause
+First formula alone may convey the meaning of the English statement.
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Halpern and Weissman's Access Control Proposal}
+\textbf{General form of a policy:}
+\begin{displaymath}
+\begin{array}{l}
+\forall x_1\ldots x_m(f \imp (\neg)\bid{Permitted}(t,t'))
+\end{array}
+\end{displaymath}
+\vspace{-15mm}
+\begin{itemize}
+\item[] \phantom{empty bullet}
+\begin{itemize}
+\item $f$ is a first-order formula
+\item $t$ denotes a subject and 
+\item $t'$ an action performed by that subject.
+\end{itemize}
+\end{itemize}
+\vspace{3mm}
+\pause
+\textbf{Example:}\\
+\vspace{2mm}
+``An article may be downloaded if a fee has been paid within the past 6 weeks.''
+\vspace{-2mm}
+\begin{displaymath}
+\begin{array}{l}
+\forall i\, \forall t\, \forall a\, ((\bid{PaidFee}(i,t)\wedge (\bid{now} - 6 < t < \bid{now})\wedge \\
+\bid{Customer}(i,\bid{now})\wedge\bid{Article}(a) \Rightarrow \bid{Permitted}(i,\rid{download}(a)))
+\end{array}
+\end{displaymath}
+$\bid{now}$ is a constant denoting current time (provided by a global clock).
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Halpern and Weissman's Access Control Proposal}
+\textbf{Expressing Permission:}
+\begin{itemize}
+\item<2-> Let $E$ be an {\em environment\/} of statements (e.g.\ $\bid{Librarian}(\id{Alice})$).
+\item<3-> Let $p_1,\ldots ,p_n$ be policies governing subjects.
+\item<4-> Subject $t$ can perform action $t'$ iff the following is {\em valid\/}:
+\pause[4]
+\begin{displaymath}
+E\wedge p_1 \wedge \cdots \wedge p_n \imp \bid{Permitted}(t,t')
+\end{displaymath}
+\vspace{-5mm}
+\item<6->  that is, $E\wedge p_1 \wedge \cdots \wedge p_n \wedge \neg\bid{Permitted}(t,t')$ 
+is {\em unsatisfiable\/}.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Halpern and Weissman's Access Control Proposal}
+\textbf{Checking Consistency:}
+\begin{itemize}
+\item Policies $p_1,\dots p_n$ and environment $E$ are {\em consistent\/} iff
+the following is {\em satisfiable\/}:
+\begin{displaymath}
+E\wedge p_1 \wedge \cdots \wedge p_n 
+\end{displaymath}
+\end{itemize}
+\pause
+\textbf{Difficulty of Checking Consistency:}
+\begin{itemize}
+\item<3-> As we shall see, neither validity or satisfiability is decidable in first-order logic!
+\item<4-> Halpern and Weissman give restrictions on $E$ and $p_1,\ldots ,p_n$ under which
+these problems are:
+\begin{itemize}
+\item<5->decidable,
+\item<5->tractable
+\item<5->sufficiently expressive to remain useful. 
+\end{itemize}
+\end{itemize}
+\end{wideslide}
+
+\section[slide=true]{Syntax}
 \begin{slide}[bm=,toc=]{First Order Logic: Syntax}
 \begin{defn}{7.6}[Ben Ari]
 Let $\mathcal{P}$,$\mathcal{A}$ and $\mathcal{V}$ be countable sets of
@@ -198,7 +388,8 @@ $\forall x \; p(x) \land q(x)$
 \item<9-> $\forall y(\forall x \; p(x) \land q(y))$
 \end{itemize}
 \end{wideslide}
-\section[slide=false]{Semantics}
+
+\section[slide=true]{Semantics}
 \begin{slide}[bm=,toc=]{Interpretations: FOL vs PL}
 {\bf Interpretation in PL:} 
 \begin{itemize}
@@ -351,7 +542,7 @@ under $\mathcal{I}$.
 \end{itemize}
 \end{wideslide}
 
-\section[slide=false]{Validity and Satisfiability}
+\section[slide=true]{Validity and Satisfiability}
 
 \begin{wideslide}[bm=,toc=]{Validity and Satisfiability}
 \begin{defn}{7.23}[Ben Ari]
@@ -476,7 +667,7 @@ A set of closed formulas $U = \{A_1,...\}$ is \emph{(simultaneously)
 
 \end{wideslide}
 
-\section[slide=false]{Logical Equivalence}
+\section[slide=true]{Logical Equivalence}
 
 \begin{wideslide}[bm=,toc=]{Definition of Logical Equivalence}
 \begin{defn}{7.28}[Ben Ari]
@@ -637,6 +828,7 @@ conjunctions, then apply relevance substitutions.
 
 \end{wideslide}
 
+\section[slide=true]{Functions}
 %\begin{wideslide}[bm=,toc=]{Logically equivalent formulas (2)}
 %\begin{displaymath}
 %\begin{array}{l}
