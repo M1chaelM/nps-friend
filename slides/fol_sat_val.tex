@@ -21,14 +21,122 @@
 
 \pdsetup{method=normal}
 
+\title{First Order Logic: Satisfiability and Validity}
+\author{Foundations of Computer Science}
+\date{\today}
+
 \begin{document}
+\maketitle
 
-\begin{wideslide}[bm=,toc=]{FOL Satisfiability}
+\begin{wideslide}[bm=,toc=]{Validity and Satisfiability}
+\begin{defn}{7.23}[Ben Ari]
+Let $A$ be a closed formula of first-order logic.
+\end{defn}
+\vspace{-2ex}
 \begin{itemize}
-\item Stub slide.
-
+\item $A$ is \emph{true} in $\mathcal{I}$ or $\mathcal{I}$ is a \emph{model} for
+$A$ iff $v_{\mathcal{I}}(A) = T$. Notation: $\mathcal{I} \models A$.
+\item $A$ is \emph{valid} if for \emph{all} interpretations $\mathcal{I}$,
+$\mathcal{I} \models A$. Notation: $\models A$ 
+\item $A$ is \emph{satisfiable} if for \emph{some} interpretation $\mathcal{I}$,
+$\mathcal{I} \models A$.
+\item $A$ is \emph{unsatisfiable} if it is not satisfiable. 
+\item $A$ is \emph{falsifiable} if it is not valid. 
 \end{itemize}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Satisfiability and Validity in $\forall x \; p(a,x)$}
+Let $A$ be the formula $\forall x \; p(a,x)$ from examples $7.17$ and $7.21$:
+\begin{enumerate}
+\item<2-> $\mathcal{I}_1 = (\N_0,\{\leq\},\{0\})$
+\begin{itemize}
+\item<3-> $T$: $A$ is satisfiable. 
+\end{itemize}
+\item<4-> $\mathcal{I}_2 = (\N_0,\{\leq\},\{1\})$
+\begin{itemize}
+\item<5-> $F$: $A$ is not valid. 
+\end{itemize}
+\item<6-> $\mathcal{I}_3 = (\Z,\{\leq\},\{0\})$
+\begin{itemize}
+\item<7-> $F$: Also shows $A$ is not valid. 
+\end{itemize}
+\item<8-> $\mathcal{I}_4 = (\mathcal{S},\{substr\},\{ \epsilon \})$
+\begin{itemize}
+\item<9-> $T$: Also shows $A$ is satisfiable. 
+\end{itemize}
+\end{enumerate}
+\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Satisfiability and Validity Examples}
+\begin{defn}{7.25}{Ben Ari}
+\end{defn}
+\begin{enumerate}
+\item<2-> $\forall x \forall y (p(x,y) \implies p(y,x))$
+\begin{itemize}
+\item<3-> Satisfiable? \pause[3] Yes, in interpretations where $p$ is a
+symmetric relation.
+\item<3-> Valid? \pause No. Falisified in interpretations where $p$ is
+non-symmetric. 
+\end{itemize}
+\item<6-> $\forall x \exists y p(x,y)$
+\begin{itemize}
+\item<7-> Satisfiable? \pause[3] Satisfiable in interpretations where 
+$p$ is a total function. For example, $(x,y) \in R$ iff $y = x + 1$
+for $x,y, \in \Z$.
+\item<7-> Valid? \pause No. Falsified if the domain is changed to $\Z^-$.  
+\end{itemize}
+\item<10-> $\exists x \exists y(p(x) \land \ngg p (y))$
+\begin{itemize}
+\item<11-> Satisfiable? \pause[3] Yes. Assume for example that $D$ is $\N$ and
+$p$ is the unary predicate corresponding to the property of being an
+odd number.
+\item<11-> Valid? \pause No. Consider a domain with only one element.
+\end{itemize}
+\end{enumerate}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Satisfiability and Validity Examples (continued)}
+\begin{defn}{7.25}{Ben Ari}
+(continued from previous slide)
+\end{defn}
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item<2-> $\forall x p(a,x)$
+\begin{itemize}
+\item<3-> Expresses the existence of an element with special properties.
+\item<3-> Satisfiable? \pause[3] Yes, when $D$ is $\N$ and $p$ is $\leq$.
+\item<3-> Valid? \pause No. Falisified if we change $D$ to $\Z$ 
+\end{itemize}
+\item<6-> $\forall x (p(x) \land q(x)) \eqv (\forall x p(x) \land \forall x
+    q(x))$
+\begin{itemize}
+\item<7-> Satisfiable? \pause[3] Yes. Ex: $D$ is $\N$, $p$ is the property of
+not being negative and $q$ is the property of being divisible by $1$. 
+\item<7-> Valid? \pause Yes. Proof uses theorem 7.22. 
+\end{itemize}
+\item<10-> $\forall x (p(x) \imp q(x)) \imp (\forall x p(x) \imp \forall x q(x))$
+\begin{itemize}
+\item<11-> Valid? \pause Yes. 
+\item<11-> What about the converse: $(\forall x p(x) \imp \forall x q(x)) \imp \forall x (p(x) \imp q(x))$?
+\end{itemize}
+\end{enumerate}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Extending to Sets of Formulas}
+As in PL, we can extend concepts of interpretation, satisfiability and other
+properties to sets of formulas.
+\begin{defn}{7.26}[Ben Ari]
+Let $U = \{A_1,...\}$ be a set of formulas where $\{p_1,...,p_m\}$ are all
+the predicates appearing in all $A_i \in U$ and $\{a_1,...,a_k\}$ are all the
+constants appearing in all $A_i \in U$. An \emph{interpretation} $\mathcal{I}_U$
+for $U$ is a triple:
+\[(D, \{R_1,...,R_m\},\{d_1,...,d_k\})\]
+where $D$ is a \emph{non-empty} set called the \emph{domain}, $R_i$ is an
+$n_i$-ary relation on $D$ that is assigned to the $n_i$-ary predicate $p_i$
+and $d_i \in D$ is an element of $D$ that is assigned to the constant $a_i$.
+\end{defn}
 \end{wideslide}
 
 \end{document}
-
