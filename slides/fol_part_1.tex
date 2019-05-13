@@ -30,7 +30,7 @@
 \begin{slide}[toc=,bm=]{Overview}
 This slide set covers the following topics in first order logic:
 
-\vspace{10mm}
+\vspace{5mm}
 \tableofcontents[content=sections]
 \end{slide}
 
@@ -220,22 +220,20 @@ these problems are:
 \section[slide=true]{Syntax}
 \begin{slide}[bm=,toc=]{First Order Logic: Syntax}
 \begin{defn}{7.6}[Ben Ari]
-Let $\mathcal{P}$,$\mathcal{A}$ and $\mathcal{V}$ be countable sets of
+Let $\mathcal{P}$, $\mathcal{A}$ and $\mathcal{V}$ be countable sets of
 \emph{predicate symbols}, \emph{constant symbols} and \emph{variables}.
-Each predicate symbol $p^n \in \mathcal{P}$ is associated with an \emph{arity},
-the number $n \geq 1$ of \emph{arguments} that it takes. $p^n$ is called an
-$n$-ary predicate. For $n = 1,2$, the terms \emph{unary} and \emph{binary},
-respectively, are also used.
-\end{defn}
-{\bf Notation}
+\pause
 \begin{itemize}
-\item By convention, we associate the following lower-case letters with
-each set: $\mathcal{P} = \{p,q,r\}$, $\mathcal{A} = \{a,b,c\}$, $\mathcal{V} =
-\{x,y,z\}$.
-\item Superscript denoting the arity of the predicate is omitted when clear (can
-    be inferred from the number of arguments).
-
+\item Each predicate symbol $p^n \in \mathcal{P}$ is associated with an \emph{arity}.
+\begin{itemize}
+\item Refers to the number $n \geq 1$ of \emph{arguments} that it takes. 
 \end{itemize}
+\item $p^n$ is called an $n$-ary predicate. 
+\item For $n = 1,2$, the terms \emph{unary} and \emph{binary},
+respectively, are also used.
+\end{itemize}
+\end{defn}
+\pause
 \begin{defn}{7.7}[Ben Ari]
 ~\\
 $\forall$ is the \emph{universal quantifier} and is read \emph{for all}.\\
@@ -244,23 +242,63 @@ $\exists$ is the \emph{existential quantifier} and is read \emph{there exists}.
 
 \end{slide}
 
-\begin{wideslide}[bm=,toc=]{Formulas in FOL}
+\begin{slide}[bm=,toc=]{First Order Logic: Notational Conventions}
+\textbf{Writing Symbols:}
+\begin{itemize}
+\item<2-> By convention, we associate the following lower-case letters with each
+set:
+\begin{itemize}
+\item $\mathcal{P} = \{p,q,r\}$, for predicate symbols
+\item $\mathcal{A} = \{a,b,c\}$, for constant symbols
+\item $\mathcal{V} = \{x,y,z\}$, for variables
+\end{itemize}
+\item<3-> The superscript denoting the arity of the predicate is omitted when clear (can
+    be inferred from the number of arguments).
+\begin{itemize}
+\item<4-> \textbf{Example:} \pause[4] $p(x,y,z)$ instead of $p^3(x,y,z)$
+\end{itemize}
+\end{itemize}
+\end{slide}
+
+\begin{wideslide}[bm=,toc=]{Atomic Formulas in FOL}
 \begin{defn}{7.8}[Ben Ari]
-An \emph{atomic formula} is an $n$-ary predicate followed by a list of $n$
-arguments in parentheses: $p(t_1,t_2,...,t_n)$, where each argument $t_i$ is
-either a variable or a constant. A \emph{formula} in first-order logic is
+~\\~\\
+\textbf{ An \emph{atomic formula}} is
+\begin{itemize}
+\item<2-> an $n$-ary predicate 
+\item<3-> followed by a list of $n$ arguments in parentheses:, 
+\begin{itemize}
+\item<4-> $p(t_1,t_2,...,t_n)$
+\end{itemize}
+\item<5-> where each argument $t_i$ is either a variable or a constant. 
+\end{itemize}
+\pause[5]
+\textbf{Examples:}
+\begin{itemize}
+\item $lt(3,4)$
+\item $p(user, edit)$
+\end{itemize}
+
+\end{defn}
+\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Formulas in FOL}
+\begin{defn}{7.8}[Ben Ari] (Continued)\\~\\
+\textbf{ A \emph{formula}} in first-order logic is
 a tree defined recursively as follows:
 \end{defn}
 \vspace{-3ex}
 \begin{itemize}
-\item A formula is a leaf labeled by an atomic formula.
-\item A formula is a node labeled by $\ngg$ with a single child that is a
+\item<2-> A formula is a leaf labeled by an atomic formula.
+\item<3-> A formula is a node labeled by $\ngg$ with a single child that is a
 formula.
-\item A formula is a node labeled by $\forall x$ or $\exists x$ (for some
+\item<4-> A formula is a node labeled by $\forall x$ or $\exists x$ (for some
  variable $x$) with a single child that is a formula.
-\item A formula is a node labeled by a binary Boolean operator with two
+\item<5-> A formula is a node labeled by a binary Boolean operator with two
 children both of which are formulas.
 \end{itemize}
+\pause[5]
 {\bf Universal vs Existential}:\\
 A formula of the form $\forall x A$ is a \emph{universal formula}.\\
 A formula of the form $\exists x A$ is an \emph{existential formula}.\\
@@ -306,21 +344,29 @@ $\forall x(\ngg\exists yp(x,y)\vee\ngg\exists yp(y,x))$}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Scope of Variables}
-\begin{defn}{7.11}
-A universal or existential formula $\forall x A$ or $\exists x A$
-is a \emph{quantified formula}. $x$ is the \emph{quantified variable}
-and its \emph{scope} is the formula $A$. It is not required that $x$
-actually appear in the scope of its quantification.
-\end{defn}
+\begin{defn}{7.11}[Ben Ari]~\\
+\textbf{Quantification and Scope:}
 \begin{itemize}
-\item Conceptually similar to scope of variables in programming languages.
-\item Technically, local declaration hides global declarations.
-\item Best practice is to avoid name conflicts.
+\item<2-> A universal or existential formula $\forall x A$ or $\exists x A$
+is a \emph{quantified formula}. 
+\item<3-> $x$ is the \emph{quantified variable}
+and its \emph{scope} is the formula $A$. 
+\item<4-> It is not required that $x$ actually appear in the scope of its 
+quantification.
+\end{itemize}
+\end{defn}
+\pause[4]
+\textbf{Comments:}
+\begin{itemize}
+\item<6-> Conceptually similar to scope of variables in programming languages.
+\item<7-> Technically, local declaration hides global declarations.
+\item<8-> Best practice is to avoid name conflicts.
 \end{itemize}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Figure 7.2: Global and local variables}
 \begin{multicols}{2}
+\textbf{Scope Example:}
 \begin{itemize}
 \item $x$ is declared globally and locally within $p$.
 \item Local declaration takes precedence in $p$.
@@ -348,58 +394,68 @@ class MyClass \{\\
 \end{multicols}
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Free and Bound Variables}
-\begin{defn}{7.12}
-Let $A$ be a formula. An occurrence of a variable $x$ in $A$ is
-a \emph{free variable of A} iff $x$ is not within the scope of
-a quantified variable $x$. A variable which is not free is \emph{bound}.
-\end{defn}
-\vspace*{-2ex}
+\begin{wideslide}[bm=,toc=]{Free, Bound, Closed}
+\begin{defn}{7.12}[Ben Ari] Let $A$ be a formula.\\~\\
+\pause
+\textbf{Free and Bound Variables:}
 \begin{itemize}
-\item A formula with no free variable is \emph{closed}.
-\item If $\{x_1,...,x_n\}$ are all free variables of $A$...
+\item An occurrence of a variable $x$ in $A$ is a \emph{free variable of A}
+iff $x$ is not within the scope of a quantified variable $x$.
+\item A variable which is not free is \emph{bound}.
+\end{itemize}
+\end{defn}
+\pause
+\textbf{Closed Formulas:}
+\begin{itemize}
+\item<4-> A formula with no free variable is \emph{closed}.
+\item<5-> If $\{x_1,...,x_n\}$ are all free variables of $A$...
   \begin{itemize}
-      \item $\forall x_1 \cdots \forall x_n A$ is the \emph{universal closure}.
-      \item $\exists x_1 \cdots \exists x_n A$ is the \emph{existential closure}.
+      \item<6->$\forall x_1 \cdots \forall x_n A$ is the \emph{universal closure}.
+      \item<7->$\exists x_1 \cdots \exists x_n A$ is the \emph{existential closure}.
   \end{itemize}
 \end{itemize}
 \vspace*{-2ex}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Examples}
 \begin{ex}{7.13}
+$p(x,y)$
 \end{ex}
 \vspace*{-2ex}
 \begin{itemize}
-\item $p(x,y)$ has two free variables ($x$ and $y$).
-\item $\exists y\; p(x,y)$ has one free variable($x$).
-\item $\forall x \exists y \;p(x,y)$ is closed.
-\item Universal closure: $\forall x \forall y \;p(x,y)$.
-\item Existential closure: $\exists x \exists y \;p(x,y)$.
+\item<2-> Has two free variables ($x$ and $y$).
+\item<3-> $\exists y\; p(x,y)$ has one free variable \pause[3] ($x$).
+\item<5-> $\forall x \exists y \;p(x,y)$ is closed.
+\item<6-> Universal closure: \pause[3] $\forall x \forall y \;p(x,y)$.
+\item<8-> Existential closure: \pause[2] $\exists x \exists y \;p(x,y)$.
 \end{itemize}
-\end{wideslide}
-\begin{wideslide}[bm=,toc=]{Scope Example}
+\pause
 \begin{ex}{7.14}
 $\forall x \; p(x) \land q(x)$
 \end{ex}
 \vspace*{-2ex}
 \begin{itemize}
-\item<2-> Bound: \pause[2] $x$ in $p(x)$
-\item<4-> Free: \pause[2] $x$ in $q(x)$
-\item<6-> Universal Closure: \pause[2] $\forall x(\forall x \; p(x) \land q(x))$
-\item<8-> How to write this better?
-\item<9-> $\forall y(\forall x \; p(x) \land q(y))$
+\item<11-> Bound: \pause[2] $x$ in $p(x)$
+\item<13-> Free: \pause[2] $x$ in $q(x)$
+\item<15-> Universal Closure: \pause[2] $\forall x(\forall x \; p(x) \land q(x))$
+\item<17-> How to write this better?
+\item<18-> $\forall y(\forall x \; p(x) \land q(y))$
 \end{itemize}
 \end{wideslide}
 
 \section[slide=true]{Semantics}
 \begin{slide}[bm=,toc=]{Interpretations: FOL vs PL}
-{\bf Interpretation in PL:} 
+{\bf Interpretation in PL:}
 \begin{itemize}
 \item Map from atomic \emph{propositions} to truth values.
 \end{itemize}
+\pause
 {\bf Interpretation in FOL:} 
 \begin{itemize}
 \item Map from atomic \emph{formulas} to truth values.
 \end{itemize}
 \vspace{1ex}
+\pause
 {\bf \emph{Mapping atomic formulas is more complex}}
 \begin{itemize}
 \item Atomic formulas contain variables and constants.
@@ -410,13 +466,23 @@ $\forall x \; p(x) \land q(x)$
 
 \begin{wideslide}[bm=,toc=]{Interpretations in FOL}
 \begin{defn}{7.16}
-Let $A$ be a formula where $\{p_1,...p_m\}$ are all the predicates
-appearing in $A$ and $\{a_1,...,a_k\}$ are all the constants appearing in $A$.
+Let $A$ be a formula where 
+\begin{itemize}
+\item<2-> $\{p_1,...,p_m\}$ are all the predicates appearing in $A$ and 
+\item<3-> $\{a_1,...,a_k\}$ are all the constants appearing in $A$.
+\end{itemize}
+\pause[3]
 An \emph{interpretation} $\mathcal{I}_A$ for $A$ is a triple:
+\pause
 \[(D,\{R_1,...R_m\}, \{d_1,...d_k\},)\]
-where $D$ is a \emph{non-empty} set called the \emph{domain}, $R_i$ is an
-$n_i$-ary relation on $D$ that is assigned to the $n_i$-ary predicate
-$p_i$ and $d_i \in D$ is assigned to the constant $a_i$.
+\pause
+where 
+\begin{itemize}
+\item<6-> $D$ is a \emph{non-empty} set called the \emph{domain}, 
+\item<7-> $R_i$ is an $n_i$-ary relation on $D$ that is assigned to the $n_i$-ary predicate
+$p_i$ and 
+\item<8-> $d_i \in D$ is assigned to the constant $a_i$.
+\end{itemize}
 \end{defn}
 \end{wideslide}
 \begin{wideslide}[bm=,toc=]{Examples of Interpretations in FOL}
@@ -451,47 +517,56 @@ iff $s_1$ is a substring of $s_2$.
 
 
 \begin{wideslide}[bm=,toc=]{Assignment}
-\begin{defn}{7.18}[Ben Ari]
-Let $\mathcal{I}_A$ be an interpretation for a formula $A$. An
-\emph{assignment} $\sigma_{\mathcal{I}_A}: \mathcal{V} \mapsto D$
-is a function which maps every variable $v \in \mathcal{V}$ to an
-element $d \in D$, the domain of $\mathcal{I}_A$.\\~\\
-$\sigma_{\mathcal{I}_A}[x_i \leftarrow d_i]$ is an assignment that is
+\begin{defn}{7.18}[Ben Ari]~\\
+\begin{itemize}
+\item<2-> Let $\mathcal{I}_A$ be an interpretation for a formula $A$. 
+\item<3-> An \emph{assignment} $\sigma_{\mathcal{I}_A}: \mathcal{V} \mapsto D$ is 
+\begin{itemize}
+\item<4-> a function, which 
+\item<5-> maps every variable $v \in \mathcal{V}$ 
+\item<6-> to an element $d \in D$, the domain of $\mathcal{I}_A$.
+\end{itemize}
+\item<7-> $\sigma_{\mathcal{I}_A}[x_i \leftarrow d_i]$ is an assignment that is
 the same as $\sigma_{\mathcal{I}_A}$ except that $x_i$ is mapped to
 $d_i$.
+\end{itemize}
 \end{defn}
+\pause[7]
+\textbf{Intuition:}
 \begin{itemize}
-\item That is, $\sigma_{\mathcal{I}_A}[x_i \leftarrow d_i]$ can be
-understood as a \emph{modification} of the assignment 
-$\sigma_{\mathcal{I}_A}$ in which the value of $x_i$ is assigned
-to $d_i$ instead.
+\item $\sigma_{\mathcal{I}_A}[x_i \leftarrow d_i]$ can be
+understood as a \emph{modification} of $\sigma_{\mathcal{I}_A}$ in which 
+\item the value of $x_i$ is assigned to $d_i$ instead.
 \end{itemize}
 \end{wideslide}
 
 
 \begin{wideslide}[bm=,toc=]{Truth in First Order Logic}
-\begin{defn}{7.19}[Ben Ari]
-Let $A$ be a formula, $\mathcal{I}_A$ an interpretation and
-$\sigma_{\mathcal{I}_A}$ an assignment. $v_{\sigma_{\mathcal{I}_A}}(A)$,
-the \emph{truth value} of $A$ \emph{under} $\mathcal{I}_A$ \emph{and}
-$\sigma_{\mathcal{I}_A}$, is defined by induction on the structure of
-$A$ (for simplicity we write $v_{\sigma}$ for $v_{\sigma_{\mathcal{I}_A}}$):
-\end{defn}
-\vspace{-2ex}
+\begin{defn}{7.19}[Ben Ari] Let $A$ be a formula, $\mathcal{I}_A$ an interpretation and
+$\sigma_{\mathcal{I}_A}$ an assignment. 
 \begin{itemize}
-\item Let $A = p_k(c_1,...,c_n)$ be an atomic formula where each $c_i$ is
-either a variable $x_i$ or a constant $a_i$. $v_{\sigma}(A) = T$ iff $(d_1,...,d_n)
+\item<2-> The \emph{truth value} of $A$ \emph{under} $\mathcal{I}_A$ \emph{and}
+$v_{\sigma_{\mathcal{I}_A}}(A)$ is written: $\sigma_{\mathcal{I}_A}$
+\item<3-> (for simplicity we write $v_{\sigma}$ for $v_{\sigma_{\mathcal{I}_A}}$)
+\item<4-> Defined by induction on the structure of $A$ :
+\begin{itemize}
+\item<5->  Let $A = p_k(c_1,...,c_n)$ be an atomic formula where each $c_i$ is
+either a variable $x_i$ or a constant $a_i$. 
+\item<6->  $v_{\sigma}(A) = T$ iff $(d_1,...,d_n)
 \in R_k$ where $R_k$ is the relation assigned by $\mathcal{I}_A$ to $p_k$, and
-$d_i$ is the domain element assigned to $c_i$, either by $\mathcal{I}_A$ if
-$c_i$ is a constant or by $\sigma_{\mathcal{I}_A}$ if $c_i$ is a variable.
-\item $v_{\sigma}(\ngg A) = T$ iff $v_{\sigma}(A) = F$.
-\item $v_{\sigma}(A_1 \lor A_2) = T$ iff $v_{\sigma}(A_1) = T$ or
-$v_{\sigma}(A_2) = T$, and similarly for the other Boolean operators.
-\item $v_{\sigma}(\forall x A_1) = T$ iff $\sigma_{[x \leftarrow d]}(A_1) = T$
+$d_i$ is the domain element assigned to $c_i$, 
+\item<7->  either by $\mathcal{I}_A$ if $c_i$ is a constant or by $\sigma_{\mathcal{I}_A}$ 
+      if $c_i$ is a variable.
+\item<8-> $v_{\sigma}(\ngg A) = T$ iff $v_{\sigma}(A) = F$.
+\item<9-> $v_{\sigma}(A_1 \lor A_2) = T$ iff $v_{\sigma}(A_1) = T$ or
+$v_{\sigma}(A_2) = T$ (sim. for $\land$, $\imp$, etc. ) 
+\item<10->  $v_{\sigma}(\forall x A_1) = T$ iff $\sigma_{[x \leftarrow d]}(A_1) = T$
 for \emph{all} $d \in D$.
-\item $v_{\sigma}(\exists x A_1) = T$ iff $\sigma_{[x \leftarrow d]}(A_1) = T$
+\item<11->  $v_{\sigma}(\exists x A_1) = T$ iff $\sigma_{[x \leftarrow d]}(A_1) = T$
 for \emph{some} $d \in D$.
 \end{itemize}
+\end{itemize}
+\end{defn}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Truth Values of Interpretations in Example 7.17}
@@ -523,20 +598,22 @@ strings in $\mathcal{S}$.
 \begin{wideslide}[bm=,toc=]{Truth for Some / All Assignments}
 \begin{thm}{7.22}[Ben Ari]
 Let $A' = A(x_1,...,x_n)$ be a (non-closed) formula with free variables
-$x_1,...,x_n$, and let $\mathcal{I}$ be an interpretation. Then:
+$x_1,...,x_n$, and let $\mathcal{I}$ be an interpretation. 
 \end{thm}
-\vspace*{-2ex}
+\pause
+Then:
 \begin{itemize}
-\item $v_{\sigma_{\mathcal{I}_A}}(A') = T$ for \emph{some} assignment $\sigma_{\mathcal{I}_A}$ iff $v_{\mathcal{I}}(\exists x_1 ... \exists x_n A') = T$.
-\item $v_{\sigma_{\mathcal{I}_A}}(A') = T$ for \emph{all} assignments
+\item<3-> $v_{\sigma_{\mathcal{I}_A}}(A') = T$ for \emph{some} assignment $\sigma_{\mathcal{I}_A}$ iff $v_{\mathcal{I}}(\exists x_1 ... \exists x_n A') = T$.
+\item<4-> $v_{\sigma_{\mathcal{I}_A}}(A') = T$ for \emph{all} assignments
 $\sigma_{\mathcal{I}_A}$ iff $v_{\mathcal{I}}(\forall x_1 ... \forall x_n A') = T$.
 \end{itemize}
+\pause[3]
 Informally:
 \begin{itemize}
-\item The value of $A'$ under interpretation $\mathcal{I}$ and assignment
+\item<6-> The value of $A'$ under interpretation $\mathcal{I}$ and assignment
 $\sigma$ is $T$ for some assignment iff the existential closure of $A'$ is true 
 under $\mathcal{I}$. 
-\item Similarly, the value of $A'$ under interpretation $\mathcal{I}$ and assignment
+\item<7-> Similarly, the value of $A'$ under interpretation $\mathcal{I}$ and assignment
 $\sigma$ is $T$ for all assignments iff the universal closure of $A'$ is true 
 under $\mathcal{I}$. 
 \end{itemize}
@@ -550,14 +627,20 @@ Let $A$ be a closed formula of first-order logic.
 \end{defn}
 \vspace{-2ex}
 \begin{itemize}
-\item $A$ is \emph{true} in $\mathcal{I}$ or $\mathcal{I}$ is a \emph{model} for
-$A$ iff $v_{\mathcal{I}}(A) = T$. Notation: $\mathcal{I} \models A$.
-\item $A$ is \emph{valid} if for \emph{all} interpretations $\mathcal{I}$,
-$\mathcal{I} \models A$. Notation: $\models A$ 
-\item $A$ is \emph{satisfiable} if for \emph{some} interpretation $\mathcal{I}$,
+\item<2-> $A$ is \emph{true} in $\mathcal{I}$ or $\mathcal{I}$ is a \emph{model} for
+$A$ iff $v_{\mathcal{I}}(A) = T$. 
+\begin{itemize}
+\item<3-> Notation: $\mathcal{I} \models A$.
+\end{itemize}
+\item<4-> $A$ is \emph{valid} if for \emph{all} interpretations $\mathcal{I}$,
+$\mathcal{I} \models A$. 
+\begin{itemize}
+\item<5-> Notation: $\models A$ 
+\end{itemize}
+\item<6-> $A$ is \emph{satisfiable} if for \emph{some} interpretation $\mathcal{I}$,
 $\mathcal{I} \models A$.
-\item $A$ is \emph{unsatisfiable} if it is not satisfiable. 
-\item $A$ is \emph{falsifiable} if it is not valid. 
+\item<7-> $A$ is \emph{unsatisfiable} if it is not satisfiable. 
+\item<8-> $A$ is \emph{falsifiable} if it is not valid. 
 \end{itemize}
 
 \end{wideslide}
@@ -589,18 +672,18 @@ Let $A$ be the formula $\forall x \; p(a,x)$ from examples $7.17$ and $7.21$:
 \begin{defn}{7.25}{Ben Ari}
 \end{defn}
 \begin{enumerate}
-\item<2-> $\forall x \forall y (p(x,y) \implies p(y,x))$
+\item<2-> $\forall x \forall y (p(x,y) \imp p(y,x))$
 \begin{itemize}
 \item<3-> Satisfiable? \pause[3] Yes, in interpretations where $p$ is a
 symmetric relation.
 \item<3-> Valid? \pause No. Falisified in interpretations where $p$ is
-non-symmetric. 
+not symmetric. 
 \end{itemize}
-\item<6-> $\forall x \exists y p(x,y)$
+\item<6-> $\forall x \exists y \; p(x,y)$
 \begin{itemize}
 \item<7-> Satisfiable? \pause[3] Satisfiable in interpretations where 
 $p$ is a total function. For example, $(x,y) \in R$ iff $y = x + 1$
-for $x,y, \in \Z$.
+for $x,y \in \Z$.
 \item<7-> Valid? \pause No. Falsified if the domain is changed to $\Z^-$.  
 \end{itemize}
 \item<10-> $\exists x \exists y(p(x) \land \ngg p (y))$
@@ -619,7 +702,7 @@ odd number.
 \end{defn}
 \begin{enumerate}
 \setcounter{enumi}{3}
-\item<2-> $\forall x p(a,x)$
+\item<2-> $\forall x \; p(a,x)$
 \begin{itemize}
 \item<3-> Expresses the existence of an element with special properties.
 \item<3-> Satisfiable? \pause[3] Yes, when $D$ is $\N$ and $p$ is $\leq$.
@@ -643,28 +726,38 @@ not being negative and $q$ is the property of being divisible by $1$.
 \begin{wideslide}[bm=,toc=]{Extending to Sets of Formulas}
 As in PL, we can extend concepts of interpretation, satisfiability and other
 properties to sets of formulas.
+\pause
 \begin{defn}{7.26}[Ben Ari]
-Let $U = \{A_1,...\}$ be a set of formulas where $\{p_1,...,p_m\}$ are all
-the predicates appearing in all $A_i \in U$ and $\{a_1,...,a_k\}$ are all the
-constants appearing in all $A_i \in U$. An \emph{interpretation} $\mathcal{I}_U$
-for $U$ is a triple:
+Let $U = \{A_1,...\}$ be a set of formulas where 
+\begin{itemize}
+\item<3-> $\{p_1,...,p_m\}$ are all the predicates appearing in all $A_i \in U$ and
+\item<4-> $\{a_1,...,a_k\}$ are all the constants appearing in all $A_i \in U$. 
+\end{itemize}
+\pause[3]
+An \emph{interpretation} $\mathcal{I}_U$ for $U$ is a triple:
 \[(D, \{R_1,...,R_m\},\{d_1,...,d_k\})\]
-where $D$ is a \emph{non-empty} set called the \emph{domain}, $R_i$ is an
-$n_i$-ary relation on $D$ that is assigned to the $n_i$-ary predicate $p_i$
-and $d_i \in D$ is an element of $D$ that is assigned to the constant $a_i$.
+\pause
+where 
+\begin{itemize}
+\item<6-> $D$ is a \emph{non-empty} set called the \emph{domain}, 
+\item<7-> $R_i$ is an $n_i$-ary relation on $D$ that is assigned to the $n_i$-ary predicate $p_i$ and 
+\item<8-> $d_i \in D$ is an element of $D$ that is assigned to the constant $a_i$.
+\end{itemize}
 \end{defn}
 
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Consistency}
-\begin{defn}{7.27}[Ben Ari]
+\begin{defn}{7.27}[Ben Ari]~\\~\\
 A set of closed formulas $U = \{A_1,...\}$ is \emph{(simultaneously)
-  satisfiable} iff there exists an interpretation $\mathcal{I}_U$ such that
-  $v_{\mathcal{I}_U}(A_i) = T$ for all $i$. The satisfying interpretation
-  is a \emph{model} of $U$. $U$ is \emph{valid} iff for every interpretation
+  satisfiable} iff 
+\begin{itemize}
+\item<2-> there exists an interpretation $\mathcal{I}_U$ such that $v_{\mathcal{I}_U}(A_i) = T$ for all $i$. 
+\item<3-> The satisfying interpretation is a \emph{model} of $U$.
+\item<4-> $U$ is \emph{valid} iff for every interpretation
   $\mathcal{I}_U$, $v_{\mathcal{I}_U}(A_i) = T$ for all $i$.
+\end{itemize}
 \end{defn}
-
 \end{wideslide}
 
 \section[slide=true]{Logical Equivalence}
@@ -674,15 +767,22 @@ A set of closed formulas $U = \{A_1,...\}$ is \emph{(simultaneously)
 \end{defn}
 \vspace{-2ex}
 \begin{itemize}
-\item Let $U = \{A_1,A_2\}$ be a pair of closed formulas. $A_1$ is
-\emph{logically equivalent} to $A_2$ iff $v_{{\mathcal{I}_U}}(A_1) =
-v_{{\mathcal{I}_U}}(A_2)$ for all interpretations $\mathcal{I}_U$.
-Notation: $A_1 \equiv A_2$.
-\item Let $A$ be a closed formula and $U$ a set of closed formulas.
-$A$ is a \emph{logical consequence} of $U$ iff for all interpretations
-$\mathcal{I}_{U \cup \{A\}}$, $v_{\mathcal{I}_{U \cup \{A\}}}(A_i) = T$ for
-all $A_i \in U$ implies $v_{\mathcal{I}_{U \cup \{A\}}}(A) = T$. Notation: $U \models A$.
+\item<2-> Let $U = \{A_1,A_2\}$ be a pair of closed formulas. 
+\item<3-> $A_1$ is \emph{logically equivalent} to $A_2$ iff \pause[3] $v_{{\mathcal{I}_U}}(A_1) =
+v_{{\mathcal{I}_U}}(A_2)$ for \emph{all} $\mathcal{I}_U$.
+\begin{itemize}
+\item<5-> Notation: $A_1 \equiv A_2$.
 \end{itemize}
+\item<6-> Let $A$ be a closed formula and $U$ a set of closed formulas.
+\item<7-> $A$ is a \emph{logical consequence} of $U$ iff \pause[4] for all interpretations
+$\mathcal{I}_{U \cup \{A\}}$, $v_{\mathcal{I}_{U \cup \{A\}}}(A_i) = T$ for
+all $A_i \in U$ implies $v_{\mathcal{I}_{U \cup \{A\}}}(A) = T$. 
+\begin{itemize}
+\item<9-> Notation: $U \models A$.
+\end{itemize}
+\end{itemize}
+\vspace{-5mm}
+\pause[2]
 \begin{thm}{7.29}
 Let $A,B$ be closed formulas and $U = \{A_1,...,A_n\}$ be a set of
 closed formulas. Then:
@@ -698,11 +798,15 @@ closed formulas. Then X \= \kill
 
 \begin{wideslide}[bm=,toc=]{Duality}
 The two quantifiers are duals:
+\pause
 \begin{tabbing}
 The two quantifiers are dua \= \kill
 \> $\models \forall x A(x) \eqv \ngg \exists x \ngg A(x)$.\\
+\> ~\\ 
+\pause
 \> $\models \exists x A(x) \eqv \ngg \forall x \ngg A(x)$.
 \end{tabbing}
+\pause
 \begin{itemize}
 \item It is only necessary to define one of the two.
 \item If $\forall$ is defined, $\exists$ can be considered an abbreviation of
@@ -713,14 +817,18 @@ The two quantifiers are dua \= \kill
 
 \begin{wideslide}[bm=,toc=]{Commutativity}
 Quantifiers of the same type commute:
+\pause
 \begin{tabbing}
 Quantifiers of the same \= \kill
 \> $\models \forall x \forall y A(x,y) \eqv \forall y \forall x A(x,y)$.\\
+\pause
 \> ~\\ 
 \> $\models \exists x \exists y A(x,y) \eqv \exists y \exists x A(x,y)$.\\
 \end{tabbing}
 
+\pause
 but $\forall$ and $\exists$ commute only in one direction:
+\pause
 \begin{tabbing}
 Quantifiers of the same \= \kill
 \> $\models \exists x \forall y A(x,y) \imp \forall y \exists x A(x,y)$.\\
@@ -731,16 +839,23 @@ Quantifiers of the same \= \kill
 \begin{wideslide}[bm=,toc=]{Distributivity}
 \begin{tabbing}
 Universal \= \kill
-Universal quantifiers distribute over conjunction:  \> \\
+Universal quantifiers distribute over conjunction:  \> \\[2mm]
+\pause
 \>$\models \forall x(A(x) \land B(x)) \eqv \forall x A(x) \land \forall x B(x)$.\\
 ~\\
-Existential quantifiers distribute over disjunction:\\
+\pause
+Existential quantifiers distribute over disjunction:\\[2mm]
+\pause
 \>$\models \exists x(A(x) \lor B(x)) \eqv \exists x A(x) \lor \exists x B(x)$.\\
 ~\\
-Distributing universal over disjunction goes only one direction:\\
+\pause
+Distributing universal over disjunction goes only one direction:\\[2mm]
+\pause
 \>$\models \forall x A(x) \lor \forall x B(x) \imp \forall x(A(x) \lor B(x))$.\\
 ~\\
-Distributing existential over conjunction goes the other direction:\\
+\pause
+Distributing existential over conjunction goes the other direction:\\[2mm]
+\pause
 \>$\models \exists x(A(x) \land B(x)) \imp \exists x A(x) \land \exists x B(x)$.\\
 \end{tabbing}
 
@@ -765,6 +880,7 @@ one subformula does not contain the quantified variable:
  \models B \wedge \forall xA(x) \eqv \forall x(B \wedge A(x)).
 \end{array}
 \end{displaymath}
+\pause
 For implication, the following equivalences hold (note they are not symmetric):
 \begin{displaymath}
 \begin{array}{l}
@@ -787,6 +903,7 @@ The following formulas hold for distributing quantifiers over implication:
 \models (\exists xA(x)\imp\forall xB(x))\imp \forall x(A(x)\imp B(x))  \\
 \end{array}
 \end{displaymath}
+\pause
 Example to verify intuition:
 \begin{itemize}
 \item Let $A(x)$ mean ``a person, $x$, is rich.''
@@ -802,6 +919,7 @@ Distribution of universal quantification works in one direction:
  \models \forall x(A(x)\eqv B(x))\imp (\forall xA(x) \eqv \forall xB(x)) \\
 \end{array}
 \end{displaymath}
+\pause
 The following formula holds for existential quantification:
 \begin{displaymath}
 \begin{array}{l}
@@ -829,6 +947,176 @@ conjunctions, then apply relevance substitutions.
 \end{wideslide}
 
 \section[slide=true]{Functions}
+\begin{slide}[bm=,toc=]{The Case for Functions in FOL}
+FOL can express many properties of relations. 
+\\~\\
+\pause
+{\bf Example:}
+\begin{itemize}
+\item $A = \forall x \forall y \forall z (p(x,y) \land p (y,z) \imp p(x,z))$ with
+\item $\mathcal{I}_A = (\Z,\{<\},\{\})$
+\item expresses transitivity for $<$ in the domain of integers.
+\end{itemize}
+\vspace{2ex}
+\pause
+{\bf Compare to}:
+\[
+  for\; all\;  x,y,z: (x < y) \imp (x + z < y + z)
+  \]
+
+\vspace{-1ex}
+\pause
+\begin{itemize}
+\item The difference is the $+$ function.
+\item How do we express this in first order logic?
+\end{itemize}
+
+\end{slide}
+
+\begin{wideslide}[bm=,toc=]{Functions and Terms}
+\begin{defn}{9.1}[Ben Ari]
+Let $\mathcal{F}$ be a countable set of \emph{function symbols}, where
+each symbol has an \emph{arity} denoted by a superscript. 
+\\~\\
+\pause
+\emph{Terms} are defined recursively as follows:
+\end{defn}
+\vspace{-2ex}
+\begin{itemize}
+\item<3-> A variable, constant or $0$-ary function symbol is a term.
+\item<4-> If $f^n$ is an $n$-ary function symbol $(n > 0)$ and $\{t_1,t_2,...,t_n\}$
+are terms, then $f^n(t_1,t_2,...,t_n)$ is a term.
+\end{itemize}
+\pause[3]
+An \emph{atomic formula} is 
+\begin{itemize}
+\item<6-> an $n$-ary predicate 
+\item<7-> followed by a list of $n$ \emph{arguments} 
+\item<8-> where each argument $t_i$ is a term: $p(t_1,t_2,...,t_n)$.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Notation}
+Conventions we adopt from Ben Ari:
+\begin{itemize}
+\item<2-> The word `function' refers only to syntactical symbols (replaces word `symbol') 
+\item<3-> Functions are denoted by $\{f,g,h\}$ (and subscripts)
+\item<4-> Superscript denoting arity is usually omitted.
+\item<5-> Constant symbols are now unnecessary, but kept for convenience.
+\begin{itemize}
+\item<6-> A constant is equivalent to a $0$-ary function.
+\end{itemize}
+\end{itemize}
+~\\
+\pause[6]
+{\bf Examples of terms:}
+\[
+  a,\;\; x,\;\; f(a,x),\;\; f(g(x),y),\;\; g(f(a,g(b)))
+  \]
+\pause
+{\bf Examples of atomic formulas:}
+\[
+  p(a,b),\;\; p(x,f(a,x)),\;\; q(f(a,a), f(g(x),g(x)))
+\]
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Interpretations for FOL with Functions}
+We must extend the definition of an interpretation to include function symbols:
+\pause
+\begin{defn}{9.3}[Ben Ari]
+Let $U$ be a set of formulas such that 
+\begin{itemize}
+\item<3-> $\{p_1,...,p_k\}$ are all the predicate symbols, 
+\item<4-> $\{f_1^{n_1},...,f_l^{n_l}\}$ are all the functions symbols and
+\item<5-> $\{a_1,...,a_m\}$ are all the constant symbols appearing in $U$. 
+\end{itemize}
+\pause[4]
+An \emph{interpretation} $\mathcal{I}$ is a $4$-tuple:
+\vspace{-2mm}
+\[
+  \mathcal{I} = (D, \{R_1,...,R_k\}, \{F_1^{n_1},...,F_l^{n_l}\},\{d_1,...,d_m\})
+  \]~\\
+\vspace{-8mm}
+\pause
+\textbf{\emph{consisting of}}
+\begin{itemize}
+\item<8-> a \emph{non-empty} domain $D$,
+\item<9-> $n_i$-ary relations $R_i$ on $D$ to be assigned to the $n_i$-ary predicate symbols $p_i$, 
+\item<10-> $n_j$-ary functions $F_j^{n_j}$ on $D$ to be assigned to the function symbol $f_j^{n_j}$, and 
+\item<11-> assignments of elements $d_n \in D$ to the constant symbols $a_n$ for $1 \leq n \leq m$.
+\end{itemize}
+\end{defn}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Meaning of Atomic Formulas with Functions}
+Let $\mathcal{D}_{\mathcal{I}}$ be a map from terms to domain elements such that:
+\[
+ \mathcal{D}_{\mathcal{I}} (f_i(t_1,...,t_n)) = F_i(\mathcal{D}_{\mathcal{I}}(t_1),...,\mathcal{D}_{\mathcal{I}}(t_n)) 
+  \]
+\pause
+{\bf Given an atomic formula} 
+\begin{itemize}
+\item $A = p_k(t_1,...,t_n)$
+\end{itemize}
+\pause
+{\bf The truth value is given by}
+\begin{itemize}
+\item $v_{\sigma_{\mathcal{I}}}(A) = T$ \emph{if and only if} $(\mathcal{D}_{\mathcal{I}}(t_1),...,\mathcal{D}_{\mathcal{I}}(t_n)) \in R_k$
+\end{itemize}
+\end{wideslide}
+\begin{wideslide}[bm=,toc=]{Examples of Interpretations with Functions}
+\begin{ex}{9.4}
+Consider the formula
+\[
+  A = \forall x \forall y(p(x,y) \imp p(f(x,a),f(y,a)))
+\]
+We claim it is true under the interpretation:
+\[
+  (\Z,\{\leq\}, \{+\}, \{1\}) 
+\]
+\vspace{-4ex}
+\pause
+\begin{proof}
+~\\For arbitrary $m,n \in \Z$ assigned to $x,y$, $f(x,a)$ and $f(y,a)$ evaluate to:
+\vspace{-1ex}
+\pause
+\[ \mathcal{D}_{\mathcal{I}}(f(x,a)) = +(\mathcal{D}_{\mathcal{I}}(x), \mathcal{D}_{\mathcal{I}}(a)) = +(m,1) = m+1 \]
+\pause
+\vspace{-4ex}
+\[ \mathcal{D}_{\mathcal{I}}(f(y,a)) = +(\mathcal{D}_{\mathcal{I}}(y), \mathcal{D}_{\mathcal{I}}(a)) = +(n,1) = n+1 \]
+\pause
+Substituting $\leq$ for $p$ yields $m \leq n \imp (m+1) \leq n + 1$, which is
+true for $m,n \in \Z$.
+\end{proof}
+\end{ex}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Examples of Interpretations with Functions (cont)}
+\begin{ex}{9.4}[cont]
+Consider the same formula
+\[
+  A = \forall x \forall y(p(x,y) \imp p(f(x,a),f(y,a)))
+\]
+Under the interpretation:
+\[
+  (\Sigma^*,\{\id{suffix}\}, \{\cdot\}, \{\id{tuv}\}) 
+\]
+\vspace{-4ex}
+\end{ex}
+\begin{itemize}
+\item<2-> $\id{suffix}$ is the relation such that $(s_1,s_2) \in \id{suffix}$ iff $s_1$ is a suffix of $s_2$.
+\item<3-> $\cdot$ is the function that concatenates its arguments
+\item<4-> $\id{tuv}$ is a string
+\item<5-> What is $v_{\mathcal{I}_A}$?
+\item<6-> Is $A$ satisfiable?
+\item<7-> Valid?
+\begin{itemize}
+\item<8-> No. Consider $(\Z,\{>\},\{\cdot\},\{-1\})$
+\end{itemize}
+\end{itemize}
+\end{wideslide}
+
+
 %\begin{wideslide}[bm=,toc=]{Logically equivalent formulas (2)}
 %\begin{displaymath}
 %\begin{array}{l}
