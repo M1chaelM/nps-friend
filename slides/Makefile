@@ -13,6 +13,8 @@ PRINTVERS := $(TARGETS:%.pdf=printable/%.pdf)
 
 INSTALL_DIR := ~/google_drive/NPS/teaching/2019/CS3001/slides/
 
+PRINTLATEXOPTS := -latex='latex %O -interaction=nonstopmode -synctex=1 "\PassOptionsToClass{mode=print}{powerdot}\input{%S}"'
+
 all: $(TARGETS) $(PRINTVERS) 
 
 presentations: $(TARGETS)
@@ -25,14 +27,13 @@ print: $(PRINTVERS)
 %.ps: %.dvi
 	dvips $< -o $@
 
-printable/%.dvi: LATEXOPTS := -latex='latex %O -interaction=nonstopmode -synctex=1 "\PassOptionsToClass{mode=print}{powerdot}\input{%S}"'
 printable/%.dvi: %.tex 
 	@mkdir -p $(@D)
-	latexmk -use-make -outdir=printable $(LATEXOPTS) $<
+	latexmk -use-make -outdir=printable $(PRINTLATEXOPTS) $<
 
-%.dvi: LATEXOPTS :=
 %.dvi: %.tex 
-	latexmk -use-make $(LATEXOPTS) $<
+	latexmk -use-make $<
+
 
 install: 
 	cp $(TARGETS) $(INSTALL_DIR) 
