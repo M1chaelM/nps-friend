@@ -5,6 +5,7 @@ prefixes are of one of the following forms (where $m,n \geq 0$):
 \[ \forall x_1\cdots \forall x_n \exists y_1 \cdots \exists y_m, \]
 \[ \forall x_1\cdots \forall x_n \exists y \forall z_1 \cdots \forall z_m, \]
 \[ \forall x_1\cdots \forall x_n \exists y_1 \exists y_2 \forall z_1 \cdots \forall z_m. \]
+\pause
 These classes are conveniently abbreviated: 
 
 \[    \forall^*\exists^*, \forall^*\exists \forall^*,   \forall^*\exists \exists \forall^*\]
@@ -17,10 +18,15 @@ There are \emph{no} decision procedures for the validity of pure PCNF formulas w
 prefixes have one of the following forms:
 \[ \exists z \forall x_1\cdots \forall x_n \exists y_1 \cdots \exists y_m, \]
 \[ \forall x_1\cdots \forall x_n \exists y_1 \exists y_2 \exists y_2 \forall z_1 \cdots \forall z_m. \]
+\pause
 For the first prefix, the result holds even if $n = m = 1$:
+\pause
 \[ \exists z \forall x_1 \exists y_1, \]
+\pause
 and for the second prefix, the result holds even if $n = 0, m = 1$:
+\pause
 \[ \exists y_1 \exists y_2 \exists y_2 \forall z_1. \]
+\pause
 Even if the matrix is restricted to contain only binary predicate symbols, there
 is still no decision procedure.
 \end{thm}
@@ -30,6 +36,7 @@ is still no decision procedure.
 \begin{ex}{3.2}[Halpern and Weissman]
 Consider the policy `anyone who is accompanied by a librarian
 may enter the stacks'.\\~\\
+\pause
 In first-order logic:
 \begin{align*}
 & \forall x_1 (\exists x_2 (\bid{Librarian}(x_2) \land \bid{Accompanies}(x_2,x_1)) \imp \\
@@ -37,10 +44,10 @@ In first-order logic:
 \end{align*}
 \end{ex}
 \begin{itemize} 
-\item Note that \emph{enter} is a function.
-\item Validity for existential formulas with functions is undecidable. 
-\item Need a more restricted sublanguage.
-\item Decidable is not enough---must also be \emph{tractable}.
+\item<3-> Note that \emph{enter} is a function.
+\item<4-> Validity for existential formulas with functions is undecidable. 
+\item<5-> Need a more restricted sublanguage.
+\item<6-> Decidable is not enough---must also be \emph{tractable}.
 \end{itemize}
 \end{wideslide}
 
@@ -48,6 +55,7 @@ In first-order logic:
   Control}
 Halpern and Weissman propose and analyze the complexity and expressiveness
 of several fragments of FOL. One example:
+\pause
 \begin{thm}{4.2}[Halpern and Weissman]
 Let $\Phi$ be a vocabulary that contains {\bf Permitted} (and possibly
 other predicate, constant, and function symbols). Let $\mathcal{L}_6$
@@ -59,15 +67,18 @@ appropriate sort, such that
 \vspace{-2ex}
 \begin{enumerate}
 \renewcommand{\labelenumi}{\alph{enumi})}
-\item E is a basic environment with $m$ constants,
-\item no policy in P has an inequality in its antecendent, and
-\item there are no bipolars in P relative to the equality statements
+\item<3-> E is a basic environment with $m$ constants,
+\item<4-> no policy in P has an inequality in its antecendent, and
+\item<5-> there are no bipolars in P relative to the equality statements
 in E.
 \end{enumerate}
+\pause[4]
 \emph{If each literal in each policy has at most one variable
   that does not appear in {\bf Permitted}, then we can determine
     the validity of the formula in time $O((|E| + m|P|)log|E|)$.}
 
     {\tiny (Refer to paper for detailed explanation of these constraints.)}
 \end{wideslide}
+
+
 
