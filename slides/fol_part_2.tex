@@ -21,7 +21,7 @@
 
 \pdsetup{method=normal}
 
-\title{First Order Logic: Part I}
+\title{First Order Logic: Part II}
 \author{Foundations of Computer Science}
 \date{\today}
 
@@ -33,7 +33,7 @@ This slide set covers the following topics in first order logic:
 \vspace{5mm}
 \tableofcontents[content=sections]
 \end{slide}
-\section[slide=false]{Prenex Conjunctive Normal Form}
+\section[]{Prenex Conjunctive Normal Form}
 
 \begin{wideslide}[bm=,toc=]{PCNF for First Order Logic}
 {\bf Recall:}
@@ -41,16 +41,23 @@ This slide set covers the following topics in first order logic:
 \item CNF in propositional logic: conjunction of disjunctions of literals.
 \item Clausal form: represented as a set of literals.
 \end{itemize}
+\pause
 We now generalize to first order logic:
 \begin{defn}{9.9}
 A formula is in \emph{prenex conjunctive normal form (PCNF)} iff it is of the
 form:
+\pause
 \[
   Q_1x_1\cdots Q_n x_n M
   \]
-  where the $Q_i$ are quantifiers and $M$ is a quantifier-free formula in CNF.
-  The sequence $Q_1x_1 \cdots Q_n x_n$ is the \emph{prefix} and $M$ is the
-  \emph{matrix}.
+\pause
+  where 
+  \begin{itemize}
+  \item<5-> the $Q_i$ are quantifiers and 
+  \item<6-> $M$ is a quantifier-free formula in CNF.
+  \item<7-> The sequence $Q_1x_1 \cdots Q_n x_n$ is the \emph{prefix} and 
+  \item<8-> $M$ is the \emph{matrix}.
+  \end{itemize}
 \end{defn}
 
 \end{wideslide}
@@ -58,10 +65,16 @@ form:
 
 \begin{wideslide}[bm=,toc=]{Clausal Form for First Order Logic}
 \begin{defn}{9.11}
-Let $A$ be a \emph{closed} formula in PCNF whose prefix consists only of 
-\emph{universal} quantifiers. The \emph{clausal form} of $A$ consists of
-the matrix of $A$ written as a set of clauses.
+Let $A$ be a formula in first order logic such that $A$
+\begin{itemize}
+\item<2-> is \emph{closed},
+\item<3-> is in PCNF 
+\item<4-> has a prefix that consists only of \emph{universal} quantifiers. 
+\end{itemize}
+\pause[4]
+The \emph{clausal form} of $A$ consists of the matrix of $A$ written as a set of clauses.
 \end{defn}
+\pause
 \begin{ex}{9.10}
 The following formula is in PCNF:
 \[
@@ -69,6 +82,7 @@ The following formula is in PCNF:
       \lor \ngg p (g(z)) \lor q(y)])
   \]
 \end{ex}
+\pause
 \begin{ex}{9.12}
 The formula in example 9.10 is closed and has only universal quantifiers, so it
 can be written in clausal form as:
@@ -80,40 +94,43 @@ can be written in clausal form as:
 \begin{wideslide}[bm=,toc=]{Skolem's Theorem}
 {\bf Recall:} every formula in PL has an equivalent in CNF.
 \begin{itemize}
-\item Not true for first-order logic.
-\item But, for every formula in FOL there is an equisatisfiable formula
+\item<2-> Not true for first-order logic.
+\item<3-> But, for every formula in FOL there is an equisatisfiable formula
 in clausal form.
 \end{itemize}
+\pause[3]
 \begin{thm}{9.13}[Skolem]
 Let $A$ be a closed formula. Then there exists a formula $A'$ in clausal form
 such that $A \approx A'$.
 \end{thm}
-
+\pause
+\textbf{Additional Notes:}
 \begin{itemize}
-\item $A \approx A'$: $A$ is satisfiable iff $A'$ is satisfiable. 
-\item We can find $A'$ using a process called \emph{Skolemization}. 
-\item This process uses functions to eliminate existential quantifiers.
+\item<6-> $A \approx A'$: $A$ is satisfiable iff $A'$ is satisfiable. 
+\item<7-> We can find $A'$ using a process called \emph{Skolemization}. 
+\item<8-> This process uses functions to eliminate existential quantifiers.
 \end{itemize}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Intuition for Skolem's Algorithm}
 Existential quantifiers indicate a function-like relationship.
 \begin{itemize}
-\item Consider $A = \forall x \exists y p(x,y)$
-\item ``For all $x$, \emph{produce} a value $y$ associated with that $x$ such
-that $p$ is true.''
-\item Similar in sense to $y = f(x)$.
-\item Replacing gives $A' = \forall x p(x,(f(x))$
+\item<2-> Consider $A = \forall x \exists y p(x,y)$
+\item<3-> ``For all $x$, \emph{produce} a value $y$ associated with that $x$ such
+     that $p$ is true.''
+\item<4-> Similar in sense to $y = f(x)$.
+\item<5-> Replacing gives $A' = \forall x p(x,(f(x))$
 \end{itemize}
 \vspace{2ex}
+\pause[5]
 Effects of replacement process:
 \begin{itemize}
-\item Eliminates existential quantifiers.
-\item Introduction of function symbols narrows the choice of models.
-\item Relations are \emph{many-many}.
-\item Functions are relations that are \emph{many-one}.
-\item The modification ``finds'' \emph{one} example necessary to satisfy the existence claim.
-\item Many other possible examples are excluded.
+\item<7-> Eliminates existential quantifiers.
+\item<8-> Introduction of function symbols narrows the choice of models.
+\item<9-> Relations are \emph{many-many}.
+\item<10-> Functions are relations that are \emph{many-one}.
+\item<11-> The modification ``finds'' \emph{one} example necessary to satisfy the existence claim.
+\item<12-> Many other possible examples are excluded.
 \end{itemize}
 \end{wideslide}
 
@@ -121,15 +138,17 @@ Effects of replacement process:
 \begin{ex}{9.14}
 ~\\Consider the formulas:
 \vspace{-2ex}
-\[A = \forall x \exists y p(x,y) \text{ and } A' = \forall x p(x,(f(x))\]
+\[A = \forall x \exists y p(x,y) \text{ and } A' = \forall x p(x,f(x))\]
 \end{ex}
 \vspace{-2ex}
+\pause
 Under the following interpretations:
 \begin{itemize}
-\item $\mathcal{I} = (\Z,\{>\},\{\})$
-\item $\mathcal{I}' = (\Z,\{>\},\{F(x) = x + 1\},\{\})$
-\item $\mathcal{I}'' = (\Z,\{>\},\{F(x) = x - 1\},\{\})$
+\item<3-> $\mathcal{I} = (\Z,\{>\},\{\})$
+\item<4-> $\mathcal{I}' = (\Z,\{>\},\{F(x) = x + 1\},\{\})$
+\item<5-> $\mathcal{I}'' = (\Z,\{>\},\{F(x) = x - 1\},\{\})$
 \end{itemize}
+\pause[4]
 Note that:
 \begin{itemize}
 \item $\mathcal{I} \models A$, $\mathcal{I}' \models A$ and $\mathcal{I}''
@@ -141,47 +160,48 @@ Note that:
 
 \begin{wideslide}[bm=,toc=]{Skolem's Algorithm}
 \begin{itemize}
-\item Rename bound variables to remove name conflicts.
-\item Eliminate Boolean operators except $\ngg, \land, \lor$.
-\item Push negation operators inward to atomic formulas. Use
+\item<2-> Rename bound variables to remove name conflicts.
+\item<3-> Eliminate Boolean operators except $\ngg, \land, \lor$.
+\item<4-> Push negation operators inward to atomic formulas. Use
 \begin{itemize}
 \item $\ngg \forall x A(x) \equiv \exists x \ngg A (x)$ and
 \item $\ngg \exists x A(x) \equiv \forall x \ngg A (x)$ 
 \end{itemize}
-\item Extract quantifiers from the matrix using equivalence laws:
+\item<5-> Extract quantifiers from the matrix using equivalence laws:
 \begin{itemize}
 \item $A \;op\; Qx B(x) \equiv Qx(A \;op \; B(x))$ and
 \item $QxA(x) \;op\; B \equiv Qx(A(x) \;op \; B)$ 
 \end{itemize}
-\item Use distributive laws to transform matrix to CNF.
-\item Eliminate existential quantifiers by adding Skolem functions.
+\item<6-> Use distributive laws to transform matrix to CNF.
+\item<7-> Eliminate existential quantifiers by adding Skolem functions.
 \begin{itemize}
-\item For each existential quantifier, $\exists x$, create a new $n-ary$ function $f$ 
-\item $n = $ number of universally quantified variables preceding $\exists x$ in
+\item<8-> For each existential quantifier, $\exists x$, create a new $n-ary$ function $f$ 
+\item<9-> $n = $ number of universally quantified variables preceding $\exists x$ in
 prenex normal form.
 \end{itemize}\end{itemize}
 \end{wideslide}
 
-\section[slide=false]{Computational Complexity of FOL}
+\section[]{Computational Complexity of FOL}
 \begin{slide}[bm=,toc=]{Validity in FOL is Undecidable}
 There is no decision procedure for validity in first order logic.
 \begin{itemize}
-\item First proved by Alonzo Church in 1936.
-\item Proof uses a reduction \emph{from} the halting problem.
-\item That is $\id{HALT} \leq \id{FOL-VAL}$
+\item<2-> First proved by Alonzo Church in 1936.
+\item<3-> Proof uses a reduction \emph{from} the halting problem.
+\item<4-> That is $\id{HALT} \leq \id{FOL-VAL}$
 \begin{itemize}
-\item The halting problem is proven to be undecidable.
-\item Therefore, $\id{FOL-VAL}$ is undecidable.
+\item<5-> The halting problem is proven to be undecidable.
+\item<6-> Therefore, $\id{FOL-VAL}$ is undecidable.
 \end{itemize}
 \end{itemize}
+\pause[6]
 How the reduction works:
 \begin{itemize}
-\item Begins with an arbitrary Turing machine $T$.
-\item Constructs a formula $S_T$ in first-order logic, such that
+\item<8-> Begins with an arbitrary Turing machine $T$.
+\item<9-> Constructs a formula $S_T$ in first-order logic, such that
 \begin{itemize}
-\item $S_T$ is valid iff $T$ halts on a blank tape.
+\item<10-> $S_T$ is valid iff $T$ halts on a blank tape.
 \end{itemize}
-\item This shows that a decision procedure for $\id{FOL-VAL}$ would also solve
+\item<11->This shows that a decision procedure for $\id{FOL-VAL}$ would also solve
 the halting problem.
 \end{itemize}
 \end{slide}
@@ -191,21 +211,23 @@ the halting problem.
 
 \emph{Validity in first-order logic is undecidable.}
 \end{thm}
+\pause
 Holds even under the following restrictions:
 \begin{enumerate}
-\item The formulas contain only binary predicate symbols, one constant and one
+\item<3-> The formulas contain only binary predicate symbols, one constant and one
 unary function symbol.
 \begin{itemize}
-\item Ex: $\forall x (p(x,f(x)) \imp a$.
+\item<3-> Ex: $\forall x (p(x,f(x)) \imp a$.
 \end{itemize}
-\item The formulas are logic programs.
+\item<4-> The formulas are logic programs.
 \begin{itemize}
-\item Restricted set of clauses structured to perform computations.
-\item See Ben Ari chapter 11.
+\item<4-> Restricted set of clauses structured to perform computations.
+\item<4-> See Ben Ari chapter 11.
 \end{itemize}
-\item The formulas are pure (see below).
+\item<5-> The formulas are pure (see below).
 \end{enumerate}
 \vspace{-2ex}
+\pause[4]
 \begin{defn}{12.4}[Ben Ari]
 A formula of first-order logic is \emph{pure} if it contains no function symbols
 (including constants which are 0-ary functions symbols).
@@ -217,31 +239,32 @@ A formula of first-order logic is \emph{pure} if it contains no function symbols
 {\bf Recall:}\\
 A formula is valid if and only if its complement (negation) is unsatisfiable.
 \begin{itemize}
-\item There is a simple reduction from a formula to its complement (negation).
-\item Therefore, $\id{FOL-VAL} \leq \id{FOL-UNSAT}$ 
-\item $\id{FOL-VAL}$ is undecidable.
-\item Therefore, $\id{FOL-UNSAT}$ is undecidable.
+\item<2-> There is a simple reduction from a formula to its complement (negation).
+\item<3-> Therefore, $\id{FOL-VAL} \leq \id{FOL-UNSAT}$ 
+\item<4-> $\id{FOL-VAL}$ is undecidable.
+\item<5-> Therefore, $\id{FOL-UNSAT}$ is undecidable.
 \end{itemize}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Semi-decision Procedures for FOL-UNSAT}
 \begin{itemize}
-\item Resolution for FOL is semi-decision procedure (J.A Robinson) for FOL-UNSAT.
-\item Another technique, constructing a \emph{semantic tableau} is also
+\item<2-> Resolution for FOL is a semi-decision procedure (Robinson) for FOL-UNSAT.
+\item<3-> Another technique, constructing a \emph{semantic tableau} is also
 semi-decision procedure.
-\item Thus, $\id{FOL-UNSAT}$ is semi-decidable.
-\item Since $\id{FOL-VAL} \leq \id{FOL-UNSAT}$ 
-\item $\id{FOL-VAL}$ is semi-decidable. 
+\item<4-> Thus, $\id{FOL-UNSAT}$ is semi-decidable.
+\item<5-> Since $\id{FOL-VAL} \leq \id{FOL-UNSAT}$ 
+\item<6-> $\id{FOL-VAL}$ is semi-decidable. 
 \end{itemize}
+\pause[6]
 {\bf Recall:} 
 \begin{itemize}
-\item $\id{FOL-SAT}$ = $\id{FOL}$ - $\id{FOL-UNSAT}$
-\item Properties of semi-decision procedures:
+\item<8-> $\id{FOL-SAT}$ = $\id{FOL}$ - $\id{FOL-UNSAT}$
+\item<9-> Properties of semi-decision procedures:
 \begin{itemize}
-\item Return ``yes'' if an element is in the target set.
-\item Return ``no'' or runs forever if not.
+\item<10-> Return ``yes'' if an element is in the target set.
+\item<11-> Return ``no'' or runs forever if not.
 \end{itemize}
-\item Therefore, $\id{FOL-SAT}$ is \emph{neither} decidable \emph{nor}
+\item<12->  Therefore, $\id{FOL-SAT}$ is \emph{neither} decidable \emph{nor}
 semi-decidable.
 \end{itemize}
 
@@ -250,27 +273,26 @@ semi-decidable.
 \begin{wideslide}[bm=,toc=]{Satisfiability vs Validity in PL and FOL}
 In propositional logic:
 \begin{itemize}
-\item $\id{SAT}$ is NP-complete $\imp \id{UNSAT}$ is CoNP-complete. 
-\item $\id{UNSAT} \leq_p \id{VAL}$, so $\id{VAL}$ is coNP-Hard.
-\item $\id{INVAL}$ is in NP $\imp \id{VAL}$ is in CoNP.
-\item $\id{VAL}$ is in CoNP and $\id{VAL}$ is CoNP-Hard $\imp \id{VAL}$ is Co-NP
+\item<2-> $\id{SAT}$ is NP-complete $\imp \id{UNSAT}$ is $\id{CoNP}$-complete. 
+\item<3-> $\id{UNSAT} \leq_p \id{VAL}$, so $\id{VAL}$ is $\id{CoNP}$-Hard.
+\item<4-> $\id{INVAL}$ is in NP $\imp \id{VAL}$ is in $\id{CoNP}$.
+\item<5-> $\id{VAL}$ is in CoNP and $\id{VAL}$ is $\id{CoNP}$-Hard $\imp \id{VAL}$ is $\id{CoNP}$
 complete.
-\item Therefore, in PL, $\id{VAL}$ is harder than $\id{SAT}$ unless $NP = CoNP$.
+\item<6-> Therefore, in PL, $\id{VAL}$ is harder than $\id{SAT}$ unless $\id{NP} = \id{CoNP}$.
 \end{itemize}
 In first-order logic:
 \begin{itemize}
-\item $\id{VAL} \leq_p \id{UNSAT}$
+\item<7-> $\id{VAL} \leq_p \id{UNSAT}$
 \begin{itemize}
-\item $\id{VAL}$ is undecidable $\imp \id{UNSAT}$ is undecidable. 
-\item $\id{UNSAT}$ is semi-decidable $\imp \id{VAL}$ is semi-decidable. 
+\item<8-> $\id{VAL}$ is undecidable $\imp \id{UNSAT}$ is undecidable. 
+\item<9-> $\id{UNSAT}$ is semi-decidable $\imp \id{VAL}$ is semi-decidable. 
 \end{itemize}
-\item $\id{UNSAT}$ is semi-decidable $\imp \id{SAT}$ \emph{not} semi-decidable. 
-\item Therefore, in FOL, $\id{SAT}$ is harder than $\id{VAL}$.
+\item<10-> $\id{UNSAT}$ is semi-decidable $\imp \id{SAT}$ \emph{not} semi-decidable. 
+\item<11-> Therefore, in FOL, $\id{SAT}$ is harder than $\id{VAL}$.
 \end{itemize}
 \end{wideslide}
 
-
-\section[slide=false]{Subclasses of First-Order Logic}
+\section[]{Subclasses of First-Order Logic}
 \begin{slide}[bm=,toc=]{Decidable Subclasses}
 \begin{thm}{12.5}
 There are decision procedures for the validity of pure PCNF formulas whose
@@ -278,6 +300,7 @@ prefixes are of one of the following forms (where $m,n \geq 0$):
 \[ \forall x_1\cdots \forall x_n \exists y_1 \cdots \exists y_m, \]
 \[ \forall x_1\cdots \forall x_n \exists y \forall z_1 \cdots \forall z_m, \]
 \[ \forall x_1\cdots \forall x_n \exists y_1 \exists y_2 \forall z_1 \cdots \forall z_m. \]
+\pause
 These classes are conveniently abbreviated: 
 
 \[    \forall^*\exists^*, \forall^*\exists \forall^*,   \forall^*\exists \exists \forall^*\]
@@ -290,10 +313,15 @@ There are \emph{no} decision procedures for the validity of pure PCNF formulas w
 prefixes have one of the following forms:
 \[ \exists z \forall x_1\cdots \forall x_n \exists y_1 \cdots \exists y_m, \]
 \[ \forall x_1\cdots \forall x_n \exists y_1 \exists y_2 \exists y_2 \forall z_1 \cdots \forall z_m. \]
+\pause
 For the first prefix, the result holds even if $n = m = 1$:
+\pause
 \[ \exists z \forall x_1 \exists y_1, \]
+\pause
 and for the second prefix, the result holds even if $n = 0, m = 1$:
+\pause
 \[ \exists y_1 \exists y_2 \exists y_2 \forall z_1. \]
+\pause
 Even if the matrix is restricted to contain only binary predicate symbols, there
 is still no decision procedure.
 \end{thm}
@@ -303,6 +331,7 @@ is still no decision procedure.
 \begin{ex}{3.2}[Halpern and Weissman]
 Consider the policy `anyone who is accompanied by a librarian
 may enter the stacks'.\\~\\
+\pause
 In first-order logic:
 \begin{align*}
 & \forall x_1 (\exists x_2 (\bid{Librarian}(x_2) \land \bid{Accompanies}(x_2,x_1)) \imp \\
@@ -310,10 +339,10 @@ In first-order logic:
 \end{align*}
 \end{ex}
 \begin{itemize} 
-\item Note that \emph{enter} is a function.
-\item Validity for existential formulas with functions is undecidable. 
-\item Need a more restricted sublanguage.
-\item Decidable is not enough---must also be \emph{tractable}.
+\item<3-> Note that \emph{enter} is a function.
+\item<4-> Validity for existential formulas with functions is undecidable. 
+\item<5-> Need a more restricted sublanguage.
+\item<6-> Decidable is not enough---must also be \emph{tractable}.
 \end{itemize}
 \end{wideslide}
 
@@ -321,6 +350,7 @@ In first-order logic:
   Control}
 Halpern and Weissman propose and analyze the complexity and expressiveness
 of several fragments of FOL. One example:
+\pause
 \begin{thm}{4.2}[Halpern and Weissman]
 Let $\Phi$ be a vocabulary that contains {\bf Permitted} (and possibly
 other predicate, constant, and function symbols). Let $\mathcal{L}_6$
@@ -332,11 +362,12 @@ appropriate sort, such that
 \vspace{-2ex}
 \begin{enumerate}
 \renewcommand{\labelenumi}{\alph{enumi})}
-\item E is a basic environment with $m$ constants,
-\item no policy in P has an inequality in its antecendent, and
-\item there are no bipolars in P relative to the equality statements
+\item<3-> E is a basic environment with $m$ constants,
+\item<4-> no policy in P has an inequality in its antecendent, and
+\item<5-> there are no bipolars in P relative to the equality statements
 in E.
 \end{enumerate}
+\pause[4]
 \emph{If each literal in each policy has at most one variable
   that does not appear in {\bf Permitted}, then we can determine
     the validity of the formula in time $O((|E| + m|P|)log|E|)$.}
