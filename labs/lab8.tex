@@ -62,33 +62,26 @@ want to determine whether starting in state $A$ will eventually lead to
 state $B$. In the following questions, we refer to this problem as
 $\id{con-states}$.
 \begin{parts}
-\part A researcher publishes a new proof that a solution to the $\id{con-states}$
-problem could also be used to solve $\id{PL-SAT}$. What can we conclude
-about the complexity of $\id{con-states}$?
-\begin{solution}
-~\\$\id{PL-SAT} \leq \id{con-states}$. $\id{PL-SAT}$ is $NP$-complete, so
-$\id{con-states}$ is also $NP$-complete.
-\end{solution}
-\part Another researcher writes a proof showing that every instance of the
+\part A researcher writes a proof showing that every instance of the
 $\id{con-states}$ problem can be translated into a statement in first order
 logic that is valid if and only if State $A$ eventually leads to State
-$B$. What can we conclude from this (combined with the previous proof) about 
-the complexity of the $\id{con-states}$ problem?
+$B$. What can we conclude from this about the complexity of the 
+$\id{con-states}$ problem?
 \begin{solution}
 ~\\$\id{con-states} \leq \id{FOL-VAL}$. $\id{FOL-VAL}$ is semi-decidable, so
 $\id{con-states}$ is also semi-deciable. 
 \end{solution}
-\part A third proof shows that any algorithm that could determine whether
-an arbitrary statement in first order logic is satisfiable, could also
-be used to determine whether State $A$ eventually leads to State $B$. Given
-all three proofs, what can we say about the complexity of the $\id{con-states}$
-problem?
+\part A second proof shows that any algorithm that could determine whether
+an arbitrary statement in first order logic is satisfiable could also
+be used to determine whether State $A$ eventually leads to State $B$ for any 
+pair of states $A$ and $B$. Given both proofs, what can we say about the 
+complexity of the $\id{con-states}$ problem?
 \begin{solution}
 ~\\$\id{con-states} \leq \id{FOL-SAT}$. $\id{FOL-SAT}$ is neither decidable
 nor semi-decidable, this gives us no new information about the complexity of
 $\id{con-states}$.
 \end{solution}
-\part Finally, a fourth proof presents the following argument: Conway's Game
+\part Finally, a third proof presents the following argument: Conway's Game
 of life can simulate the behavior of an arbitrary Turing machine by
 encoding the machine and its input as some configuration of the board. The proof
 shows how this can be done and demonstrates that the progress of the game
@@ -96,7 +89,7 @@ under these circumstances corresponds exactly to the behavior of the machine.
 Furthermore, the proof shows that under these assumptions there is a state of
 the board that corresponds to a Turing machine that can make no further moves. 
 Assuming this is convincingly demonstrated, and taking the
-three previous proofs into account, what can we conclude
+two previous proofs into account, what can we conclude
 about the complexity of the $\id{con-states}$ problem?
 \begin{solution}
 ~\\Since we can assign state $A$ to any initial state of the Turing machine and
@@ -110,6 +103,28 @@ also semi-decidable.
 \clearpage
 
 \uplevel{\section*{First Order Logic}}
+
+\question[4] Consider the following interpretation $\mathcal{I} = (P,\{L,H\},\{\})$,
+where $P$ is a set of people, $L$ is a unary relation such that $L(x)$ if and
+only if $x$ is a librarian, and $H$ is a unary relation such that $H(x)$ if
+and only if $x$ is happy. Write a statement in first order logic to express
+the following:
+\begin{parts}
+\part All librarians are happy if only librarians are happy.
+\begin{solution}
+$\forall x ((\ngg L(x) \imp \ngg H(x)) \imp (L(x) \imp H(x)))$
+\end{solution}
+
+\part If it is the case that if someone is a librarian, no one is happy, then
+no librarian is happy.
+\begin{solution}
+$(\exists x L(x) \imp \forall y \ngg H(y)) \imp \forall x(L(x) \imp \ngg H(x))$
+\end{solution}
+
+\end{parts}
+
+
+
 \question Transform each of the following formulas to prenex normal form:
 \begin{parts}
 \part $\forall x(p(x) \imp \exists y q(y))$
