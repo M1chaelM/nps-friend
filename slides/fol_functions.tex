@@ -1,36 +1,7 @@
-\documentclass[style=sailor,size=12pt]{powerdot}
-\usepackage{epic,array,ecltree,url,calrsfs}
-\usepackage[nointegrals]{wasysym}
-\usepackage{listings}
-\usepackage{epsfig}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsxtra}
-\usepackage{amsthm}
-\usepackage{mlextra} % Must be below ams packages
-\usepackage{mathrsfs}
-\usepackage{color}
-\usepackage{array}
-\usepackage{graphicx}
-\graphicspath{ {../art/} }
-\usepackage{bm}
-\usepackage{tikz}
-\usepackage{multicol}
-\usepackage{enumitem}
-
-\pdsetup{method=normal}
-
-\title{First Order Logic with Functions and Prenex Conjunctive Normal Form}
-\author{Foundations of Computer Science}
-\date{\today}
-
-\begin{document}
-\maketitle
-\section[slide=false]{FOL with Functions}
 \begin{slide}[bm=,toc=]{The Case for Functions in FOL}
 FOL can express many properties of relations. 
 \\~\\
+\pause
 {\bf Example:}
 \begin{itemize}
 \item $A = \forall x \forall y \forall z (p(x,y) \land p (y,z) \imp p(x,z))$ with
@@ -38,12 +9,14 @@ FOL can express many properties of relations.
 \item expresses transitivity for $<$ in the domain of integers.
 \end{itemize}
 \vspace{2ex}
+\pause
 {\bf Compare to}:
 \[
   for\; all\;  x,y,z: (x < y) \imp (x + z < y + z)
   \]
 
 \vspace{-1ex}
+\pause
 \begin{itemize}
 \item The difference is the $+$ function.
 \item How do we express this in first order logic?
@@ -54,36 +27,44 @@ FOL can express many properties of relations.
 \begin{wideslide}[bm=,toc=]{Functions and Terms}
 \begin{defn}{9.1}[Ben Ari]
 Let $\mathcal{F}$ be a countable set of \emph{function symbols}, where
-each symbol has an \emph{arity} denoted by a superscript. \emph{Terms} are
-defined recursively as follows:
+each symbol has an \emph{arity} denoted by a superscript. 
+\\~\\
+\pause
+\emph{Terms} are defined recursively as follows:
 \end{defn}
 \vspace{-2ex}
 \begin{itemize}
-\item A variable, constant or $0$-ary function symbol is a term.
-\item If $f^n$ is an $n$-ary function symbol $(n > 0)$ and $\{t_1,t_2,...,t_n\}$
+\item<3-> A variable, constant or $0$-ary function symbol is a term.
+\item<4-> If $f^n$ is an $n$-ary function symbol $(n > 0)$ and $\{t_1,t_2,...,t_n\}$
 are terms, then $f^n(t_1,t_2,...,t_n)$ is a term.
 \end{itemize}
-An \emph{atomic formula} is an $n$-ary predicate followed by a list of $n$
-\emph{arguments} where each argument $t_i$ is a term: $p(t_1,t_2,...,t_n)$.
-
+\pause[3]
+An \emph{atomic formula} is 
+\begin{itemize}
+\item<6-> an $n$-ary predicate 
+\item<7-> followed by a list of $n$ \emph{arguments} 
+\item<8-> where each argument $t_i$ is a term: $p(t_1,t_2,...,t_n)$.
+\end{itemize}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Notation}
 Conventions we adopt from Ben Ari:
 \begin{itemize}
-\item The word `function' refers only to syntactical symbols (replaces word `symbol') 
-\item Functions are denoted by $\{f,g,h\}$ (and subscripts)
-\item Superscript denoting arity is usually omitted.
-\item Constant symbols are now unnecessary, but kept for convenience.
+\item<2-> The word `function' refers only to syntactical symbols (replaces word `symbol') 
+\item<3-> Functions are denoted by $\{f,g,h\}$ (and subscripts)
+\item<4-> Superscript denoting arity is usually omitted.
+\item<5-> Constant symbols are now unnecessary, but kept for convenience.
 \begin{itemize}
-\item A constant is equivalent to a $0$-ary function.
+\item<6-> A constant is equivalent to a $0$-ary function.
 \end{itemize}
 \end{itemize}
 ~\\
+\pause[6]
 {\bf Examples of terms:}
 \[
   a,\;\; x,\;\; f(a,x),\;\; f(g(x),y),\;\; g(f(a,g(b)))
   \]
+\pause
 {\bf Examples of atomic formulas:}
 \[
   p(a,b),\;\; p(x,f(a,x)),\;\; q(f(a,a), f(g(x),g(x)))
@@ -92,37 +73,43 @@ Conventions we adopt from Ben Ari:
 
 \begin{wideslide}[bm=,toc=]{Interpretations for FOL with Functions}
 We must extend the definition of an interpretation to include function symbols:
+\pause
 \begin{defn}{9.3}[Ben Ari]
-Let $U$ be a set of formulas such that $\{p_1,...,p_k\}$ are all the predicate
-symbols, $\{f_1^{n_1},...,f_l^{n_l}\}$ are all the functions symbols and
-$\{a_1,...,a_m\}$ are all the constant symbols appearing in $U$. An
-\emph{interpretation} $\mathcal{I}$ is a $4$-tuple:
+Let $U$ be a set of formulas such that 
+\begin{itemize}
+\item<3-> $\{p_1,...,p_k\}$ are all the predicate symbols, 
+\item<4-> $\{f_1^{n_1},...,f_l^{n_l}\}$ are all the functions symbols and
+\item<5-> $\{a_1,...,a_m\}$ are all the constant symbols appearing in $U$. 
+\end{itemize}
+\pause[4]
+An \emph{interpretation} $\mathcal{I}$ is a $4$-tuple:
+\vspace{-2mm}
 \[
   \mathcal{I} = (D, \{R_1,...,R_k\}, \{F_1^{n_1},...,F_l^{n_l}\},\{d_1,...,d_m\})
-  \]
-{\bf \emph{consisting of}}
-\end{defn}
-\vspace{-3ex}
+  \]~\\
+\vspace{-8mm}
+\pause
+\textbf{\emph{consisting of}}
 \begin{itemize}
-\item<2-> a \emph{non-empty} domain $D$,
-\item<3-> an assignment of an $n_i$-ary relation $R_i$ on $D$ to the $n_i$-ary predicate 
-      symbols $p_i$ for $1 \leq i \leq k$, 
-\item<4-> an assignment of an $n_j$-ary function $F_j^{n_j}$ on $D$ to the
-      function symbol $f_j^{n_j}$ for $1 \leq j \leq l$, and 
-\item<5-> an assignment of an element $d_n \in D$ to the constant symbol $a_n$ for $1 \leq n \leq m$.
+\item<8-> a \emph{non-empty} domain $D$,
+\item<9-> $n_i$-ary relations $R_i$ on $D$ to be assigned to the $n_i$-ary predicate symbols $p_i$, 
+\item<10-> $n_j$-ary functions $F_j^{n_j}$ on $D$ to be assigned to the function symbol $f_j^{n_j}$, and 
+\item<11-> assignments of elements $d_n \in D$ to the constant symbols $a_n$ for $1 \leq n \leq m$.
 \end{itemize}
+\end{defn}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Meaning of Atomic Formulas with Functions}
-Let $\mathcal{D}_{\mathcal{I}}$ be a map from terms to domain elements such
-that:
+Let $\mathcal{D}_{\mathcal{I}}$ be a map from terms to domain elements such that:
 \[
  \mathcal{D}_{\mathcal{I}} (f_i(t_1,...,t_n)) = F_i(\mathcal{D}_{\mathcal{I}}(t_1),...,\mathcal{D}_{\mathcal{I}}(t_n)) 
   \]
+\pause
 {\bf Given an atomic formula} 
 \begin{itemize}
 \item $A = p_k(t_1,...,t_n)$
 \end{itemize}
+\pause
 {\bf The truth value is given by}
 \begin{itemize}
 \item $v_{\sigma_{\mathcal{I}}}(A) = T$ \emph{if and only if} $(\mathcal{D}_{\mathcal{I}}(t_1),...,\mathcal{D}_{\mathcal{I}}(t_n)) \in R_k$
@@ -139,12 +126,16 @@ We claim it is true under the interpretation:
   (\Z,\{\leq\}, \{+\}, \{1\}) 
 \]
 \vspace{-4ex}
+\pause
 \begin{proof}
 ~\\For arbitrary $m,n \in \Z$ assigned to $x,y$, $f(x,a)$ and $f(y,a)$ evaluate to:
 \vspace{-1ex}
+\pause
 \[ \mathcal{D}_{\mathcal{I}}(f(x,a)) = +(\mathcal{D}_{\mathcal{I}}(x), \mathcal{D}_{\mathcal{I}}(a)) = +(m,1) = m+1 \]
+\pause
 \vspace{-4ex}
 \[ \mathcal{D}_{\mathcal{I}}(f(y,a)) = +(\mathcal{D}_{\mathcal{I}}(y), \mathcal{D}_{\mathcal{I}}(a)) = +(n,1) = n+1 \]
+\pause
 Substituting $\leq$ for $p$ yields $(m \leq n) \imp (m+1 \leq n + 1)$, which is
 true for $m,n \in \Z$.
 \end{proof}
@@ -164,148 +155,17 @@ Under the interpretation:
 \vspace{-4ex}
 \end{ex}
 \begin{itemize}
-\item $\id{suffix}$ is the relation such that $(s_1,s_2) \in \id{suffix}$ iff
-$s_1$ is a suffix of $s_2$.
-\item $\cdot$ is the function that concatenates its arguments
-\item $\id{tuv}$ is a string
-\item What is $v_{\mathcal{I}_A}$?
-\item Is $A$ satisfiable?
-\item Valid?
+\item<2-> $\id{suffix}$ is the relation such that $(s_1,s_2) \in \id{suffix}$ iff $s_1$ is a suffix of $s_2$.
+\item<3-> $\cdot$ is the function that concatenates its arguments
+\item<4-> $\id{tuv}$ is a string
+\item<5-> What is $v_{\mathcal{I}_A}$?
+\item<6-> Is $A$ satisfiable?
+\item<7-> Valid?
 \begin{itemize}
-\item<2-> No. Consider $(\Z,\{>\},\{\cdot\},\{-1\})$
+\item<8-> No. Consider $(\Z,\{>\},\{\cdot\},\{-1\})$
 \end{itemize}
 \end{itemize}
 \end{wideslide}
 
-\section[slide=false]{Prenex Conjunctive Normal Form}
 
-\begin{wideslide}[bm=,toc=]{PCNF for First Order Logic}
-{\bf Recall:}
-\begin{itemize}
-\item CNF in propositional logic: conjunction of disjunctions of literals.
-\item Clausal form: represented as a set of literals.
-\end{itemize}
-We now generalize to first order logic:
-\begin{defn}{9.9}
-A formula is in \emph{prenex conjunctive normal form (PCNF)} iff it is of the
-form:
-\[
-  Q_1x_1\cdots Q_n x_n M
-  \]
-  where the $Q_i$ are quantifiers and $M$ is a quantifier-free formula in CNF.
-  The sequence $Q_1x_1 \cdots Q_n x_n$ is the \emph{prefix} and $M$ is the
-  \emph{matrix}.
-\end{defn}
-
-\end{wideslide}
-
-
-\begin{wideslide}[bm=,toc=]{Clausal Form for First Order Logic}
-\begin{defn}{9.11}
-Let $A$ be a \emph{closed} formula in PCNF whose prefix consists only of 
-\emph{universal} quantifiers. The \emph{clausal form} of $A$ consists of
-the matrix of $A$ written as a set of clauses.
-\end{defn}
-\begin{ex}{9.10}
-The following formula is in PCNF:
-\[
-  \forall y \forall z([p(f(y)) \lor \ngg p (g(z)) \lor q(z)] \land [ \ngg q(z)
-      \lor \ngg p (g(z)) \lor q(y)])
-  \]
-\end{ex}
-\begin{ex}{9.12}
-The formula in example 9.10 is closed and has only universal quantifiers, so it
-can be written in clausal form as:
-\[
-   \{\{p(f(y)), \ngg p(g(z)), q(z)\}, \{ \ngg q(z), \ngg p (g(z)), q(y)\}\}
-  \]
-\end{ex}
-\end{wideslide}
-\begin{wideslide}[bm=,toc=]{Skolem's Theorem}
-{\bf Recall:} every formula in PL has an equivalent in CNF.
-\begin{itemize}
-\item Not true for first-order logic.
-\item But, for every formula in FOL there is an equisatisfiable formula
-in clausal form.
-\end{itemize}
-\begin{thm}{9.13}[Skolem]
-Let $A$ be a closed formula. Then there exists a formula $A'$ in clausal form
-such that $A \approx A'$.
-\end{thm}
-
-\begin{itemize}
-\item $A \approx A'$: $A$ is satisfiable iff $A'$ is satisfiable. 
-\item We can find $A'$ using a process called \emph{Skolemization}. 
-\item This process uses functions to eliminate existential quantifiers.
-\end{itemize}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Intuition for Skolem's Algorithm}
-Existential quantifiers indicate a function-like relationship.
-\begin{itemize}
-\item Consider $A = \forall x \exists y p(x,y)$
-\item ``For all $x$, \emph{produce} a value $y$ associated with that $x$ such
-that $p$ is true.''
-\item Similar in sense to $y = f(x)$.
-\item Replacing gives $A' = \forall x p(x,(f(x))$
-\end{itemize}
-\vspace{2ex}
-Effects of replacement process:
-\begin{itemize}
-\item Eliminates existential quantifiers.
-\item Introduction of function symbols narrows the choice of models.
-\item Relations are \emph{many-many}.
-\item Functions are relations that are \emph{many-one}.
-\item The modification ``finds'' \emph{one} example necessary to satisfy the existence claim.
-\item Many other possible examples are excluded.
-\end{itemize}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Skolemization Example}
-\begin{ex}{9.14}
-~\\Consider the formulas:
-\vspace{-2ex}
-\[A = \forall x \exists y p(x,y) \text{ and } A' = \forall x p(x,(f(x))\]
-\end{ex}
-\vspace{-2ex}
-Under the following interpretations:
-\begin{itemize}
-\item $\mathcal{I} = (\Z,\{>\},\{\})$
-\item $\mathcal{I}' = (\Z,\{>\},\{F(x) = x + 1\},\{\})$
-\item $\mathcal{I}'' = (\Z,\{>\},\{F(x) = x - 1\},\{\})$
-\end{itemize}
-Note that:
-\begin{itemize}
-\item $\mathcal{I} \models A$, $\mathcal{I}' \models A$ and $\mathcal{I}''
-\models A$ (ignore the functions)
-\item $\mathcal{I}'' \models A'$ but $\mathcal{I}' \not \models A'$. 
-\item $A \not \equiv A'$ but $A \approx A'$ 
-\end{itemize}
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Skolem's Algorithm}
-\begin{itemize}
-\item Rename bound variables to remove name conflicts.
-\item Eliminate Boolean operators except $\ngg, \land, \lor$.
-\item Push negation operators inward to atomic formulas. Use
-\begin{itemize}
-\item $\ngg \forall x A(x) \equiv \exists x \ngg A (x)$ and
-\item $\ngg \exists x A(x) \equiv \forall x \ngg A (x)$ 
-\end{itemize}
-\item Extract quantifiers from the matrix using equivalence laws:
-\begin{itemize}
-\item $A \;op\; Qx B(x) \equiv Qx(A \;op \; B(x))$ and
-\item $QxA(x) \;op\; B \equiv Qx(A(x) \;op \; B)$ 
-\end{itemize}
-\item Use distributive laws to transform matrix to CNF.
-\item Eliminate existential quantifiers by adding Skolem functions.
-\begin{itemize}
-\item For each existential quantifier, $\exists x$, create a new $n-ary$ function $f$ 
-\item $n = $ number of universally quantified variables preceding $\exists x$ in
-prenex normal form.
-\end{itemize}\end{itemize}
-\end{wideslide}
-
-
-\end{document}
 

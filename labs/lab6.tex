@@ -19,6 +19,7 @@
 \usepackage{tikz}
 \usepackage{multicol}
 \usepackage{enumitem}
+\setitemize{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
 
 \newcommand{\twonode}{%
   \begingroup\normalfont
@@ -48,7 +49,7 @@
 \begin{questions} 
 \section*{Complexity}
 \question If a problem $A$ is in $\id{NP}$, its complement is in \fillin[$\id{CoNP}$].
-\question We say $A$ is $\id{NP}$-Hard iff it is \fillin all problems in $\id{NP}$.
+\question Informally, we say $A$ is $\id{NP}$-Hard iff it is \fillin all problems in $\id{NP}$.
 \begin{checkboxes}
 \choice harder than
 \choice as hard as
@@ -61,7 +62,7 @@
 \question \tf[T] (T/F) If $A$ is $\id{NP}$-Complete, $A$ is $\id{NP}$-Hard.
 
 \question Let $A$ and $B$ be problems such that $A$ is $\id{NP}$-Complete
-and $A$ reduces to $B$. What can we say about $B$?
+and $A$ efficiently reduces to $B$. What can we say about $B$?
 \begin{checkboxes}
 \choice It is smaller than $A$.
 \choice It is harder than $A$.
@@ -307,14 +308,22 @@ Draw the recursive execution tree.
 Use DPLL to determine whether $A$ is a contradiction. If it is not, give an
 interpretation that satisfies $A$.
 \begin{solution}
-~\\
-First, change to clausal form: $\{\bar{r}s,\bar{s}\bar{t},r\bar{t}\}$\\
-Then eliminate $\bar{t}$, since it only appears with one polarity, to get: $\{\bar{r}s,\bar{s},r\}$\\
-Unit propagation on $r$ gives: $\{s,\bar{s}\}$\\
-Unit propagation on $s$ gives: $\{\}$\\
-Therefore, the formula is satisfiable. Tracing back the steps, we have
-$v_{\mathcal{I}_A}(s) = T, v_{\mathcal{I}_A}(r) = T$ and $v_{\mathcal{I}_A}(r)$
+\begin{itemize}
+\item First, change to clausal form: $\{\bar{r}s,\bar{s}\bar{t},r\bar{t}\}$
+\item Then eliminate all clauses containing $\bar{t}$, since it only appears with one polarity, to get: $\{\bar{r}s\}$
+\begin{itemize}
+\item Note that this is equivalent to setting $t = F$.
+\end{itemize}
+\item Next, since both $s$ is now a pure literal, we can fix
+$s=T$ and eliminate the remaining clause to arrive at: $\{\}$
+\begin{itemize}
+\item Alternatively, we could have fixed $r = F$.
+\end{itemize}
+\item Therefore, the formula is satisfiable. 
+\item Tracing back the steps, we have:
+$v_{\mathcal{I}_A}(t) = F, v_{\mathcal{I}_A}(s) = T$ and $v_{\mathcal{I}_A}(r)$
 can be true or false.
+\end{itemize}
 \end{solution}
 
 \question Let $p_{ij}$ represent the statement ``pidgeon number $i$ is in hole number $j$.''
@@ -473,11 +482,8 @@ $\{
  \bar{p_{33}}\bar{p_{43}}\}$ \\
 \item Finally, unit propagation on $p_{33}$ and $p_{43}$ produce:\\
 $\{ 
-               p_{43},
  \bar{p_{13}}\bar{p_{23}},
  \bar{p_{13}}            ,
- \bar{p_{13}}            ,
- \bar{p_{23}}            ,
  \bar{p_{23}}            ,
              \Box       \}$ \\
 \end{enumerate}
