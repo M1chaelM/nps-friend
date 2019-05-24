@@ -77,27 +77,9 @@ and $\mathcal{I}_A = (\Z,\{\{ = \}\},\{\{+\}\},\{0\})$
 \vspace{2mm}
 
 
-\question[3] Convert to prenex conjunctive normal form:
-\[
-(\exists x A(x) \imp \forall x B(x)) \imp \forall x (A(x) \imp B(x))
-\]
-\vspace{30mm}
-\begin{solution}
-\begin{align*}
-&(\exists x A(x) \imp \forall x B(x)) \imp \forall x (A(x) \imp B(x))\\
-&\equiv (\exists x A(x) \imp \forall y B(y)) \imp \forall z (A(z) \imp B(z))\\
-&\equiv  \ngg (\ngg \exists x A(x) \lor \forall y B(y)) \lor \forall z (\ngg A(z) \lor B(z))\\
-&\equiv  (\exists x A(x) \land \ngg \forall y B(y)) \lor \forall z (\ngg A(z) \lor B(z))\\
-&\equiv  (\exists x A(x) \land \exists y \ngg B(y)) \lor \forall z (\ngg A(z) \lor B(z))\\
-&\equiv  \exists x \exists y \forall z ( A(x) \land \ngg B(y)) \lor (\ngg A(z) \lor B(z))
-\end{align*}
-
-\end{solution}
-
-
-\question Let $A$ and $B$ be two problems such that $A$ reduces to $B$. 
-\begin{parts}
-\part[2] Which of the following can you conclude (choose all that apply)?
+\question[2] Let $A$ and $B$ be two problems such that $A$ reduces to $B$. 
+%\begin{parts}
+Which of the following can you conclude (choose all that apply)?
 \begin{checkboxes}
 \CorrectChoice If $B$ is semi-decidable, $A$ is also semi-decidable.
 \choice If $A$ is semi-decidable, $B$ is not decidable.
@@ -105,18 +87,41 @@ and $\mathcal{I}_A = (\Z,\{\{ = \}\},\{\{+\}\},\{0\})$
 \CorrectChoice If $B$ is in $\id{NP}$, $A$ is decidable. 
 \end{checkboxes}
 
-\vspace{2mm}
-\part[2] Now assume you \textbf{\emph{also}} know that $\id{FOL-VAL}$ reduces to $A$
-and $A$ reduces to $\id{FOL-UNSAT}$.
-Which of the following can you conclude (choose all that apply)?
-\begin{checkboxes}
-\CorrectChoice Neither $A$ nor $B$ are decidable.
-\choice  Both $A$ and $B$ are semi-decidable.
-\CorrectChoice The complement of $A$ is neither decidable nor semi-decidable. 
-\choice The complement of $B$ is neither decidable nor semi-decidable. 
-\end{checkboxes}
+%vspace{2mm}
+%part[2] Now assume you \textbf{\emph{also}} know that $\id{FOL-VAL}$ reduces to $A$
+%nd $A$ reduces to $\id{FOL-UNSAT}$.
+%hich of the following can you conclude (choose all that apply)?
+%begin{checkboxes}
+%CorrectChoice Neither $A$ nor $B$ are decidable.
+%choice  Both $A$ and $B$ are semi-decidable.
+%CorrectChoice The complement of $A$ is neither decidable nor semi-decidable. 
+%choice The complement of $B$ is neither decidable nor semi-decidable. 
+%end{checkboxes}
 
-\end{parts}
+%end{parts}
+
+\question[5] Convert to prenex conjunctive normal form:
+\[
+(\exists x A(x) \imp \forall x B(x)) \imp \forall x C(x)
+\]
+%\[
+%(\exists x A(x) \imp \forall x B(x)) \imp \forall x (A(x) \imp B(x))
+%\]
+\vspace{30mm}
+\begin{solution}
+\begin{align*}
+&(\exists x A(x) \imp \forall x B(x)) \imp \forall x C(x)\\
+& \equiv (\exists x A(x) \imp \forall y B(y)) \imp \forall z C(z)\\
+& \equiv \ngg (\ngg \exists x A(x) \lor \forall y B(y)) \lor \forall z C(z)\\
+& \equiv (\exists x A(x) \land \ngg \forall y B(y)) \lor \forall z C(z)\\
+& \equiv (\exists x A(x) \land \exists y \ngg B(y)) \lor \forall z C(z)\\
+& \equiv \exists x \exists y \forall z ((A(x) \land \ngg B(y)) \lor C(z))\\
+& \equiv \exists x \exists y \forall z ((A(x)\lor C(z)) \land (\ngg B(y)\lor C(z))
+\end{align*}
+
+\end{solution}
+
+
 
 \end{questions}
 \end{document}
