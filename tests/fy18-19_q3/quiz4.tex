@@ -1,0 +1,124 @@
+\documentclass[addpoints]{exam}
+
+\usepackage{epic,array,ecltree,url, calrsfs}
+\usepackage[nointegrals]{wasysym}
+
+
+%These tell TeX which packages to use.
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{../mlextra} % must be below ams packages
+\usepackage{mathrsfs}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {../../art/} }
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+
+
+\newcommand{\twonode}{%
+  \begingroup\normalfont
+  \includegraphics[height=\fontcharht\font`\b]{2nodetree.eps}%
+  \endgroup
+}
+
+\newcommand{\tf}[1][{}]{%
+\fillin[#1][0.25in]%
+}
+\noprintanswers
+\unframedsolutions
+\SolutionEmphasis{\itshape\small}
+\SolutionEmphasis{\color{NavyBlue}}
+\checkboxchar{$\Box$}
+\checkedchar{$\blacksquare$}
+\begin{document}
+
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+{\large CS3920: Foundations of Computer Science} &  \makebox[3in]{\large Name:\enspace\hrulefill}\\
+{\large May 29, 2018} & \\
+{\large Quiz 4} & 
+\end{tabular*}\\
+
+\fbox{\fbox{\parbox{6in}{\textbf{Instructions}: Please answer the questions 
+  below to the best of your ability. Be sure to show your work where appropriate. 
+   This quiz is closed book, closed notes, closed computer. There are \numpoints\ 
+   points in total. }}}\\
+\begin{questions}
+
+\question[3] Let $S$ be a propositional logic formula in clausal form, such that $S =
+\{t, tv, \bar{t}rs, \bar{t}r, \bar{r}\bar{s}\}$. Use DPLL to find a satisfying interpretation. 
+Draw the execution tree. 
+\vspace{40mm}
+
+
+
+\question Evaluate the formula $A$ under the interpretation given.
+\begin{parts}
+\part[1] \tf[F] (T/F) $A = \forall x \exists y (p(x,y) \lor q(x,a))$ and $\mathcal{I}_A = (\Z^+,\{>, = \},\{1\})$
+\vspace{2mm}
+\part[1] \tf[T] (T/F) $A = \forall x \forall y (p(x,y) \imp p(f(x,a), f(y,a)))$
+and $\mathcal{I}_A = (\Z,\{\{ = \}\},\{\{+\}\},\{0\})$
+\end{parts}
+\vspace{2mm}
+
+
+\question[3] Convert to prenex conjunctive normal form:
+\[
+(\exists x A(x) \imp \forall x B(x)) \imp \forall x (A(x) \imp B(x))
+\]
+\vspace{30mm}
+\begin{solution}
+\begin{align*}
+&(\exists x A(x) \imp \forall x B(x)) \imp \forall x (A(x) \imp B(x))\\
+&\equiv (\exists x A(x) \imp \forall y B(y)) \imp \forall z (A(z) \imp B(z))\\
+&\equiv  \ngg (\ngg \exists x A(x) \lor \forall y B(y)) \lor \forall z (\ngg A(z) \lor B(z))\\
+&\equiv  (\exists x A(x) \land \ngg \forall y B(y)) \lor \forall z (\ngg A(z) \lor B(z))\\
+&\equiv  (\exists x A(x) \land \exists y \ngg B(y)) \lor \forall z (\ngg A(z) \lor B(z))\\
+&\equiv  \exists x \exists y \forall z ( A(x) \land \ngg B(y)) \lor (\ngg A(z) \lor B(z))
+\end{align*}
+
+\end{solution}
+
+
+\question Let $A$ and $B$ be two problems such that $A$ reduces to $B$. 
+\begin{parts}
+\part[2] Which of the following can you conclude (choose all that apply)?
+\begin{checkboxes}
+\CorrectChoice If $B$ is semi-decidable, $A$ is also semi-decidable.
+\choice If $A$ is semi-decidable, $B$ is not decidable.
+\CorrectChoice If $A$ is not decidable, $B$ is not decidable.
+\CorrectChoice If $B$ is in $\id{NP}$, $A$ is decidable. 
+\end{checkboxes}
+
+\vspace{2mm}
+\part[2] Now assume you \textbf{\emph{also}} know that $\id{FOL-VAL}$ reduces to $A$
+and $A$ reduces to $\id{FOL-UNSAT}$.
+Which of the following can you conclude (choose all that apply)?
+\begin{checkboxes}
+\CorrectChoice Neither $A$ nor $B$ are decidable.
+\choice  Both $A$ and $B$ are semi-decidable.
+\CorrectChoice The complement of $A$ is neither decidable nor semi-decidable. 
+\choice The complement of $B$ is neither decidable nor semi-decidable. 
+\end{checkboxes}
+
+\end{parts}
+
+\end{questions}
+\end{document}
+
+
