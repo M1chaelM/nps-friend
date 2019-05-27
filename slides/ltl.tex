@@ -1,0 +1,128 @@
+\begin{slide}[bm=,toc=]{Linear Temporal Logic}
+
+\begin{defn}{13.22}
+An interpretation $\mathcal{I} = (\mathcal{S},\rho)$ is \emph{linear}
+iff $\rho$ is a function. That is, for all $s \in \mathcal{S}$, 
+there is \emph{at most} one $s' \in \mathcal{S}$ such that $s' \in \rho(s)$.
+\end{defn}
+
+\begin{defn}{13.22b}[Volpano]
+An interpretation $\mathcal{I} = (\mathcal{S},\rho)$ is \emph{linear}
+and \emph{total} iff $\rho$ is a total function. That is, for all $s \in \mathcal{S}$, 
+there is \emph{exactly} one $s' \in \mathcal{S}$ such that $s' \in \rho(s)$.
+\end{defn}
+
+The logic produced by adopting a total, linear transition function and following the truth
+assignment given (over the reflexive transitive closure of its transition
+    function) is called \emph{Linear Temporal Logic}.
+
+\end{slide}
+
+\begin{wideslide}[bm=,toc=]{Interpretations in Linear Temporal Logic}
+
+The restrictions on $\rho$ imply that interpretation in LTL can be represented
+as infinite paths:
+\unitlength=1.2pt
+\begin{center}
+\begin{picture}(200,30)
+\put(  0, 0){\state{$\ngg p$}{$s_{0}$}}
+\put( 20,10){\vector(1,0){40}}
+\put( 60, 0){\state{$\ngg p$}{$s_{1}$}}
+\put( 80,10){\vector(1,0){40}}
+\put(120, 0){\state{$p$}{$s_{2}$}}
+\put(140,10){\vector(1,0){40}}
+\put(180, 5){\makebox(20,10){\ldots}}
+\end{picture}
+\end{center}
+
+Note that the \emph{next} operator is self-dual in a linear interpretation.
+\begin{thm}{13.25} A linear interpretation whose relation $\rho$
+is a function is characterized by the formula $\Circle A \eqv \ngg
+\Circle \ngg A$.
+\end{thm}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Examples of Valid Formulas in LTL}
+The following are direct consequences of the restriction on
+interpretations in LTL.
+\begin{thm}{13.31}
+\[
+\begin{array}{ll}
+\models \Box p \imp \Circle p, & \models \Circle p \imp \Diamond p,\\ 
+~&~ \\
+\models \Box p \imp \Diamond p, & \models \Circle p \eqv \ngg \Circle \ngg p. \\
+\end{array}
+\]
+\end{thm}
+\vspace{2ex}
+Other valid formulas establish the following important properties:
+\begin{itemize}
+\item Inductive
+\item Distributive
+\item Commutative
+\end{itemize}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Induction in LTL}
+The following provides a method for proving properties of LTL formulas
+inductively:\\
+\begin{thm}{13.32}
+\[
+\begin{array}{ll}
+\models \Box p \eqv p \land \Circle \Box p, & \models \Diamond p \eqv p \lor \Circle \Diamond p,\\ 
+\end{array}
+\]
+\end{thm}
+\vspace{2ex}
+Induction in LTL is based upon the following valid formula:
+\[
+\begin{array}{ll}
+\models \Box (p \imp \Circle p) \imp (p \imp \Box p)\\
+\end{array}
+\]
+(Recall induction rules from the first section of the course.)
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Distributivity}
+$\Circle$ distributes over conjuction and disjunction:
+\begin{align*}
+&\models \Circle (p \lor q) \eqv (\Circle p \lor \Circle q),\\
+&\models \Circle (p \land q) \eqv (\Circle p \land \Circle q).
+\end{align*}
+
+$\Box$ and $\Diamond$ behave analogously to FOL quantifiers:
+\begin{align*}
+&\models \Box (p \land q) \eqv (\Box p \land \Box q), & \models \Diamond (p \lor q) \eqv (\Diamond p \lor \Diamond q), \\
+&\models (\Box p \lor \Box q) \imp \Box (p \lor q) & \models \Diamond (p \land q) \imp (\Diamond p \land \Diamond q).
+\end{align*}
+Similarly, over implication:
+\begin{align*}
+&\models \Box (p \imp q) \imp (\Box p \imp \Box q),\\
+&\models (\Diamond p \imp \Diamond q) \imp \Diamond (p \imp q),\\
+&\models \Circle (p \imp q) \eqv (\Circle p \imp \Circle q).
+\end{align*}
+%
+\end{wideslide}
+\begin{wideslide}[bm=,toc=]{Commutativity}
+$\Circle$ commutes with $\Box$ and $\Diamond$: 
+\begin{align*}
+&\models \Box \Circle p \eqv \Circle \Box p,\\
+&\models \Diamond \Circle p \eqv \Circle \Diamond p.
+\end{align*}
+
+$\Box$ and $\Diamond$ commute in one direction: 
+\begin{align*}
+&\models  \Diamond \Box p \imp \Box \Diamond  p
+\end{align*}
+
+Note that if $p$ is eventually always true and $q$ is always eventually
+true, we have:
+\begin{thm}{13.34}
+\begin{align*}
+\models (\Diamond \Box p \land \Box \Diamond q) \imp \Box \Diamond(p \land q)
+\end{align*}
+\end{thm}
+\end{wideslide}
