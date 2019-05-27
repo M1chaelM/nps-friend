@@ -1,0 +1,185 @@
+\begin{wideslide}[bm=,toc=]{Definition of Logical Equivalence}
+\begin{defn}{7.28}[Ben Ari]
+\end{defn}
+\vspace{-2ex}
+\begin{itemize}
+\item<2-> Let $U = \{A_1,A_2\}$ be a pair of closed formulas. 
+\item<3-> $A_1$ is \emph{logically equivalent} to $A_2$ iff \pause[3] $v_{{\mathcal{I}_U}}(A_1) =
+v_{{\mathcal{I}_U}}(A_2)$ for \emph{all} $\mathcal{I}_U$.
+\begin{itemize}
+\item<5-> Notation: $A_1 \equiv A_2$.
+\end{itemize}
+\item<6-> Let $A$ be a closed formula and $U$ a set of closed formulas.
+\item<7-> $A$ is a \emph{logical consequence} of $U$ iff \pause[4] for all interpretations
+$\mathcal{I}_{U \cup \{A\}}$, $v_{\mathcal{I}_{U \cup \{A\}}}(A_i) = T$ for
+all $A_i \in U$ implies $v_{\mathcal{I}_{U \cup \{A\}}}(A) = T$. 
+\begin{itemize}
+\item<9-> Notation: $U \models A$.
+\end{itemize}
+\end{itemize}
+\vspace{-5mm}
+\pause[2]
+\begin{thm}{7.29}
+Let $A,B$ be closed formulas and $U = \{A_1,...,A_n\}$ be a set of
+closed formulas. Then:
+\end{thm}
+\vspace{-5ex}
+\begin{tabbing}
+closed formulas. Then X \= \kill
+\> $A \equiv B$ iff $\models A \eqv B$\\
+\> $U \models A$ iff $\models (A_1 \land \cdots \land A_n) \imp A$
+\end{tabbing}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Duality}
+The two quantifiers are duals:
+\pause
+\begin{tabbing}
+The two quantifiers are dua \= \kill
+\> $\models \forall x A(x) \eqv \ngg \exists x \ngg A(x)$.\\
+\> ~\\ 
+\pause
+\> $\models \exists x A(x) \eqv \ngg \forall x \ngg A(x)$.
+\end{tabbing}
+\pause
+\begin{itemize}
+\item It is only necessary to define one of the two.
+\item If $\forall$ is defined, $\exists$ can be considered an abbreviation of
+      $\ngg \forall \ngg$.
+\end{itemize}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Commutativity}
+Quantifiers of the same type commute:
+\pause
+\begin{tabbing}
+Quantifiers of the same \= \kill
+\> $\models \forall x \forall y A(x,y) \eqv \forall y \forall x A(x,y)$.\\
+\pause
+\> ~\\ 
+\> $\models \exists x \exists y A(x,y) \eqv \exists y \exists x A(x,y)$.\\
+\end{tabbing}
+
+\pause
+but $\forall$ and $\exists$ commute only in one direction:
+\pause
+\begin{tabbing}
+Quantifiers of the same \= \kill
+\> $\models \exists x \forall y A(x,y) \imp \forall y \exists x A(x,y)$.\\
+\end{tabbing}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Distributivity}
+\begin{tabbing}
+Universal \= \kill
+Universal quantifiers distribute over conjunction:  \> \\[2mm]
+\pause
+\>$\models \forall x(A(x) \land B(x)) \eqv \forall x A(x) \land \forall x B(x)$.\\
+~\\
+\pause
+Existential quantifiers distribute over disjunction:\\[2mm]
+\pause
+\>$\models \exists x(A(x) \lor B(x)) \eqv \exists x A(x) \lor \exists x B(x)$.\\
+~\\
+\pause
+Distributing universal over disjunction goes only one direction:\\[2mm]
+\pause
+\>$\models \forall x A(x) \lor \forall x B(x) \imp \forall x(A(x) \lor B(x))$.\\
+~\\
+\pause
+Distributing existential over conjunction goes the other direction:\\[2mm]
+\pause
+\>$\models \exists x(A(x) \land B(x)) \imp \exists x A(x) \land \exists x B(x)$.\\
+\end{tabbing}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Quantification Without the Free Variable in Its Scope}
+
+Quantifiers over disjunction or conjunction are always distributive when
+one subformula does not contain the quantified variable:
+
+\vspace*{-5mm}
+\begin{displaymath}
+\def\arraystretch{1.5}
+\begin{array}{ll}
+ \models \exists xA(x) \vee B \eqv \exists x(A(x) \vee  B), &
+ \models \forall xA(x) \vee B \eqv \forall x(A(x) \vee  B), \\
+ \models B \vee \exists xA(x) \eqv \exists x(B \vee A(x)), &
+ \models B \vee \forall xA(x) \eqv \forall x(B \vee A(x)), \\
+ \models \exists xA(x) \wedge B \eqv \exists x(A(x) \wedge B), &
+ \models \forall xA(x) \wedge B \eqv \forall x(A(x) \wedge B), \\
+ \models B \wedge \exists xA(x) \eqv \exists x(B \wedge A(x)), &
+ \models B \wedge \forall xA(x) \eqv \forall x(B \wedge A(x)).
+\end{array}
+\end{displaymath}
+\pause
+For implication, the following equivalences hold (note they are not symmetric):
+\begin{displaymath}
+\begin{array}{l}
+ \models \forall x(A\imp B(x)) \eqv (A \imp \forall xB(x)) \\ 
+ \models \forall x(A(x)\imp B) \eqv (\exists xA(x) \imp B) \\
+\end{array}
+\end{displaymath}
+
+\end{wideslide}
+\begin{wideslide}[bm=,toc=]{Quantification Over Implication}
+The following formulas hold for distributing quantifiers over implication:
+\vspace*{-2mm}
+\begin{displaymath}
+\def\arraystretch{1.5}
+\begin{array}{l}
+\models \forall x(A(x)\imp B(x))\imp (\forall xA(x)\imp\forall xB(x)) \\
+\models \forall x(A(x)\imp B(x))\imp (\exists xA(x)\imp\exists xB(x)) \\
+\models \forall x(A(x)\imp B(x))\imp (\forall xA(x)\imp\exists xB(x)) \\
+\models \exists x(A(x)\imp B(x))\eqv (\forall xA(x)\imp\exists xB(x))  \\
+\models (\exists xA(x)\imp\forall xB(x))\imp \forall x(A(x)\imp B(x))  \\
+\end{array}
+\end{displaymath}
+\pause
+Example to verify intuition:
+\begin{itemize}
+\item Let $A(x)$ mean ``a person, $x$, is rich.''
+\item Let $B(x)$ mean ``a person, $x$, is happy.''
+\item Check the formulas under this interpretation.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Quantification Over Equivalence}
+Distribution of universal quantification works in one direction:
+\begin{displaymath}
+\begin{array}{l}
+ \models \forall x(A(x)\eqv B(x))\imp (\forall xA(x) \eqv \forall xB(x)) \\
+\end{array}
+\end{displaymath}
+\pause
+The following formula holds for existential quantification:
+\begin{displaymath}
+\begin{array}{l}
+ \models \forall x(A(x)\eqv B(x))\imp (\exists xA(x) \eqv \exists xB(x)) \\
+\end{array}
+\end{displaymath}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Example Derivation for Distributing Quantifiers Over
+Implications / Biconditionals}
+To derive an equivalent formula, translate $\imp$ or $\eqv$ into disjuctions and
+conjunctions, then apply relevance substitutions.
+\begin{displaymath}
+\def\arraystretch{1.5}
+\begin{array}{ll}
+\exists x (A(x) \imp B(x))  & \equiv \exists x(\ngg A(x) \lor B(x)) \\
+\pause &\equiv \exists x\ngg A(x) \lor \exists x B(x) \\
+\pause  &\equiv \ngg \exists x\ngg A(x) \imp \exists x B(x) \\
+\pause &\equiv \forall x A(x) \imp \exists x B(x) \\
+
+\end{array}
+\end{displaymath}
+
+\end{wideslide}
+
+
