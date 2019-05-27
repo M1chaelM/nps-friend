@@ -1,0 +1,176 @@
+\begin{slide}[bm=,toc=]{Interpretations: FOL vs PL}
+{\bf Interpretation in PL:}
+\begin{itemize}
+\item Map from atomic \emph{propositions} to truth values.
+\end{itemize}
+\pause
+{\bf Interpretation in FOL:} 
+\begin{itemize}
+\item Map from atomic \emph{formulas} to truth values.
+\end{itemize}
+\vspace{1ex}
+\pause
+{\bf \emph{Mapping atomic formulas is more complex}}
+\begin{itemize}
+\item Atomic formulas contain variables and constants.
+\item First these must be assigned elements from some domain.
+\item Then predicates are interpreted as relations on that domain. 
+\end{itemize}
+\end{slide}
+
+\begin{wideslide}[bm=,toc=]{Interpretations in FOL}
+\begin{defn}{7.16}
+Let $A$ be a formula where 
+\begin{itemize}
+\item<2-> $\{p_1,...,p_m\}$ are all the predicates appearing in $A$ and 
+\item<3-> $\{a_1,...,a_k\}$ are all the constants appearing in $A$.
+\end{itemize}
+\pause[3]
+An \emph{interpretation} $\mathcal{I}_A$ for $A$ is a triple:
+\pause
+\[(D,\{R_1,...R_m\}, \{d_1,...d_k\},)\]
+\pause
+where 
+\begin{itemize}
+\item<6-> $D$ is a \emph{non-empty} set called the \emph{domain}, 
+\item<7-> $R_i$ is an $n_i$-ary relation on $D$ that is assigned to the $n_i$-ary predicate
+$p_i$ and 
+\item<8-> $d_i \in D$ is assigned to the constant $a_i$.
+\end{itemize}
+\end{defn}
+\end{wideslide}
+\begin{wideslide}[bm=,toc=]{Examples of Interpretations in FOL}
+\begin{ex}{7.17}
+Four interpretations for the formula $\forall x \; p(a,x)$:
+\end{ex}
+\vspace*{-2ex}
+\begin{enumerate}
+\item<2-> $\mathcal{I}_1 = (\N_0,\{\leq\},\{0\})$
+\begin{itemize}
+\item<3-> $\N_0$ is assigned to $D$.
+\item<3-> The \emph{less-than or equal} relation is assigned to $p$.
+\item<3-> $0$ is assigned to $a$.
+\end{itemize}
+\item<4-> $\mathcal{I}_2 = (\N_0,\{\leq\},\{1\})$
+\begin{itemize}
+\item<5-> Same as above but $1$ is assigned to $a$. 
+\end{itemize}
+\item<6-> $\mathcal{I}_3 = (\Z,\{\leq\},\{0\})$
+\begin{itemize}
+\item<7-> Same as first example but $\Z$ is assigned to $D$. 
+\end{itemize}
+\item<8-> $\mathcal{I}_4 = (\mathcal{S},\{substr\},\{ \epsilon \})$
+\begin{itemize}
+\item The domain, $\mathcal{S}$, is a set of strings; $\epsilon$ is the empty string.
+\item The $substr$ relation is a binary relation such that $(s_1,s_2) \in substr$
+iff $s_1$ is a substring of $s_2$.
+\end{itemize}
+
+\end{enumerate}
+\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Assignment}
+\begin{defn}{7.18}[Ben Ari]~\\
+\begin{itemize}
+\item<2-> Let $\mathcal{I}_A$ be an interpretation for a formula $A$. 
+\item<3-> An \emph{assignment} $\sigma_{\mathcal{I}_A}: \mathcal{V} \mapsto D$ is 
+\begin{itemize}
+\item<4-> a function, which 
+\item<5-> maps every variable $v \in \mathcal{V}$ 
+\item<6-> to an element $d \in D$, the domain of $\mathcal{I}_A$.
+\end{itemize}
+\item<7-> $\sigma_{\mathcal{I}_A}[x_i \leftarrow d_i]$ is an assignment that is
+the same as $\sigma_{\mathcal{I}_A}$ except that $x_i$ is mapped to
+$d_i$.
+\end{itemize}
+\end{defn}
+\pause[7]
+\textbf{Intuition:}
+\begin{itemize}
+\item $\sigma_{\mathcal{I}_A}[x_i \leftarrow d_i]$ can be
+understood as a \emph{modification} of $\sigma_{\mathcal{I}_A}$ in which 
+\item the value of $x_i$ is assigned to $d_i$ instead.
+\end{itemize}
+\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Truth in First Order Logic}
+\begin{defn}{7.19}[Ben Ari] Let $A$ be a formula, $\mathcal{I}_A$ an interpretation and
+$\sigma_{\mathcal{I}_A}$ an assignment. 
+\begin{itemize}
+\item<2-> The \emph{truth value} of $A$ \emph{under} $\mathcal{I}_A$ \emph{and}
+$v_{\sigma_{\mathcal{I}_A}}(A)$ is written: $\sigma_{\mathcal{I}_A}$
+\item<3-> (for simplicity we write $v_{\sigma}$ for $v_{\sigma_{\mathcal{I}_A}}$)
+\item<4-> Defined by induction on the structure of $A$ :
+\begin{itemize}
+\item<5->  Let $A = p_k(c_1,...,c_n)$ be an atomic formula where each $c_i$ is
+either a variable $x_i$ or a constant $a_i$. 
+\item<6->  $v_{\sigma}(A) = T$ iff $(d_1,...,d_n)
+\in R_k$ where $R_k$ is the relation assigned by $\mathcal{I}_A$ to $p_k$, and
+$d_i$ is the domain element assigned to $c_i$, 
+\item<7->  either by $\mathcal{I}_A$ if $c_i$ is a constant or by $\sigma_{\mathcal{I}_A}$ 
+      if $c_i$ is a variable.
+\item<8-> $v_{\sigma}(\ngg A) = T$ iff $v_{\sigma}(A) = F$.
+\item<9-> $v_{\sigma}(A_1 \lor A_2) = T$ iff $v_{\sigma}(A_1) = T$ or
+$v_{\sigma}(A_2) = T$ (sim. for $\land$, $\imp$, etc. ) 
+\item<10->  $v_{\sigma}(\forall x A_1) = T$ iff $\sigma_{[x \leftarrow d]}(A_1) = T$
+for \emph{all} $d \in D$.
+\item<11->  $v_{\sigma}(\exists x A_1) = T$ iff $\sigma_{[x \leftarrow d]}(A_1) = T$
+for \emph{some} $d \in D$.
+\end{itemize}
+\end{itemize}
+\end{defn}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Truth Values of Interpretations in Example 7.17}
+\begin{ex}{7.21}
+Recall the four interpretations given for the formula $\forall x \; p(a,x)$:
+\end{ex}
+\vspace*{-2ex}
+\begin{enumerate}
+\item<2-> $\mathcal{I}_1 = (\N_0,\{\leq\},\{0\})$
+\begin{itemize}
+\item<3-> $T$: all natural numbers are greater than or equal to $0$.
+\end{itemize}
+\item<4-> $\mathcal{I}_2 = (\N_0,\{\leq\},\{1\})$
+\begin{itemize}
+\item<5-> $F$: $0 \in \N_0$ but $1 \not \leq 0$. 
+\end{itemize}
+\item<6-> $\mathcal{I}_3 = (\Z,\{\leq\},\{0\})$
+\begin{itemize}
+\item<7-> $F$: Not all integers are greater than or equal to $0$.
+\end{itemize}
+\item<8-> $\mathcal{I}_4 = (\mathcal{S},\{substr\},\{ \epsilon \})$
+\begin{itemize}
+\item<9-> $T$: $\epsilon$ is a substring of all strings, therefore also all
+strings in $\mathcal{S}$. 
+\end{itemize}
+\end{enumerate}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Truth for Some / All Assignments}
+\begin{thm}{7.22}[Ben Ari]
+Let $A' = A(x_1,...,x_n)$ be a (non-closed) formula with free variables
+$x_1,...,x_n$, and let $\mathcal{I}$ be an interpretation. 
+\end{thm}
+\pause
+Then:
+\begin{itemize}
+\item<3-> $v_{\sigma_{\mathcal{I}_A}}(A') = T$ for \emph{some} assignment $\sigma_{\mathcal{I}_A}$ iff $v_{\mathcal{I}}(\exists x_1 ... \exists x_n A') = T$.
+\item<4-> $v_{\sigma_{\mathcal{I}_A}}(A') = T$ for \emph{all} assignments
+$\sigma_{\mathcal{I}_A}$ iff $v_{\mathcal{I}}(\forall x_1 ... \forall x_n A') = T$.
+\end{itemize}
+\pause[3]
+Informally:
+\begin{itemize}
+\item<6-> The value of $A'$ under interpretation $\mathcal{I}$ and assignment
+$\sigma$ is $T$ for some assignment iff the existential closure of $A'$ is true 
+under $\mathcal{I}$. 
+\item<7-> Similarly, the value of $A'$ under interpretation $\mathcal{I}$ and assignment
+$\sigma$ is $T$ for all assignments iff the universal closure of $A'$ is true 
+under $\mathcal{I}$. 
+\end{itemize}
+\end{wideslide}
+
+
