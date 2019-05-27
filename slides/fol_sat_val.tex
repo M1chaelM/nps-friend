@@ -1,47 +1,23 @@
-\documentclass[style=sailor,size=12pt]{powerdot}
-\usepackage{epic,array,ecltree,url,calrsfs}
-\usepackage[nointegrals]{wasysym}
-\usepackage{listings}
-\usepackage{epsfig}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{amsxtra}
-\usepackage{amsthm}
-\usepackage{mlextra} % Must be below ams packages
-\usepackage{mathrsfs}
-\usepackage{color}
-\usepackage{array}
-\usepackage{graphicx}
-\graphicspath{ {../art/} }
-\usepackage{bm}
-\usepackage{tikz}
-\usepackage{multicol}
-\usepackage{enumitem}
-
-\pdsetup{method=normal}
-
-\title{First Order Logic: Satisfiability and Validity}
-\author{Foundations of Computer Science}
-\date{\today}
-
-\begin{document}
-\maketitle
-
 \begin{wideslide}[bm=,toc=]{Validity and Satisfiability}
 \begin{defn}{7.23}[Ben Ari]
 Let $A$ be a closed formula of first-order logic.
 \end{defn}
 \vspace{-2ex}
 \begin{itemize}
-\item $A$ is \emph{true} in $\mathcal{I}$ or $\mathcal{I}$ is a \emph{model} for
-$A$ iff $v_{\mathcal{I}}(A) = T$. Notation: $\mathcal{I} \models A$.
-\item $A$ is \emph{valid} if for \emph{all} interpretations $\mathcal{I}$,
-$\mathcal{I} \models A$. Notation: $\models A$ 
-\item $A$ is \emph{satisfiable} if for \emph{some} interpretation $\mathcal{I}$,
+\item<2-> $A$ is \emph{true} in $\mathcal{I}$ or $\mathcal{I}$ is a \emph{model} for
+$A$ iff $v_{\mathcal{I}}(A) = T$. 
+\begin{itemize}
+\item<3-> Notation: $\mathcal{I} \models A$.
+\end{itemize}
+\item<4-> $A$ is \emph{valid} if for \emph{all} interpretations $\mathcal{I}$,
+$\mathcal{I} \models A$. 
+\begin{itemize}
+\item<5-> Notation: $\models A$ 
+\end{itemize}
+\item<6-> $A$ is \emph{satisfiable} if for \emph{some} interpretation $\mathcal{I}$,
 $\mathcal{I} \models A$.
-\item $A$ is \emph{unsatisfiable} if it is not satisfiable. 
-\item $A$ is \emph{falsifiable} if it is not valid. 
+\item<7-> $A$ is \emph{unsatisfiable} if it is not satisfiable. 
+\item<8-> $A$ is \emph{falsifiable} if it is not valid. 
 \end{itemize}
 
 \end{wideslide}
@@ -73,18 +49,18 @@ Let $A$ be the formula $\forall x \; p(a,x)$ from examples $7.17$ and $7.21$:
 \begin{defn}{7.25}{Ben Ari}
 \end{defn}
 \begin{enumerate}
-\item<2-> $\forall x \forall y (p(x,y) \implies p(y,x))$
+\item<2-> $\forall x \forall y (p(x,y) \imp p(y,x))$
 \begin{itemize}
 \item<3-> Satisfiable? \pause[3] Yes, in interpretations where $p$ is a
 symmetric relation.
 \item<3-> Valid? \pause No. Falisified in interpretations where $p$ is
-non-symmetric. 
+not symmetric. 
 \end{itemize}
-\item<6-> $\forall x \exists y p(x,y)$
+\item<6-> $\forall x \exists y \; p(x,y)$
 \begin{itemize}
 \item<7-> Satisfiable? \pause[3] Satisfiable in interpretations where 
 $p$ is a total function. For example, $(x,y) \in R$ iff $y = x + 1$
-for $x,y, \in \Z$.
+for $x,y \in \Z$.
 \item<7-> Valid? \pause No. Falsified if the domain is changed to $\Z^-$.  
 \end{itemize}
 \item<10-> $\exists x \exists y(p(x) \land \ngg p (y))$
@@ -103,7 +79,7 @@ odd number.
 \end{defn}
 \begin{enumerate}
 \setcounter{enumi}{3}
-\item<2-> $\forall x p(a,x)$
+\item<2-> $\forall x \; p(a,x)$
 \begin{itemize}
 \item<3-> Expresses the existence of an element with special properties.
 \item<3-> Satisfiable? \pause[3] Yes, when $D$ is $\N$ and $p$ is $\leq$.
@@ -127,16 +103,38 @@ not being negative and $q$ is the property of being divisible by $1$.
 \begin{wideslide}[bm=,toc=]{Extending to Sets of Formulas}
 As in PL, we can extend concepts of interpretation, satisfiability and other
 properties to sets of formulas.
+\pause
 \begin{defn}{7.26}[Ben Ari]
-Let $U = \{A_1,...\}$ be a set of formulas where $\{p_1,...,p_m\}$ are all
-the predicates appearing in all $A_i \in U$ and $\{a_1,...,a_k\}$ are all the
-constants appearing in all $A_i \in U$. An \emph{interpretation} $\mathcal{I}_U$
-for $U$ is a triple:
+Let $U = \{A_1,...\}$ be a set of formulas where 
+\begin{itemize}
+\item<3-> $\{p_1,...,p_m\}$ are all the predicates appearing in all $A_i \in U$ and
+\item<4-> $\{a_1,...,a_k\}$ are all the constants appearing in all $A_i \in U$. 
+\end{itemize}
+\pause[3]
+An \emph{interpretation} $\mathcal{I}_U$ for $U$ is a triple:
 \[(D, \{R_1,...,R_m\},\{d_1,...,d_k\})\]
-where $D$ is a \emph{non-empty} set called the \emph{domain}, $R_i$ is an
-$n_i$-ary relation on $D$ that is assigned to the $n_i$-ary predicate $p_i$
-and $d_i \in D$ is an element of $D$ that is assigned to the constant $a_i$.
+\pause
+where 
+\begin{itemize}
+\item<6-> $D$ is a \emph{non-empty} set called the \emph{domain}, 
+\item<7-> $R_i$ is an $n_i$-ary relation on $D$ that is assigned to the $n_i$-ary predicate $p_i$ and 
+\item<8-> $d_i \in D$ is an element of $D$ that is assigned to the constant $a_i$.
+\end{itemize}
+\end{defn}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Consistency}
+\begin{defn}{7.27}[Ben Ari]~\\~\\
+A set of closed formulas $U = \{A_1,...\}$ is \emph{(simultaneously)
+  satisfiable} iff 
+\begin{itemize}
+\item<2-> there exists an interpretation $\mathcal{I}_U$ such that $v_{\mathcal{I}_U}(A_i) = T$ for all $i$. 
+\item<3-> The satisfying interpretation is a \emph{model} of $U$.
+\item<4-> $U$ is \emph{valid} iff for every interpretation
+  $\mathcal{I}_U$, $v_{\mathcal{I}_U}(A_i) = T$ for all $i$.
+\end{itemize}
 \end{defn}
 \end{wideslide}
 
-\end{document}
+
