@@ -1,0 +1,224 @@
+\begin{slide}[bm=,toc=]{First Order Logic: Syntax}
+\begin{defn}{7.6}[Ben Ari]
+Let $\mathcal{P}$, $\mathcal{A}$ and $\mathcal{V}$ be countable sets of
+\emph{predicate symbols}, \emph{constant symbols} and \emph{variables}.
+\pause
+\begin{itemize}
+\item Each predicate symbol $p^n \in \mathcal{P}$ is associated with an \emph{arity}.
+\begin{itemize}
+\item Refers to the number $n \geq 1$ of \emph{arguments} that it takes. 
+\end{itemize}
+\item $p^n$ is called an $n$-ary predicate. 
+\item For $n = 1,2$, the terms \emph{unary} and \emph{binary},
+respectively, are also used.
+\end{itemize}
+\end{defn}
+\pause
+\begin{defn}{7.7}[Ben Ari]
+~\\
+$\forall$ is the \emph{universal quantifier} and is read \emph{for all}.\\
+$\exists$ is the \emph{existential quantifier} and is read \emph{there exists}.
+\end{defn}
+
+\end{slide}
+
+\begin{slide}[bm=,toc=]{First Order Logic: Notational Conventions}
+\textbf{Writing Symbols:}
+\begin{itemize}
+\item<2-> By convention, we associate the following lower-case letters with each
+set:
+\begin{itemize}
+\item $\mathcal{P} = \{p,q,r\}$, for predicate symbols
+\item $\mathcal{A} = \{a,b,c\}$, for constant symbols
+\item $\mathcal{V} = \{x,y,z\}$, for variables
+\end{itemize}
+\item<3-> The superscript denoting the arity of the predicate is omitted when clear (can
+    be inferred from the number of arguments).
+\begin{itemize}
+\item<4-> \textbf{Example:} \pause[4] $p(x,y,z)$ instead of $p^3(x,y,z)$
+\end{itemize}
+\end{itemize}
+\end{slide}
+
+\begin{wideslide}[bm=,toc=]{Atomic Formulas in FOL}
+\begin{defn}{7.8}[Ben Ari]
+~\\~\\
+\textbf{ An \emph{atomic formula}} is
+\begin{itemize}
+\item<2-> an $n$-ary predicate 
+\item<3-> followed by a list of $n$ arguments in parentheses:, 
+\begin{itemize}
+\item<4-> $p(t_1,t_2,...,t_n)$
+\end{itemize}
+\item<5-> where each argument $t_i$ is either a variable or a constant. 
+\end{itemize}
+\pause[5]
+\textbf{Examples:}
+\begin{itemize}
+\item $lt(3,4)$
+\item $p(user, edit)$
+\end{itemize}
+
+\end{defn}
+\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Formulas in FOL}
+\begin{defn}{7.8}[Ben Ari] (Continued)\\~\\
+\textbf{ A \emph{formula}} in first-order logic is
+a tree defined recursively as follows:
+\end{defn}
+\vspace{-3ex}
+\begin{itemize}
+\item<2-> A formula is a leaf labeled by an atomic formula.
+\item<3-> A formula is a node labeled by $\ngg$ with a single child that is a
+formula.
+\item<4-> A formula is a node labeled by $\forall x$ or $\exists x$ (for some
+ variable $x$) with a single child that is a formula.
+\item<5-> A formula is a node labeled by a binary Boolean operator with two
+children both of which are formulas.
+\end{itemize}
+\pause[5]
+{\bf Universal vs Existential}:\\
+A formula of the form $\forall x A$ is a \emph{universal formula}.\\
+A formula of the form $\exists x A$ is an \emph{existential formula}.\\
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 7.1: Tree for
+$\forall x(\ngg\exists yp(x,y)\vee\ngg\exists yp(y,x))$}
+\begin{multicols}{2}
+\begin{itemize}
+\item Formula tree structure follows PL.
+\item Similar concept of induction on structure.
+\item In the string representation, $\exists$ and $\forall$ have the same precedence as $\ngg$.
+\end{itemize}
+\begin{center}
+\setlength{\GapWidth}{8mm}
+\setlength{\GapDepth}{8mm}
+\begin{bundle}{$\forall x$\rule[-1mm]{0mm}{1mm}}
+\chunk{
+  \begin{bundle}{$\vee$\rule[-1mm]{0mm}{1mm}}
+  \chunk{
+    \begin{bundle}{$\ngg$\rule[-1mm]{0mm}{1mm}}
+    \chunk{
+      \begin{bundle}{$\exists y$\rule[-1mm]{0mm}{1mm}}
+      \chunk{$p(x,y)$}
+      \end{bundle}
+    }
+    \end{bundle}
+  }
+  \chunk{
+    \begin{bundle}{$\ngg$\rule[-1mm]{0mm}{1mm}}
+    \chunk{
+      \begin{bundle}{$\exists y$\rule[-1mm]{0mm}{1mm}}
+      \chunk{$p(y,x)$}
+      \end{bundle}
+    }
+    \end{bundle}
+  }
+  \end{bundle}
+}
+\end{bundle}
+\end{center}
+\end{multicols}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Scope of Variables}
+\begin{defn}{7.11}[Ben Ari]~\\
+\textbf{Quantification and Scope:}
+\begin{itemize}
+\item<2-> A universal or existential formula $\forall x A$ or $\exists x A$
+is a \emph{quantified formula}. 
+\item<3-> $x$ is the \emph{quantified variable}
+and its \emph{scope} is the formula $A$. 
+\item<4-> It is not required that $x$ actually appear in the scope of its 
+quantification.
+\end{itemize}
+\end{defn}
+\pause[4]
+\textbf{Comments:}
+\begin{itemize}
+\item<6-> Conceptually similar to scope of variables in programming languages.
+\item<7-> Technically, local declaration hides global declarations.
+\item<8-> Best practice is to avoid name conflicts.
+\end{itemize}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Figure 7.2: Global and local variables}
+\begin{multicols}{2}
+\textbf{Scope Example:}
+\begin{itemize}
+\item $x$ is declared globally and locally within $p$.
+\item Local declaration takes precedence in $p$.
+\item This code is error prone and confusing.
+\item Using another variable name improves readability.
+\end{itemize}
+\vspace*{-2ex}
+\begin{program}
+class MyClass \{\\
+\>int x;\\
+\>void p() \{\\
+\>\>int x;\\
+\>\>x = 1;\\
+\>\>// Print the value of x\\
+\>\}\\
+\>void q() \{\\
+\>\>// Print the value of x\\
+\>\}\\
+\>... void main(...) \{\\
+\>x = 5;\\
+\>p;\\
+\>q;\\
+\}
+\end{program}
+\end{multicols}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Free, Bound, Closed}
+\begin{defn}{7.12}[Ben Ari] Let $A$ be a formula.\\~\\
+\pause
+\textbf{Free and Bound Variables:}
+\begin{itemize}
+\item An occurrence of a variable $x$ in $A$ is a \emph{free variable of A}
+iff $x$ is not within the scope of a quantified variable $x$.
+\item A variable which is not free is \emph{bound}.
+\end{itemize}
+\end{defn}
+\pause
+\textbf{Closed Formulas:}
+\begin{itemize}
+\item<4-> A formula with no free variable is \emph{closed}.
+\item<5-> If $\{x_1,...,x_n\}$ are all free variables of $A$...
+  \begin{itemize}
+      \item<6->$\forall x_1 \cdots \forall x_n A$ is the \emph{universal closure}.
+      \item<7->$\exists x_1 \cdots \exists x_n A$ is the \emph{existential closure}.
+  \end{itemize}
+\end{itemize}
+\vspace*{-2ex}
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Examples}
+\begin{ex}{7.13}
+$p(x,y)$
+\end{ex}
+\vspace*{-2ex}
+\begin{itemize}
+\item<2-> Has two free variables ($x$ and $y$).
+\item<3-> $\exists y\; p(x,y)$ has one free variable \pause[3] ($x$).
+\item<5-> $\forall x \exists y \;p(x,y)$ is closed.
+\item<6-> Universal closure: \pause[3] $\forall x \forall y \;p(x,y)$.
+\item<8-> Existential closure: \pause[2] $\exists x \exists y \;p(x,y)$.
+\end{itemize}
+\pause
+\begin{ex}{7.14}
+$\forall x \; p(x) \land q(x)$
+\end{ex}
+\vspace*{-2ex}
+\begin{itemize}
+\item<11-> Bound: \pause[2] $x$ in $p(x)$
+\item<13-> Free: \pause[2] $x$ in $q(x)$
+\item<15-> Universal Closure: \pause[2] $\forall x(\forall x \; p(x) \land q(x))$
+\item<17-> How to write this better?
+\item<18-> $\forall y(\forall x \; p(x) \land q(y))$
+\end{itemize}
+\end{wideslide}
