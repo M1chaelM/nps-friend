@@ -1,0 +1,59 @@
+\documentclass[style=sailor,size=12pt]{powerdot}
+\usepackage{epic,array,ecltree,url,calrsfs}
+\usepackage[nointegrals]{wasysym}
+\usepackage{listings}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mlextra} % Must be below ams packages
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {../art/} }
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+
+\pdsetup{method=normal}
+
+\title{Temporal Logic}
+\author{Foundations of Computer Science}
+\date{\today}
+
+\pdsetup{method=normal}
+
+\begin{document}
+\maketitle
+
+\begin{slide}[toc=,bm=]{Overview}
+This slide set covers the following topics in first order logic:
+
+\vspace{5mm}
+\tableofcontents[content=sections]
+\end{slide}
+
+\section[slide=true]{Motivation and Applications}
+\include{why_ptl}
+
+\section[slide=true]{Syntax}
+\include{ptl_syntax}
+
+\section[slide=true]{Semantics}
+\include{ptl_semantics}
+
+\section[slide=true]{Validity and Satisfiability}
+\include{ptl_sat_val}
+
+\section[slide=true]{Linear Temporal Logic}
+\include{ltl}
+
+\section[slide=true]{Timed Propositional Temporal Logic}
+\include{tptl}
+
+\end{document}
