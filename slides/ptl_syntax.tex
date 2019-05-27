@@ -1,0 +1,40 @@
+\begin{slide}[bm=,toc=]{Propositional Temporal Logic: Syntax}
+\begin{defn}{13.2}[Ben Ari]
+The syntax of \emph{propositional temporal logic (PTL)} is defined like
+the syntax of propositional logic except for the addition of two unary
+operators:
+\end{defn}
+\vspace{-2ex}
+\begin{itemize}
+\item $\Box$, read \emph{always},
+\item $\Diamond$, read \emph{eventually}.
+\end{itemize}
+The two unary operators have the same precedence as negation.\\~\\
+{\bf Informally:}
+\begin{itemize}
+\item $\Box$ is the universal operator meaning `for \emph{any} time in the
+future'
+\item $\Diamond$ is the existential operator meaning `for \emph{some} time in
+the future.
+\end{itemize}
+\end{slide}
+
+\begin{wideslide}[bm=,toc=]{The ``Next'' Operator}
+{\bf Models of time can be:}
+\begin{itemize}
+\item continuous (with real-valued intervals) or
+\item discrete (series of snapshots or steps).
+\item Discrete models are natural for program execution.
+\item Useful to express the \emph{next} instant in time.
+\item We add another operator for this purpose:
+\end{itemize}
+\begin{defn}{13.23}[Ben Ari]
+The unary operator $\Circle$ is called \emph{next}.
+\end{defn}
+{\bf Applications of Next:}
+\begin{itemize}
+\item Useful for deciding properties like satisfiability.
+\item Rarely used to express properties of programs.
+\item In concurrent programs, we often don't know which step is ``next.''
+\end{itemize}
+\end{wideslide}
