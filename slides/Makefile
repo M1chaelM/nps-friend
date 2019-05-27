@@ -1,12 +1,12 @@
 
-.PHONY: all print clean distclean install 
+.PHONY: all print clean distclean install
 
-TARGETS := abelson.pdf animate_derivations.pdf automata-mutualind.pdf \
-	discrete_math_review.pdf mutualind.pdf pgmsasautomata.pdf \
-	post.pdf sampleRTderivation.pdf set_seq_strings.pdf \
-	strongind.pdf logicoverview.pdf whyproplogic.pdf pl_syntax_semantics.pdf \
-        decisionproc.pdf fol_part_1.pdf fol_part_2.pdf \
-        ptl.pdf relations_functions.pdf pl_sat_val.pdf resolution.pdf
+TARGETS := discrete_math_review.pdf relations_functions.pdf set_seq_strings.pdf \
+	post.pdf animate_derivations.pdf strongind.pdf mutualind.pdf \
+	pgmsasautomata.pdf automata-mutualind.pdf sampleRTderivation.pdf  \
+	logicoverview.pdf whyproplogic.pdf pl_syntax_semantics.pdf pl_sat_val.pdf \
+        decisionproc.pdf resolution.pdf fol_part_1.pdf fol_part_2.pdf \
+	ptl.pdf 
 
 PRINTVERS := $(TARGETS:%.pdf=printable/%.pdf)
 
@@ -31,7 +31,7 @@ printable/%.dvi: %.tex
 	latexmk -use-make -outdir=printable $(PRINTLATEXOPTS) $<
 
 %.dvi: %.tex 
-	latexmk -use-make $<
+	latexmk -interaction=nonstopmode -use-make $<
 
 
 install: 
