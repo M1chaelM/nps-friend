@@ -1,12 +1,33 @@
 \section[slide=false]{Semantics}
+\begin{wideslide}[bm=,toc=]{Interpretations: PTL}
+\begin{defn}{13.8}[Ben Ari]
+An \emph{interpretation} $\mathcal{I}$ for a formula $A$ in PTL
+is a pair $(\mathcal{S},\rho)$, where 
+\begin{itemize}
+\item<2-> $\mathcal{S} = \{s_1,...,s_n\}$
+is a set of states \textbf{each of which} is an assignment of truth values to the atomic
+propositions in $A$, 
+\item<3-> $s_i: \mathcal{P} \to \{T,F\}$, and 
+\item<4-> $\rho$ is a binary relation on the states, $\rho \subseteq S \times S$.
+\end{itemize}
+\end{defn}
+\pause[4]
+Note that $(s_1,s_2) \in \rho$ can be written functionally as $s_2 \in \rho(p_1)$.
+\vspace{2ex}
+\end{wideslide}
+
 \begin{wideslide}[bm=,toc=]{Figure 13.1: State transition diagram}
-\begin{defn}{13.4}[Ben Ari]
-A \emph{state transition diagram} is a directed graph. The nodes are
-\emph{states} and the edges are \emph{transitions}. Each state is
-labeled with a set of propositional literals such that clashing
-literals do not appear in any state.
+\begin{defn}{13.4}[Ben Ari]~
+\begin{itemize}
+\item<2-> A \emph{state transition diagram} is a directed graph. 
+\item<3-> The nodes are \emph{states} and the edges are \emph{transitions}. 
+\item<4-> To express $\mathcal{S}$, we label each state with non-clashing
+propositional literals. 
+\item<5-> The edges express the relation $\rho$.
+\end{itemize}
 \end{defn}
 \unitlength=1.3pt
+\vspace{-5mm}
 \begin{center}
 \begin{picture}(140,105)
 \put(0,60){
@@ -38,62 +59,15 @@ literals do not appear in any state.
 \end{center}
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Interpretations: PTL}
-\begin{defn}{13.8}[Ben Ari]
-An \emph{interpretation} $\mathcal{I}$ for a formula $A$ in PTL
-is a pair $(\mathcal{S},\rho)$, where $\mathcal{S} = \{s_1,...,s_n\}$
-is a set of states each of which is an assignment of truth values to the atomic
-propositions in $A$, $s_i: \mathcal{P} \to \{T,F\}$, and $\rho$ is a binary
-relation on the states, $\rho \subseteq S \times S$.
-\end{defn}
-Note that $(s_1,s_2) \in \rho$ can be written functionally as $s_2 \in \rho(p_1)$.
-\vspace{2ex}
-\begin{multicols}{2}
-In graphical representations:
-\begin{itemize}
-\item states are usually labeled only with the atomic propositions that
-are assigned $T$.
-\item Atoms not shown are assigned $F$.
-\end{itemize}
-\unitlength=1pt
-\begin{center}
-\begin{picture}(160,105)
-\put(0,60){
-  \put(10,10){\state{$p$}{$s_{0}$}}
-  \put(30,20){\vector(1,0){39}}
-  \put(70,10){\state{\shortstack{$p$\\$q$}}{$s_{1}$}}
-  \put(77, 9){\line(0,-1){4}}
-  \put(65, 7){\oval(24,12)[b]}
-  \put(65, 7){\oval(24,12)[tl]}
-  \put(64,13){\vector(1,0){8}}
-  \put(89,25){\vector(1,0){41}}
-  \put(131,15){\vector(-1,0){41}}
-  \put(130,10){\state{$q$}{$s_{2}$}}
-  \put(127,35){\oval(26,20)[tr]}
-  \put(127,45){\line(-1,0){94}}
-  \put(33, 35){\oval(27,20)[tl]}
-  \put(140,33){\vector(0,-1){0}}
-}
-\put(70,0){
-\put(0,10){\state{}{$s_{3}$}}
-\put(10, 9){\line(0,-1){3}}
-\put(22, 7){\oval(24,12)[b]}
-\put(22, 7){\oval(24,12)[tr]}
-\put(24,13){\vector(-1,0){6}}
-\put(10,69){\vector(0,-1){38}}
-\put(18,28){\vector(1,1){44}}
-}
-\end{picture}
-\end{center}
-\end{multicols}
-\end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Graphical and Non-graphical Representations of $\mathcal{S}$ and $\rho$}
+\vspace{-2mm}
 \begin{ex}{13.9}[Ben Ari]
 \end{ex}
+\vspace{-7mm}
 \begin{multicols}{2}
 {\bf Graphical:}
-\vspace{-4ex}
+\vspace{-10mm}
 \unitlength=1.2pt
 \begin{center}
 \begin{picture}(160,120)
@@ -139,69 +113,154 @@ s_3(p) = F&,\;\; s_3(q) = F\\
 \end{align*}
 
 \end{multicols}
+\vspace{-10mm}
+\pause
+In graphical representations:
+\begin{itemize}
+\item States are usually labeled only with the atomic propositions assigned $T$.
+\item Atoms not shown are assigned $F$.
+\end{itemize}
+
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Models of Time}
+\begin{wideslide}[bm=,toc=]{$\rho$ and $\rho^*$}
+\textbf{Intuition for $\rho$:}
 \begin{itemize}
-\item Placing restrictions on $\rho$, the transition function, produces
-different variations of temporal logic.
-\item These variations have practical significance.
+\item<2-> Indicates the set of possible next states.
+\item<3-> I.e. states reachable from a given state.
+\item<4-> Not necessarily reflexive: 
 \begin{itemize}
-\item Contrast with PL or FOL.
+\item<5-> can't always remain in the same state.
 \end{itemize}
-\item We focus on three:
+\item<6-> Not usually transitive:
 \begin{itemize}
-\item Reflexivity
-\item Transitivity
-\item Linearity
+\item<7-> can't always get to any reachable state in one step.  
 \end{itemize}
-\item The combination produces \emph{Linear Temporal Logic}.
-\item Especially useful in computer science.
+\end{itemize}
+\pause[7]
+\begin{defn}{of $\rho^*$}~\\
+\pause
+We define $\rho^*$ as the reflexive, transitive closure of $\rho$.
+\end{defn}
+\pause
+\vspace{-5mm}
+\begin{itemize}
+\item Convenient for defining truth values of statements with $\Box$ and
+$\Diamond$.
+\item Allows us to preserve ``natural'' sense of \emph{always} and
+\emph{eventually}.
+\item (More details follow.)
+\end{itemize}
+
+\end{wideslide}
+
+\begin{wideslide}[bm=,toc=]{Truth in PTL}
+Let $A$ be a formula in PTL.\\
+$\nu_{\mathcal{I},s}(A)$, the {\em truth value\/} of $A$ in $s$, is defined recursively as follows:
+\begin{itemize}
+\item<2-> If $A$ is $p\in\mathcal{P}$ then $\nu_{\mathcal{I},s}(A) = s(p)$.
+\item<3-> If $A$ is $\neg A'$ then $\nu_{\mathcal{I},s}(A) = T$ iff $\nu_{\mathcal{I},s}(A') = F$.
+\item<4-> If $A$ is $A'\vee A''$ then $\nu_{\mathcal{I},s}(A) = T$ iff $\nu_{\mathcal{I},s}(A') = T$ or
+$\nu_{\mathcal{I},s}(A'') = T$, and similarly for the other Boolean operators.
+
+\item<5-> If $A$ is $\Box A'$ then $\nu_{\mathcal{I},s}(A) = T$ iff $\nu_{\mathcal{I},s}(A') = T$ for
+all states $s'\in\rho^*(s)$.
+
+\item<6-> If $A$ is $\Diamond A'$ then $\nu_{\mathcal{I},s}(A) = T$ iff $\nu_{\mathcal{I},s}(A') = T$ for
+some state $s'\in\rho^*(s)$.
+
+\end{itemize}
+\pause[6]
+{\bf Notation:}\\
+\begin{itemize}
+\item<8-> We abbreviate $\nu_{\mathcal{I},s}(A)$ as $s\models_\mathcal{I} A$. 
+\item<9-> When interpretation $\mathcal{I}$ is clear from the context, it is omitted
+giving: 
+\begin{itemize}
+\item<10-> $s\models A$ iff $\nu_s(A) = T$.
+\end{itemize}
 \end{itemize}
 \end{wideslide}
 
 
-\begin{wideslide}[bm=,toc=]{Reflexivity}
+%\begin{wideslide}[bm=,toc=]{Models of Time}
+%\begin{itemize}
+%\item<1-> Placing restrictions on $\rho$, the transition function, produces
+%different variations of temporal logic.
+%\item<2-> These variations have practical significance.
+%\begin{itemize}
+%\item<3-> Contrast with PL or FOL.
+%\end{itemize}
+%\item<4-> We focus on three:
+%\begin{itemize}
+%\item<5-> Reflexivity
+%\item<5-> Transitivity
+%\item<5-> Linearity
+%\end{itemize}
+%\item<6-> The combination produces \emph{Linear Temporal Logic}.
+%\item<7-> Especially useful in computer science.
+%\end{itemize}
+%\end{wideslide}
+
+
+\begin{wideslide}[bm=,toc=]{Reflexivity of $\rho^*$}
 \begin{defn}{13.16}[Ben Ari]
 An interpretation $\mathcal{I} = (\mathcal{S},\rho)$ is \emph{reflexive}
-iff $\rho$ is a reflexive relation: for all $s \in \mathcal{S}$, $(s,s) \in
-\rho$, or $s \in \rho(s)$ in functional notation.
+iff $\rho$ is a reflexive relation: 
+\begin{itemize}
+\item<2-> for all $s \in \mathcal{S}$, $(s,s) \in \rho$, 
+\item<3-> or $s \in \rho(s)$ in functional notation.
+\end{itemize}
 \end{defn}
-{\bf Impact of Restriction:}
+\pause[3]
+\vspace{-3mm}
+Observe that we guarantee this property in $\rho^*$ by definition.\\[2mm]
+\pause
+{\bf Implications:}
 \begin{itemize}
-\item $\Diamond running$: ``eventually the programming is in the state
+\item<6-> $\Diamond running$: ``eventually the programming is in the state
 `running'.
-\item If it is running in the current state, the intuitive meaning is true.
+\item<7-> If it is running in the current state, the intuitive meaning is true.
 \begin{itemize}
-\item That is, intuitively, runnning \emph{now} $\imp$ running \emph{eventually}.
+\item<8-> That is, intuitively, runnning \emph{now} $\imp$ running \emph{eventually}.
 \end{itemize}
-\item The above holds if $\rho$ is reflexive.
+\item<9-> The above holds if $\rho$ is reflexive.
 \end{itemize}
-\begin{thm}{13.17}
-An interpretation with a reflexive transition relation is characterized by the
-formula $\Box A \imp A$ (or, by duality, by the formula $A \imp \Diamond A$).
+\pause[5]
+\vspace{-2mm}
+\begin{thm}{13.17*}
+A temporal logic in which truth is defined over the reflexive closure of the transition relation 
+is characterized by the formula $\Box A \imp A$ (or, by duality, by the formula $A \imp \Diamond A$).
 \end{thm}
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Transitivity}
+\begin{wideslide}[bm=,toc=]{Transitivity of $\rho^*$}
 \begin{defn}{13.18}[Ben Ari]
 An interpretation $\mathcal{I} = (\mathcal{S},\rho)$ is \emph{transitive}
-iff $\rho$ is a transitive relation: for all $s_1,s_2,s_3 \in \mathcal{S}$, 
+iff $\rho$ is a transitive relation: 
+\begin{itemize}
+\item<2-> for all $s_1,s_2,s_3 \in \mathcal{S}$, 
 $s_2 \in \rho(s_1) \land s_3 \in \rho(s_2) \imp s_3 \in \rho(s_1)$.
+\end{itemize}
 \end{defn}
-{\bf Impact of Restriction:}
+\vspace{-3mm}
+\pause[2]
+Again, observe that we guarantee this property in $\rho^*$ by definition.\\[2mm]
+\pause
+{\bf Implications:}
 \begin{itemize}
-\item Requiring transitivity again produces an intuitive result.
-\item Assume the following is proven:
+\item<5-> Requiring transitivity again produces an intuitive result.
+\item<6-> Assume the following is proven:
 \begin{itemize}
-\item $s_2 \models running$ for $s_2 \in \rho(s_1) \imp s_1 \models \Diamond running$
-\item $s_3 \models running$ for $s_3 \in \rho(s_2) \imp s_2 \models \Diamond running$
+\item<7-> $s_2 \models running$ for $s_2 \in \rho(s_1) \imp s_1 \models \Diamond running$
+\item<8-> $s_3 \models running$ for $s_3 \in \rho(s_2) \imp s_2 \models \Diamond running$
 \end{itemize}
-\item We expect that $s_3 \models running$ should prove $s_1 \models \Diamond running$ 
+\item<9-> We expect that $s_3 \models running$ should prove $s_1 \models \Diamond running$ 
 \end{itemize}
-\begin{thm}{13.17}
-An interpretation with a transitive transition relation is characterized by the
-formula $\Box A \imp \Box \Box A$ (or by the formula 
+\pause[6]
+\begin{thm}{13.17*}
+A temporal logic in which truth is defined over the transitive closure of the transition 
+relation is characterized by the formula $\Box A \imp \Box \Box A$ (or by the formula 
 $\Diamond \Diamond A \imp \Diamond A$).
 \end{thm}
 \end{wideslide}
@@ -218,51 +277,11 @@ In an interpretation that is both reflexive and transitive:
 
 \end{wideslide}
 
-\begin{wideslide}[bm=,toc=]{Truth in PTL}
-Let $A$ be a formula in PTL, and $\rho^*$ be the reflexive, transitive closure
-of $\rho$.\\
-$\nu_{\mathcal{I},s}(A)$, the {\em truth value\/} of $A$ in $s$, is defined recursively as follows:
-\begin{itemize}
-\item If $A$ is $p\in\mathcal{P}$ then $\nu_{\mathcal{I},s}(A) = s(p)$.
-\item If $A$ is $\neg A'$ then $\nu_{\mathcal{I},s}(A) = T$ iff $\nu_{\mathcal{I},s}(A') = F$.
-\item If $A$ is $A'\vee A''$ then $\nu_{\mathcal{I},s}(A) = T$ iff $\nu_{\mathcal{I},s}(A') = T$ or
-$\nu_{\mathcal{I},s}(A'') = T$.
-
-and similarly for the other Boolean operators.
-
-\item If $A$ is $\Box A'$ then $\nu_{\mathcal{I},s}(A) = T$ iff $\nu_{\mathcal{I},s}(A') = T$ for
-all states $s'\in\rho^*(s)$.
-
-\item If $A$ is $\Diamond A'$ then $\nu_{\mathcal{I},s}(A) = T$ iff $\nu_{\mathcal{I},s}(A') = T$ for
-some state $s'\in\rho^*(s)$.
-
-\end{itemize}
-{\bf Notation:}\\
-\begin{itemize}
-\item We abbreviate $\nu_{\mathcal{I},s}(A)$ as $s\models_\mathcal{I} A$. 
-\item When interpretation $\mathcal{I}$ is clear from the context, it is omitted
-giving: 
-\item $s\models A$ iff $\nu_s(A) = T$.
-\end{itemize}
-\end{wideslide}
-
 \begin{wideslide}[bm=,toc=]{Example: Computing Truth Value}
 \begin{ex}{13.11}[Modified]
 Computing truth value for $\Box p \lor \Box q$ for each state
 $s$. 
 \end{ex}
-\begin{itemize}
-\item $s_0 \in \rho^*(s_0)$, but $s_0 \not \models p$ and $s_0 \not \models q$, so 
-$s_0 \not \models p \lor q$. Thus, $s_0 \not \models \Box p \lor \Box q$.
-
-\item $\rho^*(s_1) = \{s_1,s_2,s_3\}$. $s_2 \not \models p$ so $s_1 \not \models
-\Box p$. Also, $s_3 \not \models q$ so $s_1 \not \models \Box q$. Therefore, $s_1 \not
-\models \Box p \lor \Box q$.
-\item $\rho^*(s_2) = \{s_2\}$. Since $s_2 \models q$, we have $s_2 \models \Box q$
-and $s_2 \models \Box p \lor \Box q$.
-\item $\rho^*(s_3) = \{s_3\}$. Since $s_3 \models p$,  $s_3 \models \Box p$ and
-therefore $s_3 \models \Box p \lor \Box q$.
-\end{itemize}
 \begin{center}
 \begin{picture}(160,105)
 \put(0,60){
@@ -296,5 +315,18 @@ therefore $s_3 \models \Box p \lor \Box q$.
 }
 \end{picture}
 \end{center}
+\vspace{-5mm}
+\begin{itemize}
+\item<2-> $s_0 \in \rho^*(s_0)$, but $s_0 \not \models p$ and $s_0 \not \models q$, so 
+$s_0 \not \models p \lor q$. Thus, $s_0 \not \models \Box p \lor \Box q$.
+
+\item<3-> $\rho^*(s_1) = \{s_1,s_2,s_3\}$. $s_2 \not \models p$ so $s_1 \not \models
+\Box p$. Also, $s_3 \not \models q$ so $s_1 \not \models \Box q$. Therefore, $s_1 \not
+\models \Box p \lor \Box q$.
+\item<4-> $\rho^*(s_2) = \{s_2\}$. Since $s_2 \models q$, we have $s_2 \models \Box q$
+and $s_2 \models \Box p \lor \Box q$.
+\item<5-> $\rho^*(s_3) = \{s_3\}$. Since $s_3 \models p$,  $s_3 \models \Box p$ and
+therefore $s_3 \models \Box p \lor \Box q$.
+\end{itemize}
 
 \end{wideslide}

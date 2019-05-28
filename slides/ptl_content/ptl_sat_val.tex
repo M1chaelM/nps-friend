@@ -7,11 +7,11 @@ Let $A$ be a formula in Propositional Temporal Logic.
 \vspace{-2ex}
 
 \begin{itemize}
- \item A is \emph{satisfiable} iff there is an interpretation $\mathcal{I} = (\mathcal{S}, \rho)$ for $A$ and a state $s \in \mathcal{S}$ such that $s \models_{\mathcal{I}} A$.
+ \item<2-> A is \emph{satisfiable} iff there is an interpretation $\mathcal{I} = (\mathcal{S}, \rho)$ for $A$ and a state $s \in \mathcal{S}$ such that $s \models_{\mathcal{I}} A$.
 
- \item A is \emph{valid} iff for all interpretations $\mathcal{I} = (\mathcal{S},\rho)$ for $A$ and for all states $s \in \mathcal{S}$, $s \models_{\mathcal{I}} A$. 
+ \item<3-> A is \emph{valid} iff for all interpretations $\mathcal{I} = (\mathcal{S},\rho)$ for $A$ and for all states $s \in \mathcal{S}$, $s \models_{\mathcal{I}} A$. 
 \begin{itemize}
-\item {\bf Notation}: $\models A$. 
+\item<4-> {\bf Notation}: $\models A$. 
 \end{itemize}
 \end{itemize}
 
@@ -23,8 +23,8 @@ The previous example shows $\Box p \lor \Box q$ is satisfiable, but
 not valid.
 \end{ex}
 \begin{itemize}
-\item  Satisfiable: $s_2,s_3 \models \Box p \lor \Box q$.
-\item  Falsifiable: $s_0,s_1 \not \models \Box p \lor \Box q$.
+\item<2->  Satisfiable: $s_2,s_3 \models \Box p \lor \Box q$.
+\item<3->  Falsifiable: $s_0,s_1 \not \models \Box p \lor \Box q$.
 \end{itemize}
 \begin{center}
 \begin{picture}(160,105)
@@ -65,18 +65,20 @@ not valid.
 {\bf Definition:} \\
 A \emph{substitution instance} of a propositional logic formula is
 obtained by substituting PTL formulas uniformly for propositional letters.\\~\\
+\pause
 {\bf Example:}\\
 $\Box p \land \Box q \imp \Box p$ is a substitution instance of $A \land B \imp
 A$.\\~\\
+\pause
 {\bf Facts:}\\
 \begin{itemize}
-\item Any valid formula of propositional logic is a valid formula of PTL.
+\item<4-> Any valid formula of propositional logic is a valid formula of PTL.
 \begin{itemize}
-\item Ex: $(A \imp B) \imp A$ is a valid formula in both PL and PTL.
+\item<5-> Ex: $(A \imp B) \imp A$ is a valid formula in both PL and PTL.
 \end{itemize}
-\item Any \emph{substitution instance} of a valid PL formula is valid.
+\item<6-> Any \emph{substitution instance} of a valid PL formula is valid.
 \begin{itemize}
-\item Ex: $(\Box p \imp \Box q) \imp \Box p$ is a substitution instance of a
+\item<7-> Ex: $(\Box p \imp \Box q) \imp \Box p$ is a substitution instance of a
 valid PL formula, and therefore is also valid.
 \end{itemize}
 \end{itemize}
@@ -84,10 +86,12 @@ valid PL formula, and therefore is also valid.
 
 \begin{wideslide}[bm=,toc=]{Other Valid Formulas in PTL}
 Not all valid formulas are substitution instances of propositional validities.
+\pause
 \begin{thm}{13.14}[Duality]
 $\models \Box p \eqv \ngg \Diamond \ngg p$
 \end{thm}
 
+\pause
 \begin{thm}{13.15}
 $\models \Box (p \imp q) \imp (\Box p \imp \Box q)$
 \end{thm}

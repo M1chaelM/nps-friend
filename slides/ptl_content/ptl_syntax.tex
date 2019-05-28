@@ -6,10 +6,12 @@ operators:
 \end{defn}
 \vspace{-2ex}
 \begin{itemize}
-\item $\Box$, read \emph{always},
-\item $\Diamond$, read \emph{eventually}.
+\item<2-> $\Box$, read \emph{always},
+\item<3-> $\Diamond$, read \emph{eventually}.
 \end{itemize}
+\pause[3]
 The two unary operators have the same precedence as negation.\\~\\
+\pause
 {\bf Informally:}
 \begin{itemize}
 \item $\Box$ is the universal operator meaning `for \emph{any} time in the
@@ -22,16 +24,22 @@ the future.
 \begin{wideslide}[bm=,toc=]{The ``Next'' Operator}
 {\bf Models of time can be:}
 \begin{itemize}
-\item continuous (with real-valued intervals) or
-\item discrete (series of snapshots or steps).
-\item Discrete models are natural for program execution.
-\item Useful to express the \emph{next} instant in time.
-\item We add another operator for this purpose:
+\item<2-> continuous (with real-valued intervals) or
+\item<3-> discrete (series of snapshots or steps).
 \end{itemize}
+\pause[3]
+{\bf Discrete models:}
+\begin{itemize}
+\item Natural for program execution.
+\item Allow us to define a \emph{next} instant in time.
+\item We add another operator to express this:
+\end{itemize}
+\pause
 \begin{defn}{13.23}[Ben Ari]
 The unary operator $\Circle$ is called \emph{next}.
 \end{defn}
-{\bf Applications of Next:}
+\pause
+{\bf Notes regarding the next operator:}
 \begin{itemize}
 \item Useful for deciding properties like satisfiability.
 \item Rarely used to express properties of programs.

@@ -1,20 +1,25 @@
 \begin{slide}[bm=,toc=]{Linear Temporal Logic}
 
-\begin{defn}{13.22}
+\begin{defn}{13.22}[Ben Ari]
 An interpretation $\mathcal{I} = (\mathcal{S},\rho)$ is \emph{linear}
 iff $\rho$ is a function. That is, for all $s \in \mathcal{S}$, 
 there is \emph{at most} one $s' \in \mathcal{S}$ such that $s' \in \rho(s)$.
 \end{defn}
-
-\begin{defn}{13.22b}[Volpano]
+\pause
+\begin{defn}{13.22*}[Volpano]
 An interpretation $\mathcal{I} = (\mathcal{S},\rho)$ is \emph{linear}
 and \emph{total} iff $\rho$ is a total function. That is, for all $s \in \mathcal{S}$, 
 there is \emph{exactly} one $s' \in \mathcal{S}$ such that $s' \in \rho(s)$.
 \end{defn}
-
-The logic produced by adopting a total, linear transition function and following the truth
-assignment given (over the reflexive transitive closure of its transition
-    function) is called \emph{Linear Temporal Logic}.
+\pause
+\textbf{Linear Temporal Logic:}\\
+\begin{itemize}
+\item The logic produced by
+\begin{itemize}
+\item adopting a total, linear transition function and 
+\item following the truth assignment given (over $\rho^*$). 
+\end{itemize}
+\end{itemize}
 
 \end{slide}
 
@@ -22,6 +27,7 @@ assignment given (over the reflexive transitive closure of its transition
 
 The restrictions on $\rho$ imply that interpretation in LTL can be represented
 as infinite paths:
+\pause
 \unitlength=1.2pt
 \begin{center}
 \begin{picture}(200,30)
@@ -35,7 +41,9 @@ as infinite paths:
 \end{picture}
 \end{center}
 
+\pause
 Note that the \emph{next} operator is self-dual in a linear interpretation.
+\pause
 \begin{thm}{13.25} A linear interpretation whose relation $\rho$
 is a function is characterized by the formula $\Circle A \eqv \ngg
 \Circle \ngg A$.
@@ -46,6 +54,7 @@ is a function is characterized by the formula $\Circle A \eqv \ngg
 \begin{wideslide}[bm=,toc=]{Examples of Valid Formulas in LTL}
 The following are direct consequences of the restriction on
 interpretations in LTL.
+\pause
 \begin{thm}{13.31}
 \[
 \begin{array}{ll}
@@ -55,8 +64,10 @@ interpretations in LTL.
 \end{array}
 \]
 \end{thm}
+\pause
 \vspace{2ex}
 Other valid formulas establish the following important properties:
+\pause
 \begin{itemize}
 \item Inductive
 \item Distributive
@@ -68,6 +79,7 @@ Other valid formulas establish the following important properties:
 \begin{wideslide}[bm=,toc=]{Induction in LTL}
 The following provides a method for proving properties of LTL formulas
 inductively:\\
+\pause
 \begin{thm}{13.32}
 \[
 \begin{array}{ll}
@@ -76,12 +88,14 @@ inductively:\\
 \]
 \end{thm}
 \vspace{2ex}
+\pause
 Induction in LTL is based upon the following valid formula:
 \[
 \begin{array}{ll}
 \models \Box (p \imp \Circle p) \imp (p \imp \Box p)\\
 \end{array}
 \]
+\pause
 (Recall induction rules from the first section of the course.)
 
 \end{wideslide}
@@ -93,11 +107,13 @@ $\Circle$ distributes over conjuction and disjunction:
 &\models \Circle (p \land q) \eqv (\Circle p \land \Circle q).
 \end{align*}
 
+\pause
 $\Box$ and $\Diamond$ behave analogously to FOL quantifiers:
 \begin{align*}
 &\models \Box (p \land q) \eqv (\Box p \land \Box q), & \models \Diamond (p \lor q) \eqv (\Diamond p \lor \Diamond q), \\
 &\models (\Box p \lor \Box q) \imp \Box (p \lor q) & \models \Diamond (p \land q) \imp (\Diamond p \land \Diamond q).
 \end{align*}
+\pause
 Similarly, over implication:
 \begin{align*}
 &\models \Box (p \imp q) \imp (\Box p \imp \Box q),\\
@@ -113,11 +129,13 @@ $\Circle$ commutes with $\Box$ and $\Diamond$:
 &\models \Diamond \Circle p \eqv \Circle \Diamond p.
 \end{align*}
 
+\pause
 $\Box$ and $\Diamond$ commute in one direction: 
 \begin{align*}
 &\models  \Diamond \Box p \imp \Box \Diamond  p
 \end{align*}
 
+\pause
 Note that if $p$ is eventually always true and $q$ is always eventually
 true, we have:
 \begin{thm}{13.34}

@@ -16,8 +16,17 @@
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Why Temporal Logic?}
+\begin{ex}{C Program}
+\end{ex}
+\vspace{-10mm}
+\begin{program}
+for (n = 0; n < 4; n++)\\
+\>\>;
+\end{program}
+\pause
+\textbf{State at time t:}
 \begin{center}
-\begin{picture}(255,50)
+\begin{picture}(200,50)
 %\begin{picture}(255,25)
 \put(  -15, -20){\makebox(2,12){\small time:}}
 \put(  0, 0){\state{\tinysz{n=0}}{$s_{0}$}}
@@ -50,7 +59,7 @@
 \begin{array}{|l|l|}
 \hline
 \bid{First-order logic} & \bid{Temporal logic analog} \\\hline
-\forall i\geq 0.\, n=_{t_i}2\;\rid{is False} & s_0\not\models\Box n = 2\\\hline
+\forall i\geq 0.\, n=_{t_i}2\;\rid{is False} & s_0\not\models\Box n = 2\\\hline 
 \exists i\geq 0.\, n=_{t_i}2\;\rid{is True}  & s_0\models\Diamond n = 2\\\hline
 \forall i.\exists j.\, n=_{t_j}3 \wedge j\geq i\;\rid{is True} & s_0\models\Box\Diamond n = 3\\\hline
 \exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3 \wedge i \geq j\;\rid{is False} & 
@@ -66,22 +75,22 @@ s_0\models\Diamond (n = 2\wedge\Diamond n = 3)\\\hline
 
 \begin{wideslide}[bm=,toc=]{Why Temporal Logic?}
 \begin{enumerate}
-\item FOL doesn't care about temporal ordering.  
+\item<1-> FOL doesn't care about temporal ordering.  
 \begin{itemize}
-\item Can write
+\item<2-> Can write
 \begin{displaymath}
 \exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3
 \end{displaymath}
 which is true for the C program.
-\item Says nothing about which predicate became true first.
-\item Hence it has no analog in temporal logic.
+\item<2-> Says nothing about which predicate became true first.
+\item<2-> Hence it has no analog in temporal logic.
 \end{itemize}
-\item Predicates in FOL can be parameterized on time.
+\item<3-> Predicates in FOL can be parameterized on time.
 \begin{itemize}
-\item Produces awkward constructions.
-\item Time is not referenced anywhere in the C program.
-\item Predicates not parametrized on time in temporal logic.
+\item<4-> Produces awkward constructions.
+\item<4-> Time is not referenced anywhere in the C program.
+\item<4-> Predicates not parametrized on time in temporal logic.
 \end{itemize}
-\item Temporal logic naturally expresses temporal ordering of events.
+\item<5-> Temporal logic naturally expresses temporal ordering of events.
 \end{enumerate}
 \end{wideslide}
