@@ -1,0 +1,336 @@
+\documentclass[addpoints]{exam}
+
+\usepackage{epic,array,ecltree,url,calrsfs}
+\usepackage[nointegrals]{wasysym}
+
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{../mlextra} % must be below ams packages
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {../../art/} }
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+
+\newcommand{\tf}[1][{}]{%
+\fillin[#1][0.25in]%
+}
+
+\noprintanswers
+\unframedsolutions
+\SolutionEmphasis{\itshape\small}
+\SolutionEmphasis{\color{NavyBlue}}
+\checkboxchar{$\Box$}
+\checkedchar{$\blacksquare$}
+
+
+\pointsinmargin
+\begin{document}
+
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+{\large CS3001: Foundations of Computer Science} &  \makebox[3in]{\large Name:\enspace\hrulefill}\\
+{\large May 28, 2019} & \\
+{\large Exam 2} & 
+\end{tabular*}\\
+
+\fbox{\fbox{\parbox{6in}{\textbf{Instructions}: Please answer the questions 
+  below to the best of your ability. Be sure to show your work where appropriate. 
+   This exam is closed book, closed notes, closed computer. There are \numpoints\ 
+   points and \numbonuspoints\ extra credit points in total.}}}\\
+\begin{questions}
+
+\question[4] Write the following $\id{PL}$ formula in \emph{\underline{clausal}} form:\\[2mm]
+$  (\ngg r \imp (p \imp q)) \land (s \imp t)$
+\vspace{30mm}
+
+
+\question[5] Transform the following $\id{FOL}$ formula to prenex normal form:\\[2mm]
+$\forall x \exists y r(x,y) \land (\exists x p(x) \imp \forall x q(x))$
+\vspace{40mm}
+
+
+
+\question[4] Fill in the blanks to produce an interpretation that \emph{\underline{satisfies}} the formula: 
+\vspace{2mm}
+\begin{parts}
+\part $A = \forall x p(a,f(x,a))$, and $\mathcal{I}_A = \{\Z, \{=\}, \{\times\}, \{\fillin[0][1cm]\} \}$
+\vspace{2mm}
+\part $A = \forall n p(n,f(a,n))$, and $\mathcal{I}_A = \{\N, \{\ < \}, \{\fillin[\times][1cm]\}, \{1\}\}$
+\end{parts}
+\vspace{5mm}
+
+\question[4] Fill in the blanks to produce an interpretation that
+\emph{\underline{falsifies}} the formula: 
+
+\vspace{2mm}
+\begin{parts}
+\part $A = \forall x \forall y (p(x,y) \imp p(f(x,a),f(y,a)))$, $\mathcal{I}_A = \{\Z, \{ > \}, \{\fillin[][1cm]\}, \fillin[][1cm] \}$
+\vspace{2mm}
+\part $A = (\exists x p(x,a) \land \exists x q(x,a) ) \imp \exists x (p(x,a) \land
+    q(x,a))$, $\mathcal{I}_A = \{\N_0, \{\fillin[<][1cm] ,\fillin[>][1cm] \}, \{5\} \}$ 
+\vspace{2mm}
+\end{parts}
+\vspace{5mm}
+
+\clearpage
+\question[4] Let $S, S'$ be propositional logic formulas in clausal form, 
+ and let $C, C'$ be individual clauses. 
+
+\begin{parts}
+\part \tf[T] (T/F) If $S$ is satisfiable and $S' \subseteq S$, then $S'$ 
+must be satisfiable.
+\part \tf[T] (T/F) If $S$ is satisfiable and $C$ is trivial, then $S \cup {C}$ 
+must be satisfiable.
+\part \tf[F] (T/F) If $S$ is satisfiable and $C$ is satisfiable, $S \cup {C}$
+must be satisfiable.
+\part \tf[F] (T/F) If $C$ is unsatisfiable and $C' \subseteq C$, then $C'$
+must be unsatisfiable.
+\end{parts}
+\vspace{5mm}
+
+%For final, need to add interpretations
+%\question[4] Which of the following statements in first order logic correctly
+%             expresses the anti-symmetric property (choose all that apply):
+%\begin{checkboxes}
+%\CorrectChoice $\forall x \forall y(p(x,y) \land p(y,x) \imp q(x,y)$
+%\choice        $\forall x \forall y (\ngg q(x,y) \imp (p(x,y) \imp \ngg %p(y,x)))
+%\end{checkboxes}
+\question Consider the following interpretation $\mathcal{I} = (P,\{L,H\},\{\})$,
+where 
+\begin{itemize}
+\item $P$ is a set of people, 
+\item $G$ is a unary relation such that $G(x)$ iff $x$ is a grad student, and
+\item $R$ is a unary relation such that $R(x)$ iff and only if $x$ is rich. 
+\end{itemize}
+Write a statement in first order logic to express the following:
+\begin{parts}
+\part[3] If all grad students are rich then everyone is rich.
+\vspace{20mm}
+\part[3] If someone is rich and not a grad student, then no grad student is rich.
+\vspace{20mm}
+\end{parts}
+
+
+\question[6] Let $S$ be a propositional logic formula in clausal form, given
+below.  Use DPLL to prove $S$ is a contradiction. Draw the execution tree.
+\[S = \{\bar{r}\bar{s}, s\bar{p}, r\bar{s}\bar{p}, pt, rt, \bar{r}sp, st,
+  p\bar{t}, t\}\]. 
+
+\vspace{60mm}
+
+\clearpage
+\question The following is proposed as an alternative one-bit adder design:
+
+\begin{center}
+\begin{picture}(380,120)
+\put(-10,  0){\makebox(20,20)[l]{$b_2$}}
+\put(-10,100){\makebox(20,20)[l]{$b_1$}}
+\put(300, 20){\makebox(25,20)[l]{s}}
+\put(300, 80){\makebox(25,20)[l]{c}}
+\put(20, 10){\line(1,0){58}}
+\put(20,110){\line(1,0){60}}
+\put(30, 10){\line(1, 2){40}}
+\put(30,110){\line(1,-2){38}}
+\put(70, 90){\line(1,0){10}}
+\put(68, 33){\line(1,0){10}}
+\put(104, 33){\line(1,0){10}}
+\put(104, 10){\line(1,0){10}}
+
+\put(78,23){  % NOT gate
+  \put( 0, 0){\line(0,1){20}}
+  \put( 0, 0){\line(2,1){20}}
+  \put(0, 20){\line(2,-1){20}}
+  \put(23,10){\circle{6}}
+}
+\put(78,0){  % NOT gate
+  \put( 0, 0){\line(0,1){20}}
+  \put( 0, 0){\line(2,1){20}}
+  \put(0, 20){\line(2,-1){20}}
+  \put(23,10){\circle{6}}
+}
+\put(70,80){ %OR gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,20){\oval(20,40)[r]}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(110,100){\line(1,0){130}}
+\put(150,40){\line(0,1){60}}
+\put(150,40){\line(1,0){20}}
+
+\put(105,0){ %OR gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,20){\oval(20,40)[r]}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(145, 20){\line(1,0){25}}
+
+\put(170,10){ %AND gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,0){\line(0,1){40}}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(210, 30){\line(1,0){85}}
+
+\put(220,30){\line(0,1){14}}
+\put(210,45){  % NOT gate
+  \put( 0, 0){\line(1,0){20}}
+  \put( 0, 0){\line(1,2){10}}
+  \put(20, 0){\line(-1,2){10}}
+  \put(10,23){\circle{6}}
+}
+\put(220,71){\line(0,1){14}}
+\put(220, 85){\line(1,0){20}}
+
+\put(240,70){ %AND gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,0){\line(0,1){40}}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(280, 90){\line(1,0){15}}
+\end{picture}
+\end{center}
+
+
+Let $S$ be a set of formulas in propositional logic that describe the
+properties of the proposed one-bit adder and let $P_S$ be the set of atoms in
+$S$.
+\begin{parts}
+\part[2] Give an explicit definition of $P_S$ (write the elements).
+\vspace{5mm}
+
+\part[3] Let $A \in S$ be a formula that describes the relationship between $b_1$,
+  $b_2$ and $s$ in the proposed adder. Fill in the blank below to complete
+  $A$:\\  
+
+$A \equiv \fillin[(b_1 \lor b_2) \land (\ngg b_1 \lor b_2)][6cm] \eqv s $
+
+\vspace{2mm}
+\part[3] Write a formula $B \in S$ that describes the relationship between $b_1$,
+  $b_2$ and $c$.\\
+
+  $B \equiv$
+
+\vspace{2mm}
+\part Evaluate $A$ and $B$ above under the following interpretation (show
+    your work):\\
+    $\mathcal{I}_S(b_1) = 0, \mathcal{I}_S(b_0) = 1, \mathcal{I}_S(s) = 1, \mathcal{I}_S(c) = 1$
+\begin{subparts}
+\vspace{2mm}
+\subpart[2]\label{addervala} $v_{\mathcal{I}_S}(A) = $ 
+\vspace{10mm}
+\subpart[2]\label{addervalb} $v_{\mathcal{I}_S}(B) = $ 
+\vspace{10mm}
+\subpart[3] Looking just at the results in parts \ref{addervala} and
+\ref{addervalb} above, is the adder functioning correctly? Briefly justify your
+answer.
+
+\vspace{10mm}
+\end{subparts}
+
+%\part[2] Is $S$ satisfiable?
+%
+%\part[2] Is $S$ valid?
+
+
+%\part[4] Recall that the \emph{desired} relationship between $b_1$, $b_2$ and $c$ can
+%be expressed by the statement: 
+%\[c \eqv b_1 \land b_2\] 
+%
+%Does the proposed circuit create an equivalent relationship? If yes, show that it is 
+%equivalent. If no, provide a counterexample.
+
+\vspace{20mm}
+\end{parts}
+
+
+
+
+\clearpage
+\question[6] 
+\begin{itemize}
+\item Let $\mathcal{F}$ be the set of all formulas in propositional logic.
+\item Define $A \subseteq \mathcal{F}$ to be the set of formulas that your instructor
+finds pleasing, and
+\item let $B$ be the set of all other formulas.
+\end{itemize}
+Assume we show that a non-deterministic Turing machine can determine
+whether a formula is in $A$ in polynomial time. Which of the following can you 
+conclude (choose all that apply)?
+\begin{checkboxes}
+\choice $A$ is in P. 
+\CorrectChoice $A$ is in NP. 
+\choice $A$ is in CoNP. 
+\CorrectChoice $A$ is decidable. 
+\CorrectChoice $B$ is in CoNP. 
+\CorrectChoice $B$ is decidable. 
+\CorrectChoice $A$ is semi-decidable. 
+\end{checkboxes}
+\vspace{5mm}
+
+\question[4] Let $A$ and $B$ be problems and assume the following facts have
+been established:
+\begin{itemize}
+\item $A$ reduces to $B$
+\item $\id{FOL-VAL}$ reduces to $A$
+\item $A$ reduces to $\id{FOL-UNSAT}$.
+\end{itemize}
+
+Given the information above, which of the following can you conclude (choose all that apply)?
+\begin{checkboxes}
+\CorrectChoice Neither $A$ nor $B$ are decidable.
+\choice  Both $A$ and $B$ are semi-decidable.
+\CorrectChoice The complement of $A$ is neither decidable nor semi-decidable. 
+\choice The complement of $B$ is neither decidable nor semi-decidable. 
+\end{checkboxes}
+
+
+%part[2] Now assume you \textbf{\emph{also}} know that $\id{FOL-VAL}$ reduces to $A$
+%nd $A$ reduces to $\id{FOL-UNSAT}$.
+
+\vspace{5mm}
+%\part[4] Now assume PL-SAT reduces to $A$ in polynomial time. Which of the following can you 
+%conclude (choose all that apply)?
+%\begin{checkboxes}
+%\CorrectChoice $A$ is NP-Complete.
+%\CorrectChoice $A$ is NP-Hard.
+%\CorrectChoice $B$ is in CoNP.
+%\CorrectChoice $B$ is CoNP-Complete.
+%\end{checkboxes}
+
+\vspace{5mm}
+%\question Let $FOL$ be the set of all formulas in first-order logic, and $A$-FOL  
+\bonusquestion[2] Fill in the blanks to produce an interpretation that
+\emph{\underline{satisfies}} the formula:\\[2mm]
+$A = (\exists x p(x,a) \imp \forall x p(x,a)) \land (\exists y p(a,y) \imp \forall y p(a,y))$, and $\mathcal{I}_A = \{\fillin[\{1\}][1cm], \{\ \geq \}, \{\fillin[1][1cm]\} \}$
+
+\bonusquestion[2] Fill in the blanks to produce an interpretation that
+\emph{\underline{falsifies}} the formula: 
+
+$A = \exists x \exists y (p(x,a) \land \ngg p(y,a))$, $\mathcal{I}_A = \{\fillin[][1cm], \{ = \}, \{2\} \}$
+
+
+%\part[1] $A = (\forall x p(x) \imp \forall x q(x)) \imp \forall x (p(x) \imp q(x))$ and $\mathcal{I}_A = \{\N_0, \{=\}, \{\times\}, \fillin \}$
+\end{questions}
+\end{document}
+
+
