@@ -15,6 +15,14 @@
 \newcommand{\rid}[1]{\mbox{\rm #1\/}}
 \newcommand{\tid}[1]{\mbox{\tt #1\/}}
 \newcommand{\id}[1]{\mbox{\it #1\/}}
+\newcommand*{\ngg}{\mathop{\neg}}
+\newcommand*{\imp}{\mathbin{\rightarrow}}
+\newcommand*{\revimp}{\mathbin{\leftarrow}}
+\newcommand*{\eqv}{\mathbin{\leftrightarrow}}
+\newcommand*{\neqv}{\mathbin{\oplus}}
+\newcommand*{\logeqv}{\mathrel{\equiv}}
+\newcommand*{\fml}{\mathit{fml}}
+
 
 \begin{document}
 
@@ -103,15 +111,15 @@ $\hat{\delta}_q(\id{tryq},w)=\id{csq}$.
 Suppose $w$ is a state sequence.  Then
 \begin{enumerate}
 %\item[(a)] $\hat{\delta}_p(\id{tryp},w)=\id{tryp}\wedge w\neq\epsilon \Rightarrow$ $w$ ends with $\neg\id{wantp}$.
-\item[(a)] $\hat{\delta}_p(\id{tryp},w)=\id{waitp}\Rightarrow$ $w$ ends with a
+\item[(a)] $\hat{\delta}_p(\id{tryp},w)=\id{waitp}\; \imp w$ ends with a
 state in which $\id{wantp}$ holds.
-\item[(b)] $\hat{\delta}_p(\id{tryp},w)=\id{csp}\Rightarrow$ $w$ ends with a
+\item[(b)] $\hat{\delta}_p(\id{tryp},w)=\id{csp}\; \imp w$ ends with a
 state in which $(\neg\id{wantq}\vee\id{turn}=2)\wedge\id{wantp}$ holds.
 
 %\item[(d)] $\hat{\delta}_q(\id{tryq},w)=\id{tryq}\wedge w\neq\epsilon \Rightarrow$ $w$ ends with $\neg\id{wantq}$.
-\item[(c)] $\hat{\delta}_q(\id{tryq},w)=\id{waitq}\Rightarrow$ $w$ ends with a
+\item[(c)] $\hat{\delta}_q(\id{tryq},w)=\id{waitq}\; \imp$ $w$ ends with a
 state in which $\id{wantq}$ holds.
-\item[(d)] $\hat{\delta}_q(\id{tryq},w)=\id{csq}\Rightarrow$ $w$ ends with 
+\item[(d)] $\hat{\delta}_q(\id{tryq},w)=\id{csq}\; \imp$ $w$ ends with 
 a state in which $(\neg\id{wantp}\vee\id{turn}=1)\wedge\id{wantq}$ holds.
 \end{enumerate}
 
@@ -127,7 +135,8 @@ their antecedents false.
 \vspace{1em}
 {\em Inductive step\/}.
 Suppose (a) and (b) hold for a state sequence $w$ where $|w|\geq 0$.
-We show (a) and (b) hold for state sequence $wa$ where $a$ is a state.
+We show (a) and (b) hold for state sequence $wa$ where $a$ is the final state
+in the sequence.
 
 \begin{enumerate}
 %\item[(a)]  Suppose $\hat{\delta}_p(\id{tryp},wa)=\id{tryp}$.
@@ -142,17 +151,17 @@ We have $\delta_p(\id{tryp},a)=\id{waitp}$ only if $\id{wantp}$ holds in $a$ by 
 \item[2.]  $\hat{\delta}_p(\id{tryp},w)=\id{waitp}$ and $\delta_p(\id{waitp},a)=\id{waitp}$.
 Nowhere in the automaton from which $\delta_q$ is derived is {\tt wantp} updated, nor is it
 updated in the transition from {\tt waitp} to itself in the automaton from which $\delta_p$ is derived.
-Therefore the value of {\em wantp\/} in $a$ is its value in the state ending $w$.
-By induction and (a), {\em wantp\/} holds in the state ending $w$, hence it holds in $a$.
+Therefore the value of {\em wantp\/} in $a$ is its value in the final state of $w$.
+By induction and (a), {\em wantp\/} holds in the final state of $w$, hence it holds in $a$.
 \end{enumerate}
 \item[(b)]  Suppose $\hat{\delta}_p(\id{tryp},wa)=\id{csp}$.
 We have $\hat{\delta}_p(\id{tryp},w)=\id{waitp}$ and $\delta_p(\id{waitp},a)=\id{csp}$.
 And $\delta_p(\id{waitp},a)=\id{csp}$ only if $\neg\id{wantq}\vee\id{turn}=2$ holds in $a$ by definition
 of $\delta_p$.
 Further, nowhere in the automaton from which $\delta_q$ is derived is {\tt wantp} updated, nor is it
-updated in the transition from {\tt waitp} to {\tt csp} in the automaton from which $\delta_p$ is derived..
-Therefore the value of {\em wantp\/} in $a$ is its value in the state ending $w$.
-By induction and (a), {\em wantp\/} holds in the state ending $w$, hence it holds in $a$.
+updated in the transition from {\tt waitp} to {\tt csp} in the automaton from which $\delta_p$ is derived.
+Therefore the value of {\em wantp\/} in $a$ is its value in the final state of $w$.
+By induction and (a), {\em wantp\/} holds in the final state of $w$, hence it holds in $a$.
 \end{enumerate}
 \noindent {\em End proof\/}.
 
@@ -164,5 +173,6 @@ Then by the preceding Lemma, $w$ must end with a state in which
 \[(\neg\id{wantq}\vee\id{turn}=2)\wedge\id{wantp}\;\wedge\;
 (\neg\id{wantp}\vee\id{turn}=1)\wedge\id{wantq}
 \]
-holds, which implies $\id{turn}=1\wedge\id{turn}=2$, a contradiction.
+holds. This formula is only satisfiable if unit literals $\id{wantp}$ and
+$\id{wantq}$ are true, which implies $\id{turn}=1\wedge\id{turn}=2$, a contradiction.
 \end{document}
