@@ -39,11 +39,11 @@ customer $i$ is permitted to download article $a$.
 \begin{enumerate}
 \item Imagine a database updated over time to reflect current customers and when they paid their fees.
 \item<2-> Represented as a {\em timed\/} linear interpretation of database states.
-\item<3-> So the download policy in TPTL becomes
+\item<3-> So for a given customer $i$ and article $a$ we can produce a download
+policy in TPTL as follows:
 \pause[3]
 \begin{displaymath}
 \begin{array}{l}
-\forall i\, \forall a\, \\
 \>\> \Box\; t.\;t - 6 < \bid{PaidFee}[i] < t\; \wedge \\
 \>\>\>\>\bid{Customer}(i) \wedge \bid{Article}(a) \Rightarrow
 \bid{Permitted}(i,a)
@@ -51,5 +51,8 @@ customer $i$ is permitted to download article $a$.
 \end{displaymath}
 \pause
 which can be regarded as a correctness criterion for the database.
+\item<4-> Note that the above expresses a class of TPTL formulas.
+\item<5-> Specifying a particular customer and article would produce the
+particular relevant formula.
 \end{enumerate}
 \end{wideslide}
