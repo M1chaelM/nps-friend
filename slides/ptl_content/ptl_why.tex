@@ -66,11 +66,11 @@ for (n = 0; n < 4; n++)\\
 s_0\not\models\Diamond (n = 3\wedge\Diamond n = 2)\\\hline
 \exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3 \wedge i \leq j\;\rid{is True} & 
 s_0\models\Diamond (n = 2\wedge\Diamond n = 3)\\\hline
-\exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3\;\rid{is True} & 
-\rid{no temporal analog as it} \\
- & \rid{must order}\;t_i\;\rid{and}\;t_j\\\hline
+\exists i.\exists j.\, n =_{t_i}2 \wedge n=_{t_j}3\;\rid{is True} & s_0\models
+\Diamond (n = 2) \land \Diamond (n = 3)^*\\\hline
 \end{array}
 \end{displaymath}
+* Note that the order of $t_i$ and $t_j$ is unspecified.
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Why Temporal Logic?}
@@ -83,7 +83,6 @@ s_0\models\Diamond (n = 2\wedge\Diamond n = 3)\\\hline
 \end{displaymath}
 which is true for the C program.
 \item<2-> Says nothing about which predicate became true first.
-\item<2-> Hence it has no analog in temporal logic.
 \end{itemize}
 \item<3-> Predicates in FOL can be parameterized on time.
 \begin{itemize}
