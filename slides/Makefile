@@ -1,24 +1,35 @@
 
 .PHONY: all print clean distclean install
 
-FOL_TARGETS := fol_part_1.pdf fol_part_2.pdf
-PTL_TARGETS := ptl.pdf 
+REV_PRES  := discrete_math_review.pdf relations_functions.pdf set_seq_strings.pdf
+IND_PRES  := post.pdf animate_derivations.pdf strongind.pdf mutualind.pdf \
+             pgmsasautomata.pdf automata-mutualind.pdf sampleRTderivation.pdf
+MSC_PRES  := logicoverview.pdf decisionproc.pdf
+PL_PRES   := whyproplogic.pdf pl_syntax_semantics.pdf pl_sat_val.pdf resolution.pdf
+FOL_PRES  := fol_part_1.pdf fol_part_2.pdf
+PTL_PRES  := ptl.pdf 
 
-TARGETS := discrete_math_review.pdf relations_functions.pdf set_seq_strings.pdf \
-	post.pdf animate_derivations.pdf strongind.pdf mutualind.pdf \
-	pgmsasautomata.pdf automata-mutualind.pdf sampleRTderivation.pdf  \
-	logicoverview.pdf whyproplogic.pdf pl_syntax_semantics.pdf pl_sat_val.pdf \
-	decisionproc.pdf resolution.pdf $(FOL_TARGETS) $(PTL_TARGETS) 
+REV_PRINT := $(REV_PRES:%.pdf=printable/%.pdf)
+IND_PRINT := $(IND_PRES:%.pdf=printable/%.pdf)
+MSC_PRINT := $(MSC_PRES:%.pdf=printable/%.pdf) 
+PL_PRINT  := $(PL_PRES:%.pdf=printable/%.pdf)
+FOL_PRINT := $(FOL_PRES:%.pdf=printable/%.pdf)
+PTL_PRINT := $(PTL_PRES:%.pdf=printable/%.pdf) 
 
-PRINTVERS := $(TARGETS:%.pdf=printable/%.pdf)
+
+FOL_TARGETS := $(FOL_PRINT) $(FOL_PRES)
+PTL_TARGETS := $(PTL_PRINT) $(PTL_PRES)
+
+PRES := $(REV_PRES) $(IND_PRES) $(MSC_PRES) $(PL_PRES) $(FOL_PRES) $(PTL_PRES) 
+PRINTVERS := $(REV_PRINT) $(IND_PRINT) $(MSC_PRINT) $(PL_PRINT) $(FOL_PRINT) $(PTL_PRINT) 
 
 INSTALL_DIR := ~/google_drive/NPS/teaching/2019/CS3001/slides/
 
 PRINTLATEXOPTS := -latex='latex %O -interaction=nonstopmode -synctex=1 "\PassOptionsToClass{mode=print}{powerdot}\input{%S}"'
 
-all: $(TARGETS) $(PRINTVERS) 
+all: $(PRES) $(PRINTVERS) 
 
-presentations: $(TARGETS)
+presentations: $(PRES)
 
 print: $(PRINTVERS) 
 
