@@ -51,7 +51,7 @@ printable/%.dvi: %.tex
 	latexmk -interaction=nonstopmode -use-make $<
 
 install: 
-	cp $(TARGETS) $(INSTALL_DIR) 
+	cp $(PRES) $(PRINTVERS) $(INSTALL_DIR) 
 	if [ -d "printable" ]; then mkdir -p $(INSTALL_DIR)/printable && cp $(PRINTVERS) $(INSTALL_DIR)/printable; fi
 
 clean: 
