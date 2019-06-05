@@ -428,18 +428,34 @@ before the next function call.
 
 \end{solution}
 \question Let $S \subseteq \mathcal{F}$ be a set of formulas in propositional logic.
-Define the relation $A\sim B$ on $S$ for $A,B \in S$ where $A\sim B$ under
+\begin{enumerate}
+\item Define the relation $A*B$ on $S$ for $A,B \in S$ such that $(A,B) \in *$ if and
+only if $v_{\mathcal{I}_S}(A) = v_{\mathcal{I}_S}(B)$ for all $\mathcal{I}_S$.
+\item Define a second relation, $A\sim B$ on $S$ for $A,B \in S$ where $A\sim B$ under
 an interpretation $\mathcal{I}_S$ if and only if it is not the case that
 $v_{\mathcal{I}_S}(A) = \top$ and $v_{\mathcal{I}_S}(B) = \bot$.
+\end{enumerate}
+
 \begin{parts}
-\part Prove $\sim$ is a partial order on $S$.
+\part Prove $*$ is an equivalence relation on $S$.
 \begin{solution}
 omitted
 \end{solution}
-\part What is $\sim$?
+\part What is $*$?
 \begin{solution}
 omitted
-%The material implication ($\implies$).
+\end{solution}
+\part Prove $\sim$ is reflexive.
+\begin{solution}
+omitted
+\end{solution}
+\part Prove $\sim$ is transitive.
+\begin{solution}
+omitted
+\end{solution}
+\part Prove the claim that if $A\sim B$ and $B \sim A$, then $A*B$.
+\begin{solution}
+omitted
 \end{solution}
 \end{parts}
 
