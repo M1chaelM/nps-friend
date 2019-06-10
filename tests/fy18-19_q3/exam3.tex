@@ -66,29 +66,29 @@
 %Mutual exclusion property.
 %Liveness Property.
 
-\question Define propositions $p$, $q$, $p'$ and $q'$ as follows:\\
- $p$: ``Process p is in the critical section.''\\
- $q$: ``Process q is in the critical section.''\\ 
- $p'$: ``Process p is attempting to enter the critical section.\\
- $q'$: ``Process q is attempting to enter the critical section.''\\
-\begin{parts}
-\part[2] Use the propositions given above to express the property of
-mutual exclusion in linear temporal logic.
-\vspace{15mm}
-
-\begin{solution}
-$\Box \ngg (p \land q)$
-\end{solution}
-
-\part[2] Use the propositions given above to express the property of
-liveness in linear temporal logic.
-\vspace{15mm}
-
-\begin{solution}
-$\Box (p' \imp \Diamond p) \land \Box (q' \imp \Diamond q)$
-\end{solution}
-\end{parts}
-
+%\question Define propositions $p$, $q$, $p'$ and $q'$ as follows:\\
+% $p$: ``Process p is in the critical section.''\\
+% $q$: ``Process q is in the critical section.''\\ 
+% $p'$: ``Process p is attempting to enter the critical section.\\
+% $q'$: ``Process q is attempting to enter the critical section.''\\
+%\begin{parts}
+%\part[2] Use the propositions given above to express the property of
+%mutual exclusion in linear temporal logic.
+%\vspace{15mm}
+%
+%\begin{solution}
+%$\Box \ngg (p \land q)$
+%\end{solution}
+%
+%\part[2] Use the propositions given above to express the property of
+%liveness in linear temporal logic.
+%\vspace{15mm}
+%
+%\begin{solution}
+%$\Box (p' \imp \Diamond p) \land \Box (q' \imp \Diamond q)$
+%\end{solution}
+%\end{parts}
+%
 \question For each formula below select all that apply:
 
 \begin{parts}
@@ -132,20 +132,25 @@ $\Box (p' \imp \Diamond p) \land \Box (q' \imp \Diamond q)$
 \end{oneparcheckboxes}
 \vspace{5mm}
 
-
-
 \end{parts}
-
-\vspace{5mm}
-\question[4] Let $A$ be some set of formulas in first order logic and $B$ the
-set of all $\id{FOL}$ formulas that are not in $A$. Which of
-the following can you conclude (choose all that apply)?
-\begin{checkboxes}
-\CorrectChoice If $A$ is decidable, $B$ is decidable.
-\choice If $A$ is not decidable, $B$ is semi-decidable.
-\choice If $A$ is in $P$, $B$ is semi-decidable.
-\CorrectChoice If $A$ is semi-decidable, $B$ is neither decidable nor semi-decidable.
-\end{checkboxes}
+\question[4] Consider the following interpretation $\mathcal{I} = (P,\{C,E\},\{Fred\})$,
+where 
+\begin{itemize}
+\item $P$ is a set of people, 
+\item $C$ is a unary relation such that $C(x)$ iff $x$ is a civilian, 
+\item $E$ is a unary relation such that $E(x)$ iff $x$ may enter the library.
+\item Fred is some person.
+\end{itemize}
+Write a statement in first order logic to express the following:
+\begin{parts}
+\part All civilians may enter the library if only civilians may enter the
+library.
+\vspace{15mm}
+\part If Fred is a civilian, then no one may enter the library.
+\vspace{15mm}
+\end{parts}
+\question[3] Let $\Sigma = \{a\}$ and let $K$ be the set of odd length
+strings over $\Sigma^*$. Write a Post system for $K$.
 
 \clearpage
 \question For each of the formulas and sets of interpretations below, mark $S$
@@ -477,33 +482,43 @@ $s_5 = s_3$, $s_6 = s_4$, etc.)
 \end{parts}
 
 \clearpage
-\question[5] Consider the following attempt to solve the critical section
-problem:
-\begin{center}
-\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
-\hline
-\multicolumn{2}{|c|}{\p{boolean wantp = false, wantq = false}}\\
-\hline
-\p{Process p} & \p{Process q} \\
-\hline
-\p{while (true) \{} & \p{while (true) \{} \\
-\p{\ tryp: \ wantp = true} & \p{\ tryq: \ wantq = true } \\
-\p{\ waitp: wait until !wantq } & \p{\ waitq: wait until !wantp} \\
-\p{\ csp: \ \ wantp = false} & \p{\ csq: \ \ wantq = false} \\
-\p{\}} & \p{\}} \\\hline
-\end{tabular}
-\end{center}
-Draw the state transition diagram for process $p$.
-\vspace{30mm}
+%\question[5] Consider the following attempt to solve the critical section
+%problem:
+%\begin{center}
+%\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+%\hline
+%\multicolumn{2}{|c|}{\p{boolean wantp = false, wantq = false}}\\
+%\hline
+%\p{Process p} & \p{Process q} \\
+%\hline
+%\p{while (true) \{} & \p{while (true) \{} \\
+%\p{\ tryp: \ wantp = true} & \p{\ tryq: \ wantq = true } \\
+%\p{\ waitp: wait until !wantq } & \p{\ waitq: wait until !wantp} \\
+%\p{\ csp: \ \ wantp = false} & \p{\ csq: \ \ wantq = false} \\
+%\p{\}} & \p{\}} \\\hline
+%\end{tabular}
+%\end{center}
+%Draw the state transition diagram for process $p$.
+%\vspace{30mm}
+\question[4] Let $A$ be some set of formulas in first order logic and $B$ the
+set of all $\id{FOL}$ formulas that are not in $A$. Which of
+the following can you conclude (choose all that apply)?
+\begin{checkboxes}
+\CorrectChoice If $A$ is decidable, $B$ is decidable.
+\choice If $A$ is not decidable, $B$ is semi-decidable.
+\choice If $A$ is in $P$, $B$ is semi-decidable.
+\CorrectChoice If $A$ is semi-decidable, $B$ is neither decidable nor semi-decidable.
+\end{checkboxes}
+\vspace{5mm}
 
-\question[5] The following is proposed as an alternative one-bit adder design:
+\question The following is proposed as an alternative one-bit adder design:
 
 \begin{center}
 \begin{picture}(280,120)
 \put(-10,  0){\makebox(20,20)[l]{$b_2$}}
 \put(-10,100){\makebox(20,20)[l]{$b_1$}}
-\put(260, 20){\makebox(25,20)[l]{Sum}}
-\put(260, 80){\makebox(25,20)[l]{Carry}}
+\put(260, 20){\makebox(25,20)[l]{s}}
+\put(260, 80){\makebox(25,20)[l]{c}}
 \put(20, 10){\line(1,0){50}}
 \put(20,110){\line(1,0){60}}
 \put(30, 10){\line(1, 2){40}}
@@ -550,18 +565,39 @@ Draw the state transition diagram for process $p$.
 \end{picture}
 \end{center}
 
-The behavior of this circuit can be expressed in clausal form as:
+\begin{parts}
+\part[4] Write a formula in propositional logic that relates: 
 
-\[\{\bar{s}\bar{b_1}\bar{b_2},
-  \bar{s}b_1b_2,s\bar{b_1}b_2,sb_1\bar{b_2},\bar{c}b_1,\bar{c}b_2,c\bar{b_1}\bar{b_2}\}\]
+\begin{subparts}
 
-where $s$ is the sum bit and $c$ is the carry bit. Add the unit literals $s$ and
-$c$ and use DPLL to show that the sum bit and carry bit can never be set at the
-same time:
+\subpart $b_1$, $b_2$ and $c$
+\vspace{15mm}
+\begin{solution}
+$(b_1 \lor b_2) \land (b_1 \land b_2) \eqv c$
+\end{solution}
 
-\[\{\bar{s}\bar{b_1}\bar{b_2},
-  \bar{s}b_1b_2,s\bar{b_1}b_2,sb_1\bar{b_2},\bar{c}b_1,\bar{c}b_2,c\bar{b_1}\bar{b_2},s,c\}\]
-\vspace{30mm}
+\subpart $b_1$, $b_2$ and $s$
+\vspace{15mm}
+\begin{solution}
+$\ngg (b_1 \lor b_2) \land (b_1 \land b_2) \eqv s$
+\end{solution}
+\end{subparts}
+
+\part[4] Assume $s$ and $c$ are meant to model the behavior of sum and carry
+bits respectively, and use your statements to evaluate the proposed design.
+
+\begin{subparts}
+\subpart Will the sum bit function correctly? If yes, explain how you know
+this. If no, provide an example.
+\vspace{15mm}
+\subpart Will the carry bit function correctly? If yes, explain how you know
+this. If no, provide an example.
+\vspace{15mm}
+\end{subparts}
+
+
+\end{parts}
+
 
 \clearpage
 \question Answer parts a, b and c with respect to the automaton shown below:
@@ -647,8 +683,23 @@ j.\;S_1(i)\;\wedge\;S_2(i)\;\wedge\cdots\wedge\;S_1(n)\wedge\;S_2(n)\imp S_1(n+1
 \end{parts}
 
 \clearpage
-\question[4] Let $\rho^*$ be a binary relation on the set $S$. Use first order logic to
-express the claim that $\rho^*$ is reflexive and transitive.
+\question[5] Consider the following set of formulas in first order logic:
+\begin{itemize}
+\item $\forall x p(x,x)$
+\item $\forall x \forall y (p(x,y) \land p(y,x) \imp q(x,y))$
+\item $\forall x \forall y \forall z ((p(x,y) \land p(y,z)) \imp p(x,z))$
+\end{itemize}
+Which of the following represent \textbf{satisfying} interpretations?
+Choose all that apply:
+\begin{choices} 
+\choice$\mathcal{I}_A = \{\Z, \{ \leq , = \}, \{\} \}$ 
+\choice$\mathcal{I}_A = \{\N, \{ > , = \}, \{\} \}$ 
+\choice$\mathcal{I}_A = \{\N, \{ \;|\; , = \}, \{\} \}$ (Note that $|$ indicates ``divides'')
+\choice$\mathcal{I}_A = \{\{\emptyset, \{1\}, \{1,2\}\}, \{\subseteq , =  \}, \{\} \}$ 
+\choice$\mathcal{I}_A = \{\mathcal{F}, \{\;\models \;, \;\equiv \; \}, \{\} \}$
+(Let $\mathcal{F}$ be the set of formulas in propositional logic.)
+\end{choices}
+
 %\question[4] Let $S_{rt}$ be the set of reflexive, transitive relations, and let
 %$\rho^*$ be a relation on the set of boolean functions $F_B$ such that 
 %$\rho^* \in S_{rt}$.  Use first order logic to express the properties of $\rho^*$. 
@@ -656,11 +707,18 @@ express the claim that $\rho^*$ is reflexive and transitive.
 $(\forall x (S(x) \imp \rho^*(x,x))) \land (\forall x\forall y \forall z (S(x)
       \land S(y) \land S(z) \land \rho^*(x,y) \land rho^*(y,z) \imp \rho^*(x,z)))$
 \end{solution}
-\vspace{50mm}
+\vspace{5mm}
 
 
+\bonusquestion[4] 
+Let $\Sigma = \{a,b\}$ and let $p(x,y)$ be a binary relation on $\Sigma^*$ 
+where $p(x,y)$ if and only if there exists a string $w$ in $\Sigma^*$ such that $y = xw$.
+For example, if $x = aba$ and $y = ababb$, then $p(x,y)$ because $w = bb$
+and $bb \in \Sigma^*$.  Prove that $P$ is a partial order.
+\vspace{30mm}
 
-\bonusquestion[5] Prove: $\models \Box (p \imp q) \imp (\Box p \imp \Box q)$
+
+%\bonusquestion[4] Prove: $\models \Box (p \imp q) \imp (\Box p \imp \Box q)$
 
 
 %Draw derivation tree / post system?
