@@ -1,0 +1,735 @@
+\documentclass[addpoints]{exam}
+
+\usepackage{epic,array,ecltree,url,calrsfs}
+\usepackage[nointegrals]{wasysym}
+
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{../mlextra} % must be below ams packages
+\usepackage{mathrsfs}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {../../art/} }
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+
+%Pagination stuff.
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+
+\newcommand{\tf}[1][{}]{%
+\fillin[#1][0.25in]%
+}
+
+\noprintanswers
+\unframedsolutions
+\SolutionEmphasis{\itshape\small}
+\SolutionEmphasis{\color{NavyBlue}}
+\checkboxchar{$\Box$}
+\checkedchar{$\blacksquare$}
+
+%\pagestyle{empty} 
+%\footer{}{\thepage}{}
+
+\pointsinmargin
+\begin{document}
+
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+{\large CS3001: Foundations of Computer Science} &  \makebox[3in]{\large Name:\enspace\hrulefill}\\
+{\large June 11, 2019} & \\
+{\large Exam 3} & 
+\end{tabular*}\\
+
+\fbox{\fbox{\parbox{6in}{\textbf{Instructions}: Please answer the questions 
+  below to the best of your ability. Be sure to show your work where appropriate. 
+   This exam is closed book, closed notes, closed computer. There are \numpoints\ 
+   points in total and \numbonuspoints\ possible extra credit points. }}}\\
+\begin{questions}
+
+%First section: 10 points
+%
+%Second section: 10 points
+%
+%Temporal Logic: 35 points
+%
+%Mutual exclusion property.
+%Liveness Property.
+
+\question Define propositions $p$, $q$, $p'$ and $q'$ as follows:\\
+ $p$: ``Process p is in the critical section.''\\
+ $q$: ``Process q is in the critical section.''\\ 
+ $p'$: ``Process p is attempting to enter the critical section.\\
+ $q'$: ``Process q is attempting to enter the critical section.''\\
+\begin{parts}
+\part[2] Use the propositions given above to express the property of
+mutual exclusion in linear temporal logic.
+\vspace{15mm}
+
+\begin{solution}
+$\Box \ngg (p \land q)$
+\end{solution}
+
+\part[2] Use the propositions given above to express the property of
+liveness in linear temporal logic.
+\vspace{15mm}
+
+\begin{solution}
+$\Box (p' \imp \Diamond p) \land \Box (q' \imp \Diamond q)$
+\end{solution}
+\end{parts}
+
+\question For each formula below select all that apply:
+
+\begin{parts}
+\part[2] $\Circle p \land \ngg \Diamond  p$
+
+\begin{oneparcheckboxes}
+\choice Valid
+\choice Satisfiable
+\CorrectChoice Falsifiable
+\CorrectChoice Unsatisfiable
+\end{oneparcheckboxes}
+\vspace{5mm}
+
+\part[2] $\Box(p \imp \Circle p) \imp \Box p$
+
+\begin{oneparcheckboxes}
+\choice Valid
+\CorrectChoice Satisfiable
+\CorrectChoice Falsifiable
+\choice Unsatisfiable
+\end{oneparcheckboxes}
+\vspace{5mm}
+
+\part[2] $\Box(p \land q) \eqv (\Box p \land \Box q)$
+
+\begin{oneparcheckboxes}
+\CorrectChoice Valid
+\CorrectChoice Satisfiable
+\choice Falsifiable
+\choice Unsatisfiable
+\end{oneparcheckboxes}
+\vspace{5mm}
+
+\part[2] $\Diamond \Box \ngg p \imp \Box \Diamond p $   
+
+\begin{oneparcheckboxes}
+\choice Valid
+\choice Satisfiable
+\CorrectChoice Falsifiable
+\CorrectChoice Unsatisfiable
+\end{oneparcheckboxes}
+\vspace{5mm}
+
+
+
+\end{parts}
+
+\vspace{5mm}
+\question[4] Let $A$ be some set of formulas in first order logic and $B$ the
+set of all $\id{FOL}$ formulas that are not in $A$. Which of
+the following can you conclude (choose all that apply)?
+\begin{checkboxes}
+\CorrectChoice If $A$ is decidable, $B$ is decidable.
+\choice If $A$ is not decidable, $B$ is semi-decidable.
+\choice If $A$ is in $P$, $B$ is semi-decidable.
+\CorrectChoice If $A$ is semi-decidable, $B$ is neither decidable nor semi-decidable.
+\end{checkboxes}
+
+\clearpage
+\question For each of the formulas and sets of interpretations below, mark $S$
+next to each interpretation that {\bf \emph{satisfies}} the formula, and $F$ next to each
+interpretation that {\bf \emph{falsifies}} the formula. (For all interpretations shown,
+assume the values of the last two states continue to repeat after $s_4$, so 
+$s_5 = s_3$, $s_6 = s_4$, etc.)
+\begin{parts}
+\part[4] $\Box (p \lor q) \imp (\Box p \lor \Box q)$ \\
+\begin{picture}(340,1)
+\put(200, 0){\makebox(25,20)[l]{\small Repeat $\imp$}}
+\multiput(190, -135)(0,5){30}{\line(0,1){1}}
+\end{picture}
+\begin{choices}
+\choice
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$p$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{$p$}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{$p$}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$p$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{$p$}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[S] (S/F)
+
+\choice
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$p$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{$q$}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{$p$}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$q$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{$p$}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[F] (S/F)
+
+
+
+\choice
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{$q$}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{$p$}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$q$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{$p$}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[S] (S/F)
+
+\choice 
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[S] (S/F)
+
+
+\end{choices}
+
+
+\part[4] $(\Box p \imp \Box q) \imp \Box( p \imp q) $\\
+\begin{picture}(340,1)
+\put(200, 0){\makebox(25,20)[l]{\small Repeat $\imp$}}
+\multiput(190, -135)(0,5){30}{\line(0,1){1}}
+\end{picture}
+\begin{choices}
+
+\choice 
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$pq$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{$pq$}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{$pq$}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$pq$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{$pq$}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[S] (S/F)
+
+\choice
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$q$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{$q$}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{$p$}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$q$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{$q$}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[F] (S/F)
+
+
+\choice
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$q$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{$pq$}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$q$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{$pq$}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[F] (S/F)
+
+\choice
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$p$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{$p$}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{$p$}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$p$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{$p$}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[F] (S/F)
+\end{choices}
+
+\part[4] $\Box (q \imp \Box \Diamond p)$ \\
+%\part[4] $\Box \Diamond p \imp \Diamond \Box p$ \\
+\begin{picture}(340,1)
+\put(200, 0){\makebox(25,20)[l]{\small Repeat $\imp$}}
+\multiput(190, -135)(0,5){30}{\line(0,1){1}}
+\end{picture}
+\begin{choices}
+\choice
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$q$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{$p$}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$q$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[F] (S/F)
+
+
+\choice 
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$q$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[F] (S/F)
+
+\choice
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$p$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$p$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{$p$}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[S] (S/F)
+  
+
+\choice
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$p$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$p$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{$q$}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[S] (S/F)
+
+
+
+\end{choices}
+\part[4] $(\Diamond \Box p \land \Box \Diamond q) \imp \Box \Diamond (p \land q)$\\
+\begin{picture}(340,1)
+\put(200, 0){\makebox(25,20)[l]{\small Repeat $\imp$}}
+\multiput(190, -135)(0,5){30}{\line(0,1){1}}
+\end{picture}
+
+\begin{choices}
+
+\choice 
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$p$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{$p$}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$p$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{$pq$}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[S] (S/F)
+
+
+\choice
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$p$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$q$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{$p$}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[S] (S/F)
+
+\choice
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{$pq$}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{$pq$}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{$pq$}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{$p$}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{$p$}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[S] (S/F)
+
+
+
+\choice
+\unitlength=.9pt
+\begin{picture}(340,30)
+\put(  0,-5){\state{}{$s_{0}$}}
+\put( 20, 5){\vector(1,0){40}}
+\put( 60,-5){\state{}{$s_{1}$}}
+\put( 80, 5){\vector(1,0){40}}
+\put(120,-5){\state{}{$s_{2}$}}
+\put(140, 5){\vector(1,0){40}}
+\put(180,-5){\state{}{$s_{3}$}}
+\put(200, 5){\vector(1,0){40}}
+\put(240,-5){\state{}{$s_{4}$}}
+\put(260, 5){\vector(1,0){40}}
+\put(300, 0){\makebox(20,10){\ldots}}
+\end{picture}
+\tf[S] (S/F)
+
+\end{choices}
+
+
+
+\end{parts}
+
+\clearpage
+\question[5] Consider the following attempt to solve the critical section
+problem:
+\begin{center}
+\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+\hline
+\multicolumn{2}{|c|}{\p{boolean wantp = false, wantq = false}}\\
+\hline
+\p{Process p} & \p{Process q} \\
+\hline
+\p{while (true) \{} & \p{while (true) \{} \\
+\p{\ tryp: \ wantp = true} & \p{\ tryq: \ wantq = true } \\
+\p{\ waitp: wait until !wantq } & \p{\ waitq: wait until !wantp} \\
+\p{\ csp: \ \ wantp = false} & \p{\ csq: \ \ wantq = false} \\
+\p{\}} & \p{\}} \\\hline
+\end{tabular}
+\end{center}
+Draw the state transition diagram for process $p$.
+\vspace{30mm}
+
+\question[5] The following is proposed as an alternative one-bit adder design:
+
+\begin{center}
+\begin{picture}(280,120)
+\put(-10,  0){\makebox(20,20)[l]{$b_2$}}
+\put(-10,100){\makebox(20,20)[l]{$b_1$}}
+\put(260, 20){\makebox(25,20)[l]{Sum}}
+\put(260, 80){\makebox(25,20)[l]{Carry}}
+\put(20, 10){\line(1,0){50}}
+\put(20,110){\line(1,0){60}}
+\put(30, 10){\line(1, 2){40}}
+\put(30,110){\line(1,-2){40}}
+\put(70, 90){\line(1,0){10}}
+\put(70,80){ %OR gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,20){\oval(20,40)[r]}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(70,0){ %AND gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,0){\line(0,1){40}}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(110,100){\line(1,0){60}}
+\put(110, 20){\line(1,0){60}}
+\put(210, 30){\line(1,0){40}}
+\put(210, 90){\line(1,0){40}}
+\put(170,70){ %AND gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,0){\line(0,1){40}}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}\put(170,10){ %AND gate
+  \put(20,20){\oval(40,40)[r]}
+  \put(0,0){\line(0,1){40}}
+  \put(0,0){\line(1,0){20}}
+  \put(0,40){\line(1,0){20}}
+}
+\put(120,80){  % NOT gate
+  \put( 0, 0){\line(1,0){20}}
+  \put( 0, 0){\line(1,-2){10}}
+  \put(20, 0){\line(-1,-2){10}}
+  \put(10,-23){\circle{6}}
+}
+\put(130,80){\line(0,1){20}}
+\put(130,54){\line(0,-1){14}}
+\put(130,40){\line(1,0){40}}
+\put(150,80){\line(1,0){20}}
+\put(150,20){\line(0,1){60}}
+\end{picture}
+\end{center}
+
+The behavior of this circuit can be expressed in clausal form as:
+
+\[\{\bar{s}\bar{b_1}\bar{b_2},
+  \bar{s}b_1b_2,s\bar{b_1}b_2,sb_1\bar{b_2},\bar{c}b_1,\bar{c}b_2,c\bar{b_1}\bar{b_2}\}\]
+
+where $s$ is the sum bit and $c$ is the carry bit. Add the unit literals $s$ and
+$c$ and use DPLL to show that the sum bit and carry bit can never be set at the
+same time:
+
+\[\{\bar{s}\bar{b_1}\bar{b_2},
+  \bar{s}b_1b_2,s\bar{b_1}b_2,sb_1\bar{b_2},\bar{c}b_1,\bar{c}b_2,c\bar{b_1}\bar{b_2},s,c\}\]
+\vspace{30mm}
+
+\clearpage
+\question Answer parts a, b and c with respect to the automaton shown below:
+\fullwidth{\begin{center}
+\includegraphics{exam3_automaton.pdf}
+\end{center}}
+
+\begin{parts}
+\part[4] Fill in the blanks to complete the definition of the transition
+function, $\delta$.
+
+\begin{align*}
+  &\delta(s_0,0) = s_0&
+  &\delta(s_1,\fillin[$0$][.25in]) = \fillin[$s_2$][.25in]
+  &\delta(s_2,\fillin[$0$][.25in]) = \fillin[$s_2$][.25in]\\ 
+  &\delta(s_0,1) = s_1&
+  &\delta(s_1,\fillin[$1$][.25in]) = \fillin[$s_2$][.25in]
+  &\delta(s_2,\fillin[$1$][.25in]) = \fillin[$s_2$][.25in]\\
+\end{align*}
+
+\part[2] Let $\hat{\delta}(s_1,w) = s_0$. Which of the following are possible
+values of $w$ (circle all that apply)?
+
+\begin{oneparchoices}
+\CorrectChoice $11$
+\choice $11110$
+\CorrectChoice $1111011$
+\choice $100000111$
+\end{oneparchoices}
+\vspace{5mm}
+
+\part[3] Say we want to prove that this automaton accepts only strings
+ending in an even number of ones. Our strategy will be to perform
+induction on input length. Fill in the blanks below to complete the statements
+we will establish to prove the theorem:
+\begin{itemize}
+\item The automaton halts in state $s_0$ iff its input ends with a \fillin[$0$][.25in]. 
+\item The automaton halts in state $s_1$ iff its input ends with an \fillin[odd][.25in] number of ones.
+\item The automaton halts in state $s_2$ iff \fillin[its input ends with an odd
+number of ones] [3in].
+\end{itemize}
+\part[3] Which of the following induction rules is the best choice for our proof?
+\begin{choices}
+\uplevel{
+\choice 
+	\(\begin{array}[t]{l}
+	S(i) \;\wedge\; \forall n \geq i.\;S(n) \imp S(n+1) \\
+	\hline
+	\forall n \geq i. \; S(n)
+	\end{array}\) % \\[2ex]
+
+\CorrectChoice 
+	\(\begin{array}[t]{l}
+	S_1(i)\;\wedge\;S_2(i)\;\wedge\;S_3(i)\;\wedge\;\forall n \geq
+        i.\;S_1(n)\;\wedge\;S_2(n)\;\wedge\;S_3(n)\imp S_1(n+1)\;\wedge\;S_2(n+1)\wedge\;S_3(n+1)\\
+	\hline
+	\forall n \geq i. \; S_1(n)\;\wedge\;S_2(n)\;\wedge\;S_3(n)
+
+	\end{array}\) % \\[2ex]
+
+\choice 
+	\(\begin{array}[t]{l}
+	S_1(i) \;\wedge\;S_2(i)\;\wedge\;S_3(i)  \;\wedge\; \\
+        \forall n \geq i.\;S_1(i)\;\wedge\;S_2(i)\;\wedge\;S_3(i)\;\wedge\cdots\wedge\;S_1(n)\;\wedge\;S_2(n)\;\wedge\;S_3(n)\imp S_1(n+1)\;\wedge\;S_2(n+1)\;\wedge\;S_3(n+1)\\
+	\hline
+	\forall n \geq i. \; S_1(n)\;\wedge\;S_2(n)\;\wedge\;S_3(n)
+	\end{array}\)
+
+\choice 
+	\(\begin{array}[t]{l}
+	S_1(i) \;\wedge\; S_2(i)\;\wedge\;S_1(i+1) \;\wedge\; S_2(i+1)\;\wedge\;\cdots\wedge\;S_1(j)\;\wedge\;S_2(j) \\
+\forall n \geq
+j.\;S_1(i)\;\wedge\;S_2(i)\;\wedge\cdots\wedge\;S_1(n)\wedge\;S_2(n)\imp S_1(n+1)\wedge\;S_2(n+1)\\
+	\hline
+	\forall n \geq i. \; S_1(n)\;\wedge\;S_2(n)
+	\end{array}\) % \\[2ex]
+
+}
+\end{choices}
+
+\part[2] Briefly justify your answer to part (c):
+
+\end{parts}
+
+\clearpage
+\question[4] Let $\rho^*$ be a binary relation on the set $S$. Use first order logic to
+express the claim that $\rho^*$ is reflexive and transitive.
+%\question[4] Let $S_{rt}$ be the set of reflexive, transitive relations, and let
+%$\rho^*$ be a relation on the set of boolean functions $F_B$ such that 
+%$\rho^* \in S_{rt}$.  Use first order logic to express the properties of $\rho^*$. 
+\begin{solution}
+$(\forall x (S(x) \imp \rho^*(x,x))) \land (\forall x\forall y \forall z (S(x)
+      \land S(y) \land S(z) \land \rho^*(x,y) \land rho^*(y,z) \imp \rho^*(x,z)))$
+\end{solution}
+\vspace{50mm}
+
+
+
+\bonusquestion[5] Prove: $\models \Box (p \imp q) \imp (\Box p \imp \Box q)$
+
+
+%Draw derivation tree / post system?
+%Complexity questions?
+
+
+%For final, need to add interpretations
+%\question[4] Which of the following statements in first order logic correctly
+%             expresses the anti-symmetric property (choose all that apply):
+%\begin{checkboxes}
+%\CorrectChoice $\forall x \forall y(p(x,y) \land p(y,x) \imp q(x,y)$
+%\choice        $\forall x \forall y (\ngg q(x,y) \imp (p(x,y) \imp \ngg %p(y,x)))
+%\end{checkboxes}
+
+%\question[6] Let $S$ be a propositional logic formula in clausal form, such that
+%$S = \{s\bar{t}, p\bar{r}\bar{s}, \bar{p}\bar{r}, r\bar{s}, \bar{p}rs, st, pt,
+%  rt, t\}$. Use DPLL to prove $S$ is a contradiction. Draw the execution tree.
+%
+%\vspace{60mm}
+%
+%
+%
+%
+%
+%\question[4] Let $A$ and $B$ be problems such that $A$ reduces to $B$, and
+%evaluate each of the following claims:
+%\begin{parts}
+%\part \tf[T] (T/F) If $B$ is decidable, $A$ is decidable.
+%\part \tf[F] (T/F) If $B$ is NP-Hard, $A$ is decidable.
+%\part \tf[T] (T/F) If FOL-VAL reduces to $A$, $B$ is undecidable.
+%\part \tf[F] (T/F) If $B$ reduces to FOL-SAT, $B$ is undecidable.
+%\end{parts}
+%
+%\vspace{5mm}
+%
+%\question Let $\mathcal{F}$ be the set of all formulas in propositional logic.
+%Define $A \subseteq \mathcal{F}$ to be the set of formulas that your instructor
+%finds interesting, and let $B$ be the set of all other formulas.
+%\begin{parts}
+%
+%\part[4] Assume we show that a non-deterministic Turing machine can determine
+%whether a formula is in $A$ in polynomial time. Which of the following can you 
+%conclude (choose all that apply)?
+%\begin{checkboxes}
+%\CorrectChoice $A$ is in NP. 
+%\choice        $A$ is NP-Hard.
+%\CorrectChoice $A$ is decidable. 
+%\CorrectChoice $A$ is semi-decidable. 
+%\end{checkboxes}
+%
+%\vspace{5mm}
+%\part[4] Now assume PL-SAT reduces to $A$ in polynomial time. Which of the following can you 
+%conclude (choose all that apply)?
+%\begin{checkboxes}
+%\CorrectChoice $A$ is NP-Complete.
+%\CorrectChoice $A$ is NP-Hard.
+%\CorrectChoice $B$ is in CoNP.
+%\CorrectChoice $B$ is CoNP-Complete.
+%\end{checkboxes}
+%\end{parts}
+%
+%\vspace{5mm}
+%\question Let $FOL$ be the set of all formulas in first-order logic, and $A$-FOL  
+
+
+
+%\part[1] $A = (\forall x p(x) \imp \forall x q(x)) \imp \forall x (p(x) \imp q(x))$ and $\mathcal{I}_A = \{\N_0, \{=\}, \{\times\}, \fillin \}$
+
+\end{questions}
+\end{document}
+
+
