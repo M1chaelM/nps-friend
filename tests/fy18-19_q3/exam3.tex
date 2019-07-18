@@ -610,7 +610,7 @@ this. If no, provide an example.
 function, $\delta$.
 
 \begin{align*}
-  &\delta(s_0,0) = s_0&
+  &\delta(s_0,0) = s_2&
   &\delta(s_1,\fillin[$0$][.25in]) = \fillin[$s_2$][.25in]
   &\delta(s_2,\fillin[$0$][.25in]) = \fillin[$s_2$][.25in]\\ 
   &\delta(s_0,1) = s_1&
@@ -618,7 +618,7 @@ function, $\delta$.
   &\delta(s_2,\fillin[$1$][.25in]) = \fillin[$s_2$][.25in]\\
 \end{align*}
 
-\part[2] Let $\hat{\delta}(s_1,w) = s_0$. Which of the following are possible
+\part[2] Let $\hat{\delta}(s_0,w) = s_0$. Which of the following are possible
 values of $w$ (circle all that apply)?
 
 \begin{oneparchoices}
@@ -634,8 +634,9 @@ ending in an even number of ones. Our strategy will be to perform
 induction on input length. Fill in the blanks below to complete the statements
 we will establish to prove the theorem:
 \begin{itemize}
-\item The automaton halts in state $s_0$ iff its input ends with a \fillin[$0$][.25in]. 
-\item The automaton halts in state $s_1$ iff its input ends with an \fillin[odd][.25in] number of ones.
+\item The automaton halts in state $s_0$ iff its input ends with an even number of ones. 
+\item The automaton halts in state $s_1$ iff its input ends with \fillin[an odd
+number of ones][2.25in].
 \item The automaton halts in state $s_2$ iff \fillin[its input ends with an odd
 number of ones] [3in].
 \end{itemize}
@@ -742,47 +743,6 @@ and $bb \in \Sigma^*$.  Prove that $P$ is a partial order.
 %
 %
 %
-%
-%\question[4] Let $A$ and $B$ be problems such that $A$ reduces to $B$, and
-%evaluate each of the following claims:
-%\begin{parts}
-%\part \tf[T] (T/F) If $B$ is decidable, $A$ is decidable.
-%\part \tf[F] (T/F) If $B$ is NP-Hard, $A$ is decidable.
-%\part \tf[T] (T/F) If FOL-VAL reduces to $A$, $B$ is undecidable.
-%\part \tf[F] (T/F) If $B$ reduces to FOL-SAT, $B$ is undecidable.
-%\end{parts}
-%
-%\vspace{5mm}
-%
-%\question Let $\mathcal{F}$ be the set of all formulas in propositional logic.
-%Define $A \subseteq \mathcal{F}$ to be the set of formulas that your instructor
-%finds interesting, and let $B$ be the set of all other formulas.
-%\begin{parts}
-%
-%\part[4] Assume we show that a non-deterministic Turing machine can determine
-%whether a formula is in $A$ in polynomial time. Which of the following can you 
-%conclude (choose all that apply)?
-%\begin{checkboxes}
-%\CorrectChoice $A$ is in NP. 
-%\choice        $A$ is NP-Hard.
-%\CorrectChoice $A$ is decidable. 
-%\CorrectChoice $A$ is semi-decidable. 
-%\end{checkboxes}
-%
-%\vspace{5mm}
-%\part[4] Now assume PL-SAT reduces to $A$ in polynomial time. Which of the following can you 
-%conclude (choose all that apply)?
-%\begin{checkboxes}
-%\CorrectChoice $A$ is NP-Complete.
-%\CorrectChoice $A$ is NP-Hard.
-%\CorrectChoice $B$ is in CoNP.
-%\CorrectChoice $B$ is CoNP-Complete.
-%\end{checkboxes}
-%\end{parts}
-%
-%\vspace{5mm}
-%\question Let $FOL$ be the set of all formulas in first-order logic, and $A$-FOL  
-
 
 
 %\part[1] $A = (\forall x p(x) \imp \forall x q(x)) \imp \forall x (p(x) \imp q(x))$ and $\mathcal{I}_A = \{\N_0, \{=\}, \{\times\}, \fillin \}$
