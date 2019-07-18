@@ -600,7 +600,8 @@ this. If no, provide an example.
 
 
 \clearpage
-\question Answer parts a, b and c with respect to the automaton shown below:
+\question Answer the questions that follow with respect to the automaton shown
+below:
 \fullwidth{\begin{center}
 \includegraphics{exam3_automaton.pdf}
 \end{center}}
@@ -634,12 +635,12 @@ ending in an even number of ones. Our strategy will be to perform
 induction on input length. Fill in the blanks below to complete the statements
 we will establish to prove the theorem:
 \begin{itemize}
-\item The automaton halts in state $s_0$ iff its input ends with a \fillin[$0$][.25in]. 
+\item The automaton halts in state $s_0$ iff its input does not end with a \fillin[$1$][.25in]. 
 \item The automaton halts in state $s_1$ iff its input ends with an \fillin[odd][.25in] number of ones.
 \item The automaton halts in state $s_2$ iff \fillin[its input ends with an odd
 number of ones] [3in].
 \end{itemize}
-\part[3] Which of the following induction rules is the best choice for our proof?
+\part[3]\label{part:inductionrule} Which of the following induction rules is the best choice for our proof?
 \begin{choices}
 \uplevel{
 \choice 
@@ -678,7 +679,7 @@ j.\;S_1(i)\;\wedge\;S_2(i)\;\wedge\cdots\wedge\;S_1(n)\wedge\;S_2(n)\imp S_1(n+1
 }
 \end{choices}
 
-\part[2] Briefly justify your answer to part (c):
+\part[2] Briefly justify your answer to part (\ref{part:inductionrule}):
 
 \end{parts}
 
