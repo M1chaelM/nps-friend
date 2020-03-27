@@ -1,0 +1,59 @@
+\documentclass[style=sailor,size=12pt]{powerdot}
+\usepackage{epic,array,ecltree,url,calrsfs}
+\usepackage[nointegrals]{wasysym}
+\usepackage{listings}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mlextra} % Must be below ams packages
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {../art/} }
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\newcommand{\treenode}{%
+  \begingroup\normalfont
+  \includegraphics[height=\fontcharht\font`\c]{node.eps}%
+  \endgroup
+}
+
+\newcommand{\tripletreenode}{%
+  \begingroup\normalfont
+  \includegraphics[height=\fontcharht\font`\B]{3nodetree.eps}%
+  \endgroup
+}
+
+\pdsetup{method=normal}
+
+\title{Systems and Proof: Part I}
+\author{Foundations of Computer Science}
+\date{\today}
+
+\begin{document}
+\maketitle
+\begin{slide}[toc=,bm=]{Overview}
+This slide set covers the following topics:
+
+\vspace{5mm}
+\tableofcontents[content=sections]
+\end{slide}
+
+\section[slide=true]{Expressing Recursive Definitions with Post Systems} 
+\include{sap_content/sap_post}
+
+\section[slide=true]{Proof by Strong Induction}
+\include{sap_content/sap_strong}
+
+\section[slide=true]{Proof by Mutual Induction}
+\include{sap_content/sap_mutual}
+
+\end{document}
+

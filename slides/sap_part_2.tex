@@ -1,0 +1,44 @@
+\documentclass[style=sailor,size=12pt]{powerdot}
+\usepackage{epic,array,ecltree,url,calrsfs}
+\usepackage[nointegrals]{wasysym}
+\usepackage{listings}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mlextra} % Must be below ams packages
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {../art/} }
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\pdsetup{method=normal}
+
+\title{Systems and Proof: Part II}
+\author{Foundations of Computer Science}
+\date{\today}
+
+\begin{document}
+\maketitle
+\begin{slide}[toc=,bm=]{Overview}
+This slide set covers the following topics:
+
+\vspace{5mm}
+\tableofcontents[content=sections]
+\end{slide}
+
+\section[slide=true]{Programs as Automata}
+\include{sap_content/sap_automata}
+
+\section[slide=true]{Proving Properties of Automata by Mutual Induction}
+\include{sap_content/sap_automata_mutual}
+
+\end{document}
+
