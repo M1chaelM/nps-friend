@@ -1,9 +1,9 @@
 
 .PHONY: all print clean distclean install
 
-REV_PRES  := discrete_math_review.pdf relations_functions.pdf set_seq_strings.pdf animate_derivations.pdf sampleRTderivation.pdf
+REV_PRES  := discrete_math_review.pdf relations_functions.pdf set_seq_strings.pdf
 SAP_PRES  := sap_part_1.pdf sap_part_2.pdf 
-LONE_PRES := logicoverview.pdf decisionproc.pdf
+LONE_PRES := logicoverview.pdf decisionproc.pdf animate_derivations.pdf sampleRTderivation.pdf
 
 PL_PRES   := pl_part_1.pdf pl_part_2.pdf
 FOL_PRES  := fol_part_1.pdf fol_part_2.pdf
@@ -17,6 +17,7 @@ PL_PRINT  := $(PL_PRES:%.pdf=printable/%.pdf)
 FOL_PRINT := $(FOL_PRES:%.pdf=printable/%.pdf)
 PTL_PRINT := $(PTL_PRES:%.pdf=printable/%.pdf) 
 
+SAP_TARGETS := $(SAP_PRINT) $(SAP_PRES)
 PL_TARGETS := $(PL_PRINT) $(PL_PRES)
 FOL_TARGETS := $(FOL_PRINT) $(FOL_PRES)
 PTL_TARGETS := $(PTL_PRINT) $(PTL_PRES)
@@ -24,7 +25,7 @@ PTL_TARGETS := $(PTL_PRINT) $(PTL_PRES)
 PRES := $(REV_PRES) $(SAP_PRES) $(LONE_PRES) $(PL_PRES) $(FOL_PRES) $(PTL_PRES) 
 PRINTVERS := $(REV_PRINT) $(SAP_PRINT) $(LONE_PRINT) $(PL_PRINT) $(FOL_PRINT) $(PTL_PRINT) 
 
-INSTALL_DIR := ~/google_drive/NPS/teaching/2020/CS3001/slides/
+INSTALL_DIR := ~/google_drive/NPS/teaching/2020/CS3001_Q3/slides/
 
 PRINTLATEXOPTS := -latex='latex %O -interaction=nonstopmode -synctex=1 "\PassOptionsToClass{mode=print}{powerdot}\input{%S}"'
 
