@@ -1,9 +1,8 @@
 
 .PHONY: all print clean distclean install
 
-REV_PRES  := discrete_math_review.pdf relations_functions.pdf set_seq_strings.pdf
-SAP_PRES  := post.pdf animate_derivations.pdf strongind.pdf mutualind.pdf \
-             pgmsasautomata.pdf automata-mutualind.pdf sampleRTderivation.pdf
+REV_PRES  := discrete_math_review.pdf relations_functions.pdf set_seq_strings.pdf animate_derivations.pdf sampleRTderivation.pdf
+SAP_PRES  := sap_part_1.pdf sap_part_2.pdf 
 LONE_PRES := logicoverview.pdf decisionproc.pdf
 
 PL_PRES   := pl_part_1.pdf pl_part_2.pdf
@@ -34,6 +33,8 @@ all: $(PRES) $(PRINTVERS)
 presentations: $(PRES)
 
 print: $(PRINTVERS) 
+
+$(SAP_TARGETS): $(wildcard sap_content/*.tex)
 
 $(PL_TARGETS): $(wildcard pl_content/*.tex)
 

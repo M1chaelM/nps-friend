@@ -1,82 +1,69 @@
+%\documentclass[style=sailor,size=12pt]{powerdot}
+%\usepackage{epic,array,ecltree,url}
+%\usepackage[nointegrals]{wasysym}
+%\usepackage{mathtools}
+%\usepackage{graphicx}
+%\graphicspath{ {../art/} }
+%\usepackage[labelformat=empty]{caption}
+%
+%\newcommand{\id}[1]{\mbox{\it #1\/}}
+%\newcommand{\rid}[1]{\mbox{\rm #1}}
+%\newcommand{\sid}[1]{\mbox{\sf #1}}
+%\newcommand{\bid}[1]{\mbox{\bf #1}}
+%\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
+%
+%\newcommand{\lra}{\longrightarrow}
+%\newcommand{\ra}{\rightarrow}
+%\newcommand{\surj}{\twoheadrightarrow}
+%\newcommand{\graph}{\mathrm{graph}}
+%\newcommand{\bb}[1]{\mathbb{#1}}
+%\newcommand{\Ell}{\mathscr{L}}
+%\newcommand{\Z}{\bb{Z}}
+%\newcommand{\Q}{\bb{Q}}
+%\newcommand{\R}{\bb{R}}
+%\newcommand{\C}{\bb{C}}
+%\newcommand{\N}{\bb{N}}
+%\newcommand{\M}{\mathbf{M}}
+%\newcommand{\m}{\mathbf{m}}
+%\newcommand{\MM}{\mathscr{M}}
+%\newcommand{\HH}{\mathscr{H}}
+%\newcommand{\Om}{\Omega}
+%\newcommand{\Ho}{\in\HH(\Om)}
+%\newcommand{\bd}{\partial}
+%\newcommand{\del}{\partial}
+%\newcommand{\bardel}{\overline\partial}
+%\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
+%\newcommand{\img}{\mathrm{img}}
+%\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
+%\newcommand{\inter}[1]{\mathrm{int}{#1}}
+%\newcommand{\exter}[1]{\mathrm{ext}{#1}}
+%\newcommand{\cl}[1]{\mathrm{cl}{#1}}
+%\newcommand{\ds}{\displaystyle}
+%\newcommand{\vol}{\mathrm{vol}}
+%\newcommand{\cnt}{\mathrm{ct}}
+%\newcommand{\osc}{\mathrm{osc}}
+%\newcommand{\LL}{\mathbf{L}}
+%\newcommand{\UU}{\mathbf{U}}
+%\newcommand{\support}{\mathrm{support}}
+%\newcommand{\AND}{\;\wedge\;}
+%\newcommand{\OR}{\;\vee\;}
+%\newcommand{\Oset}{\varnothing}
+%\newcommand{\st}{\ni}
+%\newcommand{\wh}{\widehat}
+%\newcommand{\mli}[1]{\mathit{#1}}
+%\newcommand{\ndiv}{\hspace{-3pt}\not|\hspace{2pt}}
 
-\documentclass[style=sailor,size=12pt]{powerdot}
-\usepackage{epic,array,ecltree,url}
-\usepackage[nointegrals]{wasysym}
-\usepackage{mathtools}
-\usepackage{graphicx}
-\graphicspath{ {../art/} }
-\usepackage[labelformat=empty]{caption}
-
-\newcommand{\id}[1]{\mbox{\it #1\/}}
-\newcommand{\rid}[1]{\mbox{\rm #1}}
-\newcommand{\sid}[1]{\mbox{\sf #1}}
-\newcommand{\bid}[1]{\mbox{\bf #1}}
-\newcommand{\tinysz}[1]{\mbox{\tiny $#1$}}
-
-\newcommand{\lra}{\longrightarrow}
-\newcommand{\ra}{\rightarrow}
-\newcommand{\surj}{\twoheadrightarrow}
-\newcommand{\graph}{\mathrm{graph}}
-\newcommand{\bb}[1]{\mathbb{#1}}
-\newcommand{\Ell}{\mathscr{L}}
-\newcommand{\Z}{\bb{Z}}
-\newcommand{\Q}{\bb{Q}}
-\newcommand{\R}{\bb{R}}
-\newcommand{\C}{\bb{C}}
-\newcommand{\N}{\bb{N}}
-\newcommand{\M}{\mathbf{M}}
-\newcommand{\m}{\mathbf{m}}
-\newcommand{\MM}{\mathscr{M}}
-\newcommand{\HH}{\mathscr{H}}
-\newcommand{\Om}{\Omega}
-\newcommand{\Ho}{\in\HH(\Om)}
-\newcommand{\bd}{\partial}
-\newcommand{\del}{\partial}
-\newcommand{\bardel}{\overline\partial}
-\newcommand{\textdf}[1]{\textbf{\textsf{#1}}\index{#1}}
-\newcommand{\img}{\mathrm{img}}
-\newcommand{\ip}[2]{\left\langle{#1},{#2}\right\rangle}
-\newcommand{\inter}[1]{\mathrm{int}{#1}}
-\newcommand{\exter}[1]{\mathrm{ext}{#1}}
-\newcommand{\cl}[1]{\mathrm{cl}{#1}}
-\newcommand{\ds}{\displaystyle}
-\newcommand{\vol}{\mathrm{vol}}
-\newcommand{\cnt}{\mathrm{ct}}
-\newcommand{\osc}{\mathrm{osc}}
-\newcommand{\LL}{\mathbf{L}}
-\newcommand{\UU}{\mathbf{U}}
-\newcommand{\support}{\mathrm{support}}
-\newcommand{\AND}{\;\wedge\;}
-\newcommand{\OR}{\;\vee\;}
-\newcommand{\Oset}{\varnothing}
-\newcommand{\st}{\ni}
-\newcommand{\wh}{\widehat}
-\newcommand{\mli}[1]{\mathit{#1}}
-\newcommand{\ndiv}{\hspace{-3pt}\not|\hspace{2pt}}
-
-\newcommand{\node}{%
-  \begingroup\normalfont
-  \includegraphics[height=\fontcharht\font`\c]{node.eps}%
-  \endgroup
-}
-
-\newcommand{\threenode}{%
-  \begingroup\normalfont
-  \includegraphics[height=\fontcharht\font`\B]{3nodetree.eps}%
-  \endgroup
-}
-
-\pdsetup{method=normal,
-list={labelsep=1em,leftmargin=1cm,itemsep=0pt,topsep=5pt,parsep=0pt}
-}
-% import from truth and PTL.
-\title{An Application of Post systems}
-\author{Foundations of Computer Science}
-\date{\today}
-
-
-\begin{document}
-\maketitle
+%\newcommand{\node}{%
+%  \begingroup\normalfont
+%  \includegraphics[height=\fontcharht\font`\c]{node.eps}%
+%  \endgroup
+%}
+%
+%\newcommand{\threenode}{%
+%  \begingroup\normalfont
+%  \includegraphics[height=\fontcharht\font`\B]{3nodetree.eps}%
+%  \endgroup
+%}
 
 \begin{wideslide}[bm=,toc=]{Models of computation}
 \begin{itemize}
@@ -421,11 +408,11 @@ lfrprop={},
 lineheight=2cm,topsep=0.3cm
 ]{Rooted Tree Lists \\ \vspace{1mm}\hrule \vspace{1mm} 
     \onslide{2-}{[]}\\
-    \onslide{7-}{[\node]}\\ 
-    \onslide{9-}{[\node,\node]}
+    \onslide{7-}{[\treenode]}\\ 
+    \onslide{9-}{[\treenode,\treenode]}
 }{Rooted Trees \\ \vspace{1mm}\hrule \vspace{1mm} 
-  \onslide{3-}{\node}\\ 
-  \onslide{11}{\threenode}}
+  \onslide{3-}{\treenode}\\ 
+  \onslide{11}{\tripletreenode}}
 %\begin{figure}[h]
 %\centering
 %\includegraphics[width=2.5in, height=.75in,keepaspectratio=true]{3_node_tree.eps}
@@ -460,4 +447,3 @@ lineheight=2cm,topsep=0.3cm
 \end{wideslide}
 
 
-\end{document}
