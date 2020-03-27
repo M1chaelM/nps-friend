@@ -1,0 +1,53 @@
+\documentclass[style=sailor,size=12pt]{powerdot}
+\usepackage{epic,array,ecltree,url,calrsfs}
+\usepackage[nointegrals]{wasysym}
+\usepackage{listings}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mlextra} % Must be below ams packages
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {../art/} }
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\pdsetup{method=normal}
+
+\title{Propositional Logic: Part I}
+\author{Foundations of Computer Science}
+\date{\today}
+
+\begin{document}
+\maketitle
+\begin{slide}[toc=,bm=]{Overview}
+This slide set covers the following topics in propositional logic:
+
+\vspace{5mm}
+\tableofcontents[content=sections]
+\end{slide}
+
+\section[slide=true]{Motivations and Applications}
+\include{pl_content/pl_why}
+
+\section[slide=true]{Syntax}
+\include{pl_content/pl_syntax}
+
+\section[slide=true]{Semantics}
+\include{pl_content/pl_semantics}
+
+\section[slide=true]{Validity and Satisfiability}
+\include{pl_content/pl_sat_val}
+
+\section[slide=true]{Logical Equivalence}
+\include{pl_content/pl_cnf_dnf}
+
+\end{document}
+
