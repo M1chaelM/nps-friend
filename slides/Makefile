@@ -2,17 +2,17 @@
 .PHONY: all print clean distclean install
 
 REV_PRES  := discrete_math_review.pdf relations_functions.pdf set_seq_strings.pdf
-IND_PRES  := post.pdf animate_derivations.pdf strongind.pdf mutualind.pdf \
+SAP_PRES  := post.pdf animate_derivations.pdf strongind.pdf mutualind.pdf \
              pgmsasautomata.pdf automata-mutualind.pdf sampleRTderivation.pdf
-MSC_PRES  := logicoverview.pdf decisionproc.pdf
+LONE_PRES := logicoverview.pdf decisionproc.pdf
 
 PL_PRES   := pl_part_1.pdf pl_part_2.pdf
 FOL_PRES  := fol_part_1.pdf fol_part_2.pdf
 PTL_PRES  := ptl.pdf 
 
 REV_PRINT := $(REV_PRES:%.pdf=printable/%.pdf)
-IND_PRINT := $(IND_PRES:%.pdf=printable/%.pdf)
-MSC_PRINT := $(MSC_PRES:%.pdf=printable/%.pdf) 
+SAP_PRINT := $(SAP_PRES:%.pdf=printable/%.pdf)
+LONE_PRINT := $(LONE_PRES:%.pdf=printable/%.pdf) 
 
 PL_PRINT  := $(PL_PRES:%.pdf=printable/%.pdf)
 FOL_PRINT := $(FOL_PRES:%.pdf=printable/%.pdf)
@@ -22,8 +22,8 @@ PL_TARGETS := $(PL_PRINT) $(PL_PRES)
 FOL_TARGETS := $(FOL_PRINT) $(FOL_PRES)
 PTL_TARGETS := $(PTL_PRINT) $(PTL_PRES)
 
-PRES := $(REV_PRES) $(IND_PRES) $(MSC_PRES) $(PL_PRES) $(FOL_PRES) $(PTL_PRES) 
-PRINTVERS := $(REV_PRINT) $(IND_PRINT) $(MSC_PRINT) $(PL_PRINT) $(FOL_PRINT) $(PTL_PRINT) 
+PRES := $(REV_PRES) $(SAP_PRES) $(LONE_PRES) $(PL_PRES) $(FOL_PRES) $(PTL_PRES) 
+PRINTVERS := $(REV_PRINT) $(SAP_PRINT) $(LONE_PRINT) $(PL_PRINT) $(FOL_PRINT) $(PTL_PRINT) 
 
 INSTALL_DIR := ~/google_drive/NPS/teaching/2020/CS3001/slides/
 
