@@ -1,0 +1,368 @@
+\begin{slide}[bm=,toc=]{Definition}
+\begin{defn}{A.23}[Ben Ari]
+~\\
+Let $\mathcal{F}$ be a relation on $S_1 \times \cdots \times S_n$.
+\\~\\
+$\mathcal{F}$ is a \emph{function} if and only if for every \emph{(n -- 1)-tuple}
+$(x_1,...,x_{n-1}) \in S_1 \times \cdots \times S_{n-1}$, there is at most
+one $x_n \in S_n$, such that $\mathcal{F}(x_1,...,x_n)$.
+\begin{itemize}
+\item For a function $\mathcal{F}$ we write $x_n = \mathcal{F}(x_1,...,x_{n-1})$.
+\item The \emph{domain} of $\mathcal{F}$ is the set of all
+$(x_1,...,x_{n-1})\in S_1 \times \cdots \times S_{n-1}$ for which (exactly one)
+$x_n = \mathcal{F}(x_1,...,x_{n-1})$ exists.
+\item The \emph{range} of $\mathcal{F}$ is the set of all $x_n \in S_n$ such
+that $x_n = \mathcal{F}(x_1,...,x_{n-1})$ for at least one $(x_1,...,x_{n-1})$. 
+\end{itemize}
+\end{defn}
+\end{slide}
+\begin{slide}[bm=,toc=]{Examples of Functions}
+\begin{itemize}
+\item \textbf{As a Special Relation:}
+\begin{itemize}
+\item With explicit set notation: \[f_1 = \{(1,3),(2,1),(3,2)\}\]
+\vspace{-5mm}
+\item With set comprehension: \[f_2 = \{(n_1,n_2)|n_2 = n_1^2\}\]
+\end{itemize}
+\item \textbf{Functional Notation:}
+\vspace{-3mm}
+\[
+  f_3(x) = x^2 + 1
+  \]
+\vspace{-5mm}
+\item \textbf{Arrow Notation:}
+\vspace{-3mm}
+\begin{align*}
+f_4:\N &\longrightarrow \R \\
+    x &\mapsto \sqrt{x}
+\end{align*}
+\end{itemize}
+
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Total and Partial Functions}
+\begin{defn}{A.23}[Ben Ari]~\\
+\begin{itemize}
+\item $\mathcal{F}$ is \emph{total} if the domain of $\mathcal{F}$ is (all of)
+  $S_1 \times \cdots \times S_{n-1}$;
+\item Otherwise, $\mathcal{F}$ is \emph{partial}.
+\end{itemize}
+\end{defn}
+
+\begin{figure}[b]
+\subcaptionbox*{Total Function}[.4\linewidth]{
+\begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
+\tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
+\tikzset{edge/.style = {->,> = latex'}}
+
+\draw (0, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](a5) at (0,0) {\tiny $3,1$};
+\node[vertex](a4) at (0,1) {\tiny $2,2$};
+\node[vertex](a3) at (0,2) {\tiny $2,1$};
+\node[vertex](a2) at (0,3) {\tiny $1,2$};
+\node[vertex](a1) at (0,4) {\tiny $1,1$};
+
+\draw (3, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](b6) at (3,0)   {\tiny  $6$};
+\node[vertex](b5) at (3,0.8) {\tiny  $5$};
+\node[vertex](b4) at (3,1.6) {\tiny  $4$};
+\node[vertex](b3) at (3,2.4) {\tiny  $3$};
+\node[vertex](b2) at (3,3.2) {\tiny  $2$};
+\node[vertex](b1) at (3,4) {\tiny    $1$};
+
+\draw[edge] (a1) to (b2);
+\draw[edge] (a2) to (b3);
+\draw[edge] (a3) to (b3);
+\draw[edge] (a4) to (b4);
+\draw[edge] (a5) to (b4);
+
+\end{tikzpicture}
+}
+\qquad
+\subcaptionbox*{Partial Function}[.4\linewidth]{
+\begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
+\tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
+\tikzset{edge/.style = {->,> = latex'}}
+\draw (0, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](a5) at (0,0) {\tiny $3,1$};
+\node[vertex](a4) at (0,1) {\tiny $2,2$};
+\node[vertex](a3) at (0,2) {\tiny $2,1$};
+\node[vertex](a2) at (0,3) {\tiny $1,2$};
+\node[vertex](a1) at (0,4) {\tiny $1,1$};
+
+\draw (3, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](b3) at (3,0)   {\tiny  $3$};
+\node[vertex](b2) at (3,2) {\tiny  $2$};
+\node[vertex](b1) at (3,4) {\tiny  $1$};
+
+\draw[edge] (a2) to (b1);
+\draw[edge] (a3) to (b2);
+\draw[edge] (a4) to (b2);
+\draw[edge] (a5) to (b3);
+
+\end{tikzpicture}
+}
+
+\end{figure}
+
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Injective / one-to-one Functions}
+\begin{defn}{A.23}[Ben Ari]
+$\mathcal{F}$ is \emph{injective} or \emph{one-to-one} if and only if
+\[
+  (x_1,...,x_{n-1}) \neq (y_1,...,y_{n-1})
+\] 
+\centering
+implies
+\[
+  \mathcal{F}(x_1,...,x_{n-1}) \neq \mathcal{F}(y_1,...,y_{n-1})
+\]
+
+\end{defn}
+\vspace{-5mm}
+\begin{figure}[b]
+\subcaptionbox*{Injective}[.4\linewidth]{
+\begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
+\tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
+\tikzset{edge/.style = {->,> = latex'}}
+
+\draw (0, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](a5) at (0,0) {\tiny $3,1$};
+\node[vertex](a4) at (0,1) {\tiny $2,2$};
+\node[vertex](a3) at (0,2) {\tiny $2,1$};
+\node[vertex](a2) at (0,3) {\tiny $1,2$};
+\node[vertex](a1) at (0,4) {\tiny $1,1$};
+
+\draw (3, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](b6) at (3,0)   {\tiny  $6$};
+\node[vertex](b5) at (3,0.8) {\tiny  $5$};
+\node[vertex](b4) at (3,1.6) {\tiny  $4$};
+\node[vertex](b3) at (3,2.4) {\tiny  $3$};
+\node[vertex](b2) at (3,3.2) {\tiny  $2$};
+\node[vertex](b1) at (3,4) {\tiny    $1$};
+
+\draw[edge] (a1) to (b1);
+\draw[edge] (a2) to (b3);
+\draw[edge] (a3) to (b5);
+\draw[edge] (a5) to (b2);
+\end{tikzpicture}
+}
+\qquad
+\subcaptionbox*{Not Injective}[.4\linewidth]{
+\begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
+\tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
+\tikzset{edge/.style = {->,> = latex'}}
+\draw (0, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](a5) at (0,0) {\tiny $3,1$};
+\node[vertex](a4) at (0,1) {\tiny $2,2$};
+\node[vertex](a3) at (0,2) {\tiny $2,1$};
+\node[vertex](a2) at (0,3) {\tiny $1,2$};
+\node[vertex](a1) at (0,4) {\tiny $1,1$};
+
+\draw (3, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](b3) at (3,0)   {\tiny  $3$};
+\node[vertex](b2) at (3,2) {\tiny  $2$};
+\node[vertex](b1) at (3,4) {\tiny  $1$};
+
+\draw[edge] (a1) to (b1);
+\draw[edge] (a2) to (b1);
+\draw[edge] (a3) to (b2);
+\draw[edge] (a4) to (b2);
+\draw[edge] (a5) to (b3);
+
+\end{tikzpicture}
+}
+
+\end{figure}
+
+
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Surjective / onto Functions}
+\begin{defn}{A.23}[Ben Ari]~\\
+\begin{itemize}
+\item  $\mathcal{F}$ is \emph{surjective} or \emph{onto} if and only if
+its range is all of $S_n$.
+\item Equivalently,$\mathcal{F}$ from $S_1$ to $S_2$ is \emph{surjective} if 
+and only if for all $y \in S_2$ there is a $x \in S_1$ such that
+$\mathcal{F}(x) = y$. 
+\end{itemize}
+\end{defn}
+\vspace{-5mm}
+\begin{figure}[b]
+\subcaptionbox*{Surjective}[.4\linewidth]{
+\begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
+\tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
+\tikzset{edge/.style = {->,> = latex'}}
+\draw (0, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](a5) at (0,0) {\tiny $3,1$};
+\node[vertex](a4) at (0,1) {\tiny $2,2$};
+\node[vertex](a3) at (0,2) {\tiny $2,1$};
+\node[vertex](a2) at (0,3) {\tiny $1,2$};
+\node[vertex](a1) at (0,4) {\tiny $1,1$};
+
+\draw (3, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](b3) at (3,0)   {\tiny  $3$};
+\node[vertex](b2) at (3,2) {\tiny  $2$};
+\node[vertex](b1) at (3,4) {\tiny  $1$};
+
+\draw[edge] (a1) to (b1);
+\draw[edge] (a2) to (b1);
+\draw[edge] (a3) to (b2);
+\draw[edge] (a4) to (b2);
+\draw[edge] (a5) to (b3);
+
+\end{tikzpicture}
+}
+\qquad
+\subcaptionbox*{Not Surjective}[.4\linewidth]{
+\begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
+\tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
+\tikzset{edge/.style = {->,> = latex'}}
+
+\draw (0, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](a5) at (0,0) {\tiny $3,1$};
+\node[vertex](a4) at (0,1) {\tiny $2,2$};
+\node[vertex](a3) at (0,2) {\tiny $2,1$};
+\node[vertex](a2) at (0,3) {\tiny $1,2$};
+\node[vertex](a1) at (0,4) {\tiny $1,1$};
+
+\draw (3, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](b6) at (3,0)   {\tiny  $6$};
+\node[vertex](b5) at (3,0.8) {\tiny  $5$};
+\node[vertex](b4) at (3,1.6) {\tiny  $4$};
+\node[vertex](b3) at (3,2.4) {\tiny  $3$};
+\node[vertex](b2) at (3,3.2) {\tiny  $2$};
+\node[vertex](b1) at (3,4) {\tiny    $1$};
+
+\draw[edge] (a1) to (b1);
+\draw[edge] (a2) to (b2);
+\draw[edge] (a3) to (b4);
+\draw[edge] (a4) to (b5);
+\draw[edge] (a5) to (b6);
+
+\end{tikzpicture}
+}
+
+\end{figure}
+
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Bijective Functions}
+\begin{defn}{A.23}[Ben Ari]~\\
+$\mathcal{F}$ is \emph{bijective} or \emph{one-to-one and onto} if and only if
+it is injective and surjective.
+\end{defn}
+
+\begin{figure}[b]
+\begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
+\tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
+\tikzset{edge/.style = {->,> = latex'}}
+
+\draw (0, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](a5) at (0,0) {\tiny $3,1$};
+\node[vertex](a4) at (0,1) {\tiny $2,2$};
+\node[vertex](a3) at (0,2) {\tiny $2,1$};
+\node[vertex](a2) at (0,3) {\tiny $1,2$};
+\node[vertex](a1) at (0,4) {\tiny $1,1$};
+
+\draw (3, 2) ellipse (0.75cm and 2.7cm);
+
+\node[vertex](b5) at (3,0) {\tiny  $5$};
+\node[vertex](b4) at (3,1) {\tiny  $4$};
+\node[vertex](b3) at (3,2) {\tiny  $3$};
+\node[vertex](b2) at (3,3) {\tiny  $2$};
+\node[vertex](b1) at (3,4) {\tiny  $1$};
+
+\draw[edge] (a1) to (b2);
+\draw[edge] (a2) to (b3);
+\draw[edge] (a3) to (b4);
+\draw[edge] (a4) to (b5);
+\draw[edge] (a5) to (b1);
+
+\end{tikzpicture}
+\caption*{Bijective Function}
+\end{figure}
+
+\end{slide}
+
+\begin{slide}[bm=,toc=]{Composition of Functions}
+As with relations, we can combine functions using the \emph{composition} operation, 
+denoted $f \circ g$.
+\begin{itemize}
+\item Assume $g$ is a function from $S_1$ to $S_2$ and $f$ is a function from 
+$S_3$ to $S_4$ and let $S = S_2 \cap S_3$.
+\item The composition forms a new function on $S_1 \times S_4$, such that:
+\[
+  f \circ g(x) = f(g(x))
+\]
+\vspace{-5mm}
+\item Note: since functions are relations, the above follows immediately from
+the definition of composition of functions.
+\end{itemize}
+\vspace{-5mm}
+\begin{figure}[b]
+\begin{subfigure}{.3\linewidth}
+\begin{tikzpicture}[scale=.5, every node/.style={scale=.5}]
+\tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
+\tikzset{edge/.style = {->,> = latex'}}
+
+\draw (0, 1.2) ellipse (.75cm and 2cm);
+\node[vertex](c) at (0,0.4) {\tiny $1,1$};
+\node[vertex](b) at (0,1.2) {\tiny $1,2$};
+\node[vertex](a) at (0,2)   {\tiny $2,1$};
+\node (s1) at (0, 2.9) {$S_1$};
+
+\node (g) at (1, -0.2) {$g$};
+
+\draw (2, 1.2) ellipse (.75cm and 2cm);
+\node[vertex](0) at (2,0) {$0$};
+\node[vertex](1) at (2,0.8) {$1$};
+\node[vertex](2) at (2,1.6) {$2$};
+\node[vertex](3) at (2,2.4) {$3$};
+\node (s) at (2, 3) {$S$};
+
+\node (f) at (3, -0.2) {$f$};
+
+\draw (4, 1.2) ellipse (.75cm and 2cm);
+\node[vertex](b1) at (4,0.4) {$1$};
+\node[vertex](b2) at (4,1.2) {$2$};
+\node[vertex](b3) at (4,2)   {$3$};
+\node (s4) at (4, 2.9) {$S_4$};
+
+\draw[edge] (a) to (3);
+\draw[edge] (b) to (3);
+\draw[edge] (c) to (2);
+
+\draw[edge] (0) to (b1);
+\draw[edge] (1) to (b2);
+\draw[edge] (2) to (b3);
+\draw[edge] (3) to (b1);
+
+\end{tikzpicture}
+
+\end{subfigure}
+\begin{subfigure}{.3\linewidth}
+\begin{align*}
+  f(x)       &= x \pmod{3} + 1 \\
+  g(x_1,x_2) &= x_1 + x_2 \\
+  f \circ g(x_1,x_2) &= f(g(x_1,x_2)) \\
+                     &= (x_1 + x_2) \pmod{3} + 1
+\end{align*}
+\end{subfigure}
+\end{figure}
+\end{slide}
