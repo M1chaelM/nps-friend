@@ -1,7 +1,7 @@
 
 .PHONY: all print clean distclean install
 
-REV_PRES  := discrete_math_review.pdf relations_functions.pdf set_seq_strings.pdf
+REV_PRES  := discrete_math_review.pdf
 SAP_PRES  := sap_part_1.pdf sap_part_2.pdf 
 LONE_PRES := logicoverview.pdf decisionproc.pdf animate_derivations.pdf sampleRTderivation.pdf
 
@@ -34,6 +34,8 @@ all: $(PRES) $(PRINTVERS)
 presentations: $(PRES)
 
 print: $(PRINTVERS) 
+
+$(REV_TARGETS): $(wildcard rev_content/*.tex)
 
 $(SAP_TARGETS): $(wildcard sap_content/*.tex)
 

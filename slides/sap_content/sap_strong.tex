@@ -208,48 +208,47 @@ By axiom {\bf B1}, $4\in P$.
 So by rule {\bf R} $n-3+4\in P$ or $n+1\in P$.
 \end{wideslide}
 
-\end{document}
-
-Suppose $t\in\id{RT}$ has derivation height $n+1$ where $n\geq 0$.
-Then the derivation must end with {\bf R2}. 
-Therefore $t$ has the form $\id{node}(x)$
-where $x\in\id{RTL}$.
-The derivation of $x\in\id{RTL}$ has height $n$.
-%So by induction and $S_1$, $\id{\#edges}(x)=\id{\#nodes}(x)$.
-Then
-\begin{displaymath}
-\begin{array}{lll}
-\id{\#nodes}(\id{node}(x)) & = & 1 + \id{\#nodes}(x) \\
-	& = & 1+\id{\#edges}(x) + |x|\;\;\;\rid{by induction and}\;S_1 \\
-	& = & 1+\id{\#edges}(\id{node}(x))
-\end{array}
-\end{displaymath}
-Ergo, $\id{\#edges}(\id{node}(x))=\id{\#nodes}(\id{node}(x))-1$.
-\end{wideslide}
-
-\begin{wideslide}[bm=,toc=]{Mutual induction}
-Now we show $S_1$.
-Suppose $l\in\id{RTL}$ has derivation height $n+1$ where $n\geq 0$.
-Then the derivation must end with {\bf R1}. 
-Therefore $l$ has the form $\id{cons}(x,y)$
-where $x\in\id{RT}$ and $y\in\id{RTL}$.
-Either the derivation of $x\in\id{RT}$ or $y\in\id{RTL}$ has height $n$ while the other 
-has height {\em at most\/} $n$.
-%By induction and $S_2$, $\id{\#edges}(x)=\id{\#nodes}(x)-1$.
-%Also by induction and $S_1$, $\id{\#edges}(y)=\id{\#nodes}(y)$.
-Then
-\begin{displaymath}
-\begin{array}{lll}
-\id{\#edges}(\id{cons}(x,y)) & = & \id{\#edges}(x) + \id{\#edges}(y) \\
-	& = & \id{\#nodes}(x) - 1 + \id{\#edges}(y) \\
- & & \>\>\>\>\>\>\rid{by induction and}\;S_2 \\
-	& = & \id{\#nodes}(x) - 1 + \id{\#nodes}(y) - |y| \\
- & & \>\>\>\>\>\>\rid{by induction and}\;S_1 \\
-	& = & \id{\#nodes}(\id{cons}(x,y)) - 1 - |y| \\
-	& = & \id{\#nodes}(\id{cons}(x,y)) - (1 + |y|) \\
-	& = & \id{\#nodes}(\id{cons}(x,y)) - |\id{cons}(x,y)|
-\end{array}
-\end{displaymath}
-%{\em quod erat demonstrandum (Q.E.D.)\/}
-\end{wideslide}
-
+%\end{document}
+%
+%Suppose $t\in\id{RT}$ has derivation height $n+1$ where $n\geq 0$.
+%Then the derivation must end with {\bf R2}. 
+%Therefore $t$ has the form $\id{node}(x)$
+%where $x\in\id{RTL}$.
+%The derivation of $x\in\id{RTL}$ has height $n$.
+%%So by induction and $S_1$, $\id{\#edges}(x)=\id{\#nodes}(x)$.
+%Then
+%\begin{displaymath}
+%\begin{array}{lll}
+%\id{\#nodes}(\id{node}(x)) & = & 1 + \id{\#nodes}(x) \\
+%	& = & 1+\id{\#edges}(x) + |x|\;\;\;\rid{by induction and}\;S_1 \\
+%	& = & 1+\id{\#edges}(\id{node}(x))
+%\end{array}
+%\end{displaymath}
+%Ergo, $\id{\#edges}(\id{node}(x))=\id{\#nodes}(\id{node}(x))-1$.
+%\end{wideslide}
+%
+%\begin{wideslide}[bm=,toc=]{Mutual induction}
+%Now we show $S_1$.
+%Suppose $l\in\id{RTL}$ has derivation height $n+1$ where $n\geq 0$.
+%Then the derivation must end with {\bf R1}. 
+%Therefore $l$ has the form $\id{cons}(x,y)$
+%where $x\in\id{RT}$ and $y\in\id{RTL}$.
+%Either the derivation of $x\in\id{RT}$ or $y\in\id{RTL}$ has height $n$ while the other 
+%has height {\em at most\/} $n$.
+%%By induction and $S_2$, $\id{\#edges}(x)=\id{\#nodes}(x)-1$.
+%%Also by induction and $S_1$, $\id{\#edges}(y)=\id{\#nodes}(y)$.
+%Then
+%\begin{displaymath}
+%\begin{array}{lll}
+%\id{\#edges}(\id{cons}(x,y)) & = & \id{\#edges}(x) + \id{\#edges}(y) \\
+%	& = & \id{\#nodes}(x) - 1 + \id{\#edges}(y) \\
+% & & \>\>\>\>\>\>\rid{by induction and}\;S_2 \\
+%	& = & \id{\#nodes}(x) - 1 + \id{\#nodes}(y) - |y| \\
+% & & \>\>\>\>\>\>\rid{by induction and}\;S_1 \\
+%	& = & \id{\#nodes}(\id{cons}(x,y)) - 1 - |y| \\
+%	& = & \id{\#nodes}(\id{cons}(x,y)) - (1 + |y|) \\
+%	& = & \id{\#nodes}(\id{cons}(x,y)) - |\id{cons}(x,y)|
+%\end{array}
+%\end{displaymath}
+%%{\em quod erat demonstrandum (Q.E.D.)\/}
+%\end{wideslide}
