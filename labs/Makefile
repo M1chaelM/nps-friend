@@ -7,7 +7,7 @@ TARGETS := lab1.pdf lab2.pdf lab3.pdf lab4.pdf lab5.pdf \
 
 SOLS   := $(TARGETS:%.pdf=solutions/%.pdf)
 
-INSTALL_DIR := ~/google_drive/NPS/teaching/2019/CS3001/labs/
+INSTALL_DIR := ~/google_drive/NPS/teaching/2020/CS3001_Q3/labs/
 
 all: $(SOLS) $(TARGETS) 
 
