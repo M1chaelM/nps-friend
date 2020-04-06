@@ -17,6 +17,7 @@ PL_PRINT  := $(PL_PRES:%.pdf=printable/%.pdf)
 FOL_PRINT := $(FOL_PRES:%.pdf=printable/%.pdf)
 PTL_PRINT := $(PTL_PRES:%.pdf=printable/%.pdf) 
 
+REV_TARGETS := $(REV_PRINT) $(REV_PRES)
 SAP_TARGETS := $(SAP_PRINT) $(SAP_PRES)
 PL_TARGETS := $(PL_PRINT) $(PL_PRES)
 FOL_TARGETS := $(FOL_PRINT) $(FOL_PRES)
