@@ -11,39 +11,40 @@
 %}
 
 \begin{wideslide}[bm=,toc=]{Models of computation}
+Different computational models have been developed independently:
 \begin{itemize}
-\item Different computational models have been developed independently:
-%\item Machine independent: recursive function theory.
-%\item Machine dependent:
-\begin{enumerate}
-\item Turing machines, Alan Turing (covered in CS3101)
-\item Lambda calculus, Alonzo Church
-\item Post systems, Emil Post
-\item and others.
-\end{enumerate}
-\item Post systems are of interest to us.
-\item They can be used to define something (data structure, program).
-\item Definitions may be recursive 
+\item<2->Turing machines, Alan Turing (covered in CS3101)
+\item<3->Lambda calculus, Alonzo Church
+\item<4->Post systems, Emil Post
+\item<5->and others.
+\end{itemize}
+\pause[5] Post systems are of interest to us.
+\begin{itemize}
+\item<7-> They can be used to define something (data structure, program).
+\item<8-> Definitions may be recursive \pause[3]
 
-\hspace{2em}$A \equiv \ldots A\ldots$
+\hspace{2em}$A \equiv \ldots A\ldots$ \pause
 
-or mutually recursive
+or mutually recursive \pause
 
 \hspace{2em}$A \equiv \ldots B\ldots$
 
 \hspace{2em}$B \equiv \ldots A\ldots$
 
-\item Post systems admit formal proofs---is a definition correct?
+\item<12-> Post systems admit formal proofs---is a definition correct?
 \end{itemize}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Recursive definitions}
+A recursive definition can be represented in a {\em Post system\/}.
 \begin{itemize}
-\item A recursive definition can be represented in a {\em Post system\/}.
-\item Named after mathematician Emil Leon Post.
-\item A Post system comprises a finite set of {\em variables\/}, {\em signs\/} and {\em productions\/} 
+\item<2-> Named after mathematician Emil Leon Post.
+\item<3-> A Post system comprises a finite set of {\em variables\/}, {\em signs\/} and {\em productions\/} 
 (inference rules).
-\item An inference rule has the form
+\end{itemize}
+\pause[3]
+An inference rule has the form 
+\pause
 \begin{displaymath}
 \begin{array}{c}
 t_1\;t_2\;\cdots\;t_n\\
@@ -51,15 +52,18 @@ t_1\;t_2\;\cdots\;t_n\\
 t
 \end{array}
 \end{displaymath}
+\pause
 where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables).
-\item $t_1,\ldots , t_n$ are the {\em antecedents\/} and $t$ the {\em consequent\/} or conclusion.
-\item When $n=0$, an inference rule is called an {\em axiom\/}.
+\begin{itemize}
+\item<7-> $t_1,\ldots , t_n$ are the {\em antecedents\/}
+\item<8-> $t$ is the {\em consequent\/} or conclusion.
+\item<9-> When $n=0$, an inference rule is called an {\em axiom\/}.
 \end{itemize}
 \end{wideslide}
 
 \begin{wideslide}[bm=,toc=]{Recursive definitions}
-\begin{itemize}
-\item A Post system of two productions:
+A Post system of two productions:
+\pause
 \vspace{-1em}
 \begin{tabbing}
 {\bf R}XX \=  \kill
@@ -67,6 +71,7 @@ where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables)
         \(\begin{array}[t]{l}
         3\in S
         \end{array}\) \\[2ex]
+\pause
 {\bf R} \>
         \(\begin{array}[t]{l}
         x \in S \;\;\;y \in S \\
@@ -74,14 +79,19 @@ where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables)
         x + y \in S
         \end{array}\)
 \end{tabbing}
-\item The set of signs is $\{3,\in,+\}$ and variables $\{x,y\}$.
-\item Claim: system defines the set of all positive multiples of 3.
-\item Must prove $n\in S$ iff $n$ is a positive multiple of 3.
-\item ``$n\in S$ only if $n$ is a positive multiple of 3'' (system {\em soundness\/}).
-\item ``$n\in S$ if $n$ is a positive multiple of 3'' (system {\em completeness\/}).
+\pause
+The set of signs is $\{3,\in,+\}$ and variables $\{x,y\}$.\\~\\
+\pause
+\textbf{Claim}: This system defines the set of all positive multiples of 3.
+\begin{itemize}
+\item<6-> Must prove $n\in S$ iff $n$ is a positive multiple of 3.
+\item<7-> ``$n\in S$ only if $n$ is a positive multiple of 3'' (system {\em soundness\/}).
+\item<8-> ``$n\in S$ if $n$ is a positive multiple of 3'' (system {\em completeness\/}).
 \end{itemize}
 \end{wideslide}
+
 \begin{wideslide}[bm=,toc=]{Example derivation showing $9 \in S$}
+\vspace{20mm}
 \begin{center}
 \begin{tabular}{lllll}
   \onslide{2-}{$\bid{B}$  & $\id{3}\in \id{S}$}           & \onslide{3-}{$\id{3}\in \id{S}$ & $\bid{B}$}
@@ -94,19 +104,21 @@ where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables)
 
 \end{wideslide}
 \begin{wideslide}[bm=,toc=]{Recursive Definitions}
-\begin{itemize}
-\item A Post system with multiple axioms.
+A Post system with multiple axioms.
 \begin{tabbing}
 {\bf R1}XX \=  \kill
+\pause
 {\bf B1} \>
         \(\begin{array}[t]{l}
         4\in P
         \end{array}\) \\[2ex]
+\pause
 {\bf B2} \>
         \(\begin{array}[t]{l}
         5\in P
         \end{array}\) \\[2ex]
         
+\pause
 {\bf R} \>
         \(\begin{array}[t]{l}
         x \in P \;\;\;y \in P \\
@@ -114,11 +126,13 @@ where $t,t_1,\ldots ,t_n$ ($n\geq 0$) are terms (strings of signs and variables)
         x + y \in P
         \end{array}\)
 \end{tabbing}
-\item Claim: every amount of postage at least $12$ can be formed using only $4$
+\pause
+\textbf{Claim}: every amount of postage at least $12$ can be formed using only $4$
 and $5$-cent stamps (Rosen pg. 337).
-\item Must show every positive integer at least $12$ belongs to $P$. 
+\begin{itemize}
+\item<6-> Must show every positive integer at least $12$ belongs to $P$. 
 equal to 12.
-\item This is a completeness result of the system.
+\item<7-> This is a completeness result of the system.
 \end{itemize}
 \end{wideslide}
 
