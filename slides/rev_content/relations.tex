@@ -1,44 +1,46 @@
 \begin{slide}[bm=,toc=]{Definition}
-\begin{defn}{A.19}[Ben Ari]
+\begin{defn}{A.19}[Ben Ari]~\\
 An \emph{n-ary relation} $\mathcal{R}$ is a subset of $S_1 \times \cdots \times
 S_n$. 
 \begin{itemize}
-\item $\mathcal{R}$ is said to be a relation \emph{on} $S_1 \times \cdots \times
+\item<2-> $\mathcal{R}$ is said to be a relation \emph{on} $S_1 \times \cdots \times
 S_n$.
-\item The value of $n$ is called the ``arity'' of the relation.
-\item If all the sets $S_i$ are the same set $S$, $\mathcal{R}$ is said to be
+\item<3-> The value of $n$ is called the ``arity'' of the relation.
+\item<4-> If all the sets $S_i$ are the same set $S$, $\mathcal{R}$ is said to be
 an \emph{n-ary} relation on $S$.
 \begin{itemize}
-\item In this case $\mathcal{R}$ is called a \emph{homogenous} relation.
+\item<5-> In this case $\mathcal{R}$ is called a \emph{homogenous} relation.
 \end{itemize}
-\item A 1-ary (unary) relation is simply a subset.
+\item<6-> A 1-ary (unary) relation is simply a subset.
 \end{itemize}
 \end{defn}
 \vspace{-3mm}
+\pause[6]
 \textbf{Notation:}~\\
 Let $R$ be a relation on set $S$ that contains elements $x$ and $y$. 
 The following statements are equivalent: 
 \begin{itemize}
-\item $x$ is related to $y$ under $R$
-\item $xRy$
-\item $(x,y) \in R$
+\item<8-> $x$ is related to $y$ under $R$
+\item<8-> $xRy$
+\item<8-> $(x,y) \in R$
 \end{itemize}
 \end{slide}
 
 \begin{slide}[bm=,toc=]{Examples of Binary Relations}
 \begin{ex}{}[Explicit]~\\
 \begin{itemize}
-\item Let $L = \{a,b,c\}$.
-\item Let $W = \{all,ball,bat,cat\}$.
-\item The we can define binary relation $R \subseteq L \times W$ such that 
+\item<2-> Let $L = \{a,b,c\}$.
+\item<3-> Let $W = \{all,ball,bat,cat\}$.
+\item<4-> The we can define binary relation $R \subseteq L \times W$ such that 
       $R = \{(a,all),(b,ball),(b, bat), (c,cat)\}$.
 \end{itemize}
 \end{ex}
+\pause[4]
 \begin{ex}{}[Set Comprehension]~\\
 \begin{itemize}
-\item Let $\Sigma = \{a,b\}$.
-\item Let $S = \Sigma^0 \cup \Sigma \cup \Sigma^2$
-\item Define binary relation $R_{pre}$ on $S$ such that:
+\item<6-> Let $\Sigma = \{a,b\}$.
+\item<7-> Let $S = \Sigma^0 \cup \Sigma \cup \Sigma^2$
+\item<8-> Define binary relation $R_{pre}$ on $S$ such that:
       $R_{pre} = \{(x,y)| y = xw \text{ for some } w \in S \}$.
 \end{itemize}
 \end{ex}
@@ -46,11 +48,16 @@ The following statements are equivalent:
 \end{slide}
 
 \begin{slide}[bm=,toc=]{Matrix Representations of Relations}
-Relations can be represented using a binary matrix in which the
-value corresponding to a tuple is set to $1$ if the tuple is
-in the relation, and $0$ otherwise.
+Relations can be represented using a binary matrix. 
+
+\begin{itemize}
+\item<2-> If the tuple is in the relation, its value is set to $1$.
+\item<3-> Otherwise it is $0$.
+\end{itemize}
+\pause[3]
 \begin{ex}{}[$R$ and $R_{pre}$ from previous slide]
 \[
+\pause
 R = 
 \begin{blockarray}{cccc}
 \begin{block}{cccc}
@@ -63,6 +70,7 @@ bat  & 0 & 1 & 0 \\
 cat  & 0 & 0 & 1 \\
 \end{block}
 \end{blockarray}
+\pause
 \qquad R_{pre} =
 \begin{blockarray}{cccccccc}
 \begin{block}{cccccccc}
@@ -83,14 +91,18 @@ bb & 0& 0 & 0 & 0  & 0  & 0  & 1 \\
 \end{slide}
 
 \begin{slide}[bm=,toc=]{DiGraph Representations of Relations}
-Binary relations can also be represented using a directed graph in which
-vertices represent elements and edges are placed between vertices
-if their corresponding tuple is in the relation.
-\begin{ex}{}[$R$ and $R_{pre}$ from previous slide]
+Binary relations can be represented using a directed graph.
+\begin{itemize}
+\item<2-> Vertices represent elements.
+\item<3-> Edges are placed between vertices if their corresponding tuple is in the relation.
+\end{itemize}
+\pause[3]
+\begin{ex}{}[$R$ and $R_{pre}$ from above]
 ~\\
 \vspace{-2mm}
 \begin{figure}[h!]
 \centering
+\pause
 \subcaptionbox*{$R$}[.3\linewidth]{
 \begin{tikzpicture}
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
@@ -110,6 +122,7 @@ if their corresponding tuple is in the relation.
 \draw[edge] (c1) to (d2);
 \end{tikzpicture}
 }
+\pause
 \subcaptionbox*{$R_{pre}$}[.5\linewidth]{
 \begin{tikzpicture}
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
@@ -156,9 +169,11 @@ $R$ is \emph{reflexive} if and only if $R(x,x)$ for all $x \in S$.
 \end{defn}
 ~
 \vspace{-12mm}
-\pause \begin{figure}[t]
+\pause 
+\begin{figure}[t]
 \caption*{\textbf{Example:} $R_{pre}$ is a reflexive relation on $S = \{\epsilon,a,b,aa,bb\}$} 
-\pause \subcaptionbox*{As Matrix}{
+\pause 
+\subcaptionbox*{As Matrix}{
 $ \begin{blockarray}{cccccc}
  \begin{block}{cccccc}
   & \epsilon & a & b & aa & bb \\
@@ -173,7 +188,8 @@ $ \begin{blockarray}{cccccc}
  \end{blockarray} $
 }
 \qquad
-\pause \subcaptionbox*{As Digraph}{
+\subcaptionbox*{As Digraph}{
+\pause 
 \begin{tikzpicture}
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
 \tikzset{edge/.style = {->,> = latex'}}
@@ -265,6 +281,7 @@ R$ implies $x_1 = x_2$.
 \pause \begin{figure}[t]
 \caption*{\textbf{Example:} $R_{pre}$ is also antisymmetric on $S = \{\epsilon,a,b,aa,bb\}$} 
 \subcaptionbox*{As Matrix}{
+\pause
 $ \begin{blockarray}{cccccc}
  \begin{block}{cccccc}
   & \epsilon & a & b & aa & bb \\
@@ -280,6 +297,7 @@ $ \begin{blockarray}{cccccc}
 }
 \qquad
 \subcaptionbox*{As Digraph}{
+\pause
 \begin{tikzpicture}
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
 \tikzset{edge/.style = {->,> = latex'}}
@@ -317,6 +335,7 @@ $R$ is \emph{transitive} if and only if $R(x_1,x_2)$ and $R(x_2,x_3)$ implies $R
 \pause \begin{figure}[t]
 \caption*{\textbf{Example:} Both $R_{pre}$ and $R_l$ are transitive on $S = \{\epsilon,a,b,aa,bb\}$} 
 \subcaptionbox*{$R_{pre}$}{
+\pause
 \begin{tikzpicture}
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
 \tikzset{edge/.style = {->,> = latex'}}
@@ -342,6 +361,7 @@ $R$ is \emph{transitive} if and only if $R(x_1,x_2)$ and $R(x_2,x_3)$ implies $R
 }
 \qquad
 \subcaptionbox*{$R_l$}{
+\pause
 \begin{tikzpicture}
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
 \tikzset{edge/.style = {->,> = latex'}}
@@ -370,17 +390,18 @@ $R$ is \emph{transitive} if and only if $R(x_1,x_2)$ and $R(x_2,x_3)$ implies $R
 A relation is an equivalence relation if it is:
 
 \begin{itemize}
-\item Reflexive
-\item Symmetric
-\item Transitive
+\item<2-> Reflexive
+\item<3-> Symmetric
+\item<4-> Transitive
 \end{itemize}
 \end{defn}
+\pause[4]
 \textbf{Examples}:
 \begin{itemize}
-\item $\{(x,y) | x = y \}$
-\item $\{(x,y) | x \text{ and } y \text{ begin with the same character}\}$
-\item $\{(x,y) | x \text{ and } y \text{ contain the same substring}\}$
-\item $R_{l}$ 
+\item<6-> $\{(x,y) | x = y \}$
+\item<7-> $\{(x,y) | x \text{ and } y \text{ begin with the same character}\}$
+\item<8-> $\{(x,y) | x \text{ and } y \text{ contain the same substring}\}$
+\item<9-> $R_{l}$ 
 \end{itemize}
 \end{slide}
 
@@ -388,77 +409,89 @@ A relation is an equivalence relation if it is:
 \begin{defn}{--- Equivalence Classes}~\\
 Let $E$ be an equivalence relation on a set $S$. 
 ~\\
+\pause
 For any element $x \in S$:
 \begin{itemize}
-\item We define the \emph{equivalence class} of $x$ as the set of elements in
+\item<3-> We define the \emph{equivalence class} of $x$ as the set of elements in
       $S$ that are related to $x$ under relation $E$.
-\item The equivalence class of $x$ is denoted $[x]_{E}$ (or simply $[x]$ if
+\item<4-> The equivalence class of $x$ is denoted $[x]_{E}$ (or simply $[x]$ if
       the relation is clear from context).
-\item In symbols, $[x] = \{y \in S| (x,y) \in E\}$
+\item<5-> In symbols, $[x] = \{y \in S| (x,y) \in E\}$
 \end{itemize}
 \end{defn}
 ~\\
+\pause[4]
 \begin{thm}{ -- $S$ is the union of its equivalence classes}~\\
+\pause
 Let $E$ be an equivalence relation on a set $S$. Then
+\pause
 \[
   \bigcup_{x \in X} [x]_E = S
   \]
 \end{thm}
+\pause
 This follows from the fact that $E$ is reflexive.
 \end{slide}
 
 \begin{slide}[bm=,toc=]{Equivalence Classes Partition a Set}
-\begin{thm}{ -- Equivalence classes are empty or disjoint}~\\
+\begin{thm}{ -- Equivalence classes are equal or disjoint}~\\
+\pause
 The following are equivalent:
 \begin{itemize}
-\item $xEy$ 
-\item $[x] = [y]$ 
-\item $[x] \cap [y] \neq \emptyset$ 
+\item<3-> $xEy$ 
+\item<4-> $[x] = [y]$ 
+\item<5-> $[x] \cap [y] \neq \emptyset$ 
 \end{itemize}
+\pause[4]
 Consquently, if $x$ and $y$ are not related by $E$, then:
-\item $[x] \neq [y]$, and
-\item $[x] \cap [y] = \emptyset$.
+\item<7->$[x] \neq [y]$, and
+\item<8->$[x] \cap [y] = \emptyset$.
 \end{thm}
+\pause[3]
 Colloquially, equivalence classes cannot partially overlap. 
+\pause
 \vspace{5mm}
 \begin{thm}{ -- Equivalence classes partition a set}~\\
+\pause
 This follows directly from two preceding theorems. 
 \end{thm}
 \end{slide}
 
-
-
-
 \begin{slide}[bm=,toc=]{Partial Orders}
 \begin{defn}{--- Partial Orders}~\\
+\pause
 A relation is a partial order if it is:
 
 \begin{itemize}
-\item Reflexive
-\item Antisymmetric
-\item Transitive
-\end{itemize}
-\textbf{Examples}:
-\begin{itemize}
-\item $R_{pre}$
-\item $\{(x,y) | x \text{ is a substring of } y \}$
-\item $\{(x,y) | x \text{ is a subset of } y \}$
-\item $\{(x,y) | y \text{ is a suffix of } x \}$
+\item<3-> Reflexive
+\item<4-> Antisymmetric
+\item<5-> Transitive
 \end{itemize}
 \end{defn}
+\pause[4]
+\textbf{Examples}:
+\begin{itemize}
+\item<7-> $R_{pre}$
+\item<8-> $\{(x,y) | x \text{ is a substring of } y \}$
+\item<9-> $\{(x,y) | x \text{ is a subset of } y \}$
+\item<10-> $\{(x,y) | y \text{ is a suffix of } x \}$
+\end{itemize}
 \end{slide}
 \begin{slide}[bm=,toc=]{Combining Relations}
+Recall that relations are sets.
+\\~\\
+\pause
+\textbf{Consequently:}~\\
 \begin{itemize}
-\item Relations are sets.
-\item Therefore, they can be combined using set operations.
-\item That is, given arbitrary relations $R_1$ and $R_2$, we can form:
+\item<3-> Relations can be combined using set operations.
+\item<4-> That is, given arbitrary relations $R_1$ and $R_2$, we can form:
 \begin{itemize}
-\item $R_1 \cup R_2$
-\item $R_1 \cap R_2$
-\item $R_1 - R_2$
-\item $R_2 - R_1$
+\item<5-> $R_1 \cup R_2$
+\item<6-> $R_1 \cap R_2$
+\item<7-> $R_1 - R_2$
+\item<8-> $R_2 - R_1$
 \end{itemize}
-\item Note that $R_1$ and $R_2$ must have the same arity.
+\item<9-> Note that we generally expect $R_1$ and $R_2$ to have the same arity.
 \end{itemize}
 \end{slide}
 
@@ -466,19 +499,21 @@ A relation is a partial order if it is:
 We can also combine binary relations using the \emph{composition} operation, denoted
 $R_1 \circ R_2$.
 \begin{itemize}
-\item Assume $R_2$ is a relation on $S_1 \times S_2$ and $R_1$ is a relation on
+\item<2-> Assume $R_2$ is a relation on $S_1 \times S_2$ and $R_1$ is a relation on
 $S_3 \times S_4$.
-\item Let $S = S_2 \cap S_3$.
-\item The composition forms a new relation on $S_1 \times S_4$, such that:
+\item<3-> Let $S = S_2 \cap S_3$.
+\item<4-> The composition forms a new relation on $S_1 \times S_4$, such that:
 \begin{itemize}
-\item $(x,z) \in R_1 \circ R_2$ if and only if there exists $y$ in $S$ such
+\item<5-> $(x,z) \in R_1 \circ R_2$ if and only if there exists $y$ in $S$ such
 that $(y,z) \in R_1$ and $(x,y) \in R_2$.
 \end{itemize}
-\item Note that in the case where $S = \emptyset$, $R_1 \circ R_2$ is also empty.
+\item<6-> Note that in the case where $S = \emptyset$, $R_1 \circ R_2$ is also empty.
 \end{itemize}
+
 \vspace{-5mm}
 \begin{figure}[b]
 \begin{subfigure}{.4\linewidth}
+\pause[6]
 \begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
 \tikzset{edge/.style = {->,> = latex'}}
@@ -522,6 +557,7 @@ that $(y,z) \in R_1$ and $(x,y) \in R_2$.
 
 \end{subfigure}
 \begin{subfigure}{.5\linewidth}
+\pause
 \begin{align*}
   =& R_1 \circ R_2 \\
   =& \{(b,t),(c,r),(c,s),(c,t)\}
@@ -533,20 +569,23 @@ that $(y,z) \in R_1$ and $(x,y) \in R_2$.
 \begin{slide}[bm=,toc=]{Powers of Binary Relations}
 \begin{defn}{-- Powers of Relations}
 ~\\
+\pause
 Let $R$ be a binary homogenous relation on $S$.
 \\~\\
+\pause
 The relation $R^n$ is defined inductively by: 
 \begin{itemize}
-\item $R^1 = R$
-\item $R^{n+1} = R^n \circ R$
+\item<4-> $R^1 = R$
+\item<5-> $R^{n+1} = R^n \circ R$
 \end{itemize}
 \end{defn}
+\pause[3]
 \textbf{Notes:}
 \begin{itemize}
-\item This definition makes use of the concept of relation composition
+\item<7-> This definition makes use of the concept of relation composition
 given on the previous slide.
-\item Useful for defining paths of length $n$.
-\item We will see it again in modal logic.
+\item<8->Useful for defining paths of length $n$.
+\item<9->We will see it again in modal logic.
 \end{itemize}
 \end{slide}
 

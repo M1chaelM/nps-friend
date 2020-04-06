@@ -3,54 +3,59 @@
 ~\\
 Let $\mathcal{F}$ be a relation on $S_1 \times \cdots \times S_n$.
 \\~\\
+\pause
 $\mathcal{F}$ is a \emph{function} if and only if for every \emph{(n -- 1)-tuple}
 $(x_1,...,x_{n-1}) \in S_1 \times \cdots \times S_{n-1}$, there is at most
 one $x_n \in S_n$, such that $\mathcal{F}(x_1,...,x_n)$.
 \begin{itemize}
-\item For a function $\mathcal{F}$ we write $x_n = \mathcal{F}(x_1,...,x_{n-1})$.
-\item The \emph{domain} of $\mathcal{F}$ is the set of all
+\item<3-> For a function $\mathcal{F}$ we write $x_n = \mathcal{F}(x_1,...,x_{n-1})$.
+\item<4-> The \emph{domain} of $\mathcal{F}$ is the set of all
 $(x_1,...,x_{n-1})\in S_1 \times \cdots \times S_{n-1}$ for which (exactly one)
 $x_n = \mathcal{F}(x_1,...,x_{n-1})$ exists.
-\item The \emph{range} of $\mathcal{F}$ is the set of all $x_n \in S_n$ such
+\item<5->The \emph{range} of $\mathcal{F}$ is the set of all $x_n \in S_n$ such
 that $x_n = \mathcal{F}(x_1,...,x_{n-1})$ for at least one $(x_1,...,x_{n-1})$. 
 \end{itemize}
 \end{defn}
 \end{slide}
+
 \begin{slide}[bm=,toc=]{Examples of Functions}
+\textbf{As a Special Relation:}
 \begin{itemize}
-\item \textbf{As a Special Relation:}
-\begin{itemize}
-\item With explicit set notation: \[f_1 = \{(1,3),(2,1),(3,2)\}\]
+\item<2-> With explicit set notation: \[f_1 = \{(1,3),(2,1),(3,2)\}\]
 \vspace{-5mm}
-\item With set comprehension: \[f_2 = \{(n_1,n_2)|n_2 = n_1^2\}\]
+\item<3-> With set comprehension: \[f_2 = \{(n_1,n_2)|n_2 = n_1^2\}\]
 \end{itemize}
-\item \textbf{Functional Notation:}
+\pause[3]
+\textbf{Functional Notation:}
 \vspace{-3mm}
 \[
   f_3(x) = x^2 + 1
   \]
 \vspace{-5mm}
-\item \textbf{Arrow Notation:}
+\pause
+\textbf{Arrow Notation:}
 \vspace{-3mm}
 \begin{align*}
 f_4:\N &\longrightarrow \R \\
     x &\mapsto \sqrt{x}
 \end{align*}
-\end{itemize}
 
 \end{slide}
 
 \begin{slide}[bm=,toc=]{Total and Partial Functions}
 \begin{defn}{A.23}[Ben Ari]~\\
-\begin{itemize}
-\item $\mathcal{F}$ is \emph{total} if the domain of $\mathcal{F}$ is (all of)
-  $S_1 \times \cdots \times S_{n-1}$;
-\item Otherwise, $\mathcal{F}$ is \emph{partial}.
-\end{itemize}
+\pause
+\vspace{2mm}
+$\mathcal{F}$ is \emph{total} if the domain of $\mathcal{F}$ is (all of)
+  $S_1 \times \cdots \times S_{n-1}$;\\
+\pause
+\vspace{2mm}
+Otherwise, $\mathcal{F}$ is \emph{partial}.
 \end{defn}
 
 \begin{figure}[b]
 \subcaptionbox*{Total Function}[.4\linewidth]{
+\pause
 \begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
 \tikzset{edge/.style = {->,> = latex'}}
@@ -82,6 +87,7 @@ f_4:\N &\longrightarrow \R \\
 }
 \qquad
 \subcaptionbox*{Partial Function}[.4\linewidth]{
+\pause
 \begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
 \tikzset{edge/.style = {->,> = latex'}}
@@ -112,21 +118,23 @@ f_4:\N &\longrightarrow \R \\
 \end{slide}
 
 \begin{slide}[bm=,toc=]{Injective / one-to-one Functions}
-\begin{defn}{A.23}[Ben Ari]
-$\mathcal{F}$ is \emph{injective} or \emph{one-to-one} if and only if
-\[
-  (x_1,...,x_{n-1}) \neq (y_1,...,y_{n-1})
-\] 
-\centering
+\begin{defn}{A.23}[Ben Ari]~\\
+\vspace{2mm}
+$\mathcal{F}$ is \emph{injective} or \emph{one-to-one} if and only if:
+\begin{itemize}
+\item<2-> $(x_1,...,x_{n-1}) \neq (y_1,...,y_{n-1})$
+\end{itemize}
+\pause[2]
 implies
-\[
-  \mathcal{F}(x_1,...,x_{n-1}) \neq \mathcal{F}(y_1,...,y_{n-1})
-\]
-
+\begin{itemize}
+\item<4-> $\mathcal{F}(x_1,...,x_{n-1}) \neq \mathcal{F}(y_1,...,y_{n-1})$
+\end{itemize}
 \end{defn}
-\vspace{-5mm}
+
+\vspace{-6mm}
 \begin{figure}[b]
 \subcaptionbox*{Injective}[.4\linewidth]{
+\pause[2]
 \begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
 \tikzset{edge/.style = {->,> = latex'}}
@@ -156,6 +164,7 @@ implies
 }
 \qquad
 \subcaptionbox*{Not Injective}[.4\linewidth]{
+\pause
 \begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
 \tikzset{edge/.style = {->,> = latex'}}
@@ -189,17 +198,18 @@ implies
 
 \begin{slide}[bm=,toc=]{Surjective / onto Functions}
 \begin{defn}{A.23}[Ben Ari]~\\
-\begin{itemize}
-\item  $\mathcal{F}$ is \emph{surjective} or \emph{onto} if and only if
-its range is all of $S_n$.
-\item Equivalently,$\mathcal{F}$ from $S_1$ to $S_2$ is \emph{surjective} if 
-and only if for all $y \in S_2$ there is a $x \in S_1$ such that
+\vspace{2mm}
+$\mathcal{F}$ is \emph{surjective} or \emph{onto} if and only if its range is all of $S_n$.\\
+\vspace{2mm}
+\pause
+Equivalently, $\mathcal{F}$ from $S_1$ to $S_2$ is \emph{surjective} if 
+and only if for all $y \in S_2$ there is an $x \in S_1$ such that
 $\mathcal{F}(x) = y$. 
-\end{itemize}
 \end{defn}
 \vspace{-5mm}
 \begin{figure}[b]
 \subcaptionbox*{Surjective}[.4\linewidth]{
+\pause
 \begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
 \tikzset{edge/.style = {->,> = latex'}}
@@ -227,6 +237,7 @@ $\mathcal{F}(x) = y$.
 }
 \qquad
 \subcaptionbox*{Not Surjective}[.4\linewidth]{
+\pause
 \begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
 \tikzset{edge/.style = {->,> = latex'}}
@@ -268,6 +279,7 @@ it is injective and surjective.
 \end{defn}
 
 \begin{figure}[b]
+\pause
 \begin{tikzpicture}[scale=.75, every node/.style={scale=.75}]
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
 \tikzset{edge/.style = {->,> = latex'}}
@@ -304,18 +316,19 @@ it is injective and surjective.
 As with relations, we can combine functions using the \emph{composition} operation, 
 denoted $f \circ g$.
 \begin{itemize}
-\item Assume $g$ is a function from $S_1$ to $S_2$ and $f$ is a function from 
+\item<2-> Assume $g$ is a function from $S_1$ to $S_2$ and $f$ is a function from 
 $S_3$ to $S_4$ and let $S = S_2 \cap S_3$.
-\item The composition forms a new function on $S_1 \times S_4$, such that:
+\item<3->The composition forms a new function on $S_1 \times S_4$, such that:
 \[
   f \circ g(x) = f(g(x))
 \]
 \vspace{-5mm}
-\item Note: since functions are relations, the above follows immediately from
-the definition of composition of functions.
+\item<4-> \textbf{Note:} since functions are relations, the above follows immediately from
+the definition of composition of relations.
 \end{itemize}
 \vspace{-5mm}
 \begin{figure}[b]
+\pause[4]
 \begin{subfigure}{.3\linewidth}
 \begin{tikzpicture}[scale=.5, every node/.style={scale=.5}]
 \tikzset{vertex/.style = {shape=circle,draw,minimum size=1.5em}}
@@ -356,6 +369,7 @@ the definition of composition of functions.
 \end{tikzpicture}
 
 \end{subfigure}
+\pause
 \begin{subfigure}{.3\linewidth}
 \begin{align*}
   f(x)       &= x \pmod{3} + 1 \\

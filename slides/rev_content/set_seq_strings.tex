@@ -7,7 +7,7 @@
 \begin{itemize}
    \item<2-> $a \in S$ means $a$ is an element of set $S$ 
    \item<3-> $a \notin S$ means $a$ is not an element of set $S$
-   \item<4-> The \emph{cardinality} of set $A$ is denoted $|A|$. 
+   \item<4-> The \emph{cardinality} of a set $S$ is denoted $|S|$. 
    \begin{itemize}
        \item<5-> Cardinality indicates the number of elements in the set.
    \end{itemize}
@@ -35,7 +35,7 @@
    \item<9-> Through operations on sets that have already be defined. 
    \begin{itemize}
       \item<10-> $K = S \cup R = \{red, yellow, green, 1, 2, 3\}$ 
-      \item<11-> See ``Operations on Sets'' for examples. 
+      \item<11-> See ``Operations on Sets and Strings'' for examples. 
    \end{itemize}
 \end{itemize} 
 
@@ -104,10 +104,11 @@ A finite sequence of length $n$ is an \emph{n-tuple}.
 \vspace{-5mm}
 \begin{itemize}
 \item<4-> For example $\{0,1,2,...,9\}$ and $\{0,1\}$ are alphabets. 
-\item<5->  $\Sigma$ denotes an arbitrary alphabet. 
-\item<6->  We call the elements of $\Sigma$ \emph{letters} or \emph{symbols}.
+\item<5-> The set $\{a,b\}$ is an alphabet. 
+\item<6->  $\Sigma$ denotes an arbitrary alphabet. 
+\item<7->  We call the elements of $\Sigma$ \emph{letters} or \emph{symbols}.
 \end{itemize}
-\pause[4]
+\pause[5]
 \begin{defn}{--- String}~\\
 \pause
 A \emph{string} over $\Sigma$ is any finite-length sequence of elements of
@@ -116,9 +117,9 @@ $\Sigma$.
 \vspace{-5mm}
 
 \begin{itemize}
-\item<9-> For example, if $\Sigma = \{a,b\}$ then $aabab$ is a string of length $5$ over $\Sigma$.
-\item<10-> The length of a string $x$ is denoted $|x|$. 
-\item<11-> There is a unique string of length zero over any alphabet $\Sigma$ called
+\item<10-> For example, if $\Sigma = \{a,b\}$ then $aabab$ is a string of length $5$ over $\Sigma$.
+\item<11-> The length of a string $x$ is denoted $|x|$. 
+\item<12-> There is a unique string of length zero over any alphabet $\Sigma$ called
       the \emph{empty string} and it is denoted $\epsilon$.
 \end{itemize}
 \end{slide}
@@ -132,267 +133,3 @@ $\Sigma$.
     \end{itemize}
 \end{slide}
 
-\section[slide=true]{Operations on Sets and Strings}
-
-\begin{slide}[bm=,toc=]{Set Inclusion}
-\begin{defn}{A.3}[Ben Ari]
-Let $S$ and $T$ be sets.
-\begin{itemize}
-\item $S$ is a \emph{subset} of $T$ if and only if every element of $S$ is an
-      element of $T$.
-\item Equivalently, $S \subseteq T$ if and only if $x \in S$ implies $x \in T$.
-\item $S$ is a \emph{proper subset} of $T$, (i.e.\ $S \subset T$) if and only
-      if $S \subseteq T$ and $S \neq T$.
-\end{itemize}
-\end{defn}
-\begin{thm}{A.5}[Ben Ari]
-$\emptyset \subseteq T$
-\end{thm}
-\begin{thm}{A.6}[Ben Ari]
-\emph{The subset property is transitive.}
-\end{thm}
-\begin{thm}{A.7}[Ben Ari]
-$S = T$ if and only if $S \subseteq T$ and $T \subseteq S$.
-\end{thm}
-
-
-
-\end{slide}
-
-\begin{slide}[bm=,toc=]{Basic operations on sets}
-\begin{itemize}
-   \item \emph{Set union}: 
-   \[
-     A \cup B = \{x|x \in A \text{ or } x \in B\}
-   \]
-
-   \item \emph{Set intersection}: 
-   \[
-     A \cap B = \{x|x \in A \text{ and } x \in B\}
-   \]
-
-   \item \emph{Set difference}: 
-   \[
-     A - B = \{x|x \in A \text{ and } x \notin B\}
-   \]
-
-\end{itemize}
-\end{slide}
-
-\begin{wideslide}[bm=,toc=]{Illustration of Set Operations}
-\vspace*{15mm}
-
-\unitlength=1.0pt
-\begin{center}
-\begin{picture}(260,110)
-\put(80,40){\oval(160,80)}
-\put(180,40){\oval(160,80)}
-\put(  0,0){\makebox(100,80){$S-T$}}
-\put(100,0){\makebox( 60,80){$S\cap T$}}
-\put(160,0){\makebox(100,80){$T-S$}}
-\put(0,60){\makebox(20,20)[r]{S}}
-\put(240,60){\makebox(20,20)[l]{T}}
-\put(20,85){\makebox(220,10){$\overbrace{\hspace*{220pt}}$}}
-\put(100,100){\makebox( 60,10){$S\cup T$}}
-\end{picture}
-\end{center}
-\end{wideslide}
-
-
-\begin{slide}[bm=,toc=]{Cartesian Products}
-\begin{defn}{A.17}[Ben Ari]
-~\\
-\emph{Cartesian Product of 2 Sets:}
-\begin{itemize}
-\item Let $S$ and $T$ be sets.
-\item We define their \emph{Cartesian Product}, $S \times T$, as the set of all
-pairs $(s,t)$ such that $s \in S$ and $t \in T$.
-\end{itemize}
-\emph{n-ary Cartesian Product:}
-\begin{itemize}
-\item This is the general case.
-\item Let $S_1,...,S_n$ be sets.
-\item We define their \emph{Cartesian Product}, $S_1 \times \cdots \times S_n$, as the set of all
-$\emph{n-tuples}$ $(s_1,...,s_n)$ such that $s_i \in S_i$.
-\item If all sets $S_i$ are the same set, the notation $S^n$ is used for $S
-\times \cdots \times S$.
-\end{itemize}
-\end{defn}
-\end{slide}
-
-\begin{slide}[bm=,toc=]{String Concatenation}
-
-\begin{itemize}
-    \item If $x$ and $y$ are strings then string $xy$ is called the
-    \emph{concatenation} of $x$ and $y$.
-    \item Concatenation is associative: $(xy)z = x(yz)$. 
-    \item Concatenation is not commutative. $xy$ and $yx$ are different strings
-    in general.
-    \item $\epsilon$ is an identity for concatenation: ${\epsilon}x = x\epsilon = x$. 
-    \item $|xy| = |x| + |y|$. 
-    \item We write $a^n$ for a string of $a$'s of length $n$.
-    \begin{itemize}
-        \item For example, $a^5 = aaaaa$ and $a^0 = \epsilon$. 
-        \item And $a^ma^n = a^{m+n}$ for all $m,n \geq 0.$
-    \end{itemize} 
-\end{itemize} 
-\end{slide}
-
-\begin{slide}[bm=,toc=]{Set Concatenation}
-\emph{\textbf{Definition:}}
-\begin{itemize}
-   \item  $\mli{AB} = \{xy | x \in A \text{ and } y \in B\}$. 
-   \item When forming a set concatenation, you form \emph{all} strings that can be obtained in this way.
-   \item Example:
-   \[\{\textcolor{red}{a},\textcolor{brown}{ab}\}\{\textcolor{green}{b},\textcolor{blue}{ba}\} = \
-                      \{\textcolor{red}{a}\textcolor{green}{b}, \
-                        \textcolor{red}{a}\textcolor{blue}{ba}, \
-                        \textcolor{brown}{ab}\textcolor{green}{b}, \
-                        \textcolor{brown}{ab}\textcolor{blue}{ba}\}
-   \]
-\end{itemize} 
-   Note that $\mli{AB}$ and $\mli{BA}$ are different sets in general.
-\end{slide}
-
-
-\begin{slide}[bm=,toc=]{Powers of sets of strings}
-\begin{itemize}
-\item \emph{Powers} of a set $A$ (i.e.\ $A^n$) are defined inductively:
-\[
-  A^0 = \{\epsilon\}
-\]
-\[
-  A^{n+1} = AA^n
-\]
-
-\item $A^n$ is formed by concatenating $n$ copies of $A$ together. 
-\item Taking $A^0 = \{\epsilon\}$ by definition makes $A^{m+n} = A^mA^n$ true, 
-      even when one of $m$ or $n$ is zero. 
-\item As a special case, if $A$ is an \emph{alphabet} then $A^n$ is the set of all strings
-over $A$ of length $n$.
-\item \textbf{Note:} 
-\begin{itemize}
-    \item The notation for the $n^{th}$ power of a set of strings is identical to
-    the notation for the \emph{n-ary} Cartesian power.
-    \item Need to determine the meaning from context.
-\end{itemize}
-\end{itemize}
-\end{slide}
-
-\begin{slide}[bm=,toc=]{Powers of sets}
-Let $A = \{ab,aab\}$. Then
-\[
-\begin{array}{lll}
-A^0 &= \{\epsilon\} & \\[2ex]
-
-A^1 &= AA^0         &= \{ab,aab\}\{\epsilon\} \\
-    &               &= \{ab,aab\} \\[2ex]
-
-A^2 &= AA^1         &= \{ab,aab\}\{ab,aab\}   \\
-    &               &= \{abab,abaab,aabab,aabaab\} \\[2ex]
-
-A^3 &= AA^2         &= \{ab,aab\}\{abab,abaab,aabab,aabaab\}  \\
-    &               &= \{ababab,ababaab,abaabab,abaabaab,  \\
-    &               &\;\;\;\;\;\;aababab,aababaab,aabaabab,aabaabaab \}  \\
-\end{array}
-\]
-%\\~\\
-\end{slide}
-
-
-\begin{slide}[bm=,toc=]{Kleene closure}
-\emph{Kleene closure} of a set $A$, denoted $A^*$, is the infinite union of all
-finite powers of $A$:
-\[
-A^* = \bigcup_{n \geq 0} A^n = A^0 \cup A^1 \cup A^2 \cup A^3 \cup \cdots
-\]
-As a special case, if $A$ is an alphabet then $A^*$ is the set of all strings
-over $A$ of any length, including zero length.
-\end{slide}
-
-\begin{slide}[bm=,toc=]{$\bar{A}$ and $A^+$}
-\begin{itemize}
-   \item The \emph{complement} of $A$ with respect to $\Sigma^*$ is defined 
-         $\bar{A} = \{x \in \Sigma^* | x \notin A\}$. The complement of $A$
-         depends on $\Sigma^*$, hence $\bar{A}$ is sometimes denoted 
-         $\Sigma^* - A$ to emphasize this dependence.
-   \item $A^+$ is the infinite union of all nonzero powers of $A$:
-         \[
-           A^+ = AA^* = \bigcup_{n>0} A^n
-           \]
-\end{itemize}
-\end{slide}
-
-
-
-
-\begin{slide}[bm=,toc=]{Properties of Set Operations}
-\begin{itemize}
-   \item Set union, set intersection and set concatenation are associative: 
-   \[
-     \begin{split}
-     (A\cup B) \cup C = A \cup (B \cup C) \\
-     (A\cap B) \cap C = A \cap (B \cap C) \\
-     (\mli{AB})C = A(\mli{BC}) \\
-     \end{split}
-     \]
-   \item Set union and set intersection are commutative
-   \[
-     \begin{split}
-     A\cup B = B \cup A \\
-     A\cap B = B \cap A \\
-     \end{split}
-    \]
-    \item Set concatenation is not commutative.
-\end{itemize}
-\end{slide}
-
-\begin{slide}[bm=,toc=]{Identity for Union and set Concatenation}
-\begin{itemize}
-   \item The empty set $\emptyset$ is the identity for $\bigcup$:
-   \[
-     A\cup \emptyset = \emptyset \cup A = A
-     \]
-   \item The set $\{\epsilon\}$ is an identity for set concatenation:
-       \[
-         \{\epsilon\}A = A\{\epsilon\} = A
-       \]
-   \item $A\emptyset = {\emptyset}A = \emptyset$
-\end{itemize}
-\end{slide}
-
-\begin{slide}[bm=,toc=]{Distributive Properties}
-\begin{itemize}
-   \item  Set union and intersection distribute over each other:
-   $A \cup (B \cap C) = (A\cup B)\cap(A \cup C)$\\
-   $A \cap (B \cup C) = (A\cap B)\cup(A \cap C)$
-
-   \item Set concatenation distributes over union. 
-    $A(B\cup C) = \mli{AB} \cup \mli{AC}$\\
-    $(A\cup B)C = \mli{AC} \cup \mli{BC}$
-    \item Set concatenation does \emph{not} distribute over intersection. For
-    example, let $A = \{a,ab\}$, $B = \{b\}$, $C = \{\epsilon\}$. Then
-       $A(B\cap C) = A\emptyset = \emptyset$ \\
-       $\mli{AB} \cap \mli{AC} = \{ab,abb\} \cap \{a,ab\} = \{ab\}$
-\end{itemize}
-\end{slide}
-
-\begin{slide}[bm=,toc=]{Other useful identities}
-De Morgan Laws:
-\[
-\overline{A \cup B} = \bar{A} \cap \bar{B}  
-\]
-\[
-\overline{A \cap B} = \bar{A} \cup \bar{B}  
-\]
-
-Properties of Kleene closure:
-\begin{itemize}
-\item $A^*A^* = A^*$
-\item $(A^*)^* = A^*$
-\item $A^* = \{\epsilon\} \cup AA^* = \{\epsilon\}\cup A^*A $
-\item $\emptyset^* = \{\epsilon\}$ 
-\item $\{\epsilon\}^* = \{\epsilon\}$ 
-\item $AA^* = A^*A$ 
-\end{itemize}
-\end{slide}
